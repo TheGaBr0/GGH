@@ -1,0 +1,143 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{blindtext}
+\usepackage{subfiles}
+\usepackage[a4paper]{geometry}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{epsfig}
+\usepackage[italian]{babel}
+\usepackage{setspace}
+\usepackage{tesi}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usepackage{float}
+\usepackage{algorithm2e}
+\RestyleAlgo{ruled}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exmp}{Esempio}[section]
+
+
+% per le accentate
+\usepackage[utf8]{inputenc}
+\setlength\parindent{0pt}
+%per gli algoritmi in italiano
+\renewcommand{\algorithmcfname}{Algoritmo}%
+
+
+%
+%
+%			TITOLO
+%
+\begin{document}
+\title{Crittografia post-quantistica basata sui reticoli: Implementazione e crittoanalisi di GGH}
+\author{Gabriele BOTTANI}
+\dept{Corso di Laurea in Sicurezza dei sistemi e delle reti informatiche} 
+\anno{2023-2024}
+\matricola{01701A}
+\relatore{Prof.\ Stelvio CIMATO}
+
+% 
+%			DEDICA
+%
+\beforepreface
+\prefacesection{}
+        {\hfill \Large {\sl dedicato a \dots}}
+
+% 
+%			PREFAZIONE
+%
+\prefacesection{Prefazione}
+hkjafgyruet.
+
+%
+%
+%			ORGANIZZAZIONE
+\section*{Organizzazione della tesi}
+\label{organizzazione}
+La tesi \`e organizzata come segue:
+\begin{itemize}
+\item nel Capitolo 1 \dots
+\end{itemize}
+%
+%			RINGRAZIAMENTI
+%
+\prefacesection{Ringraziamenti}
+asdjhgftry.
+\afterpreface
+% 
+% 
+%			CAPITOLO 1: Introduzione
+\subfile{chapters/Cap1/Introduzione.tex}
+%
+%			CAPITOLO 1: Teoria
+\subfile{chapters/Cap2/Teoria.tex}
+%
+
+%
+%			BIBLIOGRAFIA
+%
+%
+%			BIBLIOGRAFIA
+%
+\begin{thebibliography}{}
+    \bibitem{GGHMayNot15}
+    de Barros Charles Figueredo e Menasché Schechter Luis, “GGH May Not Be Dead after All,” 
+    Proceeding Series of the Brazilian Society of Computational and Applied Mathematics, 
+    21941-590 Rio de Janeiro RJ, 2015
+    \bibitem{Galbraith18}
+    Galbraith Steven, “Mathematics of Public Key Cryptography”, seconda edizione, Ottobre 2018
+    \bibitem{Nguyen99}
+    Nguyen Phong, “Cryptanalysis of the Goldreich-Goldwasser-Halevi Cryptosystem from 
+    Crypto ’97,” Advances in Cryptology — CRYPTO’ 99, 45 rue d’Ulm, 75230 Paris Cedex 05, 
+    France, pagine 288–304, 1999
+    \bibitem{Babai86}
+    Babai László, “On Lovász’ Lattice Reduction e the Nearest Lattice Point Problem,” 
+    Combinatorica, vol. 6, no. 1, pagine 1–13, 1986
+    \bibitem{GGH97}
+    Goldreich Oded, Goldwasser Shafi e Halevi Shai,  “Public-key Cryptosystems from 
+    Lattice Reduction Problems,” Advances in Cryptology — CRYPTO ’97, pagine 112–131, 1997
+    \bibitem{HNF01}
+    Micciancio Daniele,  “Improving Lattice Based Cryptosystems Using the Hermite 
+    Normal Form,” Lecture Notes in Computer Science, 9500 Gilman Drive, La Jolla, 
+    CA 92093 USA, pagine 126–145, 2001
+    \bibitem{PQC09}
+    Micciancio Daniele e Regev Oded, “Lattice-based Cryptography,” Post-Quantum 
+    Cryptography, pagine 147–191, 2009
+    \bibitem{CVP-NP09}
+    Aharonov Dorit e Regev Oded, “Lattice Problems in NP $\cap$ coNP“, 
+    CiteSeer X (The Pennsylvania State University), 2009
+    \bibitem{SVP-NP02}
+    Micciancio Daniele e Goldwasser Shafi, 
+    “Complexity of Lattice Problems: a cryptographic perspective“,
+    The Kluwer International Series in Engineering and Computer Science, Boston, Massachusetts,
+    Kluwer Academic Publishers, volume 671, 2002
+    \bibitem{HDMRD08}
+    Silverman Joseph H., Pipher Jill e Hoffstein Jeffrey, “An introduction to mathematical cryptography“,
+    seconda edizione, Springer, Undergraduate texts in mathematics, 2008
+    \bibitem{LLL82}
+    Lenstra Arjen Klaas, Lenstra Hendrik Willem e László Lovász, 
+    “Factoring polynomials with rational coefficients“, Mathematlsche Annalen, Springer, 
+    volume 261, pagine 515-534, 1982
+    \bibitem{FPLLL05}
+    Nguyen Phong e Damien Stehlé, “Floating-point LLL revisited“, LNCS, Springer, 
+    volume 3494, pagine 215-233, 2005
+    \bibitem{DEEPLLL94}
+    Schnorr Claus Peter e M. Euchner, 
+    “Lattice basis reduction: Improved practical algorithms and solving subset sum problems“,
+    Mathematical Programming, volume 66, pagine 181-199
+
+
+   
+\end{thebibliography}
+% 
+\end{document}

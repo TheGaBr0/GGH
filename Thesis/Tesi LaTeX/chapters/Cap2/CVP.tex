@@ -1,0 +1,205 @@
+\section{Algoritmi per la risoluzione del CVP}
+\label{CVP}
+
+
+\subsection{Algoritmi di Babai}
+Nel 1986 Babai\cite{Babai86}  propose due algoritmi per la risoluzione di apprCVP, i cosiddetti:
+"Metodo del Piano più Vicino" e "Tecnica di Arrotondamento". Ai fini di questa tesi, 
+entrambi verranno trattati, sebbene il primo sarà discusso in modo più conciso 
+poiché, come verrà spiegato nei prossimi capitoli, non è stato utilizzato nelle 
+implementazioni proposte. \\
+Il Metodo del Piano più Vicino è il primo algoritmo presentato da Babai, esso si basa sull'impiegare 
+l'ortogonalizzazione di Gram-Schmidt per semplificare il problema. L'algoritmo inizia quindi
+ortogonalizzando la base del reticolo fornita in 
+input attraverso Gram-Schmidt. Successivamente, procede in maniera iterativa a partire 
+dalla dimensione più alta: il vettore input viene proiettato sul vettore base ortogonale 
+corrispondente e questa proiezione viene approssimata al multiplo intero più vicino del 
+vettore della base originale. Tale approssimazione viene sottratta dal vettore input, 
+generando un nuovo vettore residuo. Questo processo viene ripetuto per le dimensioni 
+inferiori, una alla volta, fino a coprire tutte le dimensioni. Al termine, l'algoritmo 
+fornisce come risultato una soluzione all'apprCVP. 
+Grazie alla sua complessità polinomiale, l'algoritmo riesce a bilanciare efficacemente 
+l'accuratezza dell'approssimazione con il tempo di esecuzione. Per ulteriori dettagli e 
+informazioni sull'algoritmo si veda \cite{Galbraith18}. 
+\\
+Il secondo algoritmo è la tecnica di arrotondamento, che come da nome si basa
+principalmente sull'arrotondare dei valori frazionari all'intero più vicino.
+Seppur la sua implementazione risulti semplice e banale, in realtà la sua dimostrazione teorica
+è tutt'altro che immediata. 
+A differenza del precedente, 
+non utilizza l'ortogonalizzazione di Gram-Schmidt, ma mantiene comunque una complessità 
+polinomiale. Di seguito viene fornita una spiegazione del suo funzionamento. \\
+Come discusso nella sezione \ref{sec:dominio}, dati un reticolo $\mathcal{L}$ di dimensione
+$n$ e una sua base $\mathbf{B}$, per ogni vettore $\mathbf{t} \in \mathbb{R}^n$,
+con $\mathbf{t} \notin \mathcal{L}$, un'unica decomposizione $\mathbf{t} = \mathbf{f} + \mathbf{v}$
+può essere sempre trovata in modo tale che $\mathbf{v} \in \mathcal{L}$ e $\mathbf{f}$ si collochi
+nel dominio fondamentale $\mathcal{F}$ di $\mathbf{B}$. Questa proprietà fornisce l'idea
+dietro alla risoluzione del CVP usata da questo algoritmo: identificare il dominio fondamentale (traslato) rispettivamente
+a $\mathbf{v} \in \mathcal{L}$, nel quale il vettore target $\mathbf{t}$ si trova. 
+Sia $\mathcal{L}$ un reticolo con 
+dimensione $n$ generato da una base (buona) $\mathbf{B}$ e sia $\mathbf{t}$ un vettore tale che
+$\mathbf{t} \in \mathbb{R}^n$ e $\mathbf{t} \notin \mathcal{L}$. Dato che $\mathbf{B}$ è una
+matrice di rango massimo, è possibile calcolare
+\[
+    \mathbf{x} =  \mathbf{B}^{-1}\mathbf{t}
+\]
+Da qui si applica la tecnica di arrotondamento, la quale è semplicemente
+\[
+    \mathbf{w} = \sum_{i=1}^{n} \mathbf{b}_i \lfloor \mathbf{x}_i \rceil 
+\]
+con $\mathbf{B} = [\mathbf{b}_1,\dots,\mathbf{b}_n]$ e $\lfloor\mathbf{x}\rceil$ che significa
+prendere l'intero più vicino al numero reale $\mathbf{x}$. Questo algoritmo mira ad 
+identificare il dominio fondamentale (traslato) che il vettore $\mathbf{t}$ localizza e la sua
+correttezza è strettamente legata alla forma geometrica del dominio fondamentale, è necessaria
+quindi una base di alta qualità al fine di avere risultati validi. 
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[framed, scale=0.8]
+
+        \clip (-0.55,-0.65) rectangle (10,7); 
+
+        
+        % Draw Cartesian axes
+        \draw[->,black,thick] (0,0) -- (10,0) node[above left] {$x$};
+        \draw[->,black,thick] (0,0) -- (0,7) node[below right] {$y$};
+
+        % Add numbers to the x-axis
+        \foreach \x in {0,1,2,...,9}
+        \draw (\x,0) -- (\x,-0.1) node[below] {\x};
+
+        % Add numbers to the y-axis
+        \foreach \y in {1,2,...,6}
+        \draw (0,\y) -- (-0.1,\y) node[left] {\y};
+
+        \node[draw,circle,inner sep=1.5pt,fill] at (1,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (3,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (6,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (9,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (0,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (4,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (7,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (10,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (2,4) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (5,4) {};
+        \node[circle, fill, inner sep=1.8pt, label=right:$\mathbf{w}$] at (8,4) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (3,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (6,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (9,6) {};
+
+        \draw[dotted,black,ultra thick] (1,2) -- (4,2);
+        \draw[dotted,black,ultra thick] (3,0) -- (4,2);
+
+        \fill[gray!50] (0,0) -- (3,0) -- (4,2) -- (1,2) -- cycle;
+        \draw[->,black,ultra thick] (0,0) -- (1,2) node[left] {$\mathbf{b}_1$};
+        \draw[->,black,ultra thick] (0,0) -- (3,0) node[above right] {$\mathbf{b}_2$};
+        \node[] at (2,1) {$\mathcal{F}$};
+        
+        \draw[dotted,black,ultra thick] (1,2) -- (2,4);
+        \draw[dotted,black,ultra thick] (2,4) -- (5,4);
+        \draw[dotted,black,ultra thick] (4,2) -- (5,4);
+        \draw[dotted,black,ultra thick] (6,0) -- (7,2);
+        \draw[dotted,black,ultra thick] (4,2) -- (7,2);
+        \draw[dotted,black,ultra thick] (7,2) -- (8,4);
+        \draw[dotted,black,ultra thick] (5,4) -- (8,4);
+      
+        \node[] at (3,3) {$\mathcal{F} + \mathbf{b}_1$};
+        \node[] at (6,3) {$\mathcal{F} + \mathbf{b}_1 + \mathbf{b}_2$};
+        \node[] at (5,1) {$\mathcal{F} + \mathbf{b}_2$};
+        \node[circle, fill, inner sep=1.8pt, label=right:$\mathbf{t}$] at (7,3.5) {};
+        
+        
+    \end{tikzpicture}
+    \caption{Risoluzione del CVP usando la tecnica di arrotondamento di Babai:
+    $\mathbf{w}$ è il vertice del dominio fondamentale traslato localizzato da $\mathbf{t}$, 
+    quindi è soluzione per apprCVP.}
+    \label{fig:lattice4}
+\end{figure}
+
+\begin{exmp}
+    (Risoluzione del CVP usando la tecnica di arrotondamento di Babai)
+    \\
+    Sia $\mathcal{L}$ un reticolo generato dalla base $\mathbf{B}$ 
+    e sia $\mathbf{t} \in \mathbb{R}^n, \mathbf{t} \notin \mathcal{L}$ con
+    \[
+        \mathbf{B} =
+        \begin{bmatrix}
+            1 & 3\\
+            2 & 0
+        \end{bmatrix}
+        \ \text{ e } \ \mathbf{t} =
+        \begin{bmatrix}
+            7\\
+            3,5
+        \end{bmatrix}.
+    \]
+    Si inizi con l'applicare l'algoritmo, dal primo passo si ottiene
+    \[
+        \mathbf{B}^{-1} =
+        \begin{bmatrix}
+            0 & 0,5\\
+            0,33 & 0,17
+        \end{bmatrix}
+        \ \text{ e } \ \mathbf{x} = \mathbf{B}^{-1}\mathbf{t} = 
+        \begin{bmatrix}
+            1,75\\
+            1,75
+        \end{bmatrix}
+    \]
+    si applichi ora la tecnica di arrotondamento a $\mathbf{x}$
+    \[
+        \lfloor\mathbf{x}\rceil = 
+        \begin{bmatrix}
+            2\\
+            2
+        \end{bmatrix}
+    \]
+    si proceda infine con l'ottenere il risultato finale
+    \[
+        \mathbf{w} = \mathbf{B}\mathbf{x} =
+        \begin{bmatrix}
+            8\\
+            4
+        \end{bmatrix}
+    \]  
+    che, come mostrato in Figura \ref*{fig:lattice4}, è il vettore più vicino
+    a $\mathbf{t}$. Se si dovesse valutare la qualità della base, si otterrebbe che 
+    $\mathcal{H}(\mathbf{B}) = 0.97400$ e grazie a tali proprietà ortogonali del dominio fondamentale
+    che si genera da $\mathbf{B}$, l'algoritmo è in grado di raggiungere facilmente la soluzione.
+    \\
+    Sia ora $\mathbf{B}'$ una base di bassa qualità, ma che generi lo stesso reticolo 
+    $\mathcal{L}$
+    \[
+        \mathbf{B}' =
+        \begin{bmatrix}
+            12 & 7\\
+            -6 & -4
+        \end{bmatrix}
+        \ \text{ con } \ |\det(\mathbf{B}')| = |\det(\mathbf{B})| = 6.
+    \]
+    Calcolando $\mathcal{H}(\mathbf{B}') = 0.24473$ si conferma la bassa qualità di $\mathbf{B}'$ 
+    rispetto a $\mathbf{B}$. Procedendo con l'algoritmo si ottiene che 
+    \[
+    \mathbf{x}' = \mathbf{B}'^{-1}\mathbf{t}=
+    \begin{bmatrix}
+        8,75\\
+        -14
+    \end{bmatrix}
+    \ \text{ e quindi } \ \lfloor\mathbf{x}'\rceil = 
+    \begin{bmatrix}
+        9\\
+        -14
+    \end{bmatrix}.
+    \]
+    Computando l'ultimo passaggio, il vettore risultante è
+    \[
+        \mathbf{w}' = \mathbf{B}'\mathbf{x}' =
+        \begin{bmatrix}
+            10\\
+            2
+        \end{bmatrix}
+    \]
+    il quale non è soluzione corretta al CVP. 
+\end{exmp}
+
+\subsection{Tecnica di incorporamento}

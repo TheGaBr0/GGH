@@ -1,0 +1,196 @@
+\section{Reticoli}
+\label{sec:reticoli}
+\subsection{Nozioni base}
+\label{sec:nozioni}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.7, framed]
+            % Draw gray dots
+            \foreach \x in {-4,...,4}
+                \foreach \y in {-3,...,3}
+                \fill[black] (\x,\y) circle (0.1);
+            
+            % Draw lattice basis vectors in blue and red
+            \draw[->,black,ultra thick] (0,0) -- (1,0) node[below] {$\mathbf{b}_1$};
+            \draw[->,black,ultra thick] (0,0) -- (0,1) node[left] {$\mathbf{b}_2$};
+            
+            % Draw Cartesian axes
+            \draw[->,black,thick] (-4,0) -- (4,0) node[above left] {$x$};
+            \draw[->,black,thick] (0,-3) -- (0,3) node[below right] {$y$};
+        \end{tikzpicture}
+        \caption{${\mathcal{L} = \mathbb{Z}^n}$}
+        \label{fig:lattice1}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \vspace{-10.95em}
+        \begin{tikzpicture}[scale=0.725, framed]
+            \clip (-4,-3) rectangle (4,3); 
+
+            % Draw Cartesian axes
+            \draw[->,black,thick] (-4,0) -- (4,0) node[above left] {$x$};
+            \draw[->,black,thick] (0,-3) -- (0,3) node[below right] {$y$};
+            
+            \pgftransformcm{1}{0.2}{0.2}{1}{\pgfpoint{0cm}{0cm}}
+            % Draw gray dots
+            \foreach \x in {-4,...,4}
+                \foreach \y in {-3,...,3}
+                \node[draw,circle,inner sep=1pt,fill] at (\x,\y) {};
+            
+            % Draw lattice basis vectors in blue and red
+            \draw[->,black,ultra thick] (0,0) -- (1,0) node[below] {$\mathbf{b}_1$};
+            \draw[->,black,ultra thick] (0,0) -- (0,1) node[left] {$\mathbf{b}_2$};
+        \end{tikzpicture}
+        \vspace{0.5em}
+        \caption{${\mathcal{L} = \mathbf{B} \mathbb{Z}^n} \textrm{ dove } \mathbf{B} 
+        \in \mathbb{R}^{d \times n}$}
+        \label{fig:lattice2}
+    \end{subfigure}
+    \caption{Due esempi di strutture reticolari}
+    \label{fig:horizontal_alignment}
+\end{figure}
+
+
+
+Un reticolo è un insieme di punti in uno spazio di dimensione $n$ che forma una struttura 
+periodica. Ogni punto del reticolo può essere generato come combinazione lineare di 
+$n$ vettori, chiamati base, che sono linearmente indipendenti tra loro.
+La struttura e le proprietà di un reticolo dipendono dai vettori di base che, 
+partendo dall'origine, definiscono il suo pattern di disposizione indicando le direzioni 
+e le distanze tra i punti del reticolo. \\
+Proprietà fondamentale che sta alla base della definizione di reticolo è la proprietà dei 
+coefficienti integrali: la base di un reticolo ha sempre coefficienti integrali, 
+il che significa che tutti i vettori nella base sono combinazioni lineari intere 
+l'uno dell'altro.
+I reticoli possono essere formati in diversi modi, il più comune è il reticolo quadrato 
+(Figura~\ref{fig:lattice1}) nel quale la base è allineata con gli assi cartesiani. 
+Le altre varianti sono ottenibili applicando delle trasformazioni lineari alla base del 
+reticolo quadrato (Figura~\ref{fig:lattice2}).
+
+
+I reticoli possono essere definiti in uno spazio bidimensionale o tridimensionale, 
+ma il concetto può essere esteso a spazi di dimensioni superiori. La rappresentazione dei vettori in questa tesi è quella per colonna, 
+in quanto gli autori di~\cite{GGH97} hanno preso questa decisione per la rappresentazione
+del loro crittosistema a chiave pubblica Goldreich Goldwasser Halevi (GGH), oggetto di questa tesi. Quindi per esempio, una matrice 
+$\mathbf{B} \in \mathbb{R}^{m\times n}$ sarà divisa in vettori 
+$[\mathbf{b_1}, \mathbf{b_2}, \dots, \mathbf{b}_n]$.
+
+Più formalmente, dati $n$ vettori linearmente indipendenti 
+$\mathbf{b}_1,\dots, \mathbf{b}_n \in \mathbb{R}^n$,
+il reticolo generato da essi è un set di vettori 
+\[
+\mathcal{L} (\mathbf{b}_1,\dots,\mathbf{b}_n) = \sum_{i=1}^{n}\mathbf{b}_i \cdot 
+\mathbb{Z} = \bigl\{ {\mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n} \bigr\}.
+\]
+I vettori $\mathbf{b}_1,\dots,\mathbf{b}_n$ sono noti come base del reticolo.
+Lo stesso reticolo può avere più basi
+\[
+    \mathcal{L} = \sum_{i=1}^{n}\mathbf{c}_i \cdot \mathbb{Z} .
+\]
+
+Una base può essere rappresentata da una matrice  
+$\mathbf{B} = [\mathbf{b}_1,\dots,\mathbf{b}_n] \in \mathbb{R}^{n \times n}$ 
+avente i vettori base come colonne. Utilizzando la matrice come notazione, 
+il reticolo generato da una matrice 
+$\mathbf{B} \in \mathbb{R}^{n \times n}$ 
+può essere definita come 
+${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
+dove $\mathbf{B} \mathbf{x}$ 
+è una comune moltiplicazione matriciale. \\
+Il determinante di un reticolo è il valore assoluto del 
+determinante della matrice base 
+$\text{det}(\mathcal{L}(\mathbf{B})) = |\text{det}(\mathbf{B})|$. 
+Di conseguenza se $\mathbf{U}$ è una matrice unimodulare, avente quindi determinante +1 o -1, le basi 
+$\mathbf{B}$ e $\mathbf{B}\mathbf{U}$ generano lo stesso reticolo. 
+
+\subsection{Dominio Fondamentale}
+\label{sec:dominio}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1, framed]
+        \clip (-4,-3) rectangle (4,3); 
+
+        % Draw Cartesian axes
+        \draw[->,black,thick] (-4,0) -- (4,0) node[above left] {$x$};
+        \draw[->,black,thick] (0,-3) -- (0,3) node[below right] {$y$};
+        
+        \pgftransformcm{1}{0.2}{0.2}{1}{\pgfpoint{0cm}{0cm}}
+        % Draw gray dots
+        \foreach \x in {-4,...,4}
+            \foreach \y in {-3,...,3}
+                \node[draw,circle,inner sep=1pt,fill] at (\x,\y) {};
+
+        % Define the vertices of the first parallelepiped
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (1,0);
+        \coordinate (C) at (1,1);
+        \coordinate (D) at (0,1);
+
+        
+        % first parallelepiped
+        \draw[->,black,ultra thick] (A) -- (B) node[right] {$\mathbf{b}_1$};
+        \draw[->,black,ultra thick] (A) -- (D) node[above] {$\mathbf{b}_2$};
+
+        \draw[dotted,black,ultra thick] (B) -- (C);
+        \draw[dotted,black,ultra thick] (D) -- (C);
+
+        \fill[gray!50] (A) -- (B) -- (C) -- (D) -- cycle;
+
+        \node[] at (0.5,0.5) {\footnotesize $\mathcal{F}_1$};
+
+        % Define the vertices of the second parallelepiped
+        \coordinate (E) at (0,0);
+        \coordinate (F) at (-1,-1);
+        \coordinate (G) at (-1,-2);
+        \coordinate (H) at (0,-1);
+
+        % second parallelepiped
+        \draw[->,black,ultra thick] (E) -- (F) node[above left] {$\mathbf{a}_1$};
+        \draw[->,black,ultra thick] (E) -- (H) node[below right] {$\mathbf{a}_2$};
+
+        \draw[dotted,black,ultra thick] (F) -- (G);
+        \draw[dotted,black,ultra thick] (H) -- (G);
+
+        \fill[gray!20] (E) -- (F) -- (G) -- (H) -- cycle;
+
+        \node[] at (-0.7,-1.2) {\footnotesize $\mathcal{F}_2$};
+
+    \end{tikzpicture}
+    \caption{Un reticolo con due suoi domini fondamentali}
+    
+\label{fig:lattice3}
+\end{figure}
+
+Il dominio fondamentale è un concetto molto importante nei reticoli, grazie al quale è possibile
+capire la struttura matematica che li compone. Data una base abritraria $\mathbf{B}$ e un reticolo 
+$\mathcal{L}$ è possibile immaginare il dominio fondamentale come un parallelepipedo 
+che ha come vertici i vettori base $\mathbf{b}$ generanti il reticolo, il punto di origine e 
+come quarto punto la somma dei vettori base all'origine. \\
+Di tale parallelepipedo è possibile calcolarne il volume $\mathcal{F}(\mathbf{B})$, il 
+quale è strettamente legato al determinante del reticolo. 
+E' possibile osservare in Figura~\ref*{fig:lattice3} un reticolo con due sue basi: nonostante 
+i domini fondamentali abbiano forme diverse, l'area coperta dal loro volume è la medesima.
+Come dimostrato in~\cite[Sezione 7.4]{HDMRD08}, proprio come per il
+determinante, il dominio fondamentale è un'invariante che è indipendente dalla scelta 
+delle basi per il reticolo. Inoltre ne deriva la proprietà:
+\[
+    \mathcal{F}(\mathbf{B}) = \det(\mathcal{L})
+\]
+e ricollegandoci a quanto detto nella sezione~\ref{sec:nozioni}: 
+$\mathcal{F}(\mathbf{B})$ $=$ $\det(\mathcal{L})$ $=$ $|\det(\mathbf{B})|$.\\
+Una seconda proprietà fondamentale, sempre dimostrata in~\cite{HDMRD08} è che tramite il
+dominio fondamentale è possibile ricostruire l'intero reticolo (Figura \ref*{fig:lattice4}). 
+In altre parole, ogni vettore $\mathbf{t} \in \mathbb{R}^n$ con $\mathcal{L} \subset \mathbb{R}^n $ 
+può essere ottenuto sommando ripetutamente a un vettore $\mathbf{f} \in \mathcal{F}$ un 
+altro vettore $\mathbf{v} \in \mathcal{L}$.
+Più formalmente: 
+\[
+    \mathcal{F} + \mathbf{v} = 
+\{ 
+    \mathbf{f} + \mathbf{v} \ | \ \mathbf{f} \in \mathcal{F}, \mathbf{v} \in \mathcal{L}
+\} 
+\]
+comprende esattamente tutti i vettori nel reticolo $\mathcal{L}$.

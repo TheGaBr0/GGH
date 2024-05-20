@@ -1,0 +1,210 @@
+\section{Riduzione di un reticolo}
+
+
+
+\subsection{Rapporto di Hadamard}
+Supponiamo di avere a disposizione due basi $\mathbf{A}$ e $\mathbf{B}$ che godono della
+proprietà di generare lo stesso reticolo. Seppur condividendo tale caratteristica, 
+$\mathbf{A}$ e $\mathbf{B}$ sono in realtà molto diverse nella loro struttura; in particolare
+$\mathbf{A}$ è composta da vettori corti e quasi ortogonali fra loro e $\mathbf{B}$ è
+composta da vettori lunghi e quasi paralleli fra loro.\\
+La qualità di una base risiede in queste differenze dei vettori costituenti le basi, chiamiamo
+quindi base "buona" $\mathbf{A}$ e base "cattiva" $\mathbf{B}$.
+E' necessario però definire una metrica per valutare quanto una base sia buona o meno, a tal
+proposito Hadamard\cite{HDMRD08} introdusse una formula quantitativa per misurare la qualità
+di una base reticolare, il cosiddetto rapporto di Hadamard. \\
+
+Data una base $\mathbf{B} = [\mathbf{b_1}, \mathbf{b_2}. \dots, \mathbf{b}_n]$ e un reticolo
+$\mathcal{L}$ di dimensione $n$ generato da $\mathbf{B}$, il rapporto di Hadamard della base
+$\mathbf{B}$ è definito dal valore:
+\[
+\mathcal{H}(\mathbf{B}) = 
+    \Biggl( 
+        \frac{\det(\mathcal{L})}
+        {\|\mathbf{b_1}\|_2 \cdot \|\mathbf{b_2}\|_2, \cdots \|\mathbf{b}_n\|_2} 
+    \Biggr)^{\frac{1}{n}}
+\]
+dove $\|\cdot\|_2$ rappresenta la Norma Euclidea di $\cdot$.\\
+Il rapporto di Hadamard si configura nell'intervallo $(0, 1]$, dove più vicino all'1 si è 
+e più la base è buona, viceversa più vicino allo 0 si è e più la base è cattiva. Questa formula
+verrà utilizzata come unica misura per verificare la qualità degli esempi di basi che verranno
+presentate più avanti in questa tesi.
+
+\subsection{Ortogonalizzazione Gram-Schmidt}
+ 
+Ora che è possibile giudicare una base dato il suo rapporto di Hadamard, utilizziamo la base
+$\mathbf{B}$ definita nella precedente sezione, la quale ipotizziamo abbia un 
+$\mathcal{H}(\mathbf{B})$ prossimo allo zero. Se volessimo utilizzare questa base per risolvere
+uno dei problemi dei reticoli, molto probabilmente non riusciremmo mai a raggiungere una soluzione
+che sia valida o quantomeno che sia vicina alla soluzione ottima.
+A questo proposito sono stati ideati degli algoritmi in grado di ortogonalizzare una base
+cattiva per convertirla in una buona e mantenere le proprietà del reticolo iniziale: si
+ottiene quindi una base $\mathbf{B'}$ tale che: 
+$\mathcal{H}(\mathbf{B}') \approxeq 1$ e che $\det(\mathbf{B}) = \det(\mathbf{B'})$.
+\\
+Prima di discutere questo tipo di algoritmi però è necessario affrontare brevemente 
+l'Algoritmo di Gram-Schmidt, il quale esegue un tipo di ortogonalizzazione che viene applicata
+su spazi vettoriali e che è anche chiamata Ortogonalizzazione Gram-Schmidt (GSO).
+Questo algoritmo non è adottabile direttamente sulle basi reticolari in quanto esso andrebbe a 
+violare la proprietà dei coefficienti integrali, di fondamentale importanza nella
+definizione di reticolo. Nonostante ciò, questo algoritmo gode di una proprietà chiave che
+viene utilizzata in algoritmi di riduzione dei reticoli. Come dimostrato in~\cite{HDMRD08},
+teorema 7.13:
+
+siano span$(\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n)$ e 
+span$(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*)$ 
+gli spazi vettoriali generati rispettivamente dalle colonne di $\mathbf{B}$ e $\mathbf{B}^*$,
+allora se $\mathbf{B}^*$ è il risultato di GSO applicato a $\mathbf{B}$:
+\[
+\text{span}(\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n) =
+\text{span}(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*) 
+\]
+Ciò comporta che GSO può essere chiamato come sotto-routine di algoritmi per la trasformazione
+delle matrici di spazi vettoriali, riducendo notevolmente i conti e semplificando l'implementazione
+di algoritmi per la riduzione di reticoli.
+
+\begin{algorithm}
+    \caption{Algoritmo di Gram-Schmidt}
+    \label{alg:one}
+    \large
+    \DontPrintSemicolon
+    \KwIn{Una matrice $\mathbf{B}$ tale che $\text{rk}(\mathbf{B}) = \text{col}(\mathbf{B})$}
+    \KwOut{Una matrice $\mathbf{B}^*$ ortogonale}
+    $\mathbf{b}_1^* = \mathbf{b}_1$\;
+    \For{$i = 2$ \KwTo$n$}{
+        \For{$j = 1$ \KwTo$i-1$}{
+            $\mu_{i,j} = \frac{\langle \mathbf{b}_i,\mathbf{b}_j^* \rangle}
+            {\langle \mathbf{b}_j^*,\mathbf{b}_j^* \rangle}$\;
+        }
+        $\mathbf{b}_i^* = \mathbf{b}_i - \sum_{j=1}^{i-1}\mu_{i,j}\mathbf{b}_j^*$\;
+    }
+    \Return{$\mathbf{B}^*$}
+\end{algorithm}
+Dove rk() indica il rango e col() il numero delle colonne. 
+
+\subsection{Algoritmo di Lenstra-Lenstra-Lovász}
+L'algoritmo di Lenstra-Lenstra-Lovász (LLL)\cite{LLL82,HDMRD08} è noto come uno dei più famosi algoritmi per 
+la riduzione dei reticoli. 
+In teoria, opera con un tempo polinomiale $O(n^6 (\log\mathcal{E})^3)$, dove $n$ è la dimensione di un 
+reticolo $\mathcal{L}$ dato ed $\mathcal{E}$ rappresenta la massima lunghezza euclidea dei vettori nella base 
+fornita. Il risultato di LLL è una base ridotta, il cui vettore più breve può essere 
+considerato una soluzione approssimata del apprSVP con un fattore di $2^{(n-1)/2}$ rispetto 
+alla lunghezza del vettore corretto più corto. Nonostante questo fattore sia 
+esponenziale, l'algoritmo si dimostra sorprendentemente efficiente nella pratica e ciò lo rende
+un tassello fondamentale negli algoritmi di risoluzione del CVP e del SVP. 
+
+Una base $\mathbf{B}^*$ per essere considerata LLL ridotta deve soddisfare due condizioni:
+\begin{itemize}
+    \item Condizione di grandezza: $\mu_{i,j} = \frac{\langle \mathbf{b}_i,\mathbf{b}_j^* \rangle}
+    {\langle \mathbf{b}_j^*,\mathbf{b}_j^* \rangle}  
+    \leq \eta$ per ogni $1\leq j < i \leq n$.
+    \item Condizione di Lovász: $\langle \mathbf{b}_i^*,\mathbf{b}_i^* \rangle \geq 
+    (\delta- \mu^2_{i,i-1}) \langle \mathbf{b}_{i}^*,\mathbf{b}_{i}^* \rangle$
+    per ogni $1 < i \leq n$.
+\end{itemize}
+I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e $\frac{1}{2}$.
+
+\begin{algorithm}
+    \caption{Algoritmo di LLL, con $\delta = \frac{3}{4}, \eta=\frac{1}{2}$}
+    \label{alg:two}
+    \DontPrintSemicolon
+    \KwIn{Una matrice $\mathbf{B}$ che sia base di un reticolo}
+    \KwOut{Una matrice $\mathbf{B}^*$ LLL-ridotta}
+    $k=1$\;
+    $\mathbf{b}_1^* = \mathbf{b}_1$\;
+
+    \While{$k<=n$}{
+        \For{$j = k-1$ \KwTo$0$}{ 
+            \If(\tcp*[f]{Condizione di grandezza}){$|\mu_{k,j}| > \eta$}{ 
+                $\mathbf{b}_k = \mathbf{b}_k - \lfloor \mu_{k,j} \rceil \mathbf{b}_j$\;
+                GramSchmidt($\mathbf{B}$)\; % chktex 36
+         }
+        }
+        \If(\tcp*[f]{Condizione di Lovász})
+        {$\langle \mathbf{b}_k^*,\mathbf{b}_k^* \rangle \geq 
+        (\delta - \mu^2_{k,k-1}) \langle \mathbf{b}_{k-1}^*,\mathbf{b}_{k-1}^* \rangle$}{
+            $k=k+1$\;
+        }
+        \Else{
+            Scambia $\mathbf{b}_{k-1}$ e $\mathbf{b}_k$\;
+            GramSchmidt($\mathbf{B}$)\; % chktex 36
+            $k=\text{max}(k-1, 1)$
+        }
+    }
+\end{algorithm}
+
+\begin{exmp} (Riduzione di una base con LLL)
+    Sia $\mathcal{L}$ un reticolo generato dalla matrice:
+    \[
+        \mathbf{B} =
+    \begin{bmatrix}
+        87634 & 32323 & -21221\\
+        88432 & 27883 & -11234\\
+        94345 & 40323 & -32123
+    \end{bmatrix}
+    \]
+    \[
+        \text{con } \mathcal{H}(\mathbf{B}) = 0.14318 \text{ e } \det(\mathbf{B}) = -1079906335101.
+    \]
+    Si applichi ora una riduzione LLL alla matrice $\mathbf{B}$:
+    \[
+        \mathbf{B}' =
+    \begin{bmatrix}
+        7509 & 3560 & -915\\
+        798 & -4440 & 9987\\
+        5833 & -11277 & -1169
+    \end{bmatrix}
+    \]
+    Ricalcolando $\mathcal{H}(\mathbf{B}')$ è possibile osservare che:
+    \[
+        \mathcal{H}(\mathbf{B}') = 0.96096 \text{ e }\det(\mathbf{B}) = 1079906335101.
+    \]
+    E' stato ottenuto un incremeneto notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
+    interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}')|$ e 
+    perciò $\mathbf{B}$ e $\mathbf{B}'$ sono entrambe basi valide per $\mathcal{L}$.
+\end{exmp}
+
+\subsection{Varianti di LLL}
+
+LLL è un eccellente algoritmo in grado di restituire in un tempo polinomiale una matrice 
+quasi ortogonale partendo da una con vettori quasi paralleli, o che comunque è ritenibile 
+di bassa qualità. Esistono però varianti che ne velocizzano i calcoli, 
+così come altri algoritmi capaci di restituire una base di qualità ancora superiore 
+rispetto a quella ottenuta con la riduzione LLL. Di seguito vengono presentate 
+brevemente tre versioni dell'algoritmo. 
+\\
+La prima versione discussa è quella in virgola mobile (FPLLL)\cite{FPLLL05}, la quale 
+utilizza aritmetica in virgola mobile a 
+precisione arbitraria per accelerare i calcoli razionali dell'algoritmo originale. 
+Questa versione ha come vantaggio un aumento delle performance: in comparazione con LLL
+il tempo di computazione nel caso peggiore è $O(n^3 (\log\mathcal{E})^2)$. 
+\\ 
+La seconda versione è stata presentata da Schnorr-Euchner~\cite{DEEPLLL94} ed il suo nome
+originale è "deep insertions" ovvero inserzioni profonde. In LLL (Algoritmo~\ref*{alg:two}),
+è presente un passaggio in cui avviene uno scambio tra il vettore 
+$\mathbf{b}_{k-1}$ e $\mathbf{b}_{k}$, il quale di solito permette qualche riduzione di grandezza
+ulteriore del nuovo $\mathbf{b}_{k}$. Nella variante deep insertions, viene invece inserito
+$\mathbf{b}_{k}$ tra $\mathbf{b}_{i-1}$ e $\mathbf{b}_{i}$ con $i$ che viene scelta in modo
+da apportare una maggiore riduzione di grandezza. L'algoritmo risultante, nel caso peggiore,
+potrebbe non terminare in un tempo polinomiale, ma in pratica, quando eseguito sulla maggioranza
+dei reticoli, termina rapidamente e può fornire in output una base ridotta 
+significativamente migliore di quella di LLL standard. 
+\\
+L'ultima variante di LLL è basata sull'algoritmo di riduzione 
+Korkin–Zolotarev (KZ)\cite[Sezione 18.5]{Galbraith18}. Le caratteristiche di una base KZ-ridotta
+sono generalmente migliori rispetto a quelle di LLL, ma richiedono una complessità maggiore
+e un tempo di computazione non polinomiale, per le proprietà complete si veda il riferimento. 
+Più nel dettaglio, il problema principale, è che non esiste un algoritmo in grado di computare
+una base KZ in tempo polinomiale. L'algoritmo più veloce conosciuto richiede un tempo
+di computazione esponenziale rispetto alla dimensione. 
+Per compensare a tale problema KZ apporta un 
+grande vantaggio in rispetto all'accuratezza della riduzione, infatti, il primo vettore
+di una base KZ-ridotta è sempre una soluzione al SVP. Dato che la complessità di KZ
+cresce con $n$, è logico pensare che a basse dimensioni sia comunque sufficientemente
+veloce. Un'idea è quindi quella di computare
+una riduzione di proiezioni a dimensioni più basse del reticolo originale.
+L'algoritmo in questa configurazione prende il nome di Korkine-Zolotarev a blocco (BKZ), 
+il quale, se combinato con LLL, diventa una variante di quest'ultimo chiamata LLL-BKZ. Questa
+variante è in grado di bilanciare costo computazionale e qualità di riduzione ottenendo così
+l'algoritmo più efficiente per SVP in grandi dimensioni, dimostrando anche una qualità di riduzione
+significativamente migliore di quella di LLL standard. 
