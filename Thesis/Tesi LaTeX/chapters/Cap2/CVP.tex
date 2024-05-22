@@ -116,8 +116,8 @@ quindi una base di alta qualità al fine di avere risultati validi.
     \label{fig:lattice4}
 \end{figure}
 
-\begin{exmp}
-    (Risoluzione del CVP usando la tecnica di arrotondamento di Babai)
+\begin{exmp} (Risoluzione del CVP usando la tecnica di arrotondamento di Babai)
+    \label{exp:babai}
     \\
     Sia $\mathcal{L}$ un reticolo generato dalla base $\mathbf{B}$ 
     e sia $\mathbf{t} \in \mathbb{R}^n, \mathbf{t} \notin \mathcal{L}$ con
@@ -130,20 +130,20 @@ quindi una base di alta qualità al fine di avere risultati validi.
         \ \text{ e } \ \mathbf{t} =
         \begin{bmatrix}
             7\\
-            3,5
+            3.5
         \end{bmatrix}.
     \]
     Si inizi con l'applicare l'algoritmo, dal primo passo si ottiene
     \[
         \mathbf{B}^{-1} =
         \begin{bmatrix}
-            0 & 0,5\\
-            0,33 & 0,17
+            0 & 0.5\\
+            0.33 & 0.17
         \end{bmatrix}
         \ \text{ e } \ \mathbf{x} = \mathbf{B}^{-1}\mathbf{t} = 
         \begin{bmatrix}
-            1,75\\
-            1,75
+            1.75\\
+            1.75
         \end{bmatrix}
     \]
     si applichi ora la tecnica di arrotondamento a $\mathbf{x}$
@@ -163,12 +163,12 @@ quindi una base di alta qualità al fine di avere risultati validi.
         \end{bmatrix}
     \]  
     che, come mostrato in Figura \ref*{fig:lattice4}, è il vettore più vicino
-    a $\mathbf{t}$. Se si dovesse valutare la qualità della base, si otterrebbe che 
+    a $\mathbf{t}$ con $\|\mathbf{t}-\mathbf{w}\|_2 = 1.12$. Se si dovesse valutare la qualità della base, si otterrebbe che 
     $\mathcal{H}(\mathbf{B}) = 0.97400$ e grazie a tali proprietà ortogonali del dominio fondamentale
     che si genera da $\mathbf{B}$, l'algoritmo è in grado di raggiungere facilmente la soluzione.
     \\
     Sia ora $\mathbf{B}'$ una base di bassa qualità, ma che generi lo stesso reticolo 
-    $\mathcal{L}$
+    $\mathcal{L}$:
     \[
         \mathbf{B}' =
         \begin{bmatrix}
@@ -182,7 +182,7 @@ quindi una base di alta qualità al fine di avere risultati validi.
     \[
     \mathbf{x}' = \mathbf{B}'^{-1}\mathbf{t}=
     \begin{bmatrix}
-        8,75\\
+        8.75\\
         -14
     \end{bmatrix}
     \ \text{ e quindi } \ \lfloor\mathbf{x}'\rceil = 
@@ -199,7 +199,148 @@ quindi una base di alta qualità al fine di avere risultati validi.
             2
         \end{bmatrix}
     \]
-    il quale non è soluzione corretta al CVP. 
+    il quale non è soluzione corretta al CVP in quanto 
+    $\|\mathbf{t}-\mathbf{w}_2\|_2 = 3.35 > \|\mathbf{t}-\mathbf{w}\|_2$. 
 \end{exmp}
 
 \subsection{Tecnica di incorporamento}
+Babai, oltre alla presentazione dei due algoritmi precedentemente trattati, ha dimostrato
+anche quanto una base ridotta migliori l'approssimazione della soluzione ad apprCVP.
+In particolare con una base LLL-ridotta, questo porta ad un fattore di approssimazione
+esponenziale. Nella pratica però il metodo migliore per risolvere apprCVP è la cosiddetta tecnica di
+incorporamento\cite{Galbraith18} che riduce il CVP a un SVP.  
+\\
+Sia $\mathbf{B} = [\mathbf{b}_1,\dots, \mathbf{b}_n]$ la base di un reticolo $\mathcal{L}$
+di dimensione $n$ e sia $\mathbf{t} \in \mathbb{R}^n, \mathbf{t} \notin \mathcal{L}$. 
+La tecnica di incorporamento impone la costruzione di un reticolo di dimensione $n+1$ con
+la seguente struttura:
+\[
+    \mathbf{B}' =
+    \begin{bmatrix}
+        \vdots & \vdots & \vdots & & \vdots\\
+        \mathbf{t} & \mathbf{b}_1 & \mathbf{b}_2 & \cdots & \mathbf{b}_n\\
+        \vdots & \vdots & \vdots & & \vdots\\
+        1 & 0 & 0 & & 0
+    \end{bmatrix}
+\]
+Il nuovo reticolo $\mathcal{L}(\mathbf{B}')$ è strutturato in modo tale da avere lo stesso 
+determinante di $\mathcal{L}(\mathbf{B})$ e quasi la stessa dimensione, ci si può quindi 
+aspettare che il vettore più corto di $\mathcal{L}(\mathbf{B}')$ abbia quasi la stessa 
+lunghezza di quello di $\mathcal{L}(\mathbf{B})$. Si assuma che $\mathbf{w} \in \mathcal{L}$
+minimizzi la distanza per $\mathbf{t}$ e sia $\mathbf{u} = \mathbf{t}-\mathbf{w}$, allora il vettore
+\[
+    \mathbf{v} =
+    \begin{bmatrix}
+        \mathbf{u}\\
+        1
+    \end{bmatrix}
+\]
+appartiene a $\mathcal{L}'$ e, se dovesse anche essere il suo vettore più corto, si 
+potrebbe risolvere l'apprCVP di $\mathcal{L}$ determinando l'apprSVP di $\mathcal{L}'$.
+Per ottenere $\mathbf{v}$ è sufficiente ridurre $\mathbf{B}'$
+mediante algoritmi come LLL (o meglio BKZ-LLL) per poi ottenere $\mathbf{w}$ calcolando 
+$\mathbf{t}-\mathbf{u}$.
+Un problema nella pratica sta nella scelta di $\mathbf{t}$: teoricamente
+$\mathbf{t}$ può appartenere all'insieme $\mathbb{R}$, ma questo creerebbe problemi nella
+costruzione della nuova base $\mathbf{B}'$ la quale non soddisferebbe più la proprietà dei 
+coefficienti integrali che sta alla base della definizione di reticolo. Tale problema viene
+discusso e affrontato nell'attacco di Nguyen contro GGH, il quale verrà trattato nelle prossime sezioni.
+Nel concreto si tenta di mantenere $\mathbf{t} \in \mathbb{Z}^n$ in modo da evitare problemi
+di questa natura.
+\clearpage
+
+\begin{exmp}(Risoluzione del CVP usando la tecnica di incorporamento)
+Siano $\mathbf{B}$ e $\mathbf{B}'$ le stesse basi definite nell'Esempio \ref*{exp:babai} e
+sia
+\[
+    \mathbf{t} =
+    \begin{bmatrix}
+        6\\
+        3
+    \end{bmatrix}.
+\]
+Seguendo quanto descritto nella tecnica di incorporamento, si costruisca la matrice 
+\[
+    \mathbf{M} =
+    \begin{bmatrix}
+        \mathbf{t}_{0,0} & \mathbf{b}_{0,0} & \mathbf{b}_{1,0}\\
+        \mathbf{t}_{1,0} & \mathbf{b}_{0,1} & \mathbf{b}_{1,1}\\
+        1 & 0 & 0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        6 & 1 & 3 \\
+        3 & 2 & 0 \\
+        1 & 0 & 0 
+    \end{bmatrix}
+\]
+e la si riduca usando un algoritmo di riduzione, in questo caso LLL:
+\begin{equation*}
+    \mathbf{M}^* =
+    \begin{bmatrix*}[l]
+        -1           & \phantom{-}1 & 1\\
+        \phantom{-}1 & -1           & 2 \\
+        -1           & -1           & 0\\
+    \end{bmatrix*}.
+\end{equation*}
+Infine è necessario che si estraggano i primi $n$ valori dalla prima colonna di $\mathbf{M}^*$
+sottraendoli poi a $\mathbf{t}$:
+\begin{equation*}
+    \mathbf{w} = \mathbf{t} - \mathbf{u} =
+    \begin{bmatrix*}[l]
+        6 \\
+        3
+    \end{bmatrix*}
+    -
+    \begin{bmatrix*}[l]
+        -1 \\
+        \phantom{-}1
+    \end{bmatrix*}
+    =
+    \begin{bmatrix*}[l]
+        7 \\
+        2
+    \end{bmatrix*}
+\end{equation*}
+che è soluzione all' apprCVP con $\|\mathbf{t}-\mathbf{w}\|_2=1.41$.
+Utilizzando la base cattiva $\mathbf{B}'$ invece, si otterrebbe:
+\begin{equation*}
+    \mathbf{M}_2 =
+    \begin{bmatrix*}[l]
+        6 & \phantom{-}12 & \phantom{-}7\\
+        3 & -6           & -4\\
+        1 & \phantom{-}0 & \phantom{-}0
+    \end{bmatrix*}
+    \ \text{ con } \
+    \mathbf{M}_2^* =
+    \begin{bmatrix*}[l]
+        \phantom{-}1 & \phantom{-}1 & 1\\
+        -1           & -1           & 2\\
+        \phantom{-}1 & -1           & 0
+    \end{bmatrix*}.
+\end{equation*}
+Ed effettuando l'ultimo passaggio:
+\begin{equation*}
+    \mathbf{w}_2 = \mathbf{t} - \mathbf{u}_2 =
+    \begin{bmatrix*}[l]
+        6 \\
+        3
+    \end{bmatrix*}
+    -
+    \begin{bmatrix*}[l]
+        \phantom{-}1 \\
+        -1
+    \end{bmatrix*}
+    =
+    \begin{bmatrix*}[l]
+        5 \\
+        4
+    \end{bmatrix*}
+\end{equation*}
+che è comunque soluzione all'apprCVP in quanto $\|\mathbf{t}-\mathbf{w}_2\|_2=1.41$.
+\end{exmp}
+Grazie a questo esempio si può comprendere meglio l'efficacia in pratica di questa tecnica
+in comparazione con l'algoritmo di arrotondamento di Babai: nonostante la bassa qualità
+della seconda base si è riusciti comunque a trovare una soluzione corretta.
+
+

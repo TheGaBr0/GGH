@@ -24,7 +24,7 @@ $\mathbf{B}$ è definito dal valore:
         {\|\mathbf{b_1}\|_2 \cdot \|\mathbf{b_2}\|_2, \cdots \|\mathbf{b}_n\|_2} 
     \Biggr)^{\frac{1}{n}}
 \]
-dove $\|\cdot\|_2$ rappresenta la Norma Euclidea di $\cdot$.\\
+\\
 Il rapporto di Hadamard si configura nell'intervallo $(0, 1]$, dove più vicino all'1 si è 
 e più la base è buona, viceversa più vicino allo 0 si è e più la base è cattiva. Questa formula
 verrà utilizzata come unica misura per verificare la qualità degli esempi di basi che verranno
@@ -148,20 +148,20 @@ I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e
     \]
     Si applichi ora una riduzione LLL alla matrice $\mathbf{B}$:
     \[
-        \mathbf{B}' =
+        \mathbf{B}^* =
     \begin{bmatrix}
         7509 & 3560 & -915\\
         798 & -4440 & 9987\\
         5833 & -11277 & -1169
     \end{bmatrix}
     \]
-    Ricalcolando $\mathcal{H}(\mathbf{B}')$ è possibile osservare che:
+    Ricalcolando $\mathcal{H}(\mathbf{B}^*)$ è possibile osservare che:
     \[
-        \mathcal{H}(\mathbf{B}') = 0.96096 \text{ e }\det(\mathbf{B}) = 1079906335101.
+        \mathcal{H}(\mathbf{B}^*) = 0.96096 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
     \]
     E' stato ottenuto un incremeneto notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
-    interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}')|$ e 
-    perciò $\mathbf{B}$ e $\mathbf{B}'$ sono entrambe basi valide per $\mathcal{L}$.
+    interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}^*)|$ e 
+    perciò $\mathbf{B}$ e $\mathbf{B}^*$ sono entrambe basi valide per $\mathcal{L}$.
 \end{exmp}
 
 \subsection{Varianti di LLL}
