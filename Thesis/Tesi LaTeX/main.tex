@@ -1,3 +1,4 @@
+\DocumentMetadata{pdfversion=2.0, pdfstandard=A-4}
 \documentclass[a4paper,12pt]{report}
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -5,18 +6,16 @@
 \usepackage{blindtext}
 \usepackage{subfiles}
 \usepackage[a4paper]{geometry}
-\usepackage{amssymb,amsmath,amsthm}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{epsfig}
 \usepackage[italian]{babel}
 \usepackage{setspace}
 \usepackage{tesi}
-\usepackage{amsfonts}
 \usepackage{mathtools}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
 \usepackage{float}
@@ -32,6 +31,17 @@
 \setlength\parindent{0pt}
 %per gli algoritmi in italiano
 \renewcommand{\algorithmcfname}{Algoritmo}%
+
+%hyperref figure%
+\newcommand*{\figref}[2][]{%
+  \hyperref[{fig:#2}]{%
+    Figure~\ref*{fig:#2}%
+    \ifx\\#1\\%
+    \else
+      \,#1%
+    \fi
+  }%
+}
 
 
 %

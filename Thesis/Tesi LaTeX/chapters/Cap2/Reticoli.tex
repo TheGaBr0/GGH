@@ -60,7 +60,7 @@ $n$ vettori, chiamati base, che sono linearmente indipendenti tra loro.
 La struttura e le proprietà di un reticolo dipendono dai vettori di base che, 
 partendo dall'origine, definiscono il suo pattern di disposizione indicando le direzioni 
 e le distanze tra i punti del reticolo. \\
-Proprietà fondamentale che sta alla base della definizione di reticolo è la proprietà dei 
+Una proprietà fondamentale che sta alla base della definizione di reticolo è la proprietà dei 
 coefficienti integrali: la base di un reticolo ha sempre coefficienti integrali, 
 il che significa che tutti i vettori nella base sono combinazioni lineari intere 
 l'uno dell'altro.
@@ -70,13 +70,22 @@ Le altre varianti sono ottenibili applicando delle trasformazioni lineari alla b
 reticolo quadrato (Figura~\ref{fig:lattice2}).
 
 
-I reticoli possono essere definiti in uno spazio bidimensionale o tridimensionale, 
+I reticoli sono normalmente definiti in uno spazio bidimensionale o tridimensionale, 
 ma il concetto può essere esteso a spazi di dimensioni superiori. La rappresentazione dei vettori in questa tesi è quella per colonna, 
-in quanto gli autori di~\cite{GGH97} hanno preso questa decisione per la rappresentazione
+in quanto gli autori di~\cite{GGH97} hanno preso questa decisione per la costruzione
 del loro crittosistema a chiave pubblica Goldreich Goldwasser Halevi (GGH), oggetto di questa tesi. Quindi per esempio, una matrice 
 $\mathbf{B} \in \mathbb{R}^{m\times n}$ sarà divisa in vettori 
-$[\mathbf{b_1}, \mathbf{b_2}, \dots, \mathbf{b}_n]$.
-
+$[\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n]$. 
+\\
+Una base può essere rappresentata da una matrice  
+$\mathbf{B} = [\mathbf{b}_1,\mathbf{b}_2,\dots,\mathbf{b}_n] \in \mathbb{R}^{n \times n}$ 
+avente, come precedentemente anticipato, i vettori base come colonne.  Utilizzando la matrice come notazione, 
+il reticolo generato da una matrice 
+$\mathbf{B} \in \mathbb{R}^{n \times n}$ 
+può essere definita come 
+${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
+dove $\mathbf{B} \mathbf{x}$ 
+è una comune moltiplicazione matriciale. \\
 Più formalmente, dati $n$ vettori linearmente indipendenti 
 $\mathbf{b}_1,\dots, \mathbf{b}_n \in \mathbb{R}^n$,
 il reticolo generato da essi è un set di vettori 
@@ -84,27 +93,86 @@ il reticolo generato da essi è un set di vettori
 \mathcal{L} (\mathbf{b}_1,\dots,\mathbf{b}_n) = \sum_{i=1}^{n}\mathbf{b}_i \cdot 
 \mathbb{Z} = \bigl\{ {\mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n} \bigr\}.
 \]
-I vettori $\mathbf{b}_1,\dots,\mathbf{b}_n$ sono noti come base del reticolo.
-Lo stesso reticolo può avere più basi
+Lo stesso reticolo può essere generato più basi composte ciascuna da vettori diversi
 \[
     \mathcal{L} = \sum_{i=1}^{n}\mathbf{c}_i \cdot \mathbb{Z} .
 \]
 
-Una base può essere rappresentata da una matrice  
-$\mathbf{B} = [\mathbf{b}_1,\dots,\mathbf{b}_n] \in \mathbb{R}^{n \times n}$ 
-avente i vettori base come colonne. Utilizzando la matrice come notazione, 
-il reticolo generato da una matrice 
-$\mathbf{B} \in \mathbb{R}^{n \times n}$ 
-può essere definita come 
-${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
-dove $\mathbf{B} \mathbf{x}$ 
-è una comune moltiplicazione matriciale. \\
 Il determinante di un reticolo è il valore assoluto del 
 determinante della matrice base 
 $\text{det}(\mathcal{L}(\mathbf{B})) = |\text{det}(\mathbf{B})|$. 
-Di conseguenza se $\mathbf{U}$ è una matrice unimodulare, avente quindi determinante +1 o -1, le basi 
-$\mathbf{B}$ e $\mathbf{B}\mathbf{U}$ generano lo stesso reticolo. 
-
+Di conseguenza, per ogni matrice unimodulare (ovvero avente determinante +1 o -1) 
+$\mathbf{U} \in \mathbf{Z}^{n \times n}$, $\mathbf{B}\mathbf{U}$ è una base di 
+$\mathcal{L}(\mathbf{B})$. Per verificare se due basi $\mathbf{R}$ e $\mathbf{B}$ generano
+lo stesso reticolo, è possibile utilizzare la matrice pseudo-inversa e trovare un $\mathbf{U}$
+tale per cui $\mathbf{R}\mathbf{U} = \mathbf{B}$.
+\\
+Computando $\mathbf{R}^+$, ovvero la matrice pseudo-inversa di $\mathbf{R}$ si ha che
+\[
+    \mathbf{U} = \mathbf{R}^+ \ \mathbf{B}.
+\]
+$\mathbf{R}^+$ è particolarmente facile da ottenere in questo caso in quanto i vettori
+colonna di $\mathbf{R}$ sono linearmente indipendenti per definizione. Di conseguenza la
+matrice pseudo-inversa assume la seguente forma:
+\[
+    \mathbf{R}^+ = (\mathbf{R}^* \ \mathbf{R})^{-1} \ \mathbf{R}^*
+\]
+con $\mathbf{R}^*$ che è la matrice trasposta coniugata di $\mathbf{R}$. Dato che $\mathbf{R}$
+è una matrice composta da soli interi, la matrice trasposta coniugata è uguale alla matrice
+trasposta normale. Si ottiene quindi che
+\[
+    \mathbf{U} = (\mathbf{R}^T \ \mathbf{R})^{-1} \ \mathbf{R}^T \ \mathbf{B}.
+\]
+\begin{exmp} (Verificare che due basi generino lo stesso reticolo)
+    \label{exp:basis}
+    \\
+    Siano $\mathbf{R}$ e $\mathbf{B}$ due basi generanti entrambi il reticolo $\mathcal{L}$
+    con
+    \begin{equation*}
+        \mathbf{R} =
+        \begin{bmatrix}
+            1 & 3\\
+            2 & 0
+        \end{bmatrix}
+        \ \text{ e } \ 
+        \mathbf{B} =
+        \begin{bmatrix*}[l]
+            \phantom{-}12 & \phantom{-}7\\
+            -6 & -4
+        \end{bmatrix*}
+    \end{equation*}
+    allora deve esistere una matrice unimodulare $\mathbf{U}$ tale che 
+    $\mathbf{R}\mathbf{U} = \mathbf{B}$. Per trovare $\mathbf{U}$ è possibile
+    calcolare
+    \begin{equation*}
+        \mathbf{U} = (\mathbf{R}^T \ \mathbf{R})^{-1} \ \mathbf{R}^T \ \mathbf{B} =
+        \begin{bmatrix*}[l]
+            -3 & -2\\
+            \phantom{-}5 & \phantom{-}3
+        \end{bmatrix*}.
+    \end{equation*}
+    Ora è sufficiente controllare che
+    \begin{equation*}
+        \mathbf{RU} = \mathbf{B}
+        \ \text{ ovvero } \
+        \begin{bmatrix}
+            1 & 3\\
+            2 & 0
+        \end{bmatrix}
+        \times
+        \begin{bmatrix*}[l]
+            -3 & -2\\
+            \phantom{-}5 & \phantom{-}3
+        \end{bmatrix*}
+        =
+        \begin{bmatrix*}[l]
+            \phantom{-}12 & \phantom{-}7\\
+            -6 & -4
+        \end{bmatrix*}
+    \end{equation*}
+inoltre dato che $\det(\mathbf{U}) = 1$, si può affermare che $\mathbf{R}$ e $\mathbf{B}$
+sono entrambe basi di $\mathcal{L}$.
+\end{exmp}
 \subsection{Dominio Fondamentale}
 \label{sec:dominio}
 
@@ -167,11 +235,11 @@ $\mathbf{B}$ e $\mathbf{B}\mathbf{U}$ generano lo stesso reticolo.
 Il dominio fondamentale è un concetto molto importante nei reticoli, grazie al quale è possibile
 capire la struttura matematica che li compone. Data una base abritraria $\mathbf{B}$ e un reticolo 
 $\mathcal{L}$ è possibile immaginare il dominio fondamentale come un parallelepipedo 
-che ha come vertici i vettori base $\mathbf{b}$ generanti il reticolo, il punto di origine e 
+che ha come vertici: i vettori base $\mathbf{b}$ generanti il reticolo, il punto di origine e 
 come quarto punto la somma dei vettori base all'origine. \\
 Di tale parallelepipedo è possibile calcolarne il volume $\mathcal{F}(\mathbf{B})$, il 
 quale è strettamente legato al determinante del reticolo. 
-E' possibile osservare in Figura~\ref*{fig:lattice3} un reticolo con due sue basi: nonostante 
+E' possibile osservare in Figura~\ref{fig:lattice3} un reticolo con due sue basi: nonostante 
 i domini fondamentali abbiano forme diverse, l'area coperta dal loro volume è la medesima.
 Come dimostrato in~\cite[Sezione 7.4]{HDMRD08}, proprio come per il
 determinante, il dominio fondamentale è un'invariante che è indipendente dalla scelta 
@@ -182,7 +250,7 @@ delle basi per il reticolo. Inoltre ne deriva la proprietà:
 e ricollegandoci a quanto detto nella sezione~\ref{sec:nozioni}: 
 $\mathcal{F}(\mathbf{B})$ $=$ $\det(\mathcal{L})$ $=$ $|\det(\mathbf{B})|$.\\
 Una seconda proprietà fondamentale, sempre dimostrata in~\cite{HDMRD08} è che tramite il
-dominio fondamentale è possibile ricostruire l'intero reticolo (Figura \ref*{fig:lattice4}). 
+dominio fondamentale è possibile ricostruire l'intero reticolo (Figura \ref{fig:lattice3}). 
 In altre parole, ogni vettore $\mathbf{t} \in \mathbb{R}^n$ con $\mathcal{L} \subset \mathbb{R}^n $ 
 può essere ottenuto sommando ripetutamente a un vettore $\mathbf{f} \in \mathcal{F}$ un 
 altro vettore $\mathbf{v} \in \mathcal{L}$.
@@ -194,3 +262,62 @@ Più formalmente:
 \} 
 \]
 comprende esattamente tutti i vettori nel reticolo $\mathcal{L}$.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[framed, scale=0.8]
+
+        \clip (-0.55,-0.65) rectangle (10,7); 
+
+        
+        % Draw Cartesian axes
+        \draw[->,black,thick] (0,0) -- (10,0) node[above left] {$x$};
+        \draw[->,black,thick] (0,0) -- (0,7) node[below right] {$y$};
+
+        % Add numbers to the x-axis
+        \foreach \x in {0,1,2,...,9}
+        \draw (\x,0) -- (\x,-0.1) node[below] {\x};
+
+        % Add numbers to the y-axis
+        \foreach \y in {1,2,...,6}
+        \draw (0,\y) -- (-0.1,\y) node[left] {\y};
+
+        \node[draw,circle,inner sep=1.5pt,fill] at (1,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (3,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (6,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (9,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (0,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (4,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (7,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (10,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (2,4) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (5,4) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (3,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (6,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (9,6) {};
+
+        \draw[dotted,black,ultra thick] (1,2) -- (4,2);
+        \draw[dotted,black,ultra thick] (3,0) -- (4,2);
+
+        \fill[gray!50] (0,0) -- (3,0) -- (4,2) -- (1,2) -- cycle;
+        \draw[->,black,ultra thick] (0,0) -- (1,2) node[left] {$\mathbf{b}_1$};
+        \draw[->,black,ultra thick] (0,0) -- (3,0) node[above right] {$\mathbf{b}_2$};
+        \node[] at (2,1) {$\mathcal{F}$};
+        
+        \draw[dotted,black,ultra thick] (1,2) -- (2,4);
+        \draw[dotted,black,ultra thick] (2,4) -- (5,4);
+        \draw[dotted,black,ultra thick] (4,2) -- (5,4);
+        \draw[dotted,black,ultra thick] (6,0) -- (7,2);
+        \draw[dotted,black,ultra thick] (4,2) -- (7,2);
+        \draw[dotted,black,ultra thick] (7,2) -- (8,4);
+        \draw[dotted,black,ultra thick] (5,4) -- (8,4);
+      
+        \node[] at (3,3) {$\mathcal{F} + \mathbf{b}_1$};
+        \node[] at (6,3) {$\mathcal{F} + \mathbf{b}_1 + \mathbf{b}_2$};
+        \node[] at (5,1) {$\mathcal{F} + \mathbf{b}_2$};
+        
+        
+    \end{tikzpicture}
+    \caption{Il dominio fondamentale comprende esattamente tutti i vettori di $\mathcal{L}$ }
+    \label{fig:lattice3}
+\end{figure}

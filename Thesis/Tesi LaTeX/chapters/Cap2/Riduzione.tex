@@ -21,7 +21,7 @@ $\mathbf{B}$ è definito dal valore:
 \mathcal{H}(\mathbf{B}) = 
     \Biggl( 
         \frac{\det(\mathcal{L})}
-        {\|\mathbf{b_1}\|_2 \cdot \|\mathbf{b_2}\|_2, \cdots \|\mathbf{b}_n\|_2} 
+        {\|\mathbf{b}_1\|_2 \cdot \|\mathbf{b}_2\|_2, \cdots \|\mathbf{b}_n\|_2} 
     \Biggr)^{\frac{1}{n}}
 \]
 \\
@@ -40,16 +40,15 @@ che sia valida o quantomeno che sia vicina alla soluzione ottima.
 A questo proposito sono stati ideati degli algoritmi in grado di ortogonalizzare una base
 cattiva per convertirla in una buona e mantenere le proprietà del reticolo iniziale: si
 ottiene quindi una base $\mathbf{B'}$ tale che: 
-$\mathcal{H}(\mathbf{B}') \approxeq 1$ e che $\det(\mathbf{B}) = \det(\mathbf{B'})$.
+$\mathcal{H}(\mathbf{B}^*) \approxeq 1$ e che $\det(\mathbf{B}) = \det(\mathbf{B}^*)$.
 \\
-Prima di discutere questo tipo di algoritmi però è necessario affrontare brevemente 
-l'Algoritmo di Gram-Schmidt, il quale esegue un tipo di ortogonalizzazione che viene applicata
+Prima di discutere questo tipo di algoritmi è necessario affrontare brevemente 
+l'algoritmo di Gram-Schmidt, il quale, esegue un tipo di ortogonalizzazione che viene applicata
 su spazi vettoriali e che è anche chiamata Ortogonalizzazione Gram-Schmidt (GSO).
 Questo algoritmo non è adottabile direttamente sulle basi reticolari in quanto esso andrebbe a 
 violare la proprietà dei coefficienti integrali, di fondamentale importanza nella
 definizione di reticolo. Nonostante ciò, questo algoritmo gode di una proprietà chiave che
-viene utilizzata in algoritmi di riduzione dei reticoli. Come dimostrato in~\cite{HDMRD08},
-teorema 7.13:
+viene utilizzata in algoritmi di riduzione dei reticoli. Come dimostrato in~\cite[Teorema 7.13]{HDMRD08}:
 
 siano span$(\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n)$ e 
 span$(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*)$ 
@@ -57,7 +56,7 @@ gli spazi vettoriali generati rispettivamente dalle colonne di $\mathbf{B}$ e $\
 allora se $\mathbf{B}^*$ è il risultato di GSO applicato a $\mathbf{B}$:
 \[
 \text{span}(\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n) =
-\text{span}(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*) 
+\text{span}(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*).
 \]
 Ciò comporta che GSO può essere chiamato come sotto-routine di algoritmi per la trasformazione
 delle matrici di spazi vettoriali, riducendo notevolmente i conti e semplificando l'implementazione
@@ -88,12 +87,12 @@ la riduzione dei reticoli.
 In teoria, opera con un tempo polinomiale $O(n^6 (\log\mathcal{E})^3)$, dove $n$ è la dimensione di un 
 reticolo $\mathcal{L}$ dato ed $\mathcal{E}$ rappresenta la massima lunghezza euclidea dei vettori nella base 
 fornita. Il risultato di LLL è una base ridotta, il cui vettore più breve può essere 
-considerato una soluzione approssimata del apprSVP con un fattore di $2^{(n-1)/2}$ rispetto 
+considerato una soluzione approssimata dell'apprSVP con un fattore di $2^{(n-1)/2}$ rispetto 
 alla lunghezza del vettore corretto più corto. Nonostante questo fattore sia 
 esponenziale, l'algoritmo si dimostra sorprendentemente efficiente nella pratica e ciò lo rende
 un tassello fondamentale negli algoritmi di risoluzione del CVP e del SVP. 
 
-Una base $\mathbf{B}^*$ per essere considerata LLL ridotta deve soddisfare due condizioni:
+Una base $\mathbf{B}^*$ per essere considerata LLL-ridotta deve soddisfare due condizioni:
 \begin{itemize}
     \item Condizione di grandezza: $\mu_{i,j} = \frac{\langle \mathbf{b}_i,\mathbf{b}_j^* \rangle}
     {\langle \mathbf{b}_j^*,\mathbf{b}_j^* \rangle}  
@@ -135,33 +134,44 @@ I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e
 
 \begin{exmp} (Riduzione di una base con LLL)
     Sia $\mathcal{L}$ un reticolo generato dalla matrice:
-    \[
+    \begin{equation*}
         \mathbf{B} =
-    \begin{bmatrix}
-        87634 & 32323 & -21221\\
-        88432 & 27883 & -11234\\
-        94345 & 40323 & -32123
-    \end{bmatrix}
-    \]
+        \begin{bmatrix*}
+            \phantom{-}87634 & \phantom{-}88432 & \phantom{-}94345\\
+            \phantom{-}32323 & \phantom{-}27883 & \phantom{-}40323\\
+            -21221           & -11234           & -32123
+        \end{bmatrix*}
+    \end{equation*}
     \[
-        \text{con } \mathcal{H}(\mathbf{B}) = 0.14318 \text{ e } \det(\mathbf{B}) = -1079906335101.
+        \text{con } \mathcal{H}(\mathbf{B}) = 0.10393 \text{ e } \det(\mathbf{B}) = -1079906335101.
     \]
     Si applichi ora una riduzione LLL alla matrice $\mathbf{B}$:
-    \[
+    \begin{equation*}
         \mathbf{B}^* =
-    \begin{bmatrix}
-        7509 & 3560 & -915\\
-        798 & -4440 & 9987\\
-        5833 & -11277 & -1169
-    \end{bmatrix}
-    \]
+        \begin{bmatrix*}
+            \phantom{-}7509 & \phantom{-}798  & \phantom{-}5833\\
+            \phantom{-}3560 & -4440           & -11277\\
+            -915            & \phantom{-}9987 & -1169
+        \end{bmatrix*}
+    \end{equation*}
     Ricalcolando $\mathcal{H}(\mathbf{B}^*)$ è possibile osservare che:
     \[
-        \mathcal{H}(\mathbf{B}^*) = 0.96096 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
+        \mathcal{H}(\mathbf{B}^*) = 0.72358 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
     \]
     E' stato ottenuto un incremeneto notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
-    interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}^*)|$ e 
-    perciò $\mathbf{B}$ e $\mathbf{B}^*$ sono entrambe basi valide per $\mathcal{L}$.
+    interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}^*)|$ e,
+    usando la formula descritta nella Sezione \ref*{sec:reticoli}, 
+    è possibile trovare una matrice di interi
+    \begin{equation*}
+        \mathbf{U} =
+        \begin{bmatrix*}
+            -2           & -1              & \phantom{-}22\\
+            \phantom{-}1 & \phantom{-}1    & -10\\
+            \phantom{-}1 & \phantom{-}0    & -11
+        \end{bmatrix*}
+        \ \text{ con } \det(\mathbf{U}) = -1
+    \end{equation*}
+    tale per cui $\mathbf{B}\mathbf{U} = \mathbf{B}^*$.
 \end{exmp}
 
 \subsection{Varianti di LLL}
@@ -190,7 +200,7 @@ potrebbe non terminare in un tempo polinomiale, ma in pratica, quando eseguito s
 dei reticoli, termina rapidamente e può fornire in output una base ridotta 
 significativamente migliore di quella di LLL standard. 
 \\
-L'ultima variante di LLL è basata sull'algoritmo di riduzione 
+L'ultima variante discussa è basata sull'algoritmo di riduzione 
 Korkin–Zolotarev (KZ)\cite[Sezione 18.5]{Galbraith18}. Le caratteristiche di una base KZ-ridotta
 sono generalmente migliori rispetto a quelle di LLL, ma richiedono una complessità maggiore
 e un tempo di computazione non polinomiale, per le proprietà complete si veda il riferimento. 
