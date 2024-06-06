@@ -3,14 +3,14 @@
 
 
 \subsection{Rapporto di Hadamard}
-Supponiamo di avere a disposizione due basi $\mathbf{A}$ e $\mathbf{B}$ che godono della
+Si supponga di avere a disposizione due basi $\mathbf{A}$ e $\mathbf{B}$ che godono della
 proprietà di generare lo stesso reticolo. Seppur condividendo tale caratteristica, 
 $\mathbf{A}$ e $\mathbf{B}$ sono in realtà molto diverse nella loro struttura; in particolare
-$\mathbf{A}$ è composta da vettori corti e quasi ortogonali fra loro e $\mathbf{B}$ è
+$\mathbf{A}$ è composta da vettori corti e quasi ortogonali fra loro mentre $\mathbf{B}$ è
 composta da vettori lunghi e quasi paralleli fra loro.\\
 La qualità di una base risiede in queste differenze dei vettori costituenti le basi, chiamiamo
 quindi base "buona" $\mathbf{A}$ e base "cattiva" $\mathbf{B}$.
-E' necessario però definire una metrica per valutare quanto una base sia buona o meno, a tal
+E' necessario però definire una metrica per valutare quanto una base sia buona o meno; a tal
 proposito Hadamard\cite{HDMRD08} introdusse una formula quantitativa per misurare la qualità
 di una base reticolare, il cosiddetto rapporto di Hadamard. \\
 
@@ -38,7 +38,7 @@ $\mathcal{H}(\mathbf{B})$ prossimo allo zero. Se volessimo utilizzare questa bas
 uno dei problemi dei reticoli, molto probabilmente non riusciremmo mai a raggiungere una soluzione
 che sia valida o quantomeno che sia vicina alla soluzione ottima.
 A questo proposito sono stati ideati degli algoritmi in grado di ortogonalizzare una base
-cattiva per convertirla in una buona e mantenere le proprietà del reticolo iniziale: si
+cattiva per convertirla in una buona e mantenere le proprietà del reticolo iniziale, si
 ottiene quindi una base $\mathbf{B'}$ tale che: 
 $\mathcal{H}(\mathbf{B}^*) \approxeq 1$ e che $\det(\mathbf{B}) = \det(\mathbf{B}^*)$.
 \\
@@ -59,7 +59,7 @@ allora se $\mathbf{B}^*$ è il risultato di GSO applicato a $\mathbf{B}$:
 \text{span}(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*).
 \]
 Ciò comporta che GSO può essere chiamato come sotto-routine di algoritmi per la trasformazione
-delle matrici di spazi vettoriali, riducendo notevolmente i conti e semplificando l'implementazione
+delle matrici di spazi vettoriali, riducendo notevolmente i calcoli e semplificando l'implementazione
 di algoritmi per la riduzione di reticoli.
 
 \begin{algorithm}
@@ -158,9 +158,9 @@ I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e
     \[
         \mathcal{H}(\mathbf{B}^*) = 0.72358 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
     \]
-    E' stato ottenuto un incremeneto notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
+    E' stato ottenuto un incremento notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
     interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}^*)|$ e,
-    usando la formula descritta nella Sezione \ref*{sec:reticoli}, 
+    usando la formula descritta nella Sezione \ref{sec:reticoli}, 
     è possibile trovare una matrice di interi
     \begin{equation*}
         \mathbf{U} =
@@ -203,7 +203,7 @@ significativamente migliore di quella di LLL standard.
 L'ultima variante discussa è basata sull'algoritmo di riduzione 
 Korkin–Zolotarev (KZ)\cite[Sezione 18.5]{Galbraith18}. Le caratteristiche di una base KZ-ridotta
 sono generalmente migliori rispetto a quelle di LLL, ma richiedono una complessità maggiore
-e un tempo di computazione non polinomiale, per le proprietà complete si veda il riferimento. 
+e un tempo di computazione non polinomiale; per le proprietà complete si veda il riferimento. 
 Più nel dettaglio, il problema principale, è che non esiste un algoritmo in grado di computare
 una base KZ in tempo polinomiale. L'algoritmo più veloce conosciuto richiede un tempo
 di computazione esponenziale rispetto alla dimensione. 

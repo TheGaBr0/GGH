@@ -119,22 +119,20 @@ class GGHCryptosystem:
         
         return c - result
     
-    def get_hadamard_ratio(self, basis = None, type='public'):
+    def get_hadamard_ratio(self, basis = None):
         
-        if not basis: 
-            if basis not in ['public', 'private']:
-                print("Valid inputs are: 'public', 'private'")
-                return None
-            matrix = self.bad_basis if basis == 'public' else self.good_basis
-        else:
-            matrix = basis
+        matrix = basis
         norms = []
         
         for j in range(matrix.ncols()):
             column = [matrix[i, j] for i in range(matrix.nrows())]
-            norms.append(self.column_norm(column))
+            norm = self.column_norm(column)
+            norms.append(norm)
+           
         
         denominator = math.prod(norms)
         numerator = abs(Decimal(matrix.det().str()))
+
+
         result = (numerator / denominator) ** Decimal(1 / self.dimension)
-        return f"{result:.16f}"
+        return result

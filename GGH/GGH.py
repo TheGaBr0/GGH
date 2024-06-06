@@ -14,8 +14,9 @@ class GGHCryptosystem:
         self.ciphertext = None
         self.error = None
 
-        self.good_basis = None
-        self.bad_basis = None
+        self.private_basis = None
+        self.public_basis = None
+        self.unimodular = None
 
         self.private_key = None
         self.public_key = None
@@ -50,12 +51,14 @@ class GGHCryptosystem:
 
     def generate_sigma(self, R_inv):
 
-        rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.tolist())) #infinite norm
-    
+        #rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.tolist())) #infinite norm
+                
+        rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.transpose().tolist())) #L1 norm, i need to transpose the matrix cause i want the absolute column sums
+
         sigma_max = 1 / (2 * rho)
 
         if self.integer_sigma:
-            return math.floor(sigma_max) if math.floor(sigma_max) < 3 else 3 #standard sigma is 3
+            return int(math.floor(sigma_max)) if math.floor(sigma_max) < 3 else 3 #standard sigma is 3
         else:
             return sigma_max
 
@@ -63,12 +66,12 @@ class GGHCryptosystem:
     def generate_error(self):
         sigma = self.public_key[1]
 
-        random_elements = [[random.choice([-sigma, sigma]) for _ in range(self.dimension)]]
+        random_elements = [random.choice([-sigma, sigma]) for _ in range(self.dimension)]
         
         if isinstance(sigma, int):
-            self.error = fmpq_mat(random_elements).transpose()
+            self.error = fmpz_mat([random_elements]).transpose()
         else:
-            random_elements = [[fmpq(sp.Rational(item).numerator, sp.Rational(item).denominator) for item in sublist] for sublist in random_elements]
+            random_elements = [fmpq(sp.Rational(item).numerator, sp.Rational(item).denominator) for item in random_elements]
             self.error = fmpq_mat(random_elements).transpose()
 
     def generate_random_message(self):
@@ -91,11 +94,12 @@ class GGHCryptosystem:
                 continue
             else:
                 break
-        self.good_basis = R
+        self.private_basis = R
         sigma = self.generate_sigma(R_inv)
         print("Generating public key...")
         U = self.random_unimodular(self.dimension, 2)
-        self.bad_basis = B = R * U
+        self.unimodular = U
+        self.public_basis = B = R * U
         print("Computing results...")
         self.public_key = (B, sigma)
         B_inv = B.inv()
@@ -122,25 +126,22 @@ class GGHCryptosystem:
         return result
     
     def column_norm(self, col):
-        getcontext().prec = 50
         return Decimal(sum(Decimal(int(x))**2 for x in col)).sqrt()
 
-    def get_hadamard_ratio(self, basis = None, type='public'):
+    def get_hadamard_ratio(self, basis = None):
         
-        if not basis: 
-            if basis not in ['public', 'private']:
-                print("Valid inputs are: 'public', 'private'")
-                return None
-            matrix = self.bad_basis if basis == 'public' else self.good_basis
-        else:
-            matrix = basis
+        matrix = basis
         norms = []
         
         for j in range(matrix.ncols()):
             column = [matrix[i, j] for i in range(matrix.nrows())]
-            norms.append(self.column_norm(column))
+            norm = self.column_norm(column)
+            norms.append(norm)
+           
         
         denominator = math.prod(norms)
         numerator = abs(Decimal(matrix.det().str()))
+
+
         result = (numerator / denominator) ** Decimal(1 / self.dimension)
-        return f"{result:.16f}"
+        return result

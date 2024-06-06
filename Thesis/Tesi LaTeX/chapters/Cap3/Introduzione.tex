@@ -1,0 +1,53 @@
+\section{Struttura e funzionamento di GGH}
+Nel 1996, Oded Goldreich, Shafi Goldwasser e Shai Halevi\cite{GGH97} hanno introdotto un nuovo 
+sistema crittografico a chiave pubblica basato sulla difficoltà di risolvere CVP in reticoli
+di dimensioni elevate. 
+\\
+L'idea dietro GGH è la seguente: si supponga di avere un messaggio $\mathbf{m}$ 
+codificato in un vettore appartenente ad un reticolo $\mathcal{L}$, un vettore target 
+$\mathbf{t} \notin \mathcal{L}$ vicino ad $\mathbf{m}$ e
+due basi $\mathbf{R}$ e $\mathbf{B}$ entrambe generanti $\mathcal{L}$
+e rappresentanti rispettivamente base privata e base pubblica. 
+Siano $\mathbf{R}$ una base buona e $\mathbf{B}$ una base cattiva, allora, tramite l'utilizzo
+dell'algoritmo di arrotondamento di Babai (Sezione \ref*{sec:babai}), sarà possibile ritrovare
+il vettore più vicino a $\mathbf{t}$ (che risulterà essere $\mathbf{m}$) usando la base privata,
+ma non usando la base pubblica.
+
+Più formalmente, GGH è definito da una funzione trapdoor (ovvero una funzione matematica che è facile da 
+calcolare in una direzione, ma molto difficile da invertire senza dei dati segreti), la quale
+è composta da 4 funzioni probabilistiche di complessità polinomiale:
+\begin{itemize}
+    \item Generate: Dato in input un intero positivo $n$ vengono generate due basi 
+    $\mathbf{R} \text{ e } \mathbf{B}$ di rango massimo in
+    $\mathbb{Z}^n$ e un numero positivo reale $\sigma$. Le basi $\mathbf{R} \text{ e } \mathbf{B}$
+    sono rappresentate da matrici $n \times n$ e sono rispettivamente denominate base 
+    privata e base pubblica. Sia $\mathbf{R}$ che $\mathbf{B}$ generano lo stesso reticolo 
+    $\mathcal{L}$ e, insieme a $\sigma$, danno origine a chiave privata e chiave pubblica.
+    Per maggiori dettagli riguardo la generazione delle chiavi si veda la prossima sezione.
+    \item Sample: Dati in input $\mathbf{B}, \sigma$ vengono originati i vettori
+    $\mathbf{v},\mathbf{e} \in \mathbb{R}^n$. \\
+    Il vettore $\mathbf{v}$ viene scelto casualmente da un cubo in $\mathbb{Z}^n$ che sia 
+    sufficientemente grande. Gli autori suggeriscono di scegliere in maniera casuale
+    ogni valore di $\mathbf{v}$ uniformemente dall'intervallo $[-n^2, -n^2 + 1, \dots, +n^2]$, 
+    sottolineando però che la scelta di $n^2$ è arbitraria e che non hanno prove
+    di come essa possa influenzare la sicurezza del crittosistema stesso. \\
+    Il vettore $\mathbf{e}$ invece, viene scelto casualmente in  $\mathbb{R}^n$ in modo
+    tale la media dei valori sia zero e la varianza sia $\sigma^2$. Il metodo più semplice
+    per generare tale vettore è quello di scegliere ogni valore di $\mathbf{e}$ come $\pm\sigma$
+    con probabilità $\frac{1}{2}$. Questo vettore ha l'importante funzione di essere un errore
+    che viene aggiunto al calcolo del testo cifrato per complicarne la decifratura. 
+    \item Evaluate: Dati in input $\mathbf{B}, \sigma, \mathbf{v}, \mathbf{e}$ si calcola
+    $\mathbf{c} = \mathbf{B}\mathbf{v} + \mathbf{e}$. Con questo calcolo si ottiene
+    il messaggio cifrato che è rappresentato da $\mathbf{c}$. 
+    \item Invert: Dati in input $\mathbf{R},\mathbf{c}$ si utilizza la tecnica di arrotondamento
+    di Babai per invertire la funzione trapdoor e ricavare il messaggio originale.
+\end{itemize}
+
+%
+%			CHIAVI GGH
+%
+\subfile{Generate.tex}
+%
+%			ESEMPIO GGH
+%
+\subfile{Esempio.tex}

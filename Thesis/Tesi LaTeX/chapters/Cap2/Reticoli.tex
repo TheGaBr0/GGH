@@ -21,7 +21,7 @@
             \draw[->,black,thick] (0,-3) -- (0,3) node[below right] {$y$};
         \end{tikzpicture}
         \caption{${\mathcal{L} = \mathbb{Z}^n}$}
-        \label{fig:lattice1}
+        \label{fig:lattice1a}
     \end{subfigure}
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
@@ -46,7 +46,7 @@
         \vspace{0.5em}
         \caption{${\mathcal{L} = \mathbf{B} \mathbb{Z}^n} \textrm{ dove } \mathbf{B} 
         \in \mathbb{R}^{d \times n}$}
-        \label{fig:lattice2}
+        \label{fig:lattice1b}
     \end{subfigure}
     \caption{Due esempi di strutture reticolari}
     \label{fig:horizontal_alignment}
@@ -60,14 +60,14 @@ $n$ vettori, chiamati base, che sono linearmente indipendenti tra loro.
 La struttura e le proprietà di un reticolo dipendono dai vettori di base che, 
 partendo dall'origine, definiscono il suo pattern di disposizione indicando le direzioni 
 e le distanze tra i punti del reticolo. \\
-Una proprietà fondamentale che sta alla base della definizione di reticolo è la proprietà dei 
+Una proprietà fondamentale su cui si basa la definizione di reticolo è la proprietà dei 
 coefficienti integrali: la base di un reticolo ha sempre coefficienti integrali, 
 il che significa che tutti i vettori nella base sono combinazioni lineari intere 
 l'uno dell'altro.
 I reticoli possono essere formati in diversi modi, il più comune è il reticolo quadrato 
-(Figura~\ref{fig:lattice1}) nel quale la base è allineata con gli assi cartesiani. 
+(Figura~\ref{fig:lattice1a}) nel quale la base è allineata con gli assi cartesiani. 
 Le altre varianti sono ottenibili applicando delle trasformazioni lineari alla base del 
-reticolo quadrato (Figura~\ref{fig:lattice2}).
+reticolo quadrato (Figura~\ref{fig:lattice1b}).
 
 
 I reticoli sono normalmente definiti in uno spazio bidimensionale o tridimensionale, 
@@ -82,7 +82,7 @@ $\mathbf{B} = [\mathbf{b}_1,\mathbf{b}_2,\dots,\mathbf{b}_n] \in \mathbb{R}^{n \
 avente, come precedentemente anticipato, i vettori base come colonne.  Utilizzando la matrice come notazione, 
 il reticolo generato da una matrice 
 $\mathbf{B} \in \mathbb{R}^{n \times n}$ 
-può essere definita come 
+può essere definito come 
 ${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
 dove $\mathbf{B} \mathbf{x}$ 
 è una comune moltiplicazione matriciale. \\
@@ -93,7 +93,7 @@ il reticolo generato da essi è un set di vettori
 \mathcal{L} (\mathbf{b}_1,\dots,\mathbf{b}_n) = \sum_{i=1}^{n}\mathbf{b}_i \cdot 
 \mathbb{Z} = \bigl\{ {\mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n} \bigr\}.
 \]
-Lo stesso reticolo può essere generato più basi composte ciascuna da vettori diversi
+Lo stesso reticolo può essere generato da più basi composte ciascuna da vettori diversi
 \[
     \mathcal{L} = \sum_{i=1}^{n}\mathbf{c}_i \cdot \mathbb{Z} .
 \]
@@ -107,7 +107,7 @@ $\mathcal{L}(\mathbf{B})$. Per verificare se due basi $\mathbf{R}$ e $\mathbf{B}
 lo stesso reticolo, è possibile utilizzare la matrice pseudo-inversa e trovare un $\mathbf{U}$
 tale per cui $\mathbf{R}\mathbf{U} = \mathbf{B}$.
 \\
-Computando $\mathbf{R}^+$, ovvero la matrice pseudo-inversa di $\mathbf{R}$ si ha che
+Computando $\mathbf{R}^+$, ovvero la matrice pseudo-inversa di $\mathbf{R}$, si ha che
 \[
     \mathbf{U} = \mathbf{R}^+ \ \mathbf{B}.
 \]
@@ -229,7 +229,7 @@ sono entrambe basi di $\mathcal{L}$.
     \end{tikzpicture}
     \caption{Un reticolo con due suoi domini fondamentali}
     
-\label{fig:lattice3}
+\label{fig:lattice2}
 \end{figure}
 
 Il dominio fondamentale è un concetto molto importante nei reticoli, grazie al quale è possibile
@@ -239,7 +239,7 @@ che ha come vertici: i vettori base $\mathbf{b}$ generanti il reticolo, il punto
 come quarto punto la somma dei vettori base all'origine. \\
 Di tale parallelepipedo è possibile calcolarne il volume $\mathcal{F}(\mathbf{B})$, il 
 quale è strettamente legato al determinante del reticolo. 
-E' possibile osservare in Figura~\ref{fig:lattice3} un reticolo con due sue basi: nonostante 
+E' possibile osservare in Figura~\ref{fig:lattice2} un reticolo con due sue basi: nonostante 
 i domini fondamentali abbiano forme diverse, l'area coperta dal loro volume è la medesima.
 Come dimostrato in~\cite[Sezione 7.4]{HDMRD08}, proprio come per il
 determinante, il dominio fondamentale è un'invariante che è indipendente dalla scelta 

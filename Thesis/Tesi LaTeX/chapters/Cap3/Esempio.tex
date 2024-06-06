@@ -1,0 +1,129 @@
+\subsection{Esempio pratico}
+Prima di affrontare le varie tipologie di attacchi a GGH, viene mostrato un semplice esempio
+(a dimensione 3) di come due entità, rispettivamente Alice e Bob, possano utilizzare questo
+crittosistema per scambiare messaggi. 
+\begin{exmp} (Esempio di funzionamento di GGH)
+Sia $\mathbf{R}$ la base privata di Alice definita come:
+\begin{equation*}
+    \mathbf{R} =
+    \begin{bmatrix*}[l]
+        \phantom{-}11 & 0 & 0\\
+                   -3 & 9 & 1\\
+                   -4 & 1 & 8
+    \end{bmatrix*}
+    \ \text{ con } \mathcal{H}(\mathbf{R}) = 0.96022
+\end{equation*}
+Alice procede col generare la sua base pubblica $\mathbf{B}$ moltiplicando $\mathbf{R}$ con una matrice
+unimodulare casuale $\mathbf{U}$:
+\begin{equation*}
+    \mathbf{U} =
+    \begin{bmatrix*}[l]
+        -10 & 34 & -83\\
+        -5  & 18 & -44\\
+        -13 & 45 & -110
+    \end{bmatrix*}
+    \ \text{ quindi } \mathbf{B}=\mathbf{R}\mathbf{U} =
+    \begin{bmatrix*}[l]
+        -110 & 374 & -913\\
+        -28  & 105 & -257\\
+        -69  & 242 & -592
+    \end{bmatrix*}.
+\end{equation*}
+E' possibile osservare come $\mathbf{B}$ abbia un rapporto di Hadamard molto basso, più 
+precisamente $\mathcal{H}(\mathbf{B}) = 0.02257$. Infine, utilizzando $\sigma = 3$, 
+Alice compone le sue due chiavi
+\begin{gather*}
+    \mathbf{K}_{private} = (\mathbf{R}^{-1}, \mathbf{T}) 
+    \ \text{ e } \  
+    \mathbf{K}_{public} = (\mathbf{B}, \sigma)\\
+    \text{con } \ \mathbf{T} = \mathbf{B}^{-1}\mathbf{R}.
+\end{gather*}
+Bob decide di mandare un messaggio $\mathbf{m} = [-90, 112, 102]^T$ con vettore di errore
+$\mathbf{e} = [3, -3, -3]^T$. Utilizza quindi la chiave pubblica di Alice e ottiene il 
+corrispondente testo cifrato
+\begin{equation*}
+    \mathbf{c} =
+    \begin{bmatrix*}[l]
+        -110 & 374 & -913\\
+        -28  & 105 & -257\\
+        -69  & 242 & -592
+    \end{bmatrix*}
+    \begin{bmatrix*}[l]
+              -90 \\
+    \phantom{-}112\\
+    \phantom{-}102
+    \end{bmatrix*}
+    +
+    \begin{bmatrix*}[l]
+    \phantom{-}3\\
+              -3\\
+              -3
+    \end{bmatrix*}
+    =
+    \begin{bmatrix*}[l]
+        -41335\\
+        -11937\\
+        -27073
+    \end{bmatrix*}.
+\end{equation*}
+Alice, una volta ricevuto il messaggio cifrato, è in grado di decifrarlo in maniera efficiente
+usando la sua chiave privata. Infatti, avendo a disposizione
+\[
+    \mathbf{R}^{-1} = 
+    \begin{bmatrix*}[l]
+        \frac{1}{11}    & 0             & 0\\[6pt]
+        \frac{20}{781}  & \frac{8}{71}  & \frac{-1}{71}\\[6pt]
+        \frac{3}{71}    & \frac{-1}{71} & \frac{9}{71}
+    \end{bmatrix*}
+    \ \text{ e } \ 
+    \mathbf{T} =
+    \begin{bmatrix*}[l]
+        0  & 5  & -2 \\
+        22 & 21 & -25 \\
+        9  & 8  & -10
+    \end{bmatrix*}
+\]
+Alice, ottiene il messaggio originale calcolando 
+\[
+    \mathbf{x} = \lfloor \mathbf{R}^{-1}\mathbf{c}\rceil = 
+    \begin{bmatrix*}[l]
+        -3758 \\
+        -2022 \\
+        -5010 
+    \end{bmatrix*}
+    \ \text{ e } \ \mathbf{m} = \mathbf{T}\mathbf{x} = 
+    \begin{bmatrix*}[l]
+        -90 \\
+        \phantom{-}112 \\
+        \phantom{-}102
+    \end{bmatrix*}.
+\]
+Si supponga ora che ci sia una terza persona, chiamata Eve, in ascolto nel canale di 
+comunicazione tra Alice e Bob. Eve riesce ad ottenere la chiave pubblica di Alice e il 
+messaggio cifrato inviato da Bob. Decide quindi di provare a decifrarlo usando la base 
+pubblica invece della privata. 
+Dato che non è in possesso della chiave privata di Alice, Eve tenerà la 
+decifrazione usando l'algoritmo originale di Babai, riscrivendo poi il risultato come 
+combinazione lineare della base pubblica. 
+\\
+Come primo passo Eve trova il vettore $\mathbf{w}$
+più vicino a $\mathbf{c}$ usando come base $\mathbf{B}$:
+\[
+    \mathbf{w} = \mathbf{B} \lfloor \mathbf{B}^{-1}\mathbf{c}\rceil = 
+    \begin{bmatrix*}[l]
+        -41349 \\
+        -11942 \\
+        -27083 
+    \end{bmatrix*}
+\]
+infine ottiene il messaggio $\mathbf{m}$ computando
+\[
+    \mathbf{m} = \mathbf{B}^{-1}\mathbf{w} = 
+    \begin{bmatrix*}[l]
+        -91 \\
+        -119 \\
+        -105 
+    \end{bmatrix*}
+\]
+che, come si può notare, non è uguale al messaggio originale inviato da Bob. 
+\end{exmp}
