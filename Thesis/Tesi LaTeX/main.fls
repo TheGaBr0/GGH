@@ -326,9 +326,6 @@ INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\gbott\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
-INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsl12.tfm
-INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
-INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
 INPUT .\main.toc
 INPUT .\main.toc
 INPUT main.toc
@@ -345,6 +342,7 @@ INPUT .\chapters\Cap2\Reticoli.tex
 INPUT chapters\Cap2\Reticoli.tex
 INPUT .\chapters\Cap2\Reticoli.tex
 INPUT chapters\Cap2\Reticoli.tex
+INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx6.tfm
@@ -371,6 +369,7 @@ INPUT .\chapters\Cap2\Problemi.tex
 INPUT chapters\Cap2\Problemi.tex
 INPUT .\chapters\Cap2\Problemi.tex
 INPUT chapters\Cap2\Problemi.tex
+INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
 INPUT .\chapters\Cap2\Riduzione.tex
 INPUT chapters\Cap2\Riduzione.tex
 INPUT .\chapters\Cap2\Riduzione.tex

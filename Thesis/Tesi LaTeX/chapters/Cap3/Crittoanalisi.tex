@@ -1,1 +1,114 @@
 \section{Crittoanalisi di GGH}
+In questa sezione saranno esaminate le vulnerabilità di GGH e gli attacchi derivanti da esse. 
+I principali attacchi a cui GGH è soggetto includono:
+\begin{itemize}
+\item Computazione di una chiave privata: eseguendo una riduzione della base pubblica $\mathbf{B}$
+si tenta di ottenere una chiave privata $\mathbf{B}'$ di qualità pari o simile a quella originale. 
+\item Risoluzione diretta del CVP: tentare di risolvere il CVP del testo cifrato $\mathbf{c}$ 
+rispetto al reticolo definito dalla base pubblica $\mathbf{B}$. 
+\item Attacco di Nguyen: sfruttando la particolare struttura del vettore di errore $\mathbf{e}$ 
+adottata dagli autori del crittosistema è possibile ricondursi ad un'instanza del CVP molto più 
+semplice di quella proposta da GGH. 
+\end{itemize}
+
+\subsection{Crittoanalisi originale}
+L'attacco più ovvio e semplice tra quelli proposti è la computazione di una chiave privata per invertire la
+funzione trapdoor. Uno studio dettagliato e combinato con esperimenti pratici ha portato però 
+gli autori a considerarlo inefficace per una dimensione maggiore di 100.
+Un miglioramento dell'attacco precedente consiste nell'utilizzo di uno degli algoritmi
+per approssimare il CVP presentati nella Sezione \ref{sec:babai}, tuttavia tale miglioramento
+non permette a questo attacco di funzionare correttamente oltre la dimensione 150.
+Gli autori, basandosi su quanto descritto finora, hanno ipotizzato che se l'algoritmo di 
+riduzione utilizzato è LLL, il loro schema risulti sicuro per dimensioni superiori a 150. 
+Tuttavia, poiché esistono algoritmi di riduzione migliori (Sezione \ref{sec:LLL-variants}), 
+la loro conclusione è che la funzione trapdoor di GGH dovrebbe essere sicura per dimensioni 
+comprese tra 250 e 300. \\
+Di seguito viene presentato un esempio in dimensione 3 dell'attacco basato su 
+risoluzione diretta del CVP. 
+Per eseguire tale attacco sono stati utilizzati l'algoritmo LLL e la tecnica di incorporamento. 
+Nonostante BKZ sia l'opzione più efficace, la bassa 
+dimensionalità del problema rende i risultati ottenuti con LLL molto simili se non uguali. 
+Pertanto, per semplicità, è stato scelto l'algoritmo LLL.
+
+
+\begin{exmp} (Esempio di attacco a GGH con risoluzione diretta del CVP) \\
+Siano $(\mathbf{B}, \sigma)$ e $\mathbf{c}$ rispettivamente chiave pubbblica e testo cifrato
+utilizzati tra Alice e Bob nell'esempio \ref{exp:GGH}. Supponiamo che Eve abbia intercettato 
+il testo cifrato e la chiave pubblica, e stia cercando di attaccare il criptosistema GGH
+risolvendo direttamente il CVP.\\ Decide di procedere tramite tecnica di incorporamento
+costruendo quindi la seguente matrice:
+\begin{equation*}
+    \mathbf{M} =
+    \begin{bmatrix*}[l]
+        -41335 & -110 & 374 & -913\\
+        -11937 & -28 & 105 & -257\\
+        -27073 & -69 & 242 & -592 \\
+        \phantom{-}1 & \phantom{-}0 & \phantom{-}0 & \phantom{-}0
+    \end{bmatrix*}.
+\end{equation*}
+Come secondo passaggio riduce $\mathbf{M}$ tramite LLL:
+\begin{equation*}
+    \mathbf{M}^* =
+    \begin{bmatrix*}[l]
+        1 & \phantom{-}3  &           -2 & \phantom{-}5\\
+        1 &          -3   & \phantom{-}3 & \phantom{-}3\\
+        1 &          -3   &           -4 & \phantom{-}2 \\
+        4 & \phantom{-}1  & \phantom{-}3 & -2
+    \end{bmatrix*}.
+\end{equation*}
+Eve a questo punto, sapendo che $\sigma = 3$, cerca di trovare $\mathbf{e}$. 
+Per fare ciò seleziona i primi $n$ valori del vettore colonna  di $\mathbf{M}^*$ 
+che abbia forma
+
+\begin{equation*}
+    \begin{bmatrix*}[l]
+        \pm\sigma_1 \\
+        \phantom{\pm}\vdots \\
+        \pm\sigma_n \\
+        \phantom{\pm}1
+    \end{bmatrix*}
+    =
+    \begin{bmatrix*}[l]
+        \phantom{-}3\\[0.1cm]
+                  -3\\[0.1cm]
+        \phantom{-}3\\[0.1cm]
+        \phantom{-}1\\
+    \end{bmatrix*}
+    \ \text{ con conseguente } \
+    \mathbf{e} =
+    \begin{bmatrix*}[l]
+        \phantom{-}3\\[0.1cm]
+                  -3\\[0.1cm]
+        \phantom{-}3\\[0.1cm]
+    \end{bmatrix*}.
+\end{equation*}
+Come penultimo passaggio Eve calcola il vettore $\mathbf{w}$ più vicino a $\mathbf{c}$
+\begin{equation*}
+    \mathbf{w} = \mathbf{c} - \mathbf{e} =
+    \begin{bmatrix*}[l]
+        -41335\\
+        -11937\\
+        -27073
+    \end{bmatrix*} -
+    \begin{bmatrix*}[l]
+        \phantom{-}3\\
+                  -3\\
+        \phantom{-}3\\
+    \end{bmatrix*} =
+    \begin{bmatrix*}[l]
+        -41338\\
+        -11934\\
+        -27070
+    \end{bmatrix*} 
+\end{equation*}
+e ottiene infine il messaggio originale $\mathbf{m}$ tramite
+\begin{equation*}
+    \mathbf{m} = \mathbf{B}^{-1} \mathbf{w} =
+    \begin{bmatrix*}[l]
+        -90\\
+        \phantom{-}112\\
+        \phantom{-}102
+    \end{bmatrix*}.
+\end{equation*}
+\end{exmp}
+\subsection{Attacco di Nguyen}

@@ -10,7 +10,7 @@ caratteristiche necessarie a mantenere la sicurezza del crittosistema.
 In questa sezione verrà quindi analizzata la struttura della funzione Generate, la quale si
 occupa di quanto introdotto precedentemente. 
 \\
-Generate prende come unico parametro in input la dimensione $n$ dalla quale dipende la
+Questa funzione prende come unico parametro in input la dimensione $n$ dalla quale dipende la
 grandezza delle basi generate. In linea con quanto detto nella Sezione \ref{sec:problemi}, 
 più $n$ cresce e più i problemi sui reticoli si fanno complessi, rendendo quindi più sicuro
 il crittosistema. A discapito di ciò però,
@@ -32,7 +32,7 @@ Due sono le proposte avanzate:
     Si genera poi una matrice $\mathbf{R}'$ casuale (punto 1.) per poi computare
     $\mathbf{R} = \mathbf{R}' + k\mathbf{I}$.
 \end{enumerate}
-Come descritto in precedenza, una volta generata la base privata $\mathbf{R}$, è necessario 
+Come preannunciato, una volta generata la base privata $\mathbf{R}$, è necessario 
 derivare la base pubblica rappresentata da un'altra base $\mathbf{B}$, tale che $\mathbf{R}$ 
 e $\mathbf{B}$ generino lo stesso reticolo $\mathcal{L}$. Dato che ogni base di 
 $\mathcal{L}(\mathbf{R})$ è ottenuta con $\mathbf{B} = \mathbf{R}\mathbf{U}$ per qualche matrice

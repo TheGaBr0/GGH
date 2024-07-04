@@ -1,8 +1,5 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {chapter}{}{ii}{chapter*.1}%
-\contentsline {chapter}{Prefazione}{iii}{chapter*.2}%
-\contentsline {chapter}{Ringraziamenti}{iv}{chapter*.4}%
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Proprietà e problemi sui reticoli}{2}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Reticoli}{2}{section.2.1}%
@@ -22,3 +19,5 @@
 \contentsline {subsection}{\numberline {3.1.1}Generazione delle chiavi}{17}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}Esempio pratico}{19}{subsection.3.1.2}%
 \contentsline {section}{\numberline {3.2}Crittoanalisi di GGH}{21}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Crittoanalisi originale}{21}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Attacco di Nguyen}{23}{subsection.3.2.2}%

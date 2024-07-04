@@ -9,7 +9,7 @@ Nel 1986 Babai\cite{Babai86}  propose due algoritmi per la risoluzione di apprCV
 entrambi verranno trattati, sebbene il primo sarà discusso in modo più conciso 
 poiché, come verrà spiegato nei prossimi capitoli, non è stato utilizzato nelle 
 implementazioni proposte. \\
-Il Metodo del Piano più Vicino è il primo algoritmo presentato da Babai, esso si basa sull'impiegare 
+Il metodo del piano più vicino è il primo algoritmo presentato da Babai, esso si basa sull'impiegare 
 l'ortogonalizzazione di Gram-Schmidt per semplificare il problema. L'algoritmo inizia quindi
 ortogonalizzando la base del reticolo fornita in 
 input attraverso Gram-Schmidt. Successivamente, procede in maniera iterativa a partire 
@@ -178,6 +178,9 @@ quindi una base di alta qualità al fine di avere risultati validi.
     il quale non è soluzione corretta all'apprCVP in quanto 
     $\|\mathbf{t}-\mathbf{w}_2\|_2 = 3.35 > \|\mathbf{t}-\mathbf{w}\|_2$. 
 \end{exmp}
+La principale differenza tra i due algoritmi di Babai è che il metodo del piano più vicino
+risulta essere più preciso in quanto i valori frazionari vengono arrotondati in maniera
+adattiva piuttosto che tutti insieme in un'unica volta.  
 
 \subsection{Tecnica di incorporamento}
 Babai, oltre alla presentazione dei due algoritmi precedentemente trattati, ha dimostrato
@@ -319,5 +322,6 @@ $\|\mathbf{t}-\mathbf{w}_2\|_2=\|\mathbf{t}-\mathbf{w}\|_2=1.41$.
 Grazie a questo esempio si può comprendere meglio l'efficacia nella pratica di questa tecnica:
 in comparazione con l'algoritmo di arrotondamento di Babai, nonostante la bassa qualità
 della seconda base, si è riusciti comunque a trovare una soluzione corretta.
+
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.5.26)  5 JUN 2024 20:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.5.26)  3 JUL 2024 22:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -749,17 +749,11 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 62.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/gbott/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2
-
-] [3
-
-] [4
-
-] (main.toc)
+{C:/Users/gbott/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc)
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [5
+ [2
 
 ] (chapters/Cap1/Introduzione.tex
 Capitolo 1.
@@ -796,31 +790,31 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Capitolo 3.
 (chapters/Cap3/Introduzione.tex [16
 
-] (chapters/Cap3/Generate.tex [17] [18]) (chapters/Cap3/Esempio.tex [19] [20])) (chapters/Cap3/Crittoanalisi.tex)) [21] [22
+] (chapters/Cap3/Generate.tex [17] [18]) (chapters/Cap3/Esempio.tex [19] [20])) (chapters/Cap3/Crittoanalisi.tex [21] [22])) [23] [24
 
 ]
-Underfull \hbox (badness 1231) in paragraph at lines 140--142
+Underfull \hbox (badness 1231) in paragraph at lines 120--122
 []\OT1/cmr/m/n/12 Nguyen Phong e Da-mien Ste-hl^^Se, \Floating-point LLL re-vi-si-ted\, LNCS,
  []
 
-[23] (main.aux)
+[25] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-04-11>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 27961 strings out of 474370
- 546640 string characters out of 5740535
+ 27957 strings out of 474370
+ 546603 string characters out of 5740535
  1964754 words of memory out of 5000000
- 49783 multiletter control sequences out of 15000+600000
- 573740 words of font info for 94 fonts, out of 8000000 for 9000
+ 49781 multiletter control sequences out of 15000+600000
+ 573388 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,17n,100p,605b,1149s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,17n,100p,605b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\gbott\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (28 pages, 402227 bytes).
+Output written on main.pdf (27 pages, 405349 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 86 named destinations out of 1000 (max. 500000)
- 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 444 PDF objects out of 1000 (max. 8388607)
+ 84 named destinations out of 1000 (max. 500000)
+ 193 words of extra memory for PDF output out of 10000 (max. 10000000)
 
