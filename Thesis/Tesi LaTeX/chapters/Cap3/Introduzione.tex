@@ -1,4 +1,5 @@
 \section{Struttura e funzionamento di GGH}
+\label{sec:gghintroduction}
 Nel 1996, Oded Goldreich, Shafi Goldwasser e Shai Halevi\cite{GGH97} hanno introdotto un nuovo 
 sistema crittografico a chiave pubblica basato sulla difficoltà di risolvere CVP in reticoli
 di dimensioni elevate. 
@@ -25,19 +26,20 @@ calcolare in una direzione, ma molto difficile da invertire senza dei dati segre
     $\mathcal{L}$ e, insieme a $\sigma$, danno origine a chiave privata e chiave pubblica.
     Per maggiori dettagli riguardo la generazione delle chiavi si veda la prossima sezione.
     \item Sample: Dati in input $\mathbf{B}, \sigma$ vengono originati i vettori
-    $\mathbf{v},\mathbf{e} \in \mathbb{R}^n$. \\
-    Il vettore $\mathbf{v}$ viene scelto casualmente da un cubo in $\mathbb{Z}^n$ che sia 
+    $\mathbf{m},\mathbf{e} \in \mathbb{R}^n$. \\
+    Il vettore $\mathbf{m}$ viene scelto casualmente da un cubo in $\mathbb{Z}^n$ che sia 
     sufficientemente grande. Gli autori suggeriscono di scegliere in maniera casuale
-    ogni valore di $\mathbf{v}$ uniformemente dall'intervallo $[-n^2, -n^2 + 1, \dots, +n^2]$, 
+    ogni valore di $\mathbf{m}$ uniformemente dall'intervallo $[-n^2, -n^2 + 1, \dots, +n^2]$, 
     sottolineando però che la scelta di $n^2$ è arbitraria e che non hanno prove
-    di come essa possa influenzare la sicurezza del crittosistema stesso. \\
+    di come essa possa influenzare la sicurezza del crittosistema stesso. Un intervallo
+    sufficientemente grande che viene normalmente utilizzato è $[-128, 127]$. \\
     Il vettore $\mathbf{e}$ invece, viene scelto casualmente in  $\mathbb{R}^n$ in modo
     tale la media dei valori sia zero e la varianza sia $\sigma^2$. Il metodo più semplice
     per generare tale vettore è quello di scegliere ogni valore di $\mathbf{e}$ come $\pm\sigma$
     con probabilità $\frac{1}{2}$. Questo vettore ha l'importante funzione di essere un errore
     che viene aggiunto al calcolo del testo cifrato per complicarne la decifratura. 
-    \item Evaluate: Dati in input $\mathbf{B}, \sigma, \mathbf{v}, \mathbf{e}$ si calcola
-    $\mathbf{c} = \mathbf{B}\mathbf{v} + \mathbf{e}$. Con questo calcolo si ottiene
+    \item Evaluate: Dati in input $\mathbf{B}, \sigma, \mathbf{m}, \mathbf{e}$ si calcola
+    $\mathbf{c} = \mathbf{B}\mathbf{m} + \mathbf{e}$. Con questo calcolo si ottiene
     il messaggio cifrato che è rappresentato da $\mathbf{c}$. 
     \item Invert: Dati in input $\mathbf{R},\mathbf{c}$ si utilizza la tecnica di arrotondamento
     di Babai per invertire la funzione trapdoor e ricavare il messaggio originale.

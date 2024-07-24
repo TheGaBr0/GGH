@@ -41,7 +41,9 @@ A questo proposito sono stati ideati degli algoritmi in grado di ortogonalizzare
 cattiva per convertirla in una buona e mantenere le proprietà del reticolo iniziale, si
 ottiene quindi una base $\mathbf{B'}$ tale che: 
 $\mathcal{H}(\mathbf{B}^*) \approxeq 1$ e che $\det(\mathbf{B}) = \det(\mathbf{B}^*)$.
-\\
+Nell'ambito della riduzione di reticoli è importante notare come il gap di un reticolo giochi
+un ruolo chiave: è noto che più il gap è grande e più la riduzione è semplice.\\
+
 Prima di discutere questo tipo di algoritmi è necessario affrontare brevemente 
 l'algoritmo di Gram-Schmidt, il quale, esegue un tipo di ortogonalizzazione che viene applicata
 su spazi vettoriali e che è anche chiamata Ortogonalizzazione Gram-Schmidt (GSO).
@@ -217,4 +219,11 @@ L'algoritmo in questa configurazione prende il nome di Korkine-Zolotarev a blocc
 il quale, se combinato con LLL, diventa una variante di quest'ultimo chiamata LLL-BKZ. Questa
 variante è in grado di bilanciare costo computazionale e qualità di riduzione ottenendo così
 l'algoritmo più efficiente per SVP in grandi dimensioni, dimostrando anche una qualità di riduzione
-significativamente migliore di quella di LLL standard. 
+significativamente migliore di quella di LLL standard. \\
+
+Per reticoli di dimensioni ancora maggiori, dove anche BKZ potrebbe risultare computazionalmente oneroso, 
+è stata sviluppata una versione ulteriormente ottimizzata chiamata BKZ "pruned" o potata \cite{BKZPRUNED}. Questa variante 
+mantiene l'efficacia di BKZ nel bilanciare costo computazionale e qualità della riduzione, 
+ma introduce una tecnica di potatura nell'enumerazione dei vettori. Tale tecnica è spesso usata in 
+informatica al fine di ottimizzare algoritmi riducendo lo spazio di ricerca, permettendo così di ottenere 
+soluzioni approssimate (e solitamente corrette) in tempi significativamente minori rispetto all'esplorazione completa.

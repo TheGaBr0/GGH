@@ -86,6 +86,12 @@ può essere definito come
 ${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
 dove $\mathbf{B} \mathbf{x}$ 
 è una comune moltiplicazione matriciale. \\
+Si definisca ora l'i-esimo minimo $\lambda_i(\mathcal{L})$ come il raggio della sfera più 
+piccola, centrata nell'origine, che contiene $i$ vettori linearmente indipendenti del reticolo. 
+Si chiami "gap" il rapporto tra il secondo e il primo minimo, 
+$\frac{\lambda_1(\mathcal{L})}{\lambda_2(\mathcal{L})}$. 
+Questo valore misura la differenza relativa tra i due vettori più corti linearmente 
+indipendenti del reticolo, fornendo un'indicazione importante sulla sua struttura.
 Più formalmente, dati $n$ vettori linearmente indipendenti 
 $\mathbf{b}_1,\dots, \mathbf{b}_n \in \mathbb{R}^n$,
 il reticolo generato da essi è un set di vettori 
@@ -176,7 +182,7 @@ sono entrambe basi di $\mathcal{L}$.
 \subsection{Dominio Fondamentale}
 \label{sec:dominio}
 
-\begin{figure}[H]
+\begin{figure}[t]
     \centering
     \begin{tikzpicture}[scale=1, framed]
         \clip (-4,-3) rectangle (4,3); 
@@ -295,6 +301,7 @@ comprende esattamente tutti i vettori nel reticolo $\mathcal{L}$.
         \node[draw,circle,inner sep=1.5pt,fill] at (3,6) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (6,6) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (9,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (8,4) {};
 
         \draw[dotted,black,ultra thick] (1,2) -- (4,2);
         \draw[dotted,black,ultra thick] (3,0) -- (4,2);

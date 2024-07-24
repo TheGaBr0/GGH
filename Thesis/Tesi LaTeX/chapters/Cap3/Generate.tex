@@ -50,7 +50,8 @@ unimodulare casuale. Anche in questo caso, due sono i metodi proposti per genera
     ($\mathbf{S}$) e inferiori ($\mathbf{L}$) con $\pm1$ sulla diagonale principale. I 
     restanti elementi della matrice che non sono zeri vengono scelti casualmente tra
     $\{-1,0,1\}$. In particolare sarà necessario moltiplicare $\mathbf{R}$ per almeno 4
-    paia di $\mathbf{S}\mathbf{L}$ al fine di ottenere $\mathbf{B}$.
+    paia di $\mathbf{S}\mathbf{L}$ al fine di ottenere un $\mathbf{B}$ sufficientemente 
+    sicuro.
 \end{enumerate}
 E' stato provato dagli stessi autori che entrambi i metodi offrono lo stesso livello di sicurezza,
 anche se il secondo, in comparazione, genera matrici con numeri più grandi andando quindi a 
@@ -63,7 +64,7 @@ e \ref{sec:babai}, la tecnica di arrotondamento di Babai è una proposta per la 
 dell'apprCVP, il quale, ritorna un vettore più vicino che non sempre risulta essere la soluzione più
 corretta. Dato che GGH si basa su questo algoritmo per decifrare un messaggio, è possibile
 definire questo crittosistema come probabilistico: in certe situazioni neanche la base
-privata può essere usata per ritrovare il messaggio originale $\mathbf{M}$ e, viceversa, 
+privata può essere usata per ritrovare il messaggio originale $\mathbf{m}$ e, viceversa, 
 in altre situazioni, la base pubblica potrebbe essere usata per decifrare il messaggio. 
 Per evitare questi casi è stato ideato il parametro $\sigma$, il 
 quale, viene utilizzato per generare il vettore di errore $\mathbf{e}$ che, una volta 
@@ -95,7 +96,7 @@ di arrotondamento di Babai utilizzata risulta parametricamente diversa rispetto 
 in Sezione \ref{sec:babai}. Il funzionamento rimane però il medesimo, la decifratura avverrà
 quindi come:
 \[
-    \mathbf{m} = \mathbf{U} \lfloor \mathbf{R}^{-1}\mathbf{c}\rceil. 
+    \mathbf{m} = \mathbf{T} \lfloor \mathbf{R}^{-1}\mathbf{c}\rceil. 
 \]
 E' comunque possibile utilizzare la versione originale dell'algoritmo di Babai che,
 seppur meno efficiente della variante usata in GGH, ritorna comunque la stessa

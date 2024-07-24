@@ -103,7 +103,7 @@ Si supponga ora che ci sia una terza persona, chiamata Eve, in ascolto nel canal
 comunicazione tra Alice e Bob. Eve riesce ad ottenere la chiave pubblica di Alice e il 
 messaggio cifrato inviato da Bob. Decide quindi di provare a decifrarlo usando la base 
 pubblica invece della privata. 
-Dato che non è in possesso della chiave privata di Alice, Eve tenerà la 
+Dato che non è in possesso della chiave privata di Alice, Eve tenterà la 
 decifrazione usando l'algoritmo originale di Babai, riscrivendo poi il risultato come 
 combinazione lineare della base pubblica. 
 \\
@@ -117,14 +117,14 @@ più vicino a $\mathbf{c}$ usando come base $\mathbf{B}$:
         -27083 
     \end{bmatrix*}
 \]
-infine ottiene il messaggio $\mathbf{m}$ computando
+infine ottiene il messaggio $\mathbf{m}'$ computando
 \[
-    \mathbf{m} = \mathbf{B}^{-1}\mathbf{w} = 
+    \mathbf{m}' = \mathbf{B}^{-1}\mathbf{w} = 
     \begin{bmatrix*}[l]
         -91 \\
         -119 \\
         -105 
     \end{bmatrix*}
 \]
-che, come si può notare, non è uguale al messaggio originale inviato da Bob. 
+che, come si può notare, non è uguale al messaggio originale $\mathbf{m}$ inviato da Bob. 
 \end{exmp}

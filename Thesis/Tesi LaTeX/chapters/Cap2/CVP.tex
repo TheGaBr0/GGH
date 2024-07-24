@@ -54,7 +54,7 @@ identificare il dominio fondamentale (traslato) che il vettore $\mathbf{t}$ loca
 correttezza è strettamente legata alla forma geometrica del dominio fondamentale, è necessaria
 quindi una base di alta qualità al fine di avere risultati validi. 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[framed, scale=0.8]
 
@@ -183,12 +183,13 @@ risulta essere più preciso in quanto i valori frazionari vengono arrotondati in
 adattiva piuttosto che tutti insieme in un'unica volta.  
 
 \subsection{Tecnica di incorporamento}
+\label{sec:embedding}
 Babai, oltre alla presentazione dei due algoritmi precedentemente trattati, ha dimostrato
 anche quanto una base ridotta migliori l'approssimazione della soluzione ad apprCVP.
 In particolare, con una base LLL-ridotta, questo porta ad un fattore di approssimazione
 esponenziale per entrambi i suoi algoritmi. Nella pratica però, il metodo migliore per 
 risolvere apprCVP, è la cosiddetta tecnica di
-incorporamento\cite{Galbraith18} che si basa sul ridurre il CVP a un SVP.  
+incorporamento\cite{Galbraith18}, tecnica euristica che si basa sul ridurre il CVP a un SVP.  
 \\
 Sia $\mathbf{B} = [\mathbf{b}_1,\dots, \mathbf{b}_n]$ la base di un reticolo $\mathcal{L}$
 di dimensione $n$ e sia $\mathbf{t} \in \mathbb{R}^n, \mathbf{t} \notin \mathcal{L}$. 
@@ -215,16 +216,23 @@ minimizzi la distanza per $\mathbf{t}$ e sia $\mathbf{u} = \mathbf{t}-\mathbf{w}
         1
     \end{bmatrix}
 \]
-appartiene a $\mathcal{L}'$ e, se dovesse anche essere il suo vettore più corto, si 
-potrebbe risolvere l'apprCVP di $\mathcal{L}$ determinando l'apprSVP di $\mathcal{L}'$.
+appartiene a $\mathcal{L}(\mathbf{M})$ e, se dovesse anche essere il suo vettore più corto, si 
+potrebbe risolvere l'apprCVP di $\mathcal{L(\mathbf{B})}$ determinando l'apprSVP di $\mathcal{L}(\mathbf{M})$.
 Per ottenere $\mathbf{v}$ è sufficiente ridurre $\mathbf{M}$
-mediante algoritmi come LLL (o meglio BKZ-LLL) per poi ottenere $\mathbf{w}$ calcolando 
+mediante algoritmi come LLL (o meglio BKZ) per poi ottenere $\mathbf{w}$ calcolando 
 $\mathbf{t}-\mathbf{u}$.
+È importante notare che il gap del reticolo di $\mathcal{L}(\mathbf{M})$ è approssimativamente il 
+rapporto tra la lunghezza del vettore più corto di $\mathcal{L}(\mathbf{B})$ e la lunghezza 
+di $\mathbf{u}$. Aumentare la lunghezza del vettore più corto di 
+$\mathcal{L}(\mathbf{B})$ rende il gap del reticolo di $\mathcal{L}(\mathbf{M})$ più ampio, 
+facilitando così la riduzione. Quando si parla di gap del reticolo dell'istanza CVP, 
+ci si riferisce in realtà al gap del reticolo dell'istanza SVP corrispondente creata 
+mediante questa tecnica di embedding.
 Un problema nella pratica sta nella scelta di $\mathbf{t}$: teoricamente
 $\mathbf{t}$ può appartenere all'insieme $\mathbb{R}$, ma questo creerebbe problemi nella
 costruzione della nuova base $\mathbf{M}$ la quale non soddisferebbe più la proprietà dei 
 coefficienti integrali che sta alla base della definizione di reticolo. Tale problema viene
-discusso e affrontato nell'attacco di Nguyen contro GGH, il quale verrà trattato nelle prossime sezioni.
+discusso e affrontato nell'attacco di Nguyen contro GGH presentato nella sezione \ref{sec:Nguyen}.
 Nel concreto si tenta di mantenere $\mathbf{t} \in \mathbb{Z}^n$ in modo da evitare problemi
 di questa natura.
 
@@ -262,8 +270,10 @@ e la si riduca usando un algoritmo di riduzione, in questo caso LLL:
         -1           & -1           & 0\\
     \end{bmatrix*}.
 \end{equation*}
-Infine è necessario che si estraggano i primi $n$ valori dalla prima colonna di $\mathbf{M}^*$
-sottraendoli poi a $\mathbf{t}$:
+Infine è necessario che si estraggano i primi $n$ valori dal vettore colonna più corto di 
+$\mathbf{M}^*$,
+sottraendoli poi a $\mathbf{t}$. In questo caso sia il primo che il secondo vettore colonna hanno
+la stessa lunghezza, di conseguenza è indifferente la scelta dell'uno o dell'altro:
 \begin{equation*}
     \mathbf{w} = \mathbf{t} - \mathbf{u} =
     \begin{bmatrix*}[l]

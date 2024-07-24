@@ -14,10 +14,14 @@
 \contentsline {section}{\numberline {2.4}Algoritmi per la risoluzione del CVP}{11}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Algoritmi di Babai}{11}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Tecnica di incorporamento}{14}{subsection.2.4.2}%
-\contentsline {chapter}{\numberline {3}Crittosistema a chiave pubblica GGH}{16}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Struttura e funzionamento di GGH}{16}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Generazione delle chiavi}{17}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Esempio pratico}{19}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Crittoanalisi di GGH}{21}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Crittoanalisi originale}{21}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Attacco di Nguyen}{23}{subsection.3.2.2}%
+\contentsline {chapter}{\numberline {3}Crittosistema a chiave pubblica GGH}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Struttura e funzionamento di GGH}{17}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Generazione delle chiavi}{18}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Esempio pratico}{20}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Crittoanalisi di GGH}{22}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Crittoanalisi originale}{22}{subsection.3.2.1}%
+\contentsline {subsubsection}{Contromisure}{24}{section*.8}%
+\contentsline {subsection}{\numberline {3.2.2}Attacco di Nguyen}{24}{subsection.3.2.2}%
+\contentsline {subsubsection}{Contromisure}{28}{section*.9}%
+\contentsline {subsection}{\numberline {3.2.3}Attacco basato su informazioni parziali}{28}{subsection.3.2.3}%
+\contentsline {subsubsection}{Contromisure}{29}{section*.10}%
