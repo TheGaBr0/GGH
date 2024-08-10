@@ -1,4 +1,4 @@
-from GGH_HNF import GGHCryptosystem
+from GGH_HNF import GGHHNFCryptosystem
 import sympy as sp
 import numpy as np
 from flint import fmpz_mat, fmpq_mat, fmpz
@@ -6,20 +6,26 @@ import os
 import subprocess
 import symengine as sym
 import time
-dimension = 400
-GGH_object = GGHCryptosystem(dimension = dimension)
+dimension = 3
+
+R = fmpz_mat([[12, -4, -1], [1,  8, -1], [-4,  1, 14]])
+
+GGH_object = GGHHNFCryptosystem(dimension = dimension, R=R)
 GGH_object.encrypt()
 
-R = GGH_object.private_key[1]
 H = GGH_object.public_key
+
+R = GGH_object.private_key[1]
+
+print(R)
+
+print(H)
     
-print(GGH_object.generate_rho(R))
+print(f"rho R: {GGH_object.calculate_rho(R)}")
 
-print(GGH_object.get_hadamard_ratio())
+print(f"rho H: {GGH_object.calculate_rho(H)}")
 
-print(GGH_object.generate_rho(H))
-
-print(GGH_object.generate_rho(GGH_object.error))
+print(f"lunghezza e: {GGH_object.vector_norm(GGH_object.error)}")
 
 H = GGH_object.public_key
     
@@ -27,11 +33,13 @@ error = GGH_object.error
 
 ciphertext = GGH_object.ciphertext
 
+print(ciphertext)
+
 decrypted_message = GGH_object.decrypt()
 
-print(f"error: {error.transpose()}")
+print(f"error: {error}")
 # print(f"decrypted message: {decrypted_message.transpose()}")
-print(f"error: {decrypted_message.transpose()}")
+print(f"error: {decrypted_message}")
 
 
 

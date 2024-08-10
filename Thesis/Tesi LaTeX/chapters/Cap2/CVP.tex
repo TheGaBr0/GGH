@@ -40,13 +40,13 @@ a $\mathbf{v} \in \mathcal{L}$, nel quale il vettore target $\mathbf{t}$ si trov
 Sia $\mathcal{L}$ un reticolo con 
 dimensione $n$ generato da una base (buona) $\mathbf{B}$ e sia $\mathbf{t}$ un vettore tale che
 $\mathbf{t} \in \mathbb{R}^n$ e $\mathbf{t} \notin \mathcal{L}$. Dato che $\mathbf{B}$ è una
-matrice di rango massimo, è possibile calcolare
+matrice di rango massimo, è possibile calcolare:
 \[
-    \mathbf{x} =  \mathbf{B}^{-1}\mathbf{t}
+    \mathbf{x} = \mathbf{t}\mathbf{B}^{-1}
 \]
-Da qui si applica la tecnica di arrotondamento, la quale è semplicemente
+Da qui si applica la tecnica di arrotondamento, la quale è semplicemente:
 \[
-    \mathbf{w} = \sum_{i=1}^{n} \mathbf{b}_i \lfloor \mathbf{x}_i \rceil 
+    \mathbf{w} = \sum_{i=1}^{n} \lfloor \mathbf{x}_i \rceil  \mathbf{b}_i
 \]
 con $\mathbf{B} = [\mathbf{b}_1,\dots,\mathbf{b}_n]$ e $\lfloor\mathbf{x}\rceil$ che significa
 prendere l'intero più vicino al numero reale $\mathbf{x}$. Questo algoritmo mira ad 
@@ -72,21 +72,28 @@ quindi una base di alta qualità al fine di avere risultati validi.
         % Add numbers to the y-axis
         \foreach \y in {1,2,...,6}
         \draw (0,\y) -- (-0.1,\y) node[left] {\y};
-
-        \node[draw,circle,inner sep=1.5pt,fill] at (1,2) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (3,0) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (6,0) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (9,0) {};
+        
+        \node[draw,circle,inner sep=1.5pt,fill] at (0,0) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (0,6) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (4,2) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (7,2) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (10,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (1,2) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (2,4) {};
-        \node[draw,circle,inner sep=1.5pt,fill] at (5,4) {};
-        \node[circle, fill, inner sep=1.8pt, label=right:$\mathbf{w}$] at (8,4) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (3,6) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (6,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (5,4) {};
+        \node[circle, fill, inner sep=1.8pt, label=below:$\mathbf{w}_2$] at (4,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (3,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (6,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (7,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (8,4) {};
+        \node[circle, fill, inner sep=1.8pt, label=left:$\mathbf{w}$] at (5,4) {};
         \node[draw,circle,inner sep=1.5pt,fill] at (9,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (12,6) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (11,4) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (10,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (9,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (12,0) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (13,2) {};
+        \node[draw,circle,inner sep=1.5pt,fill] at (14,4) {};
 
         
         \draw[dotted,black,ultra thick] (4,2) -- (5,4);
@@ -94,8 +101,8 @@ quindi una base di alta qualità al fine di avere risultati validi.
         \draw[dotted,black,ultra thick] (7,2) -- (8,4);
         \draw[dotted,black,ultra thick] (5,4) -- (8,4);
 
-        \node[] at (6,3) {$\mathcal{F} + \mathbf{b}_1 + \mathbf{b}_2$};
-        \node[circle, fill, inner sep=1.8pt, label=right:$\mathbf{t}$] at (7,3.5) {};
+        \node[] at (6.2,3.5) {$\mathcal{F} + \mathbf{b}_1 + \mathbf{b}_2$};
+        \node[circle, fill, inner sep=1.8pt, label=right:$\mathbf{t}$] at (5,3) {};
         
         
     \end{tikzpicture}
@@ -108,75 +115,68 @@ quindi una base di alta qualità al fine di avere risultati validi.
 \begin{exmp} (Risoluzione del CVP usando la tecnica di arrotondamento di Babai)
     \label{exp:babai}
     \\
-    Siano $\mathbf{R}$ e $\mathbf{B}$ le stesse basi definite nell'Esempio \ref*{exp:basis} 
+    Siano $\mathbf{R}$ e $\mathbf{B}$ le stesse basi definite nell'Esempio \ref{exp:basis} 
     e sia $\mathbf{t} \in \mathbb{R}^n, \mathbf{t} \notin \mathcal{L}$ con
     \[
         \mathbf{t} =
         \begin{bmatrix}
-            7\\
-            3.5
+            5 & 3
         \end{bmatrix}.
     \]
-    Si inizi con l'applicare l'algoritmo, dal primo passo si ottiene
+    Si inizi con l'applicare l'algoritmo, dal primo passo si ottiene:
     \[
         \mathbf{R}^{-1} =
         \begin{bmatrix}
-            0 & 0.5\\
-            0.33 & 0.17
+            0 & \phantom{-}0.33\\
+            0.5 & -0.16
         \end{bmatrix}
-        \ \text{ e } \ \mathbf{x} = \mathbf{R}^{-1}\mathbf{t} = 
+        \ \text{ e } \ \mathbf{x} = \mathbf{t}\mathbf{R}^{-1} = 
         \begin{bmatrix}
-            1.75\\
-            1.75
+            1.5 & 1.16
         \end{bmatrix}
     \]
-    si applichi ora la tecnica di arrotondamento a $\mathbf{x}$
+    si applichi ora la tecnica di arrotondamento a $\mathbf{x}$:
     \[
         \lfloor\mathbf{x}\rceil = 
         \begin{bmatrix}
-            2\\
-            2
+            2 & 1
         \end{bmatrix}
     \]
-    si proceda infine con l'ottenere il risultato finale
+    si proceda infine con l'ottenere il risultato finale:
     \[
-        \mathbf{w} = \mathbf{R}\mathbf{x} =
+        \mathbf{w} = \mathbf{x}\mathbf{R} =
         \begin{bmatrix}
-            8\\
-            4
+            5 & 4
         \end{bmatrix}
     \]  
     che, come mostrato in Figura \ref{fig:lattice4}, è il vettore più vicino
-    a $\mathbf{t}$ con $\|\mathbf{t}-\mathbf{w}\|_2 = 1.12$. Se si dovesse valutare la qualità della base, si otterrebbe che 
-    $\mathcal{H}(\mathbf{R}) = 0.97400$ e, grazie a tali proprietà ortogonali di $\mathbf{R}$,
+    a $\mathbf{t}$ con $\|\mathbf{t}-\mathbf{w}\|_2 = 1$. Se si dovesse valutare la qualità della base, si otterrebbe che 
+    $\mathcal{H}(\mathbf{R}) = 0.94574$ e, grazie a tali proprietà ortogonali di $\mathbf{R}$,
     il dominio fondamentale derivante assume una forma geometrica tale per cui
     l'algoritmo è in grado di raggiungere facilmente la soluzione.
     \\
-    Si riesegua ora l'algoritmo su $\mathbf{B}$. Calcolando $\mathcal{H}(\mathbf{B}) = 0.24473$ 
+    Si riesegua ora l'algoritmo su $\mathbf{B}$. Calcolando $\mathcal{H}(\mathbf{B}) = 0.33231$ 
     si scopre che $\mathbf{B}$ offre una qualità molto più bassa rispetto a $\mathbf{R}$. 
-    Procedendo si ottiene che 
+    Procedendo si ottiene che:
     \[
-    \mathbf{x}_2 = \mathbf{B}^{-1}\mathbf{t}=
+    \mathbf{x}_2 = \mathbf{t}\mathbf{B}^{-1}=
     \begin{bmatrix}
-        8.75\\
-        -14
+        1.5 & 1.16
     \end{bmatrix}
     \ \text{ e quindi } \ \lfloor\mathbf{x}_2\rceil = 
     \begin{bmatrix}
-        9\\
-        -14
+        2 & 1
     \end{bmatrix}.
     \]
-    Computando l'ultimo passaggio, il vettore risultante è
+    Computando l'ultimo passaggio, il vettore risultante è:
     \[
-        \mathbf{w}_2 = \mathbf{B}\mathbf{x}_2 =
+        \mathbf{w}_2 = \mathbf{x}_2\mathbf{B} =
         \begin{bmatrix}
-            10\\
-            2
+            4 & 2
         \end{bmatrix}
     \]
     il quale non è soluzione corretta all'apprCVP in quanto 
-    $\|\mathbf{t}-\mathbf{w}_2\|_2 = 3.35 > \|\mathbf{t}-\mathbf{w}\|_2$. 
+    $\|\mathbf{t}-\mathbf{w}_2\|_2 = 1.41 > \|\mathbf{t}-\mathbf{w}\|_2$. 
 \end{exmp}
 La principale differenza tra i due algoritmi di Babai è che il metodo del piano più vicino
 risulta essere più preciso in quanto i valori frazionari vengono arrotondati in maniera
@@ -198,10 +198,10 @@ la seguente struttura:
 \[
     \mathbf{M} =
     \begin{bmatrix}
-        \vdots & \vdots & \vdots & & \vdots\\
-        \mathbf{t} & \mathbf{b}_1 & \mathbf{b}_2 & \cdots & \mathbf{b}_n\\
-        \vdots & \vdots & \vdots & & \vdots\\
-        1 & 0 & 0 & & 0
+        \cdots & \mathbf{b}_1 & \cdots & 0\\
+        \cdots & \vdots &  \cdots &  0\\
+        \cdots & \mathbf{b}_n & \cdots & 0\\
+        \cdots & \mathbf{t}_1 & \cdots & 1
     \end{bmatrix}
 \]
 Il nuovo reticolo $\mathcal{L}(\mathbf{M})$ è strutturato in modo tale da avere lo stesso 
@@ -212,8 +212,7 @@ minimizzi la distanza per $\mathbf{t}$ e sia $\mathbf{u} = \mathbf{t}-\mathbf{w}
 \[
     \mathbf{v} =
     \begin{bmatrix}
-        \mathbf{u}\\
-        1
+        \mathbf{u} & 1
     \end{bmatrix}
 \]
 appartiene a $\mathcal{L}(\mathbf{M})$ e, se dovesse anche essere il suo vettore più corto, si 
@@ -225,9 +224,13 @@ $\mathbf{t}-\mathbf{u}$.
 rapporto tra la lunghezza del vettore più corto di $\mathcal{L}(\mathbf{B})$ e la lunghezza 
 di $\mathbf{u}$. Aumentare la lunghezza del vettore più corto di 
 $\mathcal{L}(\mathbf{B})$ rende il gap del reticolo di $\mathcal{L}(\mathbf{M})$ più ampio, 
-facilitando così la riduzione. Quando si parla di gap del reticolo dell'istanza CVP, 
-ci si riferisce in realtà al gap del reticolo dell'istanza SVP corrispondente creata 
-mediante questa tecnica di embedding.
+facilitando così la riduzione.
+Quando si discute del gap del reticolo in relazione a un'istanza del CVP, è 
+importante chiarire che ci si riferisce in realtà al gap del reticolo dell'istanza SVP corrispondente. 
+Questa istanza SVP viene creata attraverso una tecnica di embedding che trasforma l'istanza 
+CVP originale in un'istanza SVP equivalente. Pertanto, il concetto di gap del reticolo, 
+originariamente definito per SVP, viene esteso indirettamente alle istanze CVP attraverso 
+questa trasformazione.
 Un problema nella pratica sta nella scelta di $\mathbf{t}$: teoricamente
 $\mathbf{t}$ può appartenere all'insieme $\mathbb{R}$, ma questo creerebbe problemi nella
 costruzione della nuova base $\mathbf{M}$ la quale non soddisferebbe più la proprietà dei 
@@ -237,97 +240,81 @@ Nel concreto si tenta di mantenere $\mathbf{t} \in \mathbb{Z}^n$ in modo da evit
 di questa natura.
 
 \begin{exmp}(Risoluzione del CVP usando la tecnica di incorporamento)
-Siano $\mathbf{R}$ e $\mathbf{B}$ le stesse basi definite nell'Esempio \ref{exp:basis} e
-sia
-\[
-    \mathbf{t} =
-    \begin{bmatrix}
-        6\\
-        3
-    \end{bmatrix}.
-\]
+Siano $\mathbf{R}$, $\mathbf{B}$ e $\mathbf{t}$ le stesse basi definite nell'Esempio \ref{exp:babai}.
 Seguendo quanto descritto nella tecnica di incorporamento, si costruisca la matrice 
 \[
     \mathbf{M} =
     \begin{bmatrix}
-        \mathbf{t}_{0,0} & \mathbf{r}_{0,0} & \mathbf{r}_{1,0}\\
-        \mathbf{t}_{1,0} & \mathbf{r}_{0,1} & \mathbf{r}_{1,1}\\
-        1 & 0 & 0
+        \mathbf{r}_{0,0} & \mathbf{r}_{1,0} & 0\\
+        \mathbf{r}_{0,1} & \mathbf{r}_{1,1} & 0\\
+        \mathbf{t}_{0,0} & \mathbf{t}_{1,0} & 1
     \end{bmatrix}
     =
     \begin{bmatrix}
-        6 & 1 & 3 \\
-        3 & 2 & 0 \\
-        1 & 0 & 0 
+        1 & 2 & 0 \\
+        3 & 0 & 0 \\
+        5 & 3 & 1 
     \end{bmatrix}
 \]
 e la si riduca usando un algoritmo di riduzione, in questo caso LLL:
 \begin{equation*}
     \mathbf{M}^* =
-    \begin{bmatrix*}[l]
-        -1           & \phantom{-}1 & 1\\
-        \phantom{-}1 & -1           & 2 \\
-        -1           & -1           & 0\\
-    \end{bmatrix*}.
+    \begin{bmatrix}
+        0 & -1 & \phantom{-}1 \\
+        1 & \phantom{-}1 & \phantom{-}1 \\
+        2 & -1 & -1 
+    \end{bmatrix}.
 \end{equation*}
-Infine è necessario che si estraggano i primi $n$ valori dal vettore colonna più corto di 
-$\mathbf{M}^*$,
-sottraendoli poi a $\mathbf{t}$. In questo caso sia il primo che il secondo vettore colonna hanno
-la stessa lunghezza, di conseguenza è indifferente la scelta dell'uno o dell'altro:
+Infine è necessario che si estraggano i primi $n$ valori dal vettore riga più corto di 
+$\mathbf{M}^*$ e sottrarli poi a $\mathbf{t}$. In questo caso il vettore più corto risulta
+essere il primo, quindi $\mathbf{u} = [0 \ -1]$. Completando questo passaggio si deduce che:
 \begin{equation*}
     \mathbf{w} = \mathbf{t} - \mathbf{u} =
     \begin{bmatrix*}[l]
-        6 \\
-        3
+        5 & 3
     \end{bmatrix*}
     -
     \begin{bmatrix*}[l]
-        -1 \\
-        \phantom{-}1
+        0 & -1
     \end{bmatrix*}
     =
     \begin{bmatrix*}[l]
-        7 \\
-        2
+        5 & 4
     \end{bmatrix*}
 \end{equation*}
-che è soluzione all' apprCVP con $\|\mathbf{t}-\mathbf{w}\|_2=1.41$.
-Utilizzando la base cattiva $\mathbf{B}$ invece, si otterrebbe:
+la quale è soluzione all' apprCVP con $\|\mathbf{t}-\mathbf{w}\|_2=1$.
+Utilizzando la base cattiva $\mathbf{B}$, invece, si otterrebbe:
 \begin{equation*}
     \mathbf{M}_2 =
     \begin{bmatrix*}[l]
-        6 & \phantom{-}12 & \phantom{-}7\\
-        3 & -6           & -4\\
-        1 & \phantom{-}0 & \phantom{-}0
+        \phantom{-}5 & \phantom{-}4 & 0\\
+        -6 & -6           & 0\\
+        \phantom{-}5 & \phantom{-}3 & 1
     \end{bmatrix*}
     \ \text{ con } \
     \mathbf{M}_2^* =
     \begin{bmatrix*}[l]
-        \phantom{-}1 & \phantom{-}1 & 1\\
-        -1           & -1           & 2\\
-        \phantom{-}1 & -1           & 0
+        \phantom{-}0 & -1 & \phantom{-}1\\
+        -1 & -1 & -1\\
+        \phantom{-}2 & -1 & -1
     \end{bmatrix*}.
 \end{equation*}
 Ed effettuando l'ultimo passaggio:
 \begin{equation*}
     \mathbf{w}_2 = \mathbf{t} - \mathbf{u}_2 =
     \begin{bmatrix*}[l]
-        6 \\
-        3
+        5 & 3
     \end{bmatrix*}
     -
     \begin{bmatrix*}[l]
-        \phantom{-}1 \\
-        -1
+        0 & -1
     \end{bmatrix*}
     =
     \begin{bmatrix*}[l]
-        5 \\
-        4
+        5 & 4
     \end{bmatrix*}
 \end{equation*}
-che è comunque soluzione all'apprCVP in quanto 
-$\|\mathbf{t}-\mathbf{w}_2\|_2=\|\mathbf{t}-\mathbf{w}\|_2=1.41$.
+che è la stessa soluzione ottenuta con la base $\mathbf{R}$. 
 \end{exmp}
 Grazie a questo esempio si può comprendere meglio l'efficacia nella pratica di questa tecnica:
 in comparazione con l'algoritmo di arrotondamento di Babai, nonostante la bassa qualità

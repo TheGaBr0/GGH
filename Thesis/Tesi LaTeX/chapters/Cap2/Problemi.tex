@@ -1,9 +1,9 @@
 \section{Problemi sui reticoli}
 \label{sec:problemi}
-Le costruzioni crittografiche basate su reticoli si basano sulla complessità 
-computazionale che certe operazioni su di essi possono richiedere, 
-soprattutto nel caso di spazi multidimensionali. I problemi computazionali 
-più conosciuti relativi ai reticoli sono i seguenti:
+L’utilizzo della crittografia basata su reticoli si basa sull’assunto che, soprattutto nei 
+casi di spazi multidimensionali, la complessità computazionale derivante da determinati 
+problemi su di essi, sia un limite invalicabile. I problemi reticolari 
+più conosciuti e usati in ambito crittografico sono i seguenti:
 \begin{itemize}
     \item Problema del Vettore più Corto (SVP): Data una base di un reticolo $\mathbf{B}$, 
     trovare il vettore non nullo di lunghezza minima in $\mathcal{L}(\mathbf{B})$.
@@ -29,9 +29,10 @@ comparati come problemi dalla stessa difficoltà anche se, in pratica, risolvere
 essere un po' più difficile di SVP nella stessa dimensione.
 Ognuno di questi due problemi ha un relativo sotto-problema che nient'altro è che una 
 variante approssimativa: il Problema del Vettore più Vicino Approssimato (apprCVP) 
-e Problema del Vettore più Corto Approssimato  (apprSVP). Questi sotto-problemi consistono nel 
-trovare un vettore non nullo la cui lunghezza non sia più lunga di un fattore dato $\Psi(n)$
-rispetto a un vettore non nullo corretto (più corto o più vicino a seconda del problema).
+e Problema del Vettore più Corto Approssimato  (apprSVP). 
+Questi sotto-problemi sono riferibili alla necessità di trovare un vettore non nullo la 
+cui lunghezza sia maggiore di un fattore dato $\Psi(n)$, rispetto ad un vettore non nullo 
+corretto che risulti essere più corto o più vicino, a seconda del problema.
 \\
 In particolare GGH si basa sulla risoluzione del CVP basandosi su una delle proprietà
 fondamentali dei reticoli: la possibilità di usare più basi per lo stesso reticolo.

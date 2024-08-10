@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.5.26)  24 JUL 2024 15:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.5.26)  8 AUG 2024 20:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -796,31 +796,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 181--223
 Capitolo 3.
 (chapters/Cap3/Introduzione.tex [17
 
-] (chapters/Cap3/Generate.tex [18] [19]) (chapters/Cap3/Esempio.tex [20] [21])) (chapters/Cap3/Crittoanalisi.tex [22] [23] [24] [25] [26] [27] [28])) [29] [30] [31
+] (chapters/Cap3/Generate.tex [18] [19]) (chapters/Cap3/Esempio.tex [20])) (chapters/Cap3/Crittoanalisi.tex [21] [22] [23] [24] [25] [26] [27] [28])) (chapters/Cap4/GGH-HNF.tex [29]
+Capitolo 4.
+(chapters/Cap4/Introduzione.tex [30
+
+] (chapters/Cap4/Esempio.tex))) [31] [32
 
 ]
 Underfull \hbox (badness 1231) in paragraph at lines 120--122
 []\OT1/cmr/m/n/12 Nguyen Phong e Da-mien Ste-hl^^Se, \Floating-point LLL re-vi-si-ted\, LNCS,
  []
 
-[32] (main.aux)
+[33] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-04-11>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 27990 strings out of 474370
- 547013 string characters out of 5740535
+ 28032 strings out of 474370
+ 548140 string characters out of 5740535
  1973754 words of memory out of 5000000
- 49794 multiletter control sequences out of 15000+600000
+ 49820 multiletter control sequences out of 15000+600000
  573388 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,17n,100p,611b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,17n,100p,713b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\gbott\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (34 pages, 443437 bytes).
+Output written on main.pdf (35 pages, 455582 bytes).
 PDF statistics:
- 522 PDF objects out of 1000 (max. 8388607)
- 104 named destinations out of 1000 (max. 500000)
- 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 555 PDF objects out of 1000 (max. 8388607)
+ 110 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 

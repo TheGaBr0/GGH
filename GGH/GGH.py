@@ -6,24 +6,37 @@ from flint import fmpz_mat, fmpz, fmpq, fmpq_mat
 from decimal import Decimal, getcontext
 
 class GGHCryptosystem:
-    def __init__(self, dimension, use_random=True, integer_sigma=True):
+    def __init__(self, dimension, R=None, B=None, m=None, e=None, integer_sigma=True):
         self.dimension = dimension
         self.integer_sigma = integer_sigma
         
-        self.message = None
+        self.message = m
         self.ciphertext = None
-        self.error = None
+        self.error = e
 
-        self.private_basis = None
-        self.public_basis = None
+        self.private_basis = R
+        self.public_basis = B
         self.unimodular = None
 
         self.private_key = None
         self.public_key = None
 
-        if use_random:
-            self.generate_random_message()
+        if R is not None:
+            # Check if R is a 2D array or matrix
+            if R.nrows() != dimension:
+                raise ValueError(f"R must be a {dimension}x{dimension} matrix, but got {R.nrows()}")
+            
+            self.private_basis = R
+            if B is None:
+                self.generate_keys_from_R()
+            else:
+                self.public_basis = B
+                self.generate_keys_with_B()
+        else:
             self.generate_keys()
+
+        if m is None:
+            self.generate_random_message()
 
         sp.init_printing(use_unicode=True)
         
@@ -37,23 +50,20 @@ class GGHCryptosystem:
     def random_unimodular(self, dim, mix):
         T = sp.eye(dim)
         while mix > 0:
-            cols = list(range(dim))
-            random.shuffle(cols)
-            for j in cols:
-                x = sp.zeros(dim, 1)
-                x[j, 0] = 1
+            rows = list(range(dim))
+            random.shuffle(rows)
+            for i in rows:
+                x = sp.zeros(1, dim)
+                x[0, i] = 1
                 for k in range(dim):
-                    if k != j:
-                        x[k, 0] = np.random.choice([-1, 0, 1], p=[1/7, 5/7, 1/7])
-                T[:, j] = T * x
+                    if k != i:
+                        x[0, k] = np.random.choice([-1, 0, 1], p=[1/7, 5/7, 1/7])
+                T[i, :] = x * T
             mix -= 1
         return self.sympy_to_fmpz_mat(T)
 
     def generate_sigma(self, R_inv):
-
-        #rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.tolist())) #infinite norm
-                
-        rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.transpose().tolist())) #L1 norm, i need to transpose the matrix cause i want the absolute column sums
+        rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.tolist())) #L1 norm
 
         sigma_max = 1 / (2 * rho)
 
@@ -69,14 +79,34 @@ class GGHCryptosystem:
         random_elements = [random.choice([-sigma, sigma]) for _ in range(self.dimension)]
         
         if isinstance(sigma, int):
-            self.error = fmpz_mat([random_elements]).transpose()
+            self.error = fmpz_mat([random_elements])
         else:
             random_elements = [fmpq(sp.Rational(item).numerator, sp.Rational(item).denominator) for item in random_elements]
-            self.error = fmpq_mat(random_elements).transpose()
+            self.error = fmpq_mat([random_elements])
 
     def generate_random_message(self):
         random_elements = [random.randint(-128, 127) for _ in range(self.dimension)]
-        self.message = fmpq_mat([random_elements]).transpose()
+        self.message = fmpq_mat([random_elements])
+
+    def generate_keys_from_R(self):
+        R = self.private_basis
+        R_inv = R.inv()
+        sigma = self.generate_sigma(R_inv)
+        print("Generating public key...")
+        U = self.random_unimodular(self.dimension, 12)
+        self.unimodular = U
+        self.public_basis = B = U * R
+        print("Computing results...")
+        self.public_key = (B, sigma)
+        self.private_key = (R_inv, R)
+
+    def generate_keys_with_B(self):
+        R = self.private_basis
+        R_inv = R.inv()
+        sigma = self.generate_sigma(R_inv)
+        print("Computing results...")
+        self.public_key = (self.public_basis, sigma)
+        self.private_key = (R_inv, R)
 
     def generate_keys(self):
         l = 4
@@ -97,23 +127,24 @@ class GGHCryptosystem:
         self.private_basis = R
         sigma = self.generate_sigma(R_inv)
         print("Generating public key...")
-        U = self.random_unimodular(self.dimension, 2)
+        U = self.random_unimodular(self.dimension, 12)
         self.unimodular = U
-        self.public_basis = B = R * U
+        self.public_basis = B = U * R
         print("Computing results...")
         self.public_key = (B, sigma)
-        B_inv = B.inv()
-        self.private_key = (R_inv, B_inv * R)
+        self.private_key = (R_inv, R)
 
     def encrypt(self):
-        self.generate_error()
+        if self.error is None:
+            self.generate_error()
         B = self.public_key[0]
-        self.ciphertext = B * self.message + self.error
+        self.ciphertext = self.message * B + self.error
 
     def decrypt(self):
-        R_inv, U_inv = self.private_key
+        R_inv, R = self.private_key
+        B_inv = self.public_basis.inv()
         c = self.ciphertext
-        a = R_inv * c
+        a = c * R_inv
         
         cols = a.ncols()
         rows = a.nrows()
@@ -121,21 +152,23 @@ class GGHCryptosystem:
         for i in range(rows):
             for j in range(cols):
                 a[i,j] = round(a[i,j])
-                
-        result = U_inv * a
+        
+        print(a)
+
+        result = a * R * B_inv
         return result
     
-    def column_norm(self, col):
-        return Decimal(sum(Decimal(int(x))**2 for x in col)).sqrt()
+    def row_norm(self, row):
+        return Decimal(sum(Decimal(int(x))**2 for x in row)).sqrt()
 
     def get_hadamard_ratio(self, basis = None):
         
         matrix = basis
         norms = []
         
-        for j in range(matrix.ncols()):
-            column = [matrix[i, j] for i in range(matrix.nrows())]
-            norm = self.column_norm(column)
+        for i in range(matrix.nrows()):
+            row = [matrix[i, j] for j in range(matrix.ncols())]
+            norm = self.row_norm(row)
             norms.append(norm)
            
         

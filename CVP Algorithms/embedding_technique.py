@@ -5,25 +5,34 @@ import sympy as sp
 from decimal import Decimal
 import math
 import random
-from LLL import LLL_reduction
+from GGH import GGHCryptosystem
 
 def embedding(R, t):
-    n = len(t)
-    
-    matrix = np.zeros((n+1, n+1))
+    n = R.nrows()
 
-    matrix[0:n, 0] = t
+    # Create the initial matrix with R and a column of zeros
+    matrix_emb = fmpz_mat([[int(R[i,j]) if j < n else 0 for j in range(n+1)] for i in range(n)])
 
-    matrix[0:n, 1:n+1] = R
+    # Add t as the last row, with 1 as the last element
+    last_row = [int(t[0,i]) for i in range(n)] + [1]
+    matrix_emb = fmpz_mat(matrix_emb.tolist() + [last_row])
     
-    matrix[n, 0] = 1
-    
-    matrix = LLL_reduction(matrix.T, n+1).T #my implementation of LLL is based on row vectors matrices
+    matrix_emb = matrix_emb.lll()
 
-    first_column = matrix[:-1, 0]
+    print(matrix_emb)
+
+    min_norm = np.inf
+    shortest_row = t
+
+    for i in range(n+1):
+        i_th_row = fmpz_mat([[matrix_emb[i, j] for j in range(n+1)]])
+        norm = row_norm(i_th_row)
+        if norm < min_norm:
+            min_norm = norm
+            # We take the first n values of the shortest row
+            shortest_row = fmpz_mat([[matrix_emb[i, j] for j in range(n)]])
     
-    
-    return t - first_column
+    return t - shortest_row
 
 def numpy_to_fmpz_mat(numpy_matrix):
         return fmpz_mat([[int(item) for item in sublist] for sublist in numpy_matrix])
@@ -46,24 +55,24 @@ def generate_lattice_points(R_np, B_np, w, w_2, t_np, limit=5):
     label_w_2 = "w_2"
     label_t = "t"
     
-    plt.scatter(t_np[0],t_np[1])
+    plt.scatter(t_np[0][0],t_np[0][1])
     
-    plt.scatter(int(w_2[0]),int(w_2[1]), color='red', s=70)
+    plt.scatter(int(w_2[0, 0]),int(w_2[0, 1]), color='red', s=70)
     
-    plt.scatter(int(w[0]),int(w[1]), color='blueviolet', s=70)
+    plt.scatter(int(w[0, 0]),int(w[0, 1]), color='blueviolet', s=70)
     
     plt.annotate(label_t, # this is the text
-                 (t_np[0],t_np[1]), # these are the coordinates to position the label
+                 (t_np[0][0],t_np[0][1]), # these are the coordinates to position the label
                  textcoords="offset points", # how to position the text
                  xytext=(0,-12), # distance from text to points (x,y)
                  ha='center') # horizontal alignment can be left, right or center
     plt.annotate(label_w, 
-                 (int(w[0]),int(w[1])), 
+                 (int(w[0, 0]),int(w[0, 1])), 
                  textcoords="offset points",
                  xytext=(0,10), 
                  ha='center') 
     plt.annotate(label_w_2, 
-                 (int(w_2[0]),int(w_2[1])), 
+                 (int(w_2[0, 0]),int(w_2[0, 1])), 
                  textcoords="offset points", 
                  xytext=(0,-12), 
                  ha='center') 
@@ -91,15 +100,15 @@ def fmpq_to_decimal(fmpq_number):
         print(f"Error converting {fraction_str} to decimal: {e}")
         return None
     
-def column_norm(col):
-    return Decimal(sum(Decimal(fmpq_to_decimal(x))**2 for x in col)).sqrt()
+def row_norm(row):
+    return Decimal(sum(Decimal(fmpq_to_decimal(x))**2 for x in row)).sqrt()
     
 def get_hadamard_ratio(basis):
     norms = []
         
-    for j in range(basis.ncols()):
-        column = [basis[i, j] for i in range(basis.nrows())]
-        norms.append(Decimal(sum(Decimal(int(x))**2 for x in column)).sqrt())
+    for i in range(basis.nrows()):
+        row = [basis[i, j] for j in range(basis.ncols())]
+        norms.append(Decimal(sum(Decimal(int(x))**2 for x in row)).sqrt())
     
     denominator = math.prod(norms)
     numerator = abs(Decimal(basis.det().str()))
@@ -107,26 +116,28 @@ def get_hadamard_ratio(basis):
     return f"{result:.16f}"
 
 
-  
+GGH_object = GGHCryptosystem(dimension = 2)
+GGH_object.encrypt()
+
 R = fmpz_mat([[1,2],[3,0]])
 
+B = fmpz_mat([[5, 4], [-6, -6]])
+T = fmpq_mat([[5, 3]])
 
-B = fmpz_mat([[12,-6],[7,-4]])
 
 print(f"Good basis R = {R.tolist()} with det = {R.det()} and Hadamard ratio = {get_hadamard_ratio(R)}")
 print(f"Bad basis B = {B.tolist()} with det = {B.det()} and Hadamard ratio = {get_hadamard_ratio(B)}")
 
 R_np = np.array(R.tolist()).astype(int)
 B_np = np.array(B.tolist()).astype(int)
-t_np = np.array([6, 3]).astype(int)
+t_np = np.array(T.tolist()).astype(int)
 
-w = embedding(R_np.T, t_np.T)
-w_2 = embedding(B_np.T, t_np.T)
-print(f"CVP found by R is {w.tolist()}, t-w = {column_norm(numpy_to_fmpz_mat([t_np-w]))}")
-print(f"CVP found by B is {w_2.tolist()}, t-w_2 = {column_norm(numpy_to_fmpz_mat([t_np-w]))}")
+w = embedding(R, T)
+w_np = np.array(w.tolist()).astype(int)
+w_2 = embedding(B, T)
+w_2_np = np.array(w_2.tolist()).astype(int)
 
-generate_lattice_points(R_np, B_np, w, w_2, t_np)
+print(f"CVP found by R is {w.tolist()}, t-w = {row_norm(numpy_to_fmpz_mat([T-w]))}")
+print(f"CVP found by B is {w_2.tolist()}, t-w_2 = {row_norm(numpy_to_fmpz_mat([T-w]))}")
 
-
-
-
+generate_lattice_points(R_np, B_np, w_np, w_2_np, t_np)

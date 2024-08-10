@@ -45,7 +45,7 @@
         \end{tikzpicture}
         \vspace{0.5em}
         \caption{${\mathcal{L} = \mathbf{B} \mathbb{Z}^n} \textrm{ dove } \mathbf{B} 
-        \in \mathbb{R}^{d \times n}$}
+        \in \mathbb{R}^{m \times n}$}
         \label{fig:lattice1b}
     \end{subfigure}
     \caption{Due esempi di strutture reticolari}
@@ -71,20 +71,20 @@ reticolo quadrato (Figura~\ref{fig:lattice1b}).
 
 
 I reticoli sono normalmente definiti in uno spazio bidimensionale o tridimensionale, 
-ma il concetto può essere esteso a spazi di dimensioni superiori. La rappresentazione dei vettori in questa tesi è quella per colonna, 
-in quanto gli autori di~\cite{GGH97} hanno preso questa decisione per la costruzione
-del loro crittosistema a chiave pubblica Goldreich Goldwasser Halevi (GGH), oggetto di questa tesi. Quindi per esempio, una matrice 
+ma il concetto può essere esteso a spazi di dimensioni superiori. La rappresentazione dei vettori in questa tesi è quella per riga, 
+al contrario della scelta presa dagli autori di~\cite{GGH97} che utilizzarono una notazione per
+colonna nel loro crittosistema a chiave pubblica Goldreich Goldwasser Halevi (GGH), oggetto di questa tesi. Quindi per esempio, una matrice 
 $\mathbf{B} \in \mathbb{R}^{m\times n}$ sarà divisa in vettori 
 $[\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n]$. 
 \\
 Una base può essere rappresentata da una matrice  
 $\mathbf{B} = [\mathbf{b}_1,\mathbf{b}_2,\dots,\mathbf{b}_n] \in \mathbb{R}^{n \times n}$ 
-avente, come precedentemente anticipato, i vettori base come colonne.  Utilizzando la matrice come notazione, 
+avente, come precedentemente anticipato, i vettori base come righe.  Utilizzando la matrice come notazione, 
 il reticolo generato da una matrice 
 $\mathbf{B} \in \mathbb{R}^{n \times n}$ 
 può essere definito come 
-${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
-dove $\mathbf{B} \mathbf{x}$ 
+${\mathcal{L}(\mathbf{B}) = \bigl\{ \mathbf{x}\mathbf{B} : \mathbf{x} \in \mathbb{Z}^n \bigr\}}$, 
+dove $\mathbf{x} \mathbf{B}$ 
 è una comune moltiplicazione matriciale. \\
 Si definisca ora l'i-esimo minimo $\lambda_i(\mathcal{L})$ come il raggio della sfera più 
 piccola, centrata nell'origine, che contiene $i$ vettori linearmente indipendenti del reticolo. 
@@ -97,7 +97,7 @@ $\mathbf{b}_1,\dots, \mathbf{b}_n \in \mathbb{R}^n$,
 il reticolo generato da essi è un set di vettori 
 \[
 \mathcal{L} (\mathbf{b}_1,\dots,\mathbf{b}_n) = \sum_{i=1}^{n}\mathbf{b}_i \cdot 
-\mathbb{Z} = \bigl\{ {\mathbf{B} \mathbf{x} : \mathbf{x} \in \mathbb{Z}^n} \bigr\}.
+\mathbb{Z} = \bigl\{ {\mathbf{x} \mathbf{B} : \mathbf{x} \in \mathbb{Z}^n} \bigr\}.
 \]
 Lo stesso reticolo può essere generato da più basi composte ciascuna da vettori diversi
 \[
@@ -108,26 +108,26 @@ Il determinante di un reticolo è il valore assoluto del
 determinante della matrice base 
 $\text{det}(\mathcal{L}(\mathbf{B})) = |\text{det}(\mathbf{B})|$. 
 Di conseguenza, per ogni matrice unimodulare (ovvero avente determinante +1 o -1) 
-$\mathbf{U} \in \mathbf{Z}^{n \times n}$, $\mathbf{B}\mathbf{U}$ è una base di 
+$\mathbf{U} \in \mathbf{Z}^{n \times n}$, $\mathbf{U}\mathbf{B}$ è una base di 
 $\mathcal{L}(\mathbf{B})$. Per verificare se due basi $\mathbf{R}$ e $\mathbf{B}$ generano
 lo stesso reticolo, è possibile utilizzare la matrice pseudo-inversa e trovare un $\mathbf{U}$
-tale per cui $\mathbf{R}\mathbf{U} = \mathbf{B}$.
+tale per cui $\mathbf{U}\mathbf{R} = \mathbf{B}$.
 \\
-Computando $\mathbf{R}^+$, ovvero la matrice pseudo-inversa di $\mathbf{R}$, si ha che
+Computando $\mathbf{R}^+$, ovvero la matrice pseudo-inversa di $\mathbf{R}$, si ha che:
 \[
-    \mathbf{U} = \mathbf{R}^+ \ \mathbf{B}.
+    \mathbf{U} = \mathbf{B} \ \mathbf{R}^+.
 \]
 $\mathbf{R}^+$ è particolarmente facile da ottenere in questo caso in quanto i vettori
-colonna di $\mathbf{R}$ sono linearmente indipendenti per definizione. Di conseguenza la
+riga di $\mathbf{R}$ sono linearmente indipendenti per definizione. Di conseguenza la
 matrice pseudo-inversa assume la seguente forma:
 \[
-    \mathbf{R}^+ = (\mathbf{R}^* \ \mathbf{R})^{-1} \ \mathbf{R}^*
+    \mathbf{R}^+ = (\mathbf{R}^* (\mathbf{R} \ \mathbf{R}^*)^{-1})
 \]
 con $\mathbf{R}^*$ che è la matrice trasposta coniugata di $\mathbf{R}$. Dato che $\mathbf{R}$
 è una matrice composta da soli interi, la matrice trasposta coniugata è uguale alla matrice
-trasposta normale. Si ottiene quindi che
+trasposta normale. Si ottiene quindi che:
 \[
-    \mathbf{U} = (\mathbf{R}^T \ \mathbf{R})^{-1} \ \mathbf{R}^T \ \mathbf{B}.
+    \mathbf{U} = \mathbf{B}(\mathbf{R}^T (\mathbf{R} \ \mathbf{R}^T)^{-1})
 \]
 \begin{exmp} (Verificare che due basi generino lo stesso reticolo)
     \label{exp:basis}
@@ -137,43 +137,43 @@ trasposta normale. Si ottiene quindi che
     \begin{equation*}
         \mathbf{R} =
         \begin{bmatrix}
-            1 & 3\\
-            2 & 0
+            1 & 2\\
+            3 & 0
         \end{bmatrix}
         \ \text{ e } \ 
         \mathbf{B} =
         \begin{bmatrix*}[l]
-            \phantom{-}12 & \phantom{-}7\\
-            -6 & -4
+            \phantom{-}5 & \phantom{-}4\\
+            -6 & -6
         \end{bmatrix*}
     \end{equation*}
     allora deve esistere una matrice unimodulare $\mathbf{U}$ tale che 
-    $\mathbf{R}\mathbf{U} = \mathbf{B}$. Per trovare $\mathbf{U}$ è possibile
-    calcolare
+    $\mathbf{U}\mathbf{R} = \mathbf{B}$. Per trovare $\mathbf{U}$ è possibile
+    calcolare:
     \begin{equation*}
-        \mathbf{U} = (\mathbf{R}^T \ \mathbf{R})^{-1} \ \mathbf{R}^T \ \mathbf{B} =
+        \mathbf{U} = \mathbf{B}(\mathbf{R}^T (\mathbf{R} \ \mathbf{R}^T)^{-1}) =
         \begin{bmatrix*}[l]
-            -3 & -2\\
-            \phantom{-}5 & \phantom{-}3
+            \phantom{-}2 & \phantom{-}1\\
+            -3 & -1
         \end{bmatrix*}.
     \end{equation*}
     Ora è sufficiente controllare che
     \begin{equation*}
-        \mathbf{RU} = \mathbf{B}
+        \mathbf{U}\mathbf{R} = \mathbf{B}
         \ \text{ ovvero } \
-        \begin{bmatrix}
-            1 & 3\\
-            2 & 0
-        \end{bmatrix}
-        \times
         \begin{bmatrix*}[l]
-            -3 & -2\\
-            \phantom{-}5 & \phantom{-}3
+            \phantom{-}2 & \phantom{-}1\\
+            -3 & -1
         \end{bmatrix*}
+        \times
+        \begin{bmatrix}
+            1 & 2\\
+            3 & 0
+        \end{bmatrix}
         =
         \begin{bmatrix*}[l]
-            \phantom{-}12 & \phantom{-}7\\
-            -6 & -4
+            \phantom{-}5 & \phantom{-}4\\
+            -6 & -6
         \end{bmatrix*}
     \end{equation*}
 inoltre dato che $\det(\mathbf{U}) = 1$, si può affermare che $\mathbf{R}$ e $\mathbf{B}$

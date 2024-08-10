@@ -20,8 +20,11 @@
 \contentsline {subsection}{\numberline {3.1.2}Esempio pratico}{20}{subsection.3.1.2}%
 \contentsline {section}{\numberline {3.2}Crittoanalisi di GGH}{22}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Crittoanalisi originale}{22}{subsection.3.2.1}%
-\contentsline {subsubsection}{Contromisure}{24}{section*.8}%
+\contentsline {subsubsection}{Contromisure}{23}{section*.8}%
 \contentsline {subsection}{\numberline {3.2.2}Attacco di Nguyen}{24}{subsection.3.2.2}%
-\contentsline {subsubsection}{Contromisure}{28}{section*.9}%
+\contentsline {subsubsection}{Contromisure}{27}{section*.9}%
 \contentsline {subsection}{\numberline {3.2.3}Attacco basato su informazioni parziali}{28}{subsection.3.2.3}%
 \contentsline {subsubsection}{Contromisure}{29}{section*.10}%
+\contentsline {chapter}{\numberline {4}Migliorare GGH usando la Forma Normale di Hermite}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Struttura e funzionamento di GGH-HNF}{30}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Esempio pratico}{31}{subsection.4.1.1}%

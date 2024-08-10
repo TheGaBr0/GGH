@@ -1,0 +1,57 @@
+\section{Struttura e funzionamento di GGH-HNF}
+Sulla base di quanto precedentemente esposto in \ref{sec:gghintroduction}, 
+il messaggio originale $\mathbf{m}$ viene codificato in un vettore $\mathbf{x}$ 
+appartenente al reticolo, e il testo cifrato risulta come 
+$\mathbf{c} = \mathbf{x}\mathbf{B} + \mathbf{e}$.
+Le ottimizzazioni apportate da Micciancio hanno portato a una modifica di questo approccio. 
+Invece di generare in maniera casuale sia il vettore $\mathbf{x}$ che la base $\mathbf{B}$, 
+Micciancio ha scelto di codificare il messaggio direttamente nel vettore di errore $\mathbf{r}$, 
+procedendo con un approccio deterministico per la generazione di questi parametri.
+Questa scelta nasce dalla difficoltà nel generare vettori e basi random che abbiano una 
+sicurezza intrinseca e dimostrabile. Questa difficoltà si ripercuote sulla sicurezza del 
+crittosistema: $\mathbf{B}$ scelta casualmente rilascia spesso informazioni parziali
+relative a $\mathbf{R}$ permettendo così una facile riduzione di essa. \\
+Per superare questo problema, Micciancio decide di non generare più $\mathbf{B}$ tramite 
+la costruzione di matrici unimodulari casuali moltiplicate per $\mathbf{R}$. 
+Invece, opta per un approccio deterministico basato sulla forma normale di Hermite (HNF)
+di $\mathbf{R}$. La forma normale di Hermite è una rappresentazione canonica e unica per 
+una data matrice, ottenuta mediante operazioni elementari di riga e colonna. 
+Essa garantisce che gli elementi sulla diagonale principale siano ordinati in modo decrescente.
+Poiché l'HNF è unica per ogni reticolo la chiave pubblica $\mathbf{B}$ non rivela informazioni 
+sulla chiave privata $\mathbf{R}$, se non il reticolo $\mathcal{L}$ che genera.
+Inoltre, qualsiasi informazione su $\mathbf{R}$ che possa essere efficacemente calcolata 
+da $\mathbf{B}$ può 
+essere altrettanto efficacemente calcolata a partire da qualsiasi altra base $\mathbf{B}'$ 
+che genera lo stesso reticolo $\mathcal{L}$. Questo perché 
+$\mathbf{B}$ = HNF($\mathbf{R}$) = HNF($\mathbf{B}'$). \\
+Ottenuto $\mathbf{B}$ è necessario quindi calcolare un vettore
+$\mathbf{x}\mathbf{B}$ appartenente al reticolo che verrà poi aggiunto a $\mathbf{B}$ come
+da equazione \ref{eq:GGHencryption}.  
+L'idea migliore sarebbe scegliere il vettore in modo casuale e uniforme, ma questa scelta 
+non è praticabile. Tuttavia, Micciancio in \cite[Sezione 4.1]{HNF01} dimostra che tale 
+risultato può essere ottenuto mediante il semplice calcolo di 
+$\mathbf{x} = \mathbf{e} \bmod \mathbf{B}$. Quindi, invece di aggiungere a $\mathbf{e}$ un
+vettore casuale $\mathbf{x}\mathbf{B}$, si riduce $\mathbf{e}$ modulo la base pubblica.
+Data la particolare struttura della matrice 
+$\mathbf{B}$ nella sua forma HNF (Hermite Normal Form), questo calcolo risulta particolarmente 
+semplice da effettuare. Partendo da un vettore $\mathbf{x}$
+inizialmente nullo, si può calcolare un valore di $\mathbf{x}$ alla volta, iniziando dall'ultima 
+componente $\mathbf{x}_n$, tramite la seguente formula:
+\[
+    \mathbf{x}_i = \left\lfloor \frac{\mathbf{e}_i - 
+    \sum_{j=i+1}^{n-1} \mathbf{B}_{j,i} \mathbf{x}_j}{\mathbf{B}_{i,i}} \right\rfloor
+\]
+e ottenere infine:
+\begin{equation}
+    \label{eq:HNFencryption}
+    \mathbf{c} = \mathbf{e} - \mathbf{x}\mathbf{B}.
+\end{equation}
+
+Come si può notare le due equazioni \ref{eq:GGHencryption} e \ref{eq:HNFencryption} sono
+diverse, ma come dimostrato in \cite[Sezione 4.3]{HNF01} esse garantiscono lo stesso
+livello di sicurezza. 
+
+%
+%			ESEMPIO HNF
+%
+\subfile{Esempio.tex}

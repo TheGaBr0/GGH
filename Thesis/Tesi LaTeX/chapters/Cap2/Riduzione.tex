@@ -54,22 +54,22 @@ viene utilizzata in algoritmi di riduzione dei reticoli. Come dimostrato in~\cit
 
 siano span$(\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n)$ e 
 span$(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*)$ 
-gli spazi vettoriali generati rispettivamente dalle colonne di $\mathbf{B}$ e $\mathbf{B}^*$,
+gli spazi vettoriali generati rispettivamente dalle righe di $\mathbf{B}$ e $\mathbf{B}^*$,
 allora se $\mathbf{B}^*$ è il risultato di GSO applicato a $\mathbf{B}$:
 \[
 \text{span}(\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n) =
 \text{span}(\mathbf{b}_1^*, \mathbf{b}_2^*, \dots, \mathbf{b}_n^*).
 \]
-Ciò comporta che GSO può essere chiamato come sotto-routine di algoritmi per la trasformazione
-delle matrici di spazi vettoriali, riducendo notevolmente i calcoli e semplificando l'implementazione
-di algoritmi per la riduzione di reticoli.
+Quindi facendo uso del GSO come subroutine di un algoritmo per la trasformazione delle 
+matrici di spazi vettoriali, si ottiene una importante riduzione del costo computazionale 
+e nel contempo, si semplifica l'implementazione di algoritmi per la riduzione di reticoli.
 
 \begin{algorithm}
     \caption{Algoritmo di Gram-Schmidt}
     \label{alg:one}
     \large
     \DontPrintSemicolon
-    \KwIn{Una matrice $\mathbf{B}$ tale che $\text{rk}(\mathbf{B}) = \text{col}(\mathbf{B})$}
+    \KwIn{Una matrice $\mathbf{B}$ tale che $\text{rango}(\mathbf{B}) = \text{righe}(\mathbf{B})$}
     \KwOut{Una matrice $\mathbf{B}^*$ ortogonale}
     $\mathbf{b}_1^* = \mathbf{b}_1$\;
     \For{$i = 2$ \KwTo$n$}{
@@ -81,7 +81,7 @@ di algoritmi per la riduzione di reticoli.
     }
     \Return{$\mathbf{B}^*$}
 \end{algorithm}
-Dove rk() indica il rango e col() il numero delle colonne. 
+Dove rango() indica il rango e righe() il numero delle righe. 
 
 \subsection{Algoritmo di Lenstra-Lenstra-Lovász}
 L'algoritmo di Lenstra-Lenstra-Lovász (LLL)\cite{LLL82,HDMRD08} è noto come uno dei più famosi algoritmi per 
@@ -145,20 +145,20 @@ I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e
         \end{bmatrix*}
     \end{equation*}
     \[
-        \text{con } \mathcal{H}(\mathbf{B}) = 0.10393 \text{ e } \det(\mathbf{B}) = -1079906335101.
+        \text{con } \mathcal{H}(\mathbf{B}) = 0.14318 \text{ e } \det(\mathbf{B}) = -1079906335101.
     \]
     Si applichi ora una riduzione LLL alla matrice $\mathbf{B}$:
     \begin{equation*}
         \mathbf{B}^* =
         \begin{bmatrix*}
-            \phantom{-}7509 & \phantom{-}798  & \phantom{-}5833\\
-            \phantom{-}3560 & -4440           & -11277\\
-            -915            & \phantom{-}9987 & -1169
+            -784 & \phantom{-}632  & \phantom{-}2701\\
+            -14823 & \phantom{-}9207          & -7717\\
+            -13454 & -14753 & -97
         \end{bmatrix*}
     \end{equation*}
     Ricalcolando $\mathcal{H}(\mathbf{B}^*)$ è possibile osservare che:
     \[
-        \mathcal{H}(\mathbf{B}^*) = 0.72358 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
+        \mathcal{H}(\mathbf{B}^*) = 0.99442 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
     \]
     E' stato ottenuto un incremento notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
     interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}^*)|$ e,
@@ -167,13 +167,13 @@ I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e
     \begin{equation*}
         \mathbf{U} =
         \begin{bmatrix*}
-            -2           & -1              & \phantom{-}22\\
-            \phantom{-}1 & \phantom{-}1    & -10\\
-            \phantom{-}1 & \phantom{-}0    & -11
+            -1 & 4 & 2\\
+            -6 & 25 & 14\\
+            -3 & 11 & 5
         \end{bmatrix*}
         \ \text{ con } \det(\mathbf{U}) = -1
     \end{equation*}
-    tale per cui $\mathbf{B}\mathbf{U} = \mathbf{B}^*$.
+    tale per cui $\mathbf{U}\mathbf{B} = \mathbf{B}^*$.
 \end{exmp}
 
 \subsection{Varianti di LLL}

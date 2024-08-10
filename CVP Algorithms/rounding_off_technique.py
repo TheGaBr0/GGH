@@ -5,27 +5,28 @@ import sympy as sp
 from decimal import Decimal
 import math
 import random
+from GGH import GGHCryptosystem
 
 def rounding(basis, w):
-    
 
-    a = basis.inv() * w
-
-
+    a = w * basis.inv()
+    print(a)
     cols = a.ncols()
     rows = a.nrows()
 
     for i in range(rows):
         for j in range(cols):
             a[i,j] = round(a[i,j])
-
-    result = basis * a
-
+    
+    result = a * basis 
+    
+    
     return result
 
-def generate_lattice_points(R_np, B_np, w, w_2, limit=5):
-    if R_np.shape[0] != 2:
-        return
+def numpy_to_fmpz_mat(numpy_matrix):
+        return fmpz_mat([[int(item) for item in sublist] for sublist in numpy_matrix])
+
+def generate_lattice_points(R_np, B_np, w, w_2, t_np, limit=5):
     # Create a meshgrid of integer coordinates
     x = np.arange(-limit, limit + 1)
     y = np.arange(-limit, limit + 1)
@@ -43,24 +44,24 @@ def generate_lattice_points(R_np, B_np, w, w_2, limit=5):
     label_w_2 = "w_2"
     label_t = "t"
     
-    plt.scatter(X_rational,Y_rational)
+    plt.scatter(t_np[0][0],t_np[0][1])
     
-    plt.scatter(int(w_2[0, 0]),int(w_2[1, 0]), color='red', s=70)
+    plt.scatter(int(w_2[0, 0]),int(w_2[0, 1]), color='red', s=70)
     
-    plt.scatter(int(w[0, 0]),int(w[1, 0]), color='blueviolet', s=70)
+    plt.scatter(int(w[0, 0]),int(w[0, 1]), color='blueviolet', s=70)
     
     plt.annotate(label_t, # this is the text
-                 (X_rational,Y_rational), # these are the coordinates to position the label
+                 (t_np[0][0],t_np[0][1]), # these are the coordinates to position the label
                  textcoords="offset points", # how to position the text
                  xytext=(0,-12), # distance from text to points (x,y)
                  ha='center') # horizontal alignment can be left, right or center
     plt.annotate(label_w, 
-                 (int(w[0, 0]),int(w[1, 0])), 
+                 (int(w[0, 0]),int(w[0, 1])), 
                  textcoords="offset points",
                  xytext=(0,10), 
                  ha='center') 
     plt.annotate(label_w_2, 
-                 (int(w_2[0, 0]),int(w_2[1, 0])), 
+                 (int(w_2[0, 0]),int(w_2[0, 1])), 
                  textcoords="offset points", 
                  xytext=(0,-12), 
                  ha='center') 
@@ -88,49 +89,42 @@ def fmpq_to_decimal(fmpq_number):
         print(f"Error converting {fraction_str} to decimal: {e}")
         return None
     
-def column_norm(col):
-    return Decimal(sum(Decimal(fmpq_to_decimal(x))**2 for x in col)).sqrt()
+def row_norm(row):
+    return Decimal(sum(Decimal(fmpq_to_decimal(x))**2 for x in row)).sqrt()
     
 def get_hadamard_ratio(basis):
     norms = []
         
-    for j in range(basis.ncols()):
-        column = [basis[i, j] for i in range(basis.nrows())]
-        norms.append(Decimal(sum(Decimal(int(x))**2 for x in column)).sqrt())
+    for i in range(basis.nrows()):
+        row = [basis[i, j] for j in range(basis.ncols())]
+        norms.append(Decimal(sum(Decimal(int(x))**2 for x in row)).sqrt())
     
     denominator = math.prod(norms)
     numerator = abs(Decimal(basis.det().str()))
     result = (numerator / denominator) ** Decimal(1 / 2)
     return f"{result:.16f}"
-
-def sympy_to_fmpz_mat(basis_sympy):
-        return fmpz_mat([[int(item) for item in sublist] for sublist in basis_sympy.tolist()])
   
-R = fmpq_mat([[11, -4,  2],[-3, 13,  2],[-3, -2, 12]])
+R = fmpz_mat([[1,2],[3,0]])
 
-
-B = fmpq_mat([[ 17, -21,  23],[-14,  27, -25],[ 11, -13,  25]])
-
-
+B = fmpz_mat([[5, 4], [-6, -6]])
+T = fmpq_mat([[5, 3]])
 
 print(f"Good basis R = {R.tolist()} with det = {R.det()} and Hadamard ratio = {get_hadamard_ratio(R)}")
 print(f"Bad basis B = {B.tolist()} with det = {B.det()} and Hadamard ratio = {get_hadamard_ratio(B)}")
 
-X_rational = sp.Rational(7)
-Y_rational = sp.Rational(3.50)
-t = fmpq_mat([[fmpq(X_rational.numerator,X_rational.denominator), fmpq(Y_rational.numerator,Y_rational.denominator)]]).transpose()
-
-t = fmpq_mat([[209, -245, 885]]).transpose()
-
 R_np = np.array(R.tolist()).astype(int)
 B_np = np.array(B.tolist()).astype(int)
-w = rounding(R, t)
-w_2 = rounding(B, t)
+t_np = np.array(T.tolist()).astype(int)
 
-print(f"CVP found by R is {w.tolist()}, t-w = {column_norm(t-w)}")
-print(f"CVP found by B is {w_2.tolist()}, t-w_2 = {column_norm(t-w_2)}")
+w = rounding(R, T)
+w_np = np.array(w.tolist()).astype(int)
+w_2 = rounding(B, T)
+w_2_np = np.array(w_2.tolist()).astype(int)
 
-generate_lattice_points(R_np, B_np, w, w_2)
+print(f"CVP found by R is {w.tolist()}, t-w = {row_norm(numpy_to_fmpz_mat([T-w]))}")
+print(f"CVP found by B is {w_2.tolist()}, t-w_2 = {row_norm(numpy_to_fmpz_mat([T-w_2]))}")
+
+generate_lattice_points(R_np, B_np, w_np, w_2_np, t_np)
 
 
 

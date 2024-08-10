@@ -1,4 +1,5 @@
 \section{Crittoanalisi di GGH}
+\label{sec:cryptoanalysis}
 In questa sezione saranno esaminate le vulnerabilità di GGH e gli attacchi derivanti da esse. 
 I principali attacchi a cui GGH è soggetto includono:
 \begin{itemize}
@@ -45,78 +46,58 @@ costruendo quindi la seguente matrice:
 \begin{equation*}
     \mathbf{M} =
     \begin{bmatrix*}[l]
-        -41335 & -110 & 374 & -913\\
-        -11937 & -28 & 105 & -257\\
-        -27073 & -69 & 242 & -592 \\
-        \phantom{-}1 & \phantom{-}0 & \phantom{-}0 & \phantom{-}0
+        \phantom{-}145 & -73 & -23 & 0\\
+        -39 & \phantom{-}21 & \phantom{-}16 & 0\\
+        -165 & \phantom{-}80 & \phantom{-}11 & 0 \\
+        \phantom{-}4452 & -1964 & 735 & 1
     \end{bmatrix*}.
 \end{equation*}
 Come secondo passaggio riduce $\mathbf{M}$ tramite LLL:
 \begin{equation*}
     \mathbf{M}^* =
     \begin{bmatrix*}[l]
-        1 & \phantom{-}3  &           -2 & \phantom{-}5\\
-        1 &          -3   & \phantom{-}3 & \phantom{-}3\\
-        1 &          -3   &           -4 & \phantom{-}2 \\
-        4 & \phantom{-}1  & \phantom{-}3 & -2
+        -2           & \phantom{-}1  & -1 & -4\\
+        \phantom{-}3 & \phantom{-}3  & \phantom{-}3 & \phantom{-}1\\
+        \phantom{-}0 & \phantom{-}4  & -3 & \phantom{-}3 \\
+        \phantom{-}7 & -2            & -8 & -2
     \end{bmatrix*}.
 \end{equation*}
-Eve a questo punto, sapendo che $\sigma = 3$, cerca di trovare $\mathbf{e}$. 
-Per fare ciò seleziona i primi $n$ valori del vettore colonna  di $\mathbf{M}^*$ 
-con forma:
-
+Eve a questo punto, secondo quanto definito in sezione \ref{sec:embedding}, dovrebbe prelevare 
+i primi $n$ valori del vettore riga di $\mathbf{M}^*$ più corto. A causa della composizione del
+vettore di errore usato in GGH però la selezione del vettore da $\mathbf{M}^*$ risulta 
+essere diversa. In particolare sapendo che $\sigma = 3$ Eve preleverà il vettore riga di 
+forma $[\pm\sigma, \dots\pm\sigma,  1]$, che non per forza è il vettore più corto di $\mathbf{M}^*$.
+In questo caso nella matrice è presente un vettore con tale forma, ovvero:
 \begin{equation*}
     \begin{bmatrix*}[l]
-        \pm\sigma_1 \\
-        \phantom{\pm}\vdots \\
-        \pm\sigma_n \\
-        \phantom{\pm}1
-    \end{bmatrix*}
-    =
-    \begin{bmatrix*}[l]
-        \phantom{-}3\\[0.1cm]
-                  -3\\[0.1cm]
-                  -3\\[0.1cm]
-        \phantom{-}1\\
+        3 & 3 & 3 & 1
     \end{bmatrix*}
     \ \text{ con conseguente } \
-    \mathbf{e} =
+    \mathbf{u} =
     \begin{bmatrix*}[l]
-        \phantom{-}3\\[0.1cm]
-                  -3\\[0.1cm]
-                  -3\\[0.1cm]
+        3 & 3 & 3
     \end{bmatrix*}.
 \end{equation*}
-Il vettore scelto è selezionato con un criterio differente da quello descritto nella sezione
-\ref{sec:embedding}, infatti esso non risulta essere il più corto di $\mathbf{M}^*$. 
-Questa differenza nella selezione del vettore colonna è data dalla speciale forma che assume 
-il vettore di errore in GGH. 
-Come penultimo passaggio Eve calcola il vettore $\mathbf{w}$ più vicino a $\mathbf{c}$
+Come si può notare $\mathbf{u}$ è uguale al vettore di errore $\mathbf{e}$ utilizzato da Bob nell'esempio
+\ref{exp:GGH}, indice del corretto andamento dell'attacco. 
+Come penultimo passaggio Eve calcola il vettore $\mathbf{w}$ più vicino a $\mathbf{c}$:
 \begin{equation*}
     \mathbf{w} = \mathbf{c} - \mathbf{e} =
     \begin{bmatrix*}[l]
-        -41335\\
-        -11937\\
-        -27073
+        4452 & -1964 & 735
     \end{bmatrix*} -
     \begin{bmatrix*}[l]
-        \phantom{-}3\\
-                  -3\\
-                  -3\\
+        3 & 3 & 3
     \end{bmatrix*} =
     \begin{bmatrix*}[l]
-        -41338\\
-        -11934\\
-        -27070
-    \end{bmatrix*} 
+        4449 & -1967 & 732
+    \end{bmatrix*}
 \end{equation*}
-e ottiene infine il messaggio originale $\mathbf{m}$ tramite
+e ottiene infine il messaggio originale $\mathbf{m}$ tramite:
 \begin{equation*}
-    \mathbf{m} = \mathbf{B}^{-1} \mathbf{w} =
+    \mathbf{m} = \mathbf{w}\mathbf{B}^{-1} =
     \begin{bmatrix*}[l]
-        -90\\
-        \phantom{-}112\\
-        \phantom{-}102
+        -48 & 29 & -76
     \end{bmatrix*}.
 \end{equation*}
 \end{exmp}
@@ -143,18 +124,18 @@ e addirittura semplificare il CVP del relativo testo cifrato. Richiamando quanto
 nella sezione \Ref{sec:gghintroduction}:
 \begin{equation}
     \label{eq:GGHencryption}
-    \mathbf{c} = \mathbf{B}\mathbf{m} + \mathbf{e}
+    \mathbf{c} = \mathbf{m}\mathbf{B} + \mathbf{e}
 \end{equation}
 con $\mathbf{e} = \{\pm \sigma\}$. Data la speciale forma di $\mathbf{e}$ è possibile, tramite una precisa scelta di modulo,
 far scomparire il vettore di errore dall'equazione \ref{eq:GGHencryption}. Definendo
 quindi un vettore $\mathbf{s} = (\sigma,\dots,\sigma) \in \mathbb{Z}^n$ e utilizzando come
-modulo $2\sigma$ si ottiene che 
+modulo $2\sigma$ si ottiene che:
 \[
     \mathbf{e} + \mathbf{s} \equiv 0 \ (\bmod \ 2\sigma)
 \]
-e di conseguenza
+e di conseguenza:
 \[
-    \mathbf{c} + \mathbf{s} \equiv \mathbf{B}\mathbf{m} \ (\bmod \ 2\sigma).
+    \mathbf{c} + \mathbf{s} \equiv \mathbf{m}\mathbf{B} \ (\bmod \ 2\sigma).
 \]
 Definendo $\mathbf{cs} = \mathbf{c} + \mathbf{s}$ si arriva ad un sistema modulare di tipo
 $\mathbf{y} \equiv \mathbf{B}\mathbf{x}\ (\bmod \ 2\sigma)$ che come unica incognita 
@@ -177,15 +158,15 @@ testo cifrato $\mathbf{c}$, il sistema lineare ha, molto probabilmente, pochissi
 Si denoti con $\mathbf{m}_{2\sigma}$ il messaggio in chiaro modulo $2\sigma$ ottenuto 
 risolvendo il precedente sistema modulare. Si supponga ora che $\mathbf{B}$ sia invertibile
 modulo $2\sigma$, allora il sistema ha una sola soluzione 
-$\mathbf{m}_{2\sigma}$ = $\mathbf{B}^{-1}(\mathbf{c} + \mathbf{s})$. Sottraendo $\mathbf{B}\mathbf{m}_{2\sigma}$ 
+$\mathbf{m}_{2\sigma}$ = $(\mathbf{c} + \mathbf{s})\mathbf{B}^{-1}$. Sottraendo $\mathbf{m}_{2\sigma}\mathbf{B}$ 
 in entrambe le parti dell'equazione \ref{eq:GGHencryption} si consegue:
 \[
-    \mathbf{c} - \mathbf{B}\mathbf{m}_{2\sigma} = \mathbf{B}\mathbf{m} + \mathbf{e} - \mathbf{B}\mathbf{m}_{2\sigma}
+    \mathbf{c} - \mathbf{m}_{2\sigma}\mathbf{B} = \mathbf{m}\mathbf{B} + \mathbf{e} - \mathbf{m}_{2\sigma}\mathbf{B}
 \]
 e, raccogliendo $\mathbf{B}$ nella seconda parte dell'equazione, si ottiene quindi:
 \begin{equation}
     \label{eq:Nguyen1}
-    \mathbf{c} - \mathbf{B}\mathbf{m}_{2\sigma} = \mathbf{B}(\mathbf{m} - \mathbf{m}_{2\sigma}) + \mathbf{e}.
+    \mathbf{c} - \mathbf{m}_{2\sigma}\mathbf{B} = (\mathbf{m} - \mathbf{m}_{2\sigma})\mathbf{B} + \mathbf{e}.
 \end{equation}
 Un'importante osservazione è che, essendo $\mathbf{m}_{2\sigma}$ congruente a $\mathbf{m}$ 
 modulo $2\sigma$, la differenza $(\mathbf{m} - \mathbf{m}_{2\sigma})$ risulta per definizione 
@@ -193,14 +174,14 @@ divisibile per $2\sigma$. Questa proprietà consente di rappresentare tale diffe
 come il prodotto tra $2\sigma$ e un nuovo intero $\mathbf{m}'$, esprimendola nella 
 forma $\mathbf{m} - \mathbf{m}_{2\sigma} = 2\sigma\mathbf{m}'$, dove $\mathbf{m}'$ 
 costituisce il quoziente intero derivante da questa divisione. E' possibile quindi riscrivere
-\ref{eq:Nguyen1} come
+\ref{eq:Nguyen1} come:
 \[
-    \mathbf{c} - \mathbf{B}\mathbf{m}_{2\sigma} = \mathbf{B}(2\sigma\mathbf{m}') + \mathbf{e}
+    \mathbf{c} - \mathbf{m}_{2\sigma}\mathbf{B} = (2\sigma\mathbf{m}')\mathbf{B} + \mathbf{e}
 \]
 e, dividendo per $2\sigma$ in entrambe le parti, si ottiene infine:
 \begin{equation}
     \label{eq:Nguyen2}
-    \frac{\mathbf{c} - \mathbf{B}\mathbf{m}_{2\sigma}}{2\sigma} = \mathbf{B}\mathbf{m}' + \frac{\mathbf{e}}{2\sigma}. 
+    \frac{\mathbf{c} - \mathbf{m}_{2\sigma}\mathbf{B}}{2\sigma} = \mathbf{m}'\mathbf{B} + \frac{\mathbf{e}}{2\sigma}. 
 \end{equation}
 L'equazione \Ref{eq:Nguyen2} nella sua forma finale mostra una chiara divisione in due 
 parti: la prima rappresenta un punto razionale con tutti gli elementi noti, 
@@ -216,7 +197,7 @@ semplice. \\
 L'attacco di Nguyen può essere meglio descritto come una semplificazione del CVP di GGH, 
 semplificazione che può essere sfruttata da algoritmi di risoluzione del CVP come la 
 tecnica di incorporamento. Infatti, una volta risolto il CVP semplificato, si otterrà 
-$\mathbf{m}'$ con il quale sarà possibile calcolare il messaggio originale attraverso 
+$\mathbf{m}'$ con il quale sarà possibile calcolare il messaggio originale attraverso: 
 \[
     \mathbf{m} = \mathbf{m}_{2\sigma} + 2\sigma\mathbf{m}'.
 \] 
@@ -258,39 +239,33 @@ Eve innanzitutto verifica
 se la base pubblica $\mathbf{B}$ sia invertibile modulo $2\sigma$. Per fare ciò calcola 
 $\det(\mathbf{B}) = 781$ e controlla se esso sia coprimo con $2\sigma=6$. Scopre così che 
 $\mathbf{B}$ è effettivamente invertibile, di conseguenza, il sistema modulare ha un'unica 
-soluzione, che può essere determinata direttamente.
+soluzione, che può essere determinata direttamente:
 \[
-    \mathbf{B}^{-1}(\mathbf{c}+\mathbf{s}) \equiv \mathbf{m} \ (\bmod \ 2\sigma)
+    (\mathbf{c}+\mathbf{s})\mathbf{B}^{-1} \equiv \mathbf{m} \ (\bmod \ 2\sigma)
 \]
 \[
-    \mathbf{m}_{2\sigma} = \mathbf{B}^{-1}(\mathbf{c}+\mathbf{s}) \ (\bmod \ 2\sigma)
+    \mathbf{m}_{2\sigma} = (\mathbf{c}+\mathbf{s})\mathbf{B}^{-1} \ (\bmod \ 2\sigma)
 \]
 \begin{equation*}
     \mathbf{m}_{2\sigma} =
-    \begin{bmatrix*}[l]
-        4 & 0 & 5\\
-        5 & 5 & 0\\
-        1 & 4 & 2
-    \end{bmatrix*}
-    .
     \Biggl(
     \begin{bmatrix*}[l]
-        -41335\\
-        -11937\\
-        -27073
+        4452 & -1964 & 735
     \end{bmatrix*}
     +
     \begin{bmatrix*}[l]
-        3\\
-        3\\
-        3
+        3 & 3 & 3
     \end{bmatrix*}
-    \Biggl) \ (\bmod \ 2\sigma)
+    \Biggl)
+    \begin{bmatrix*}[l]
+        1 & 1 & 5\\
+        3 & 2 & 5\\
+        3 & 1 & 0
+    \end{bmatrix*}
+     \ (\bmod \ 2\sigma)
     =
     \begin{bmatrix*}[l]
-        0\\
-        4\\
-        0
+        0 & 5 & 2
     \end{bmatrix*}.
 \end{equation*}
 Eve, ottenuto $\mathbf{m}_{2\sigma}$, procede con il calcolare il CVP semplificato tramite
@@ -299,12 +274,10 @@ risolverlo nel passaggio successivo, moltiplica per 2 la frazione in modo da lib
 valori con la virgola. Tale moltiplicazione andrà poi riflessa su $\mathbf{B}$ anche nei 
 passaggi successivi all'estrazione del vettore $\mathbf{e}$.
 \[
-    \mathbf{c}^* = 2 \Bigl(\frac{\mathbf{c} - \mathbf{B}\mathbf{m}_{2\sigma}}{2\sigma}\Bigl)
+    \mathbf{c}^* = 2 \Bigl(\frac{\mathbf{c} - \mathbf{m}_{2\sigma}\mathbf{B}}{2\sigma}\Bigl)
     = 
     \begin{bmatrix*}[l]
-        -14277\\
-        -4119\\
-        -9347
+        1659 & -743 & 211
     \end{bmatrix*}.
 \]
 Ora che Eve ha ottenuto un'istanza semplificata del CVP originale, procede con gli stessi
@@ -314,62 +287,52 @@ invece che $\mathbf{c}$.
 \begin{equation*}
     \mathbf{M} =
     \begin{bmatrix*}[l]
-        -14277 & -110 & 374 & -913\\
-        -4119 & -28 & 105 & -257\\
-        -9347 & -69 & 242 & -592 \\
-        \phantom{-}1 & \phantom{-}0 & \phantom{-}0 & \phantom{-}0
-    \end{bmatrix*}
+        \phantom{-}145 & -73 & -23 & 0\\
+        -39 & \phantom{-}21 & \phantom{-}16 & 0\\
+        -165 & \phantom{-}80 & \phantom{-}11 & 0 \\
+        \phantom{-}1659 & -743 & 211 & 1
+    \end{bmatrix*}.
 \end{equation*}
 Nell'esempio \ref{exp:embedding} Eve usò LLL come algoritmo di riduzione. In questo attacco,
-per una maggiore sicurezza, decide di usare BKZ. Ottiene quindi la matrice
+per una maggiore sicurezza, decide di usare BKZ. Ottiene quindi la matrice:
 \begin{equation*}
     \mathbf{M}^* =
     \begin{bmatrix*}[l]
-        \phantom{-}1 & -2 & \phantom{-}2 & -7\\
-        -1 & \phantom{-}1 &  \phantom{-}7& -1\\
-        -1 & -6 & -1 &\phantom{-}0 \\
-        \phantom{-}1 & -2 & \phantom{-}2 & \phantom{-}4
+        \phantom{-}1 & \phantom{-}1 & \phantom{-}1 & \phantom{-}1\\
+                  -1 & \phantom{-}6 &           -3 & -2\\
+        \phantom{-}3 &           -1 & \phantom{-}6 & -6 \\
+        \phantom{-}9 & \phantom{-}0 &           -6 & -4
     \end{bmatrix*}
     \ \text{ con } \
     \mathbf{e} =
     \begin{bmatrix*}[l]
-        \phantom{-}1 \\
-                  -1 \\
-        \phantom{-}1
+        1 & 1 & 1
     \end{bmatrix*}.
 \end{equation*}
 
-Dopo aver costruito il vettore $\mathbf{e}$, Eve è ora in grado di calcolare $\mathbf{m}'$,
-ricordandosì però che ora è necesssario raddoppiare $\mathbf{B}$. 
+Dopo aver costruito il vettore $\mathbf{u}$, Eve è ora in grado di calcolare $\mathbf{m}'$,
+ricordandosì però che ora è necessario raddoppiare $\mathbf{B}$. 
 \begin{equation*}
-    \mathbf{m}' = (2\mathbf{B})^{-1} (\mathbf{c}^* - \mathbf{e}) =
+    \mathbf{m}' =  (\mathbf{c}^* - \mathbf{u}) (2\mathbf{B})^{-1}=
     \begin{bmatrix*}[l]
-        -15\\
-        \phantom{-}18\\
-        \phantom{-}17
+        -8 & 4 & -13
     \end{bmatrix*}.
 \end{equation*}
 Eve, come ultimo passaggio, decifra il messaggio originale tramite:
 \[
     \mathbf{m} = \mathbf{m}_{2\sigma} + 2\sigma\mathbf{m}' =
     \begin{bmatrix*}[l]
-        0\\
-        4\\
-        0
+        0 & 5 & 2
     \end{bmatrix*} + 
     \Biggl(
         6
         \begin{bmatrix*}[l]
-            -15\\
-            \phantom{-}18\\
-            \phantom{-}17
+            -8 & 4 & -13
         \end{bmatrix*}
     \Biggl)
     =
     \begin{bmatrix*}[l]
-        -90\\
-        \phantom{-}112\\
-        \phantom{-}102
+        -48 & 29 & -76
     \end{bmatrix*}.
 \]
 \end{exmp}
@@ -399,18 +362,18 @@ tale conoscenza risulta essere possibile solo in alcuni casi. Il metodo su cui s
 l'attacco è il seguente.\\
 Sia $\mathbf{m}^1$ il vettore composto dai primi $k$ degli $n$ valori di $\mathbf{m}$ (noti) e
 sia $\mathbf{m}^2$ il vettore composto dai restanti valori di $\mathbf{m}$. Similmente, sia 
-$\mathbf{B}^1$ la matrice composta dalle prime $\mathbf{k}$ colonne della base
-pubblica $\mathbf{B}$ e sia $\mathbf{B}^2$ la matrice composta dalle colonne rimanenti di
-$\mathbf{B}$.  Allora si ha che
+$\mathbf{B}^1$ la matrice composta dalle prime $\mathbf{k}$ righe della base
+pubblica $\mathbf{B}$ e sia $\mathbf{B}^2$ la matrice composta dalle righe rimanenti di
+$\mathbf{B}$. Allora si ha che:
 \begin{equation*}
-    \mathbf{c} = \mathbf{B}\mathbf{m} + \mathbf{e} =
-    (\mathbf{B}^1 \ \mathbf{B}^2) (\mathbf{m}^1 \ \mathbf{m}^2) + \mathbf{e}
-    = \mathbf{B}^1\mathbf{m}^1 + \mathbf{B}^2\mathbf{m}^2 + \mathbf{e}
+    \mathbf{c} = \mathbf{m}\mathbf{B} + \mathbf{e} =
+    (\mathbf{m}^1 \ \mathbf{m}^2)\biggl(\genfrac{}{}{0pt}{}{\mathbf{B}^1}{\mathbf{B}^2}\biggl) + \ \mathbf{e}
+    = \mathbf{m}^1\mathbf{B}^1 + \mathbf{m}^2\mathbf{B}^2 + \mathbf{e}
 \end{equation*}
-da cui si deriva
+da cui si deriva:
 \begin{equation}
     \label{eq:nguyen400}
-    \mathbf{c} - \mathbf{B}^1\mathbf{m}^1 = \mathbf{B}^2\mathbf{m}^2 + \mathbf{e}.
+    \mathbf{c} - \mathbf{m}^1\mathbf{B}^1 = \mathbf{m}^2\mathbf{B}^2 + \mathbf{e}.
 \end{equation}
 Data l'assunzione iniziale, la prima componente dell'equazione \ref{eq:nguyen400} è conosciuta. 
 La seconda componente, analogamente all'equazione \ref{eq:Nguyen2} discussa in precedenza, 

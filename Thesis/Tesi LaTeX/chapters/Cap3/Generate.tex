@@ -35,7 +35,7 @@ Due sono le proposte avanzate:
 Come preannunciato, una volta generata la base privata $\mathbf{R}$, è necessario 
 derivare la base pubblica rappresentata da un'altra base $\mathbf{B}$, tale che $\mathbf{R}$ 
 e $\mathbf{B}$ generino lo stesso reticolo $\mathcal{L}$. Dato che ogni base di 
-$\mathcal{L}(\mathbf{R})$ è ottenuta con $\mathbf{B} = \mathbf{R}\mathbf{U}$ per qualche matrice
+$\mathcal{L}(\mathbf{R})$ è ottenuta con $\mathbf{B} = \mathbf{U}\mathbf{R}$ per qualche matrice
 unimodulare $\mathbf{U}$, allora ottenere $\mathbf{B}$ equivale ad ottenere una matrice
 unimodulare casuale. Anche in questo caso, due sono i metodi proposti per generare tali matrici:
 \begin{enumerate}
@@ -88,23 +88,16 @@ Ora che tutti i parametri sono stati determinati è possibile costruire le due c
     \item La chiave pubblica è definita semplicemente dalla coppia $(\mathbf{B}, \sigma)$
     \item La chiave privata, invece, non è definita semplicemente da $\mathbf{R}$ in quanto,
     seppure logicamente corretto, non è il metodo più efficiente. Verrà quindi utilizzata
-    la coppia $(\mathbf{R}^{-1},\mathbf{T})$ con $\mathbf{T} = \mathbf{B}^{-1}\mathbf{R}$
+    la coppia $(\mathbf{R},\mathbf{R}^{-1})$
     in modo da velocizzare la decifratura.
 \end{itemize}
-E' necessario precisare che, data la scelta di costruzione della chiave privata, la tecnica
-di arrotondamento di Babai utilizzata risulta parametricamente diversa rispetto alla descrizione
-in Sezione \ref{sec:babai}. Il funzionamento rimane però il medesimo, la decifratura avverrà
-quindi come:
+La decifratura avviene tramite la tecnica di arrotondamento di Babai spiegata in sezione 
+\ref{sec:babai}:
 \[
-    \mathbf{m} = \mathbf{T} \lfloor \mathbf{R}^{-1}\mathbf{c}\rceil. 
+    \mathbf{m} =  \lfloor \mathbf{c}\mathbf{R}^{-1}\rceil \mathbf{R} \mathbf{B}^{-1}
 \]
-E' comunque possibile utilizzare la versione originale dell'algoritmo di Babai che,
-seppur meno efficiente della variante usata in GGH, ritorna comunque la stessa
-soluzione. Una volta seguito il procedimento originale e aver ottenuto il vettore $\mathbf{w}$ 
-più vicino a $\mathbf{c}$, sarà sufficiente esprimere 
-$\mathbf{w}$ come combinazione lineare della base pubblica $\mathbf{B}$. Sfruttando il fatto
-che $\mathbf{B}$ è sempre una matrice di rango massimo per definizione, sarà sufficiente calcolare
+dove, per semplicità:
 \[
-    \mathbf{m} = \mathbf{B}^{-1}\mathbf{w}
-    \ \text{ con } \ \mathbf{w} = \mathbf{R}\lfloor\mathbf{R}^{-1}\mathbf{c}\rceil.
+    \mathbf{m} = \mathbf{w}\mathbf{B}^{-1}
+    \ \text{ con } \ \mathbf{w} = \lfloor\mathbf{c}\mathbf{R}^{-1}\rceil\mathbf{R}.
 \]
