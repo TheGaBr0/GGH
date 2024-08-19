@@ -189,7 +189,9 @@ La prima versione discussa è quella in virgola mobile (FPLLL)\cite{FPLLL05}, la
 utilizza aritmetica in virgola mobile a 
 precisione arbitraria per accelerare i calcoli razionali dell'algoritmo originale. 
 Questa versione ha come vantaggio un aumento delle performance: in comparazione con LLL
-il tempo di computazione nel caso peggiore è $O(n^3 (\log\mathcal{E})^2)$. 
+il tempo di computazione nel caso peggiore è $O(n^3 (\log\mathcal{E})^2)$. E' importante notare che
+l'utilizzo di aritmetica a virgola mobile per velocizzare i calcoli è una tenica comune e utilizzabile
+per tutti gli algoritmi di riduzione dei reticoli spiegati in questa sezione.
 \\ 
 La seconda versione è stata presentata da Schnorr-Euchner~\cite{DEEPLLL94} ed il suo nome
 originale è "deep insertions" ovvero inserzioni profonde. In LLL (Algoritmo~\ref*{alg:two}),

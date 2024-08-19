@@ -1,2 +1,84 @@
 \subsection{Esempio pratico}
 \label{exp:HNF}
+
+\begin{exmp} (Esempio di funzionamento di GGH)
+    Sia $\mathbf{R}$ la base privata di Alice definita nell'esempio \ref{exp:GGH}. Sia $\mathbf{B}$ 
+    la forma normale di Hermite di $\mathbf{R}$:
+    \[
+        \mathbf{B}=\text{HNF}(\mathbf{R})=
+        \begin{bmatrix*}[l]
+            1 & 0 & 327\\
+            0 & 1 & 1322\\
+            0 & 0 & 1363
+        \end{bmatrix*}.
+    \] 
+    Se si dovesse calcolare il rapporto di Hadamard di $\mathbf{B}$ si otterrebbe che 
+    $\mathcal{H}(\mathbf{B}) = 0.01322$ che è ancora minore di quello relativo alla base pubblica dell'esempio
+    \ref{exp:GGH}, facendo intuire quanto l'HNF sia utile per la generazione di basi reticolari
+    di bassa qualità. \\
+    Alice procede col calcolare il $\rho$ della sua chiave privata ottenendo $\rho = 3.99242$ e
+    conclude con la generazione della sue sue due chiavi:
+    \begin{gather*}
+        \mathbf{K}_{private} = (\mathbf{R}, \mathbf{R}^{-1}) 
+        \ \text{ e } \  
+        \mathbf{K}_{public} = (\mathbf{B}, \rho).
+    \end{gather*}
+    Bob vuole ora mandare un messaggio ad Alice. Inizia con il selezionare un vettore $\mathbf{e}$
+    la cui lunghezza sia minore del $\rho$ di Alice:
+    \[
+        \mathbf{e} = 
+        \begin{bmatrix*}[l]
+            1 & 1 & 2\\
+        \end{bmatrix*}
+        \ \text{ con } \ \|\mathbf{e}\|_2 = 2.44948.
+    \]
+    Una volta ottenuto $\mathbf{e}$, Bob, calcola il testo cifrato attraverso
+    le equazioni \ref{eq:HNFreduction} e \ref{eq:HNFencryption}:
+    \[
+        \mathbf{c} = \mathbf{e} - \mathbf{x}\mathbf{B} = 
+        \begin{bmatrix*}[l]
+            1 & 1 & 2\\
+        \end{bmatrix*}
+        -
+        \begin{bmatrix*}[l]
+            1 & 1 & 0\\
+        \end{bmatrix*}
+        \begin{bmatrix*}[l]
+            1 & 0 & 327\\
+            0 & 1 & 1322\\
+            0 & 0 & 1363
+        \end{bmatrix*}
+        =
+        \begin{bmatrix*}[l]
+            0 & 0 & -1647\\
+        \end{bmatrix*}.
+    \]
+    Alice, una volta ricevuto $\mathbf{c}$, utilizza la sua chiave privata per 
+    decifrarlo attraverso la tecnica di arrotondamento di Babai:
+    \[
+    \mathbf{x} = \lfloor \mathbf{c}\mathbf{R}^{-1}\rceil = 
+    \begin{bmatrix*}[l]
+        -40  & -5 & -121 
+    \end{bmatrix*}
+    \ \text{ ed } \ \mathbf{e} = \mathbf{c} - \mathbf{x}\mathbf{R} = 
+    \begin{bmatrix*}[l]
+        1 & 1 & 2
+    \end{bmatrix*}.
+    \]
+    Si supponga ora che Eve, una volta intercettato il testo cifrato e la chiave pubblica, tenti di 
+    ottenere il messaggio originale usando solo la base $\mathbf{B}$:
+    \[
+        \mathbf{e}' = \mathbf{c} - (\lfloor \mathbf{c}\mathbf{B}^{-1}\rceil \mathbf{B}) = 
+        \begin{bmatrix*}[l]
+            0 & 0 & -284
+        \end{bmatrix*}.
+    \]
+    È possibile osservare una significativa differenza tra $\mathbf{e}$ ed $\mathbf{e}'$, dimostrando 
+    ancora una volta l'aumento di sicurezza apportato dall'uso della forma normale di Hermite. 
+    Inoltre è possibile verificare che $\mathbf{B}$ non è in grado di correggere l'errore $\mathbf{e}$
+    attraverso il calcolo del suo $\rho$, il quale, è pari a $0.50042$.\\
+    Mentre nell'esempio precedente (esempio \ref{exp:GGH}) il messaggio decifrato $\mathbf{m}'$ mostrava
+    poche cifre di distanza dal messaggio originale $\mathbf{m}$, in questo caso la 
+    situazione cambia notevolmente, presentando differenze molto più marcate. 
+
+\end{exmp}

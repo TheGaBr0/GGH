@@ -1,12 +1,12 @@
 \section{Struttura e funzionamento di GGH-HNF}
-Sulla base di quanto precedentemente esposto in \ref{sec:gghintroduction}, 
+Sulla base di quanto precedentemente esposto nella sezione \ref{sec:gghintroduction}, in GGH
 il messaggio originale $\mathbf{m}$ viene codificato in un vettore $\mathbf{x}$ 
 appartenente al reticolo, e il testo cifrato risulta come 
 $\mathbf{c} = \mathbf{x}\mathbf{B} + \mathbf{e}$.
-Le ottimizzazioni apportate da Micciancio hanno portato a una modifica di questo approccio. 
+Le ottimizzazioni sviluppate da Micciancio hanno portato a una modifica di questo approccio. 
 Invece di generare in maniera casuale sia il vettore $\mathbf{x}$ che la base $\mathbf{B}$, 
-Micciancio ha scelto di codificare il messaggio direttamente nel vettore di errore $\mathbf{r}$, 
-procedendo con un approccio deterministico per la generazione di questi parametri.
+Micciancio ha scelto di codificare il messaggio direttamente nel vettore di errore $\mathbf{e}$, 
+procedendo con un approccio deterministico per la generazione dei precedentemente citati parametri.
 Questa scelta nasce dalla difficoltà nel generare vettori e basi random che abbiano una 
 sicurezza intrinseca e dimostrabile. Questa difficoltà si ripercuote sulla sicurezza del 
 crittosistema: $\mathbf{B}$ scelta casualmente rilascia spesso informazioni parziali
@@ -16,7 +16,8 @@ la costruzione di matrici unimodulari casuali moltiplicate per $\mathbf{R}$.
 Invece, opta per un approccio deterministico basato sulla forma normale di Hermite (HNF)
 di $\mathbf{R}$. La forma normale di Hermite è una rappresentazione canonica e unica per 
 una data matrice, ottenuta mediante operazioni elementari di riga e colonna. 
-Essa garantisce che gli elementi sulla diagonale principale siano ordinati in modo decrescente.
+Essa presenta una struttura triangolare e garantisce che gli elementi sulla diagonale principale 
+siano ordinati in modo decrescente.
 Poiché l'HNF è unica per ogni reticolo la chiave pubblica $\mathbf{B}$ non rivela informazioni 
 sulla chiave privata $\mathbf{R}$, se non il reticolo $\mathcal{L}$ che genera.
 Inoltre, qualsiasi informazione su $\mathbf{R}$ che possa essere efficacemente calcolata 
@@ -25,7 +26,7 @@ essere altrettanto efficacemente calcolata a partire da qualsiasi altra base $\m
 che genera lo stesso reticolo $\mathcal{L}$. Questo perché 
 $\mathbf{B}$ = HNF($\mathbf{R}$) = HNF($\mathbf{B}'$). \\
 Ottenuto $\mathbf{B}$ è necessario quindi calcolare un vettore
-$\mathbf{x}\mathbf{B}$ appartenente al reticolo che verrà poi aggiunto a $\mathbf{B}$ come
+$\mathbf{x}\mathbf{B}$ appartenente al reticolo che verrà poi aggiunto a $\mathbf{e}$ come
 da equazione \ref{eq:GGHencryption}.  
 L'idea migliore sarebbe scegliere il vettore in modo casuale e uniforme, ma questa scelta 
 non è praticabile. Tuttavia, Micciancio in \cite[Sezione 4.1]{HNF01} dimostra che tale 
@@ -33,14 +34,15 @@ risultato può essere ottenuto mediante il semplice calcolo di
 $\mathbf{x} = \mathbf{e} \bmod \mathbf{B}$. Quindi, invece di aggiungere a $\mathbf{e}$ un
 vettore casuale $\mathbf{x}\mathbf{B}$, si riduce $\mathbf{e}$ modulo la base pubblica.
 Data la particolare struttura della matrice 
-$\mathbf{B}$ nella sua forma HNF (Hermite Normal Form), questo calcolo risulta particolarmente 
+$\mathbf{B}$ nella sua forma HNF, questo calcolo risulta particolarmente 
 semplice da effettuare. Partendo da un vettore $\mathbf{x}$
-inizialmente nullo, si può calcolare un valore di $\mathbf{x}$ alla volta, iniziando dall'ultima 
+inizialmente nullo, si può calcolare un valore di $\mathbf{x}$ alla volta, iniziando dall'ultimo
 componente $\mathbf{x}_n$, tramite la seguente formula:
-\[
+\begin{equation}
+    \label{eq:HNFreduction}
     \mathbf{x}_i = \left\lfloor \frac{\mathbf{e}_i - 
     \sum_{j=i+1}^{n-1} \mathbf{B}_{j,i} \mathbf{x}_j}{\mathbf{B}_{i,i}} \right\rfloor
-\]
+\end{equation}
 e ottenere infine:
 \begin{equation}
     \label{eq:HNFencryption}
@@ -49,8 +51,39 @@ e ottenere infine:
 
 Come si può notare le due equazioni \ref{eq:GGHencryption} e \ref{eq:HNFencryption} sono
 diverse, ma come dimostrato in \cite[Sezione 4.3]{HNF01} esse garantiscono lo stesso
-livello di sicurezza. 
-
+livello di sicurezza. \\
+Un ulteriore cambiamento, conseguente dalla scelta di Micciancio di usare $\mathbf{e}$ come vettore
+rappresentante il messaggio, è la totale mancanza di un fattore di bilanciamento, ruolo che nella
+versione originale del crittosistema veniva ricoperto da $\sigma$. 
+Il processo di decifratura infatti, 
+basato sulla tecnica di arrotondamento di Babai, rimane invariato. Pertanto, quanto detto in 
+sezione \ref{sec:gghkeys}, è ancora vero anche per GGH-HNF: il crittosistema è probabilistico 
+e necessità di un parametro per bilanciarne la probabilità di decifratura con chiave pubblica e 
+privata. 
+Nella versione originale di GGH, $\sigma$, veniva derivato direttamente dalla base privata
+e veniva utilizzato come parametro assoluto per la costruzione di $\mathbf{e}$. \\
+In GGH-HNF invece, Micciancio, decide di creare un nuovo parametro $\rho$ derivandolo sempre
+dalla base privata, ma con un approccio differente. 
+La base privata $\mathbf{R}$ viene ortogonalizzata utilizzando l'algoritmo di Gram-Schmidt, 
+producendo la base ortogonale $\mathbf{R}^*$. Successivamente $\rho$ è calcolato attraverso:
+\[
+    \rho = \frac{1}{2}min_i\|\mathbf{r}^*_i\|_2.
+\]
+$\rho$ rappresenta un raggio di correzione: se la lunghezza del vettore di errore 
+è minore di questo raggio la decifratura avrà successo. 
+Poiché la base privata è conosciuta esclusivamente dal destinatario, è essenziale che il parametro 
+$\rho$ sia incluso nella chiave pubblica, insieme alla base pubblica $\mathbf{B}$. Questa inclusione è 
+fondamentale affinché il mittente possa generare messaggi appropriati, codificandoli nel vettore di 
+errore $\mathbf{e}$. In questo modo, il mittente può assicurarsi che i messaggi cifrati siano compatibili 
+con i parametri di decifratura del destinatario, garantendo che possano essere decifrati correttamente 
+utilizzando la base privata del ricevente.\\
+Un'ultima modifica proposta riguarda la generazione di $\mathbf{R}$. Mentre GGH optava per la creazione 
+di una matrice rettangolare successivamente moltiplicata per una matrice casuale, Micciancio suggerisce 
+un metodo diverso basato sui suoi esperimenti.
+Il nuovo approccio consiste nel generare direttamente una matrice casuale i cui elementi sono interi 
+compresi nell'intervallo $[-n, \dots, n]$. A questa matrice viene poi applicata una riduzione LLL. 
+Gli esperimenti provarono che questo metodo produce basi con un $\rho$ sufficientemente grande, più
+precisamente $\rho = \frac{n}{2}$. 
 %
 %			ESEMPIO HNF
 %
