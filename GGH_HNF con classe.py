@@ -1,4 +1,4 @@
-from GGH_HNF import GGHHNFCryptosystem
+from GGH_crypto import GGHHNFCryptosystem
 import sympy as sp
 import numpy as np
 from flint import fmpz_mat, fmpq_mat, fmpq

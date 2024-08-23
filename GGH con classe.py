@@ -1,4 +1,4 @@
-from GGH import GGHCryptosystem
+from GGH_crypto import GGHCryptosystem
 from flint import *
 import time
 import numpy as np
@@ -32,7 +32,7 @@ def embedding(R, t):
     
     return t - shortest_row
 
-dimension = 500
+dimension = 100
 
 
 start_time = time.time()
