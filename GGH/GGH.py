@@ -1,12 +1,12 @@
-import numpy as np
 import random
 import sympy as sp
 import math
 from flint import fmpz_mat, fmpz, fmpq, fmpq_mat
 from decimal import Decimal, getcontext
+import time
 
 class GGHCryptosystem:
-    def __init__(self, dimension, R=None, B=None, m=None, e=None, integer_sigma=True):
+    def __init__(self, dimension, R=None, B=None, m=None, e=None, integer_sigma=True, debug=True):
         self.dimension = dimension
         self.integer_sigma = integer_sigma
         
@@ -17,6 +17,7 @@ class GGHCryptosystem:
         self.private_basis = R
         self.public_basis = B
         self.unimodular = None
+        self.debug = debug
 
         self.private_key = None
         self.public_key = None
@@ -24,14 +25,9 @@ class GGHCryptosystem:
         if R is not None:
             # Check if R is a 2D array or matrix
             if R.nrows() != dimension:
-                raise ValueError(f"R must be a {dimension}x{dimension} matrix, but got {R.nrows()}")
+                raise ValueError(f"[GGH] Private basis must be a {dimension}x{dimension} matrix, but got {R.nrows()}")
             
-            self.private_basis = R
-            if B is None:
-                self.generate_keys_from_R()
-            else:
-                self.public_basis = B
-                self.generate_keys_with_B()
+            self.generate_keys_from_R_or_B()
         else:
             self.generate_keys()
 
@@ -43,27 +39,35 @@ class GGHCryptosystem:
 
     def sympy_to_fmpz_mat(self, basis_sympy):
         return fmpz_mat([[int(item) for item in sublist] for sublist in basis_sympy.tolist()])
-    
-    def numpy_to_fmpz_mat(self, numpy_matrix):
-        return fmpz_mat([[int(item) for item in sublist] for sublist in numpy_matrix.tolist()])
 
     def random_unimodular(self, dim, mix):
         T = sp.eye(dim)
-        while mix > 0:
+        x = sp.zeros(1, dim)
+        choices = [-1, 0, 1]
+        weights = [1, 5, 1]
+        
+        for _ in range(mix):
             rows = list(range(dim))
             random.shuffle(rows)
             for i in rows:
-                x = sp.zeros(1, dim)
                 x[0, i] = 1
                 for k in range(dim):
                     if k != i:
-                        x[0, k] = np.random.choice([-1, 0, 1], p=[1/7, 5/7, 1/7])
-                T[i, :] = x * T
-            mix -= 1
+                        x[0, k] = random.choices(choices, weights=weights)[0]
+                
+                # Perform matrix multiplication more efficiently
+                new_row = x * T
+                for j in range(dim):
+                    T[i, j] = new_row[0, j]
+                
+                # Reset x for the next iteration
+                x[0, i] = 0
+
         return self.sympy_to_fmpz_mat(T)
 
     def generate_sigma(self, R_inv):
-        rho = fmpq(max(sum(abs(x) for x in row) for row in R_inv.tolist())) #L1 norm
+        getcontext().prec = 50
+        rho = max(sum(abs(Decimal(int(x.numer())) / Decimal(int(x.denom()))) for x in row) for row in R_inv.tolist()) #L1 norm
 
         sigma_max = 1 / (2 * rho)
 
@@ -88,49 +92,76 @@ class GGHCryptosystem:
         random_elements = [random.randint(-128, 127) for _ in range(self.dimension)]
         self.message = fmpq_mat([random_elements])
 
-    def generate_keys_from_R(self):
+    def generate_keys_from_R_or_B(self):
+
+        if self.debug:
+            print("[GGH] Private basis given as input, inverting it..")
+    
         R = self.private_basis
         R_inv = R.inv()
         sigma = self.generate_sigma(R_inv)
-        print("Generating public key...")
-        U = self.random_unimodular(self.dimension, 12)
-        self.unimodular = U
-        self.public_basis = B = U * R
-        print("Computing results...")
+
+        if self.public_basis is None:
+            if self.debug:
+                print("[GGH] Generating public key...")
+            U = self.random_unimodular(self.dimension, 2)
+            self.unimodular = U
+            self.public_basis = B = U * R
+        else:
+            if self.debug:
+                print("[GGH] Using the provided public basis as the public key")
+            B = self.public_basis
+        
         self.public_key = (B, sigma)
         self.private_key = (R_inv, R)
 
-    def generate_keys_with_B(self):
-        R = self.private_basis
-        R_inv = R.inv()
-        sigma = self.generate_sigma(R_inv)
-        print("Computing results...")
-        self.public_key = (self.public_basis, sigma)
-        self.private_key = (R_inv, R)
-
     def generate_keys(self):
+        if self.debug:
+            print("[GGH] Generating private basis...")
+        tries = 0
+        time_start = time.time()
         l = 4
         k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
-        print("Generating private key...")
+        
         while True:
             try:
-                R = self.numpy_to_fmpz_mat(np.random.randint(-l, l-1, (self.dimension, self.dimension)))
-                I = self.numpy_to_fmpz_mat(np.eye(self.dimension))
+                R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
+                I = self.sympy_to_fmpz_mat(sp.eye(self.dimension))
                 KI = k * I
                 R += KI
                 R_inv = R.inv()
+                tries += 1
             except Exception as e:
                 print(e)
                 continue
             else:
                 break
+
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start} with {tries} tries")
+
         self.private_basis = R
         sigma = self.generate_sigma(R_inv)
-        print("Generating public key...")
-        U = self.random_unimodular(self.dimension, 12)
+
+        if self.debug:
+            print(f"Generated sigma is {sigma}")
+
+        if self.debug:
+            print(f"Generating unimodular matrix")
+        time_start = time.time()
+        U = self.random_unimodular(self.dimension, 2)
+
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start}")
+
         self.unimodular = U
+        if self.debug:
+            print(f"[GGH] Generating public basis")
+        time_start = time.time()
         self.public_basis = B = U * R
-        print("Computing results...")
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start}")
+
         self.public_key = (B, sigma)
         self.private_key = (R_inv, R)
 
@@ -153,13 +184,14 @@ class GGHCryptosystem:
             for j in range(cols):
                 a[i,j] = round(a[i,j])
         
-        print(a)
-
         result = a * R * B_inv
         return result
     
-    def row_norm(self, row):
-        return Decimal(sum(Decimal(int(x))**2 for x in row)).sqrt()
+    def vector_norm(self, row):
+        if isinstance(row, fmpz_mat):
+            row = fmpq_mat(row)
+        getcontext().prec = 50
+        return Decimal(sum((Decimal(int(x.numer())) / Decimal(int(x.denom()))) ** 2 for x in row)).sqrt()
 
     def get_hadamard_ratio(self, basis = None):
         
@@ -168,7 +200,7 @@ class GGHCryptosystem:
         
         for i in range(matrix.nrows()):
             row = [matrix[i, j] for j in range(matrix.ncols())]
-            norm = self.row_norm(row)
+            norm = self.vector_norm(row)
             norms.append(norm)
            
         

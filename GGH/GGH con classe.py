@@ -32,54 +32,19 @@ def embedding(R, t):
     
     return t - shortest_row
 
-dimension = 3
+dimension = 500
 
-R = fmpz_mat([[12, -4, -1], [1,  8, -1], [-4,  1, 14]])
-B = fmpz_mat([[145, -73, -23],[-39,  21,  16],[-165,  80,  11]])
-m = fmpz_mat([[-48, 29, -76]])
-e = fmpz_mat([[3, 3, 3]])
 
 start_time = time.time()
-GGH_object = GGHCryptosystem(dimension = dimension, R=R, B=B, m=m, e=e)
+GGH_object = GGHCryptosystem(dimension = dimension)
 GGH_object.encrypt()
-
-R = GGH_object.private_basis
-B = GGH_object.public_basis
-U = GGH_object.unimodular
-
-print(R)
-print(f"R: {GGH_object.get_hadamard_ratio(R)}")
-print(B)
-print(f"B: {GGH_object.get_hadamard_ratio(B)}")
-print(U)
+print(GGH_object.unimodular.det())
 
 
 message = GGH_object.message
-
-ciphertext = GGH_object.ciphertext
-
-print(f"C: {ciphertext}")
-
 decrypted_message = GGH_object.decrypt()
 
-print(f"time taken: {time.time() - start_time}")
-
-print(f"sigma: {GGH_object.public_key[1]}")
-print(f"error: {GGH_object.error}")
 print(f"message: {message}")
 # print(f"decrypted message: {decrypted_message.transpose()}")
 print(f"decrypted_message: {decrypted_message}")
 print(decrypted_message == message)
-print(embedding(B, ciphertext))
-print(embedding(B, ciphertext) * B.inv())
-        
-a = ciphertext * B.inv()
-print(a)
-cols = a.ncols()
-rows = a.nrows()
-
-for i in range(rows):
-    for j in range(cols):
-        a[i,j] = round(a[i,j])
-
-print(a)

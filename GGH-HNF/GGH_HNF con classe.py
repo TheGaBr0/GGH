@@ -3,13 +3,13 @@ import sympy as sp
 import numpy as np
 from flint import fmpz_mat, fmpq_mat, fmpq
 
-dimension = 800
+dimension = 100
 
 
 R = fmpz_mat([[12, -4, -1], [1,  8, -1], [-4,  1, 14]])
 e = fmpz_mat([[1,1,2]])
 
-GGH_object = GGHHNFCryptosystem(dimension = dimension, rho_check=False, random_private=False)
+GGH_object = GGHHNFCryptosystem(dimension = dimension, rho_check=True, random_private=False)
 GGH_object.encrypt()
 
 B = GGH_object.public_key
