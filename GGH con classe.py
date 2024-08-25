@@ -1,4 +1,4 @@
-from GGH_crypto import GGHCryptosystem
+from GGH_crypto import GGHCryptosystem, Utils
 from flint import *
 import time
 import numpy as np
@@ -32,17 +32,21 @@ def embedding(R, t):
     
     return t - shortest_row
 
-dimension = 100
+dimension = 500
 
 
 start_time = time.time()
 GGH_object = GGHCryptosystem(dimension = dimension)
 GGH_object.encrypt()
-print(GGH_object.unimodular.det())
 
 
 message = GGH_object.message
 decrypted_message = GGH_object.decrypt()
+
+R = fmpz_mat([[1,2],[3,0]])
+
+B = fmpz_mat([[5, 4], [-6, -6]])
+T = fmpq_mat([[12, 21]])
 
 print(f"message: {message}")
 # print(f"decrypted message: {decrypted_message.transpose()}")

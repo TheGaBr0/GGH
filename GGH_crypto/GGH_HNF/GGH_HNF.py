@@ -42,7 +42,7 @@ class GGHHNFCryptosystem:
             self.generate_random_error()
         else:
             if self.debug:
-                print(f"[GGH-HNF] Length of error vector is: {self.vector_norm(e)}")
+                print(f"[GGH-HNF] Length of error vector is: {Utils.vector_norm(e)}")
 
     def generate_keys_from_R_or_B(self):
 
@@ -73,17 +73,11 @@ class GGHHNFCryptosystem:
     def numpy_to_fmpz_mat(self, numpy_matrix):
         return fmpz_mat([[int(item) for item in sublist] for sublist in numpy_matrix.tolist()])
 
-    def vector_norm(self, row):
-        if isinstance(row, fmpz_mat):
-            row = fmpq_mat(row)
-        getcontext().prec = 50
-        return Decimal(sum((Decimal(int(x.numer())) / Decimal(int(x.denom()))) ** 2 for x in row)).sqrt()
-
     def min_norm_row(self, matrix):
         norms = []
         for j in range(matrix.nrows()):
             row = [matrix[j, i] for i in range(matrix.ncols())]
-            norms.append(self.vector_norm(row))
+            norms.append(Utils.vector_norm(row))
         min_norm = min(norms)
         return norms[norms.index(min_norm)]
 
@@ -107,17 +101,17 @@ class GGHHNFCryptosystem:
             rand_val = n
             random_elements = [[random.randint(-rand_val, rand_val) for _ in range(n)]]
             error = fmpz_mat(random_elements)
-            error_norm = self.vector_norm(error)
+            error_norm = Utils.vector_norm(error)
             while(not error_norm < Decimal(0.9) * self.R_rho):
                 rand_val -= 1
                 random_elements = [[random.randint(-rand_val, rand_val) for _ in range(n)]]
                 error = fmpz_mat(random_elements)
-                error_norm = self.vector_norm(error)
+                error_norm = Utils.vector_norm(error)
             self.error = error
         else:
             random_elements = [[random.randint(-28, 28) for _ in range(n)]]
             self.error = fmpz_mat(random_elements)
-            error_norm = self.vector_norm(self.error)
+            error_norm = Utils.vector_norm(self.error)
         
         if self.debug:
             print(f"[GGH-HNF] Length of error vector is: {error_norm}")
@@ -140,9 +134,9 @@ class GGHHNFCryptosystem:
         tries = 0
         if not self.random_private:
             if self.debug:
-                print("[GGH-HNF] Generating private basis using GGH's matrix transformations tecnique...")
+                print("[GGH-HNF] Generating private basis using GGH's matrix transformations technique...")
             time_start = time.time()
-            l = 4
+            l = n
             k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
             
             while True:
@@ -196,7 +190,9 @@ class GGHHNFCryptosystem:
         self.private_key = (R_inv, R)
 
     def encrypt(self):
-
+        if self.debug:
+            print(f"[GGH-HNF] Encrypting...")
+        time_start = time.time()
         if self.x is None:
             x = self.reduce_mod_B()
         
@@ -204,8 +200,13 @@ class GGHHNFCryptosystem:
         r = self.error
 
         self.ciphertext = r - x * H
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start}")
 
     def decrypt(self):
+        if self.debug:
+            print(f"[GGH] Decrypting...")
+        time_start = time.time()
         R_inv, R = self.private_key
         
         c = self.ciphertext
@@ -219,20 +220,10 @@ class GGHHNFCryptosystem:
                                 
         result = rounded_x * R
         
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start}")
+
+
         return c - result
     
-    def get_hadamard_ratio(self, basis = None):
-        matrix = basis
-        norms = []
-        
-        for i in range(matrix.nrows()):
-            row = [matrix[i, j] for j in range(matrix.ncols())]
-            norm = self.vector_norm(row)
-            norms.append(norm)
-           
-        denominator = math.prod(norms)
-        numerator = abs(Decimal(matrix.det().str()))
-
-        result = (numerator / denominator) ** Decimal(1 / self.dimension)
-        return result
     

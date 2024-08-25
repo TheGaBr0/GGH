@@ -5,6 +5,8 @@ from flint import fmpz_mat, fmpz, fmpq, fmpq_mat
 from decimal import Decimal, getcontext
 import time
 
+from ..Utils.Utils import Utils
+
 class GGHCryptosystem:
     def __init__(self, dimension, R=None, B=None, m=None, e=None, integer_sigma=True, debug=True):
         self.dimension = dimension
@@ -120,7 +122,7 @@ class GGHCryptosystem:
             print("[GGH] Generating private basis...")
         tries = 0
         time_start = time.time()
-        l = 4
+        l = self.dimension
         k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
         
         while True:
@@ -147,7 +149,7 @@ class GGHCryptosystem:
             print(f"Generated sigma is {sigma}")
 
         if self.debug:
-            print(f"Generating unimodular matrix")
+            print(f"Generating unimodular matrix...")
         time_start = time.time()
         U = self.random_unimodular(self.dimension, 2)
 
@@ -156,7 +158,7 @@ class GGHCryptosystem:
 
         self.unimodular = U
         if self.debug:
-            print(f"[GGH] Generating public basis")
+            print(f"[GGH] Generating public basis...")
         time_start = time.time()
         self.public_basis = B = U * R
         if self.debug:
@@ -166,12 +168,20 @@ class GGHCryptosystem:
         self.private_key = (R_inv, R)
 
     def encrypt(self):
+        if self.debug:
+            print(f"[GGH] Encrypting...")
+        time_start = time.time()
         if self.error is None:
             self.generate_error()
         B = self.public_key[0]
         self.ciphertext = self.message * B + self.error
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start}")
 
     def decrypt(self):
+        if self.debug:
+            print(f"[GGH] Decrypting...")
+        time_start = time.time()
         R_inv, R = self.private_key
         B_inv = self.public_basis.inv()
         c = self.ciphertext
@@ -185,28 +195,8 @@ class GGHCryptosystem:
                 a[i,j] = round(a[i,j])
         
         result = a * R * B_inv
-        return result
-    
-    def vector_norm(self, row):
-        if isinstance(row, fmpz_mat):
-            row = fmpq_mat(row)
-        getcontext().prec = 50
-        return Decimal(sum((Decimal(int(x.numer())) / Decimal(int(x.denom()))) ** 2 for x in row)).sqrt()
 
-    def get_hadamard_ratio(self, basis = None):
-        
-        matrix = basis
-        norms = []
-        
-        for i in range(matrix.nrows()):
-            row = [matrix[i, j] for j in range(matrix.ncols())]
-            norm = self.vector_norm(row)
-            norms.append(norm)
-           
-        
-        denominator = math.prod(norms)
-        numerator = abs(Decimal(matrix.det().str()))
+        if self.debug:
+            print(f"[GGH] Time taken: {time.time() - time_start}")
 
-
-        result = (numerator / denominator) ** Decimal(1 / self.dimension)
         return result
