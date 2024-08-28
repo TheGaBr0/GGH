@@ -6,7 +6,6 @@ import math
 import os
 import subprocess
 import ast
-import threading
 
 
 class Utils:
@@ -38,11 +37,6 @@ class Utils:
                 result[i, j] = w_i[j]
 
         return result
-    
-    def start_visualization(basis_1, basis_1_cvp, point, basis_2=None, basis_2_cvp=None, title="Lattice Plot", limit=5):
-        thread = threading.Thread(target=Utils.generate_lattice_points, args=(basis_1, basis_1_cvp, point, basis_2, basis_2_cvp, title, limit))
-        thread.start()
-        return thread
     
     def generate_lattice_points(basis_1, basis_1_cvp, point, basis_2=None, basis_2_cvp=None, title="Lattice Plot", limit=5):
 
@@ -132,14 +126,14 @@ class Utils:
 
             if GGH:
                 if matrix_emb[i, n] == 1:  # Se l'ultimo elemento è 1
-                    norm = Utils.vector_norm(i_th_row)
+                    norm = Utils.vector_l2_norm(i_th_row)
                     if norm < min_norm:
                         min_norm = norm
                         # Prendi i primi n valori della riga più corta
                         shortest_vector = fmpz_mat([[matrix_emb[i, j] for j in range(n)]])
             else:
                 # Se GGH non è vero, considera comunque la riga per trovare il vettore più corto
-                norm = Utils.vector_norm(i_th_row)
+                norm = Utils.vector_l2_norm(i_th_row)
                 if norm < min_norm:
                     min_norm = norm
                     # Prendi i primi n valori della riga più corta
@@ -150,7 +144,7 @@ class Utils:
         if GGH and shortest_vector is None:
             for i in range(n + 1):
                 i_th_row = fmpz_mat([[matrix_emb[i, j] for j in range(n + 1)]])
-                norm = Utils.vector_norm(i_th_row)
+                norm = Utils.vector_l2_norm(i_th_row)
                 if norm < min_norm:
                     min_norm = norm
                     # Prendi i primi n valori della riga più corta
@@ -161,16 +155,15 @@ class Utils:
         if visualize:
             if basis.nrows() != 2:
                 raise ValueError(f"[Utils] Can't visualize. Basis must be a {2}x{2} matrix, but got a {basis.nrows()}x{basis.ncols()} one")
-            thread = Utils.start_visualization(basis, closest_vector, point, title="Embedding method")
-            thread.join()
+            Utils.generate_lattice_points(basis, closest_vector, point, title="Embedding method")
+            
 
         return closest_vector
         
-    def vector_norm(row):
+    def vector_l2_norm(row):
         if isinstance(row, fmpz_mat):
             row = fmpq_mat(row)
         getcontext().prec = 50
-   
         return Decimal(sum((Decimal(int(x.numer())) / Decimal(int(x.denom()))) ** 2 for x in row)).sqrt()
     
     def get_hadamard_ratio(basis = None):
@@ -180,7 +173,7 @@ class Utils:
 
         for i in range(matrix.nrows()):
             row = fmpz_mat([[matrix[i, j] for j in range(matrix.ncols())]])
-            norm = Utils.vector_norm(row)
+            norm = Utils.vector_l2_norm(row)
             norms.append(norm)
             
         denominator = math.prod(norms)
@@ -316,7 +309,10 @@ class Utils:
         if visualize:
             if basis.nrows() != 2:
                 raise ValueError(f"[Utils] Can't visualize. Basis must be a {2}x{2} matrix, but got a {basis.nrows()}x{basis.ncols()} one")
-            thread = Utils.start_visualization(basis, closest_vector, point, title="Babai rounding technique")
-            thread.join()
+            Utils.generate_lattice_points(basis, closest_vector, point, title="Babai rounding technique")
+            
         
         return closest_vector
+    
+    def sympy_to_fmpz_mat(basis_sympy):
+        return fmpz_mat([[int(item) for item in sublist] for sublist in basis_sympy.tolist()])

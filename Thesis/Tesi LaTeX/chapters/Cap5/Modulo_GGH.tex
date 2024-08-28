@@ -1,0 +1,136 @@
+\section{Modulo GGH}
+\label{sec:moduloggh}
+
+Il modulo GGH contenente l'implementazione del relativo crittosistema è caratterizzato
+da una classe \texttt{GGHCryptosystem} che al suo interno contiene tutte le funzionalità
+necessarie al suo corretto andamento. Istanziando la classe è possibile passare 
+diversi parametri al fine di poter modificare a piacimento determinati valori 
+che verranno usati dal crittosistema in fase di cifratura e decifratura.
+Tutti i parametri hanno un valore predefinito impostato a \texttt{None}, con l'eccezione del 
+parametro relativo alla dimensione e dei parametri booleani, impostati entrambi a \texttt{False}. 
+Se l'utente non specifica valori diversi per i parametri nulli, il modulo genererà automaticamente valori casuali per ciascuno 
+di essi. I parametri consentiti sono i seguenti:
+\begin{itemize}
+    \item \texttt{dimension} (\texttt{fmpz\_mat}): 
+    Dimensione delle basi e dei vettori generati dal crittosistema.
+    \item \texttt{private\_basis} e \texttt{public\_basis} (\texttt{fmpz\_mat}): 
+    Rispettivamente base privata e base pubblica con le quali il crittosistema effettuerà 
+    tutte le operazioni.
+    \item \texttt{unimodular} (\texttt{fmpz\_mat})
+    Matrice unimodulare usata per la generazione della base pubblica. 
+    \item \texttt{message} (\texttt{fmpz\_mat}): 
+    Messaggio che verrà cifrato dal crittosistema.
+    \item \texttt{error} (\texttt{fmpz\_mat}): 
+    Errore che verrà aggiunto in fase di cifratura.
+    \item \texttt{sigma} (\texttt{Integer}): 
+    Valore di sigma con il quale verrà generato il vettore di errore. 
+    \item \texttt{integer\_sigma} (\texttt{Boolean}): 
+    Flag booleana che, se impostata a \texttt{True}, procederà con la generazione di un sigma
+    \texttt{Integer} invece che \texttt{Float}.
+    \item \texttt{debug} (\texttt{Boolean}): 
+    Flag booleana che, se impostata a \texttt{True}, 
+    mostrerà in console tutti gli output delle varie fasi del crittosistema con annesso 
+    il tempo richiesto per ciascuna. 
+\end{itemize}
+
+Dopo l'assegnazione dei valori alle variabili interne, la classe eseguirà controlli 
+per verificare che, se un vettore o una base sono stati forniti come input, la loro 
+dimensione sia (\texttt{dimension}, \texttt{dimension})
+nel caso delle matrici e (1, \texttt{dimension}) nel caso dei vettori. Se tale condizione
+dovesse risultare falsa per qualsiasi dei paramtri, come risposta la classe ritornerà
+un eccezione di tipo \texttt{ValueError} con annesso un messaggio riguardante il parametro
+che ha causato l'errore.
+
+\subsection{Generazione delle chiavi}
+
+La generazione delle chiavi necessita di quattro elementi: base privata, base pubblica, sigma
+e una matrice unimodulare. In \cite{GGH97} vennero proposte più opzioni di generazione
+per ciascuno di questi elementi. Nella presente implementazione, sono state selezionate 
+alcune opzioni specifiche tra quelle proposte, che verranno discusse singolarmente nel contesto
+delle prestazioni e della sicurezza.
+
+\subsubsection{Chiave privata}
+La chiave privata è rappresentata dalla coppia $(\mathbf{R}, \mathbf{R}^{-1})$,
+ottenuta utilizzando esclusivamente la base privata come parametro.
+Per generarla è stato deciso di seguire i passaggi descritti 
+in sezione \ref{sec:gghkeys} al punto \ref{en:gghpriv2}. I parametri utilizzati sono
+quelli descritti nei risultati sperimentali riportati in \cite{GGH97}, ovvero 
+$k = (l \lceil \sqrt{\text{\texttt{dimension}}} + 1 \rceil)$ con $l = 4$. 
+Attraverso un ciclo, si genera quindi prima una matrice $\mathbf{R}$ di numeri casuali 
+compresi tra $[-l, l-1]$, si ottiene la base privata $\mathbf{R} = \mathbf{R}+k\mathbf{I}$ 
+e si verifica che essa sia invertibile, salvando in contemporanea il risultato dell'inversione.
+Se essa non dovesse risultare invertibile si procede, grazie al ciclo, ad una nuova generazione. 
+L'algoritmo implementato fa uso dei moduli \texttt{Random} e \texttt{Sympy} per la rispettiva
+generazione della matrice casuale e della matrice identità, le quali sono poi convertite
+entrambe in \texttt{fmpz\_mat}. 
+
+\subsubsection{Chiave pubblica}
+Al contrario della chiave privata, quella pubblica è più complessa e si compone dalla coppia
+$(\mathbf{B}, \sigma)$.
+Dopo la generazione di $\mathbf{R}$, si procede subito con la derivazione di $\sigma$ secondo 
+la prima metrica, basata sulla norma L1, introdotta in \ref{subsec:sigmametrics}. 
+Per il suo calcolo 
+è stato fatto uso di una conversione al tipo \texttt{Decimal}. Il suo risultato, 
+definito come $\rho$, viene infine usato per determinare $\sigma$ attraverso 
+$\sigma = 1 / (2\rho)$. Grazie al parametro \texttt{integer\_sigma} è possibile decidere
+se lasciare sigma in forma di \texttt{float} o arrotondarlo per difetto all'intero più vicino.
+L'arrotondamento è necessario che sia per difetto al fine di non invalidare la precisione 
+del crittosistema: la metrica basata su L1 definisce un limite a $\sigma$ sotto al quale
+il successo della decifratura con base privata è sicuro. Ottenuto $\sigma$ si calcola infine
+la base pubblica, ottenuta dalla moltplicazione di una matrice unimodulare $\mathbf{U}$ con
+la base privata $\mathbf{R}$. Per la creazione di $\mathbf{U}$ è stato scelto di usare
+la tecnica descritta al punto \ref{en:gghunim1} della sezione \ref{sec:gghkeys}, in quanto
+i valori della matrice generati sono meno grandi di quelli ottenuti col metodo del punto
+\ref{en:gghunim2}.
+L'implementazione dell'algoritmo si basa esclusivamente su matrici SymPy, integrate 
+con funzionalità del modulo Random. Questa scelta è stata fatta dopo aver condotto 
+esperimenti comparativi che hanno evidenziato la superiorità di SymPy rispetto a FLINT 
+per questo specifico caso d'uso. Analogalmente alla generazione della base privata,
+il risultato finale viene poi convertito in \texttt{fmpz\_mat} .
+
+\subsection{Cifratura e decifratura}
+
+Il processo di cifratura e decifratura rappresenta la parte più delicata dell'implementazione di GGH.
+Le operazioni al loro interno trasformano il messaggio originale in testo cifrato e viceversa, 
+utilizzando le chiavi generate precedentemente. L'implementazione di questi processi 
+richiede particolare attenzione per garantire sia l'efficienza computazionale che la 
+sicurezza del sistema, un errore di calcolo dovuto a bassa precisione renderebbe vana 
+la decifratura.
+
+\subsubsection{Cifratura}
+
+L'implementazione della cifratura nient'altro è che la computazione dell'equazione 
+\ref{eq:GGHencryption} la quale fa uso di sole matrici di tipo \texttt{fmpz\_mat}.
+La funzione di cifratura si occupa però prima della generazione del messaggio $\mathbf{m}$ 
+e dell'errore $\mathbf{e}$, secondo i semplici passaggi descritti nella sezione 
+\ref{sec:gghintroduction}. 
+Per creare $\mathbf{m}$, si genera un vettore di valori casuali nell'intervallo 
+$[-127, 128]$ utilizzando il modulo \texttt{Random}, che viene poi convertito in 
+una matrice di interi \texttt{fmpq\_mat}. 
+A causa di incompatibilità operative tra oggetti \texttt{fmpz\_mat} e \texttt{fmpq\_mat}, è
+obbligatorio salvare $\mathbf{m}$ come oggetto di tipo razionale. Questa conversione 
+è necessaria perché durante la fase di cifratura si verifica un'operazione di somma 
+tra un \texttt{fmpq\_mat} e un \texttt{fmpz\_mat}. Se $\mathbf{m}$ non viene convertito 
+in formato razionale, l'operazione causa inevitabilmente un errore di tipo 
+\texttt{TypeError} nell'ambiente FLINT. Questa conversione forzata non causa nessun effetto
+negativo in quanto, in seguito a esperimenti, sia velocità che precisione non sono intaccati.  
+Per $\mathbf{e}$, si generano valori 
+casuali nell'intervallo $\pm \sigma$. La conversione finale di $\mathbf{e}$ dipende 
+dal parametro \texttt{integer\_sigma}: se vero, risulta in una matrice \texttt{fmpz\_mat} 
+di interi; se falso, produce una matrice \texttt{fmpq\_mat} di razionali. 
+
+\subsubsection{Decifratura}
+
+La decifratura nel crittosistema GGH si basa essenzialmente sulla risoluzione del CVP. 
+In \cite{GGH97}, gli autori presentano due approcci principali: il metodo del piano più 
+vicino e la tecnica di arrotondamento di Babai. Un'analisi dei vantaggi e 
+degli svantaggi di entrambi gli algoritmi è stata trattata nella sezione \ref{sec:babai}. 
+La scelta implementativa è ricaduta sulla tecnica di arrotondamento, principalmente per la sua 
+efficienza computazionale, rinunciando però alla precisione massima ottenibile. Questa perdita
+di precisione non influisce però sulle probabilità di decifratura, come mostrato in tabella
+X sezione X. 
+L'implementazione della decifratura segue fedelmente i passaggi illustrati nell'esempio 
+\ref{exp:GGH}, mentre l'algoritmo di Babai utilizzato è stato dettagliatamente descritto 
+nell'esempio \ref{exp:babai}. Tutti i calcoli sono gestiti completamente da FLINT eccetto
+per la funzione di arrotondamento, nativa di Python. 
+

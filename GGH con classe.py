@@ -32,21 +32,25 @@ def embedding(R, t):
     
     return t - shortest_row
 
-dimension = 500
+dimension = 100
 
-
-start_time = time.time()
-GGH_object = GGHCryptosystem(dimension = dimension)
-GGH_object.encrypt()
-
-
-message = GGH_object.message
-decrypted_message = GGH_object.decrypt()
 
 R = fmpz_mat([[1,2],[3,0]])
 
 B = fmpz_mat([[5, 4], [-6, -6]])
 T = fmpq_mat([[12, 21]])
+
+start_time = time.time()
+GGH_object = GGHCryptosystem(dimension = dimension, integer_sigma=True)
+GGH_object.encrypt()
+
+print(GGH_object.error)
+
+print(Utils.get_hadamard_ratio(GGH_object.private_basis))
+
+message = GGH_object.message
+decrypted_message = GGH_object.decrypt()
+
 
 print(f"message: {message}")
 # print(f"decrypted message: {decrypted_message.transpose()}")

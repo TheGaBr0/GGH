@@ -2,7 +2,7 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage{graphicx}
 \graphicspath{{images/}}
-
+\usepackage{dirtree}
 \usepackage{blindtext}
 \usepackage{subfiles}
 \usepackage[a4paper]{geometry}
@@ -22,6 +22,7 @@
 \usepackage{algorithm2e}
 \RestyleAlgo{ruled}
 \usepackage{amsthm}
+\usepackage{pythonhighlight}
 \theoremstyle{definition}
 \newtheorem{exmp}{Esempio}[section]
 
@@ -63,10 +64,10 @@
 \afterpreface
 % 
 % 
-%			CAPITOLO 1: Introduzione
+%			  CAPITOLO 1: Introduzione
 \subfile{chapters/Cap1/Introduzione.tex}
 %
-%			CAPITOLO 1: Teoria
+%			  CAPITOLO 1: Teoria
 \subfile{chapters/Cap2/Teoria.tex}
 %
 %		    CAPITOLO 2: GGH
@@ -74,6 +75,9 @@
 %
 %		    CAPITOLO 3: GGH-HNF
 \subfile{chapters/Cap4/GGH-HNF.tex}
+%
+%       CAPITOLO 4: Implementazione
+\subfile{chapters/Cap5/Implementazione.tex}
 %
 %			BIBLIOGRAFIA
 %
@@ -133,7 +137,10 @@
     \bibitem{HNF04}
     Ludwig Christoph, “The Security and Efficiency of Micciancio’s
     Cryptosystem“, Technische Universität Darmstadt Germany, 2004
-
+    \bibitem{FLINT}
+    Fast Library for Number Theory, URL: \url{https://flintlib.org/}
+    \bibitem{FPLLL}
+    FPLLL, a lattice reduction library, URL: \url{https://github.com/fplll/fplll}
    
 \end{thebibliography}
 % 

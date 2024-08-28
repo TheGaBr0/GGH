@@ -23,12 +23,12 @@ Dopo aver scelto un $n$ adeguato, si procede con il generare la base privata $\m
 e, successivamente, decidere la distribuzione con la quale essa verrà originata. 
 Due sono le proposte avanzate:
 \begin{enumerate}
-    \item Generare una base $\mathbf{R}$ casuale: ogni elemento viene scelto in maniera casuale
+    \item \label{en:gghpriv1} Generare una base $\mathbf{R}$ casuale: ogni elemento viene scelto in maniera casuale
     uniformemente nell'intervallo $[-l,\dots,l]$ per qualche valore $l$. In \cite{GGH97}
     è stato provato che la scelta di $l$ non influenza particolarmente la qualità della base
     generata, per cui è stato scelto un $l$ tra $\pm4$ al fine di semplificare alcune operazioni
     di calcolo.
-    \item Generare una base $\mathbf{R}$ rettangolare: si inizia con il moltiplicare la matrice identità
+    \item \label{en:gghpriv2} Generare una base $\mathbf{R}$ rettangolare: si inizia con il moltiplicare la matrice identità
     $\mathbf{I}$ per qualche numero $k$ ottenendo così $k\mathbf{I}$. 
     Si genera poi una matrice $\mathbf{R}'$ casuale (punto 1.) per poi computare
     $\mathbf{R} = \mathbf{R}' + k\mathbf{I}$.
@@ -40,14 +40,14 @@ $\mathcal{L}(\mathbf{R})$ è ottenuta con $\mathbf{B} = \mathbf{U}\mathbf{R}$ pe
 unimodulare $\mathbf{U}$, allora ottenere $\mathbf{B}$ equivale ad ottenere una matrice
 unimodulare casuale. Anche in questo caso, due sono i metodi proposti per generare tali matrici:
 \begin{enumerate}
-    \item Il primo metodo consiste nell'applicare una sequenza di operazioni elementari 
+    \item \label{en:gghunim1} Il primo metodo consiste nell'applicare una sequenza di operazioni elementari 
     sulle colonne della matrice identità, mantenendo però gli uni sulla diagonale principale.
     Ad ogni step viene aggiunta alla i-esima colonna una combinazione lineare intera casuale
     delle altre colonne. I coefficienti della combinazione lineare sono scelti casualmente
     in $\{-1,0,1\}$ con un bias verso zero (probabilità $\frac{5}{7}$), in modo che i numeri non
     crescano troppo velocemente. Viene suggerito dagli autori stessi di eseguire l'algoritmo
     almeno due volte.
-    \item Il secondo metodo si basa sul generare delle matrici triangolari superiori 
+    \item \label{en:gghunim2} Il secondo metodo si basa sul generare delle matrici triangolari superiori 
     ($\mathbf{S}$) e inferiori ($\mathbf{L}$) con $\pm1$ sulla diagonale principale. I 
     restanti elementi della matrice che non sono zeri vengono scelti casualmente tra
     $\{-1,0,1\}$. In particolare sarà necessario moltiplicare $\mathbf{R}$ per almeno 4
@@ -75,6 +75,7 @@ ma allo stesso tempo, permettere a $\mathbf{R}$ di essere in grado di farlo.
 È cruciale che $\sigma$ non sia né troppo grande, altrimenti $\mathbf{R}$ non riuscirebbe 
 a recuperare il messaggio, né troppo piccolo, per evitare che $\mathbf{B}$ possa riuscirci.
 \\
+\label{subsec:sigmametrics}
 In \cite[Sezione 3.2]{GGH97} vengono proposte due metriche, ciascuna basata rispettivamente
 sulla norma $\text{L}_1$ e $\text{L}_\infty$, per definire un limite a
 $\sigma$ in maniera che non possa causare errori di inversione usando la base privata.

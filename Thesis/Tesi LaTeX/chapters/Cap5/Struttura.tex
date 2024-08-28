@@ -1,0 +1,52 @@
+\subsection{Struttura del progetto}
+\label{sec:struttura}
+Essendo Python il linguaggio scelto è conseguente che la struttura del progetto più corretta
+si configuri come un pacchetto Python. Un pacchetto Python è una struttura organizzativa che 
+racchiude moduli e sottopacchetti correlati, presentandosi come una directory nel filesystem.
+Questa directory contiene file Python (.py) che fungono da moduli, un file speciale chiamato 
+\_\_init\_\_.py che identifica la directory come pacchetto, e può includere altre subdirectory 
+rappresentanti sottopacchetti. 
+Il file \_\_init\_\_.py, pur potendo essere vuoto, è fondamentale per segnalare a Python che la 
+directory deve essere trattata come un pacchetto, consentendo così un'importazione e un 
+utilizzo strutturato dei componenti software all'interno del progetto.\\
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{7cm}
+    \dirtree{%
+    .1 GGH\_crypto.
+    .2 \_\_init\_\_.py.
+    .2 GGH.
+    .3 \_\_init\_\_.py.
+    .3 GGH.py.
+    .2 GGH\_HNF.
+    .3 \_\_init\_\_.py.
+    .3 GGH\_HNF.py.
+    .2 Utils.
+    .3 \_\_init\_\_.py.
+    .3 Utils.py.
+    }
+    \end{minipage}
+    \caption{Struttura logica del pacchetto Python}
+    \label{fig:pythonpackage}
+\end{figure}
+
+Come osservabile in Figura \ref{fig:pythonpackage}, il progetto è strutturato da:
+\begin{itemize}
+    \item \texttt{GGH\_crypto}: Rappresentante il pacchetto principale contenente tutte le implementazioni. 
+    Esso è il modulo primario dal quale tutte le funzionalità dei
+    sottopacchetti al suo interno possono essere chiamate e usate. 
+    \item \texttt{GGH}: Sottopacchetto contenente l'implementazione di GGH.
+    \item \texttt{GGH\_HNF}: Sottopacchetto contenente l'implementazione di GGH-HNF.
+    \item \texttt{Utils}: Sottopacchetto contenente degli algoritmi relativi ai reticoli e 
+    dei metodi in comune utilizzati dalle implementazioni dei due crittosistemi. 
+\end{itemize}
+
+La scelta di organizzare il progetto in tre sottopacchetti distinti, ciascuno con il proprio 
+file di inizializzazione, invece di utilizzare tre moduli nel pacchetto principale \texttt{GGH\_crypto}, 
+potrebbe essere considerata non ottimale. 
+Tuttavia, questa organizzazione presenta vantaggi significativi: consente una chiara 
+separazione logica dei componenti, offre maggiore flessibilità e semplifica la 
+gestione delle importazioni tra i vari elementi. Di contro, è innegabile che 
+questa configurazione comporti una maggiore complessità nella lettura del progetto 
+a causa del numero più elevato di files.

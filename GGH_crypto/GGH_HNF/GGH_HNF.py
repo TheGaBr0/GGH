@@ -42,7 +42,7 @@ class GGHHNFCryptosystem:
             self.generate_random_error()
         else:
             if self.debug:
-                print(f"[GGH-HNF] Length of error vector is: {Utils.vector_norm(e)}")
+                print(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(e)}")
 
     def generate_keys_from_R_or_B(self):
 
@@ -70,14 +70,11 @@ class GGHHNFCryptosystem:
         self.public_key = (H, self.R_rho)
         self.private_key = (R_inv, R)
 
-    def numpy_to_fmpz_mat(self, numpy_matrix):
-        return fmpz_mat([[int(item) for item in sublist] for sublist in numpy_matrix.tolist()])
-
     def min_norm_row(self, matrix):
         norms = []
         for j in range(matrix.nrows()):
             row = [matrix[j, i] for i in range(matrix.ncols())]
-            norms.append(Utils.vector_norm(row))
+            norms.append(Utils.vector_l2_norm(row))
         min_norm = min(norms)
         return norms[norms.index(min_norm)]
 
@@ -101,17 +98,17 @@ class GGHHNFCryptosystem:
             rand_val = n
             random_elements = [[random.randint(-rand_val, rand_val) for _ in range(n)]]
             error = fmpz_mat(random_elements)
-            error_norm = Utils.vector_norm(error)
+            error_norm = Utils.vector_l2_norm(error)
             while(not error_norm < Decimal(0.9) * self.R_rho):
                 rand_val -= 1
                 random_elements = [[random.randint(-rand_val, rand_val) for _ in range(n)]]
                 error = fmpz_mat(random_elements)
-                error_norm = Utils.vector_norm(error)
+                error_norm = Utils.vector_l2_norm(error)
             self.error = error
         else:
             random_elements = [[random.randint(-28, 28) for _ in range(n)]]
             self.error = fmpz_mat(random_elements)
-            error_norm = Utils.vector_norm(self.error)
+            error_norm = Utils.vector_l2_norm(self.error)
         
         if self.debug:
             print(f"[GGH-HNF] Length of error vector is: {error_norm}")
@@ -142,7 +139,7 @@ class GGHHNFCryptosystem:
             while True:
                 try:
                     R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
-                    I = self.numpy_to_fmpz_mat(sp.eye(self.dimension))
+                    I = Utils.sympy_to_fmpz_mat(sp.eye(self.dimension))
                     KI = k * I
                     R += KI
                     R_inv = R.inv()
