@@ -7,42 +7,53 @@ import time
 
 from ..Utils.Utils import Utils
 
-
-
 class GGHHNFCryptosystem:
-    def __init__(self, dimension, R=None, B=None, x=None, e=None, rho_check=True, random_private=True, debug=True):
+    def __init__(self, dimension, private_basis=None, public_basis=None, lattice_point=None, error=None, rho_check=True, error_bound=3, GGH_private=False, debug=False):
         self.dimension = dimension
         
-        self.x = x
+        self.lattice_point = lattice_point
         self.ciphertext = None
-        self.error = e
+        self.error = error
+        self.error_bound = error_bound
 
-        self.private_basis = R
-        self.public_basis = B
+        self.private_basis = private_basis
+        self.public_basis = public_basis
         self.unimodular = None
         
         self.R_rho = None
         self.rho_check = rho_check
-        self.random_private = random_private
-        self.debug = True
+        self.GGH_private = GGH_private
+        self.debug = debug
 
         self.private_key = None
         self.public_key = None
 
-        if R is not None:
-            # Check if R is a 2D array or matrix
-            if R.nrows() != dimension:
-                raise ValueError(f"[GGH-HNF] Private basis must be a {dimension}x{dimension} matrix, but got {R.nrows()}")
-            
+        if private_basis is not None:
+            if private_basis.nrows() != dimension or private_basis.ncols() != dimension:
+                raise ValueError(f"[GGH-HNF] Private basis must be a {dimension}x{dimension} matrix, but got {private_basis.nrows()}x{private_basis.ncols()}")
+        
+        if public_basis is not None:
+            if public_basis.nrows() != dimension or public_basis.ncols() != dimension:
+                raise ValueError(f"[GGH-HNF] Public basis must be a {dimension}x{dimension} matrix, but got {public_basis.nrows()}x{public_basis.ncols()}")
+
+        if lattice_point is not None:
+            if lattice_point.ncols() != dimension:
+                raise ValueError(f"[GGH-HNF] Lattice point vector must have length {dimension}, but got length {lattice_point.ncols()}")
+        
+        if error is not None:
+            if error.ncols() != dimension:
+                raise ValueError(f"[GGH-HNF] Error vector must have length {dimension}, but got length {error.ncols()}")
+
+        if self.private_basis is not None:
             self.generate_keys_from_R_or_B()
         else:
             self.generate_keys()
             
-        if e is None:
+        if self.error is None:
             self.generate_random_error()
         else:
             if self.debug:
-                print(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(e)}")
+                print(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(self.error)}")
 
     def generate_keys_from_R_or_B(self):
 
@@ -106,7 +117,7 @@ class GGHHNFCryptosystem:
                 error_norm = Utils.vector_l2_norm(error)
             self.error = error
         else:
-            random_elements = [[random.randint(-28, 28) for _ in range(n)]]
+            random_elements = [[random.randint(-self.error_bound, self.error_bound) for _ in range(n)]]
             self.error = fmpz_mat(random_elements)
             error_norm = Utils.vector_l2_norm(self.error)
         
@@ -129,7 +140,7 @@ class GGHHNFCryptosystem:
     def generate_keys(self):
         n = self.dimension
         tries = 0
-        if not self.random_private:
+        if self.GGH_private:
             if self.debug:
                 print("[GGH-HNF] Generating private basis using GGH's matrix transformations technique...")
             time_start = time.time()
@@ -156,6 +167,7 @@ class GGHHNFCryptosystem:
             while True:
                 try:
                     R = fmpz_mat([[random.randint(-n, n - 1) for _ in range(n)] for _ in range(n)])
+                    R = R.lll()
                     R_inv = R.inv()
                     tries += 1
                 except Exception as e:
@@ -163,8 +175,6 @@ class GGHHNFCryptosystem:
                     continue
                 else:
                     break
-            R = R.lll()
-            R_inv = R.inv()
         
         if self.debug:
             print(f"[GGH-HNF] Time taken: {time.time() - time_start} with {tries} tries")
@@ -190,7 +200,7 @@ class GGHHNFCryptosystem:
         if self.debug:
             print(f"[GGH-HNF] Encrypting...")
         time_start = time.time()
-        if self.x is None:
+        if self.lattice_point is None:
             x = self.reduce_mod_B()
         
         H = self.public_basis
@@ -198,29 +208,19 @@ class GGHHNFCryptosystem:
 
         self.ciphertext = r - x * H
         if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start}")
+            print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
 
     def decrypt(self):
         if self.debug:
-            print(f"[GGH] Decrypting...")
+            print(f"[GGH-HNF] Decrypting...")
         time_start = time.time()
-        R_inv, R = self.private_key
         
-        c = self.ciphertext
-        x = c * R_inv
+        CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
 
-        rounded_x = fmpz_mat(x.nrows(), x.ncols())
-
-        for i in range(x.nrows()):
-            for j in range(x.ncols()):
-                rounded_x[i, j] = round(x[i,j])
-                                
-        result = rounded_x * R
-        
         if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start}")
+            print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
 
 
-        return c - result
+        return fmpq_mat(self.ciphertext) - CVP
     
     

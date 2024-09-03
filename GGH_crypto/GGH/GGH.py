@@ -10,7 +10,7 @@ from ..Utils.Utils import Utils
 
 class GGHCryptosystem:
     def __init__(self, dimension, private_basis=None, public_basis=None, unimodular=None, message=None, 
-                 error=None, sigma = None, integer_sigma=True, debug=True):
+                 error=None, sigma = None, integer_sigma=True, debug=False):
         self.dimension = dimension
         self.integer_sigma = integer_sigma
         self.sigma = sigma
@@ -82,7 +82,7 @@ class GGHCryptosystem:
 
     def generate_sigma(self, R_inv):
         getcontext().prec = 50
-        rho = max(sum(abs(Decimal(int(x.numer())) / Decimal(int(x.denom()))) for x in row) for row in R_inv.tolist()) #L1 norm
+        rho = Utils.vector_l1_norm(R_inv)
 
         sigma_max = 1 / (2 * rho)
 
@@ -204,19 +204,10 @@ class GGHCryptosystem:
         if self.debug:
             print(f"[GGH] Decrypting...")
         time_start = time.time()
-        R_inv, R = self.private_key
-        B_inv = self.public_basis.inv()
-        c = self.ciphertext
-        a = c * R_inv
         
-        cols = a.ncols()
-        rows = a.nrows()
-
-        for i in range(rows):
-            for j in range(cols):
-                a[i,j] = round(a[i,j])
+        CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
         
-        result = a * R * B_inv
+        result = CVP * self.public_basis.inv()
 
         if self.debug:
             print(f"[GGH] Time taken: {time.time() - time_start}")
