@@ -23,7 +23,7 @@ def embedding_nguyen(basis, point):
 
     Utils.write_matrix_to_file(matrix=matrix_emb, filename="totry.txt")
     
-    matrix_emb = Utils.BKZ(matrix_emb)
+    matrix_emb = Utils.BKZ_reduction(matrix_emb, block=20, precision=100)
 
     for i in range(n + 1):
         i_th_row = fmpz_mat([[matrix_emb[i, j] for j in range(n + 1)]])
@@ -40,7 +40,7 @@ def embedding_nguyen(basis, point):
         return point - shortest_vector
 
     while True:
-        matrix_emb = Utils.BKZ(matrix_emb, 60, True)
+        matrix_emb = Utils.BKZ_reduction(matrix_emb, 60, True, precision=100, bkzautoabort=False, bkzmaxloops=50, nolll=True)
 
         for i in range(n + 1):
             i_th_row = fmpz_mat([[matrix_emb[i, j] for j in range(n + 1)]])
@@ -140,16 +140,16 @@ def Nguyen(public_basis, sigma, ciphertext):
 
     return final_result
     
-dimension = 300
+dimension = 350
 tries = 0
 print("Finding a basis which can be inverted mod 6...")
 while True:
     GGH_object = GGHCryptosystem(dimension = dimension)
-    GGH_object.encrypt()
     
     B, sigma = GGH_object.public_key
-    print(f"Try number {tries}: success")
     if sp.gcd(int(B.det()), 2*sigma) == 1:
+        GGH_object.encrypt()
+        print(f"Try number {tries}: success")
         break
     else:
         tries += 1

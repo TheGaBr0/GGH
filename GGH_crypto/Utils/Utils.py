@@ -141,7 +141,7 @@ class Utils:
         plt.show()
 
     def embedding(basis, ciphertext, visualize=False, GGH=False, BKZ=False, block=20, 
-                  pruned=False, precision=100, bkzautoabort=True, bkzmaxloops=None):
+                  pruned=False, precision=100, bkzautoabort=True, bkzmaxloops=None, nolll=False):
         
         if basis.ncols() != ciphertext.ncols():
                 raise ValueError(f"[Utils] Point is a {1}x{ciphertext.ncols()} matrix, but basis is a {basis.nrows()}x{basis.ncols()} one")
@@ -156,8 +156,8 @@ class Utils:
         matrix_emb = fmpz_mat(matrix_emb.tolist() + [last_row])
         
         if BKZ:
-            matrix_emb = Utils.BKZ(matrix_emb, block=block, pruned=pruned, precision=precision,
-                                   bkzautoabort=bkzautoabort, bkzmaxloops=bkzmaxloops)
+            matrix_emb = Utils.BKZ_reduction(matrix_emb, block=block, pruned=pruned, precision=precision,
+                                   bkzautoabort=bkzautoabort, bkzmaxloops=bkzmaxloops, nolll=nolll)
         else:
             matrix_emb = matrix_emb.lll()
 
@@ -284,37 +284,33 @@ class Utils:
         else:
             raise ValueError("Invalid matrix_type. Use 'fmpz' or 'fmpq'.")
 
-    def BKZ(matrix, block=20, pruned=False, precision=90, bkzautoabort=True, bkzmaxloops=None, nolll=False):
+    def BKZ_reduction(matrix, block=20, pruned=False, precision=90, bkzautoabort=True, bkzmaxloops=None, nolll=False):
         script_path = os.path.dirname(os.path.abspath(__file__))
         input_path = Utils.write_matrix_to_file(matrix, 'input.txt')
         output_path = Utils.write_matrix_to_file(matrix, 'out.txt')
 
         if os.name == 'nt':
-            if not pruned:
-                command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -m proved"
-                if bkzautoabort:
-                    command += " -bkzautoabort"
-                if nolll:
-                    command += " -nolll"
-                command += " > out.txt"
-            else:
-                command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -m proved -s default.json"
-                if bkzmaxloops:
-                    command += f" -bkzmaxloops {bkzmaxloops}"
-                if nolll:
-                    command += " -nolll"
-                command += " > out.txt"
+            command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -y -bkzdumpgso debug{block}.txt "
+            if pruned:
+                command += " -s default.json"
+            if bkzautoabort:
+                command += " -bkzautoabort"
+            if bkzmaxloops != None:
+                command += f" -bkzmaxloops {bkzmaxloops}"
+            if nolll:
+                command += " -nolll"
+            command += " > out.txt"
         else:
-            if not pruned:
-                command = f"fplll input.txt -a bkz -b {block} -p {precision} -f mpfr"
-                if bkzautoabort:
-                    command += " -bkzautoabort"
-                command += " > out.txt"
-            else:
-                command = f"fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -s default.json"
-                if bkzmaxloops:
-                    command += f" -bkzmaxloops {bkzmaxloops}"
-                command += " > out.txt"
+            command = f"fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -y -bkzdumpgso debug{block}.txt"
+            if pruned:
+                command += " -s default.json"
+            if bkzautoabort:
+                command += " -bkzautoabort"
+            if bkzmaxloops != None:
+                command += f" -bkzmaxloops {bkzmaxloops}"
+            if nolll:
+                command += " -nolll"
+            command += " > out.txt"
         try:
             # Run the command and capture its output
             print(f"Reduction started with the following parameters:\n"
@@ -324,6 +320,8 @@ class Utils:
             f"  bkzautoabort: {bkzautoabort}\n"
             f"  bkzmaxloops: {bkzmaxloops}\n"
             f"  nolll: {nolll}")
+            print("Final command:\n"
+                  f"{command}")
            
             time_now = time.time()
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, cwd=script_path)
@@ -332,11 +330,8 @@ class Utils:
             error = error.decode('utf-8')
 
             if error:
-                if str(error) != "Failure: loops limit exceeded in BKZ":
+                if str(error).strip() != "Failure: loops limit exceeded in BKZ":
                     print("Error during reduction:", error)
-
-            if error:
-                print("Error during file move:", error)
 
             print(f"Reduction completed, time taken: {time.time() - time_now}")
 
