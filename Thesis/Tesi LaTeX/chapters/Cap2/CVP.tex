@@ -30,7 +30,7 @@ Seppur la sua implementazione risulti semplice e banale, in realtà la sua dimos
 A differenza del precedente, 
 non utilizza l'ortogonalizzazione di Gram-Schmidt, ma mantiene comunque una complessità 
 polinomiale. Di seguito viene fornita una spiegazione del suo funzionamento. \\
-Come discusso nella sezione \ref{sec:dominio}, dati un reticolo $\mathcal{L}$ di dimensione
+Come discusso nella Sezione \ref{sec:dominio}, dati un reticolo $\mathcal{L}$ di dimensione
 $n$ e una sua base $\mathbf{B}$, per ogni vettore $\mathbf{t} \in \mathbb{R}^n$,
 con $\mathbf{t} \notin \mathcal{L}$, un'unica decomposizione $\mathbf{t} = \mathbf{f} + \mathbf{v}$
 può essere sempre trovata in modo tale che $\mathbf{v} \in \mathcal{L}$ e $\mathbf{f}$ si collochi
@@ -181,7 +181,7 @@ quindi una base di alta qualità al fine di avere risultati validi.
 La principale differenza tra i due algoritmi di Babai è che il metodo del piano più vicino
 risulta essere più preciso in quanto i valori frazionari vengono arrotondati in maniera
 adattiva piuttosto che tutti insieme in un'unica volta. Inoltre l'utilizzo dell'aritmetica in virgola mobile, 
-introdotta nella sezione \ref{sec:LLL-variants}, consente di ottenere tempi di esecuzione 
+introdotta nella Sezione \ref{sec:LLL-variants}, consente di ottenere tempi di esecuzione 
 ulteriormente più rapidi.
 
 
@@ -238,7 +238,7 @@ Un problema nella pratica sta nella scelta di $\mathbf{t}$: teoricamente
 $\mathbf{t}$ può appartenere all'insieme $\mathbb{R}$, ma questo creerebbe problemi nella
 costruzione della nuova base $\mathbf{M}$ la quale non soddisferebbe più la proprietà dei 
 coefficienti integrali che sta alla base della definizione di reticolo. Tale problema viene
-discusso e affrontato nell'attacco di Nguyen contro GGH presentato nella sezione \ref{sec:Nguyen}.
+discusso e affrontato nell'attacco di Nguyen contro GGH presentato nella Sezione \ref{sec:Nguyen}.
 Nel concreto si tenta di mantenere $\mathbf{t} \in \mathbb{Z}^n$ in modo da evitare problemi
 di questa natura.
 

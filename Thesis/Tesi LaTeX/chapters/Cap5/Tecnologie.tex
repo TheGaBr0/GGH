@@ -11,19 +11,19 @@ Questo compito viene spesso affidato al linguaggio di programmazione C, alle sue
 come C++ o a linguaggi specializzati in calcoli matematici come Mathematica. 
 
 Alcuni esempi di librerie C specifiche utilizzate possono essere osservati direttamente 
-negli studi svolti dagli autori citati nelle precedenti sezioni:
+negli studi svolti dagli autori citati nei precedenti capitoli:
 \begin{itemize}
-    \item \cite{HNF01,HNF04,Nguyen400}, dove viene utilizzata la Number Theory Library (NTL)
-    \item \cite{GGH97, Nguyen99}, in cui è stata impiegata la libreria LiDiA
+    \item \cite{HNF01,HNF04,Nguyen400}, dove viene utilizzata la Number Theory Library (NTL).
+    \item \cite{GGH97, Nguyen99}, in cui è stata impiegata la libreria LiDiA.
 \end{itemize}
 
 La scelta di C risulta quindi essere molto popolare e giustificata dalla sua efficienza. 
 E' però necessario precisare che, dati gli anni di pubblicazione degli studi originali, molti
 dei linguaggi di programmazione attualmente in circolazione non potevano essere presi 
-in considerazione perchè semplicemente non esistenti o non sufficientemente maturi. 
+in considerazione, poichè semplicemente non esistenti o non sufficientemente maturi. 
 Alcuni dei più recenti linguaggi
 popolari al giorno d'oggi riescono non solo a pareggiare o superare la velocità di C, ma
-risolvono anche altri suoi problemi intrinsechi come il non essere multipiattaforma
+risolvono anche altri suoi problemi intrinsechi, come il non essere multipiattaforma
 e non avere sistemi di sicurezza per quanto riguarda la memoria. \\
 Alcuni esempi includono Rust, nato nel 2015, e Python, introdotto nel 1991, molto prima 
 che venisse pubblicato GGH e le sue varianti. Nello specifico, quest'ultimo, ha attraversato 
@@ -45,11 +45,10 @@ In particolare Python gode delle seguenti proprietà:
     comuni, come buffer overflow, che sono invece frequenti in linguaggi a basso livello come C.
     \item Estendibilità: Python può essere facilmente esteso con moduli 
     scritti in C, C++ o Cython per migliorare le prestazioni e l'efficienza. 
-    \item Supporto per numeri a precisione arbitraria: Python può lavorare nativamente con
-    numeri interi di dimensioni arbitrarie senza limiti di grandezza, e
-    offre anche il supporto per numeri decimali a precisione arbitraria attraverso il
-    modulo Decimal. Questo permette calcoli precisi con numeri molto grandi o con molte
-    cifre decimali.
+    \item Gestione di numeri con precisione illimitata: Python è dotato di funzionalità 
+    native per manipolare interi di qualsiasi grandezza senza restrizioni. Inoltre, 
+    tramite il modulo \texttt{Decimal}, offre la possibilità di operare con numeri 
+    decimali a precisione arbitraria. 
 \end{itemize}
 
 Alla luce di queste caratteristiche, Python si rivela un'opzione ottimale per lo sviluppo 
@@ -61,7 +60,7 @@ esecuzione dove necessario, combinando così la facilità d'uso di Python con l'
 di linguaggi di più basso livello.
 Sfruttando la menzionata estendibilità di Python, si è affrontata la sfida delle prestazioni 
 in operazioni matriciali complesse, come l'inversione, che risultano particolarmente onerose 
-per dimensioni elevate (come evidenziato dai dati nella sezione \ref{sec:HNFLimits}). 
+per dimensioni elevate (come evidenziato dai dati nella Sezione \ref{sec:HNFLimits}). 
 In Python, la scelta più ovvia quando si deve operare con grandi numeri e con alta velocità,
 ricade spesso sulla libreria Numpy. 
 Questa preferenza è dovuta principalmente alle prestazioni superiori di Numpy nell'elaborazione 
@@ -79,29 +78,40 @@ linguaggio ad alte prestazioni. La Fast Library for Number Theory \cite{FLINT} (
 selezionata per questo scopo critico, offrendo un equilibrio ideale tra velocità e 
 precisione.
 La possibilità di integrare FLINT tramite PyPI e richiamare direttamente le sue funzioni 
-da Python consente di incorporare facilmente la libreria nel progetto, combinando così 
+da Python, consente di incorporare facilmente la libreria nel progetto, combinando così 
 l'efficienza computazionale con la flessibilità e la leggibilità del codice Python. 
 Tuttavia, a causa delle limitate funzionalità offerte dall'integrazione di FLINT e per 
-semplificare il codice, è stato necessario utilizzare i seguenti moduli Python:
+semplificare il codice, è stato necessario utilizzare altre librerie esterne di supporto.
+I principali moduli e librerie utilizzati nel progetto, oltre a FLINT, sono:
 
 \begin{itemize}
-    \item Sympy: Modulo Python dedicato ai calcoli simbolici a precisione arbitraria.
+    \item \texttt{Sympy}: Modulo Python dedicato ai calcoli simbolici a precisione arbitraria.
     Utilizzato come supporto a FLINT grazie alle sue numerose funzioni già pronte e il 
     mantenimento della precisione nei calcoli. A causa delle sue basse performance, il suo
     utilizzo è strettamente limitato a funzioni di bassa complessità.
-    \item Decimal e Fraction: Moduli nativi Python per la gestione di numeri decimali e 
+    \item \texttt{Decimal} e \texttt{Fraction}: Moduli nativi Python per la gestione di numeri decimali e 
     frazionari a precisione arbitraria. La loro funzione è quella di sostituire FLINT ove 
     esso non può fornire una soluzione diretta o dove Sympy risulta troppo lento.
-    \item Random: Modulo Python nativo che si occupa di generazione pseudo-casuale di dati.
+    \item \texttt{Random}: Modulo Python nativo che si occupa di generazione pseudo-casuale di dati.
     Utilizzato solo ed esclusivamente per la generazione di basi e vettori randomici. 
 \end{itemize}
 
-Algoritmi complessi e dalla necessaria precisione come quelli di riduzione reticolare non 
-sono stati riscritti su Python ma si è preferito l'uso di varianti efficienti, importate
-da librerie esterne. Più precisamente gli algoritmi utilizzati sono: LLL del quale
-è presente una variante direttamente integrata in FLINT e BKZ che è stato invece integrato
-attraverso la libreria FPLLL \cite{FPLLL}, una libreria open-source che fornisce implementazioni 
-a virgola mobile di algoritmi di riduzione per reticoli. 
+Questi moduli non rappresentano l'interezza delle librerie utilizzate nel progetto, ma solo
+le principali, utilizzate in vari punti del codice di ciascuna implementazione e che giocano
+un ruolo importante nel progetto. \\
+Per gli algoritmi complessi e ad alta precisione, come quelli di riduzione reticolare, 
+si è optato, ove possibile, per l'utilizzo di implementazioni efficienti e testate 
+provenienti da librerie esterne, anziché riscriverli in Python. 
+Nello specifico:
+\begin{itemize}
+    \item L'algoritmo LLL è stato integrato direttamente tramite una sua versione presente in FLINT.
+    \item L'algoritmo BKZ è stato incorporato mediante la libreria open-source FPLLL \cite{FPLLL}, 
+    che offre implementazioni in virgola mobile di vari algoritmi di riduzione per reticoli, tra cui
+    anche LLL.
+    \item Per l'algoritmo di Gram-Schmidt, non avendo trovato un'implementazione rapida 
+    e facilmente integrabile, si è proceduto a una riscrittura in Python.
+\end{itemize}
+
 E' importante precisare che FPLLL è disponibile solo per il sistema operativo Linux, impedendo
 quindi di poter funzionare su più piattaforme, punto importante del progetto. Il problema 
 è stato superato su Windows grazie all'introduzione del Windows Subsystem for Linux (WSL). 

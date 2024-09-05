@@ -140,7 +140,7 @@ def Nguyen(public_basis, sigma, ciphertext):
 
     return final_result
     
-dimension = 350
+dimension = 100
 tries = 0
 print("Finding a basis which can be inverted mod 6...")
 while True:

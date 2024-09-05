@@ -1,5 +1,6 @@
 \section{Struttura e funzionamento di GGH-HNF}
-Sulla base di quanto precedentemente esposto nella sezione \ref{sec:gghintroduction}, in GGH
+\label{sec:ggh-hnf}
+Sulla base di quanto precedentemente esposto nella Sezione \ref{sec:gghintroduction}, in GGH
 il messaggio originale $\mathbf{m}$ viene codificato in un vettore $\mathbf{x}$ 
 appartenente al reticolo, e il testo cifrato risulta come 
 $\mathbf{c} = \mathbf{x}\mathbf{B} + \mathbf{e}$.
@@ -29,7 +30,7 @@ Ottenuto $\mathbf{B}$ è necessario quindi calcolare un vettore
 $\mathbf{x}\mathbf{B}$ appartenente al reticolo che verrà poi aggiunto a $\mathbf{e}$ come
 da equazione \ref{eq:GGHencryption}.  
 L'idea migliore sarebbe scegliere il vettore in modo casuale e uniforme, ma questa scelta 
-non è praticabile. Tuttavia, Micciancio in \cite[Sezione 4.1]{HNF01} dimostra che tale 
+non è praticabile. Tuttavia, Micciancio in \cite[sezione 4.1]{HNF01} dimostra che tale 
 risultato può essere ottenuto mediante il semplice calcolo di 
 $\mathbf{x} = \mathbf{e} \bmod \mathbf{B}$. Quindi, invece di aggiungere a $\mathbf{e}$ un
 vettore casuale $\mathbf{x}\mathbf{B}$, si riduce $\mathbf{e}$ modulo la base pubblica.
@@ -50,14 +51,14 @@ e ottenere infine:
 \end{equation}
 
 Come si può notare le due equazioni \ref{eq:GGHencryption} e \ref{eq:HNFencryption} sono
-diverse, ma come dimostrato in \cite[Sezione 4.3]{HNF01} esse garantiscono lo stesso
+diverse, ma come dimostrato in \cite[sezione 4.3]{HNF01} esse garantiscono lo stesso
 livello di sicurezza. \\
 Un ulteriore cambiamento, conseguente dalla scelta di Micciancio di usare $\mathbf{e}$ come vettore
 rappresentante il messaggio, è la totale mancanza di un fattore di bilanciamento, ruolo che nella
 versione originale del crittosistema veniva ricoperto da $\sigma$. 
 Il processo di decifratura infatti, 
 basato sulla tecnica di arrotondamento di Babai, rimane invariato. Pertanto, quanto detto in 
-sezione \ref{sec:gghkeys}, è ancora vero anche per GGH-HNF: il crittosistema è probabilistico 
+Sezione \ref{sec:gghkeys}, è ancora vero anche per GGH-HNF: il crittosistema è probabilistico 
 e necessità di un parametro per bilanciarne la probabilità di decifratura con chiave pubblica e 
 privata. 
 Nella versione originale di GGH, $\sigma$, veniva derivato direttamente dalla base privata
@@ -66,9 +67,10 @@ In GGH-HNF invece, Micciancio, decide di creare un nuovo parametro $\rho$ deriva
 dalla base privata, ma con un approccio differente. 
 La base privata $\mathbf{R}$ viene ortogonalizzata utilizzando l'algoritmo di Gram-Schmidt, 
 producendo la base ortogonale $\mathbf{R}^*$. Successivamente $\rho$ è calcolato attraverso:
-\[
+\begin{equation}
+    \label{eq:rho}
     \rho = \frac{1}{2}min_i\|\mathbf{r}^*_i\|_2.
-\]
+\end{equation}
 $\rho$ rappresenta un raggio di correzione: se la lunghezza del vettore di errore 
 è minore di questo raggio la decifratura avrà successo. 
 Poiché la base privata è conosciuta esclusivamente dal destinatario, è essenziale che il parametro 

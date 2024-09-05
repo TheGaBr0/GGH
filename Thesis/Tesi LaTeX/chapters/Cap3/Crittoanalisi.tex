@@ -62,7 +62,7 @@ Come secondo passaggio riduce $\mathbf{M}$ tramite LLL:
         \phantom{-}7 & -2            & -8 & -2
     \end{bmatrix*}.
 \end{equation*}
-Eve a questo punto, secondo quanto definito in sezione \ref{sec:embedding}, dovrebbe prelevare 
+Eve a questo punto, secondo quanto definito in Sezione \ref{sec:embedding}, dovrebbe prelevare 
 i primi $n$ valori del vettore riga di $\mathbf{M}^*$ più corto. A causa della composizione del
 vettore di errore usato in GGH però la selezione del vettore da $\mathbf{M}^*$ risulta 
 essere diversa. In particolare sapendo che $\sigma = 3$ Eve preleverà il vettore riga di 
@@ -212,7 +212,7 @@ parziali. La sua strategia si articolò in due fasi: per dimensioni fino a 300, 
 tecnica di incorporamento con BKZ a blocchi di 20, mentre per le dimensioni superiori combinò lo stesso 
 algoritmo di risoluzione per il CVP con una versione potata di BKZ a blocchi di 60. Per migliorare la 
 stabilità, entrambe le varianti di BKZ furono implementate utilizzando l'aritmetica a 
-virgola mobile. Un problema precedentemente introdotto nella sezione \ref{sec:embedding} 
+virgola mobile. Un problema precedentemente introdotto nella Sezione \ref{sec:embedding} 
 è l'uso di valori non interi nella costruzione della matrice secondo la tecnica di incorporamento. 
 Infatti, secondo quanto ottenuto nell'equazione \ref{eq:Nguyen2}, 
 $\mathbf{e} \in \{\pm\frac{1}{2}\}^n$ conseguendo quindi che la parte sinistra dell'equazione
@@ -228,7 +228,7 @@ due soluzioni:
     contiene solo valori 0 o 1. Tuttavia, è importante notare che questa trasformazione comporta un 
     leggero aumento della lunghezza prevista del vettore di errore. Per un esempio più dettagliato si
     veda \cite[
-        Sezione 5]{Nguyen99}
+        sezione 5]{Nguyen99}
 \end{enumerate} 
 \begin{exmp}(Esempio dell'attacco di Nguyen a GGH tramite incorporamento) 
 Siano $(\mathbf{B}, \sigma)$ e $\mathbf{c}$ rispettivamente chiave pubblica e testo cifrato
@@ -337,7 +337,7 @@ Eve, come ultimo passaggio, decifra il messaggio originale tramite:
 \]
 \end{exmp}
 \subsubsection{Contromisure}
-Nguyen stesso propose delle modifiche allo schema originale in \cite[Sezione 7]{Nguyen99} 
+Nguyen stesso propose delle modifiche allo schema originale in \cite[sezione 7]{Nguyen99} 
 per contrastare la vulnerabilità da lui scoperta e riparare lo schema GGH.
 La vulnerabilità principale del sistema è riconducibile alla particolare struttura del
 vettore di errore $\mathbf{e}$, come definito dagli autori in \cite{GGH97}. Per mitigare 

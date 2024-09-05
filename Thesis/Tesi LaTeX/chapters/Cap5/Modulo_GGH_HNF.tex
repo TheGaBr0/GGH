@@ -1,3 +1,138 @@
 \section{Modulo GGH-HNF}
 \label{sec:moduloggh-hnf}
 
+Poiché GGH-HNF è una variante di GGH, la sua implementazione mantiene la stessa struttura 
+e utilizza alcuni dei parametri e dei meccanismi precedentemente descritti nella scorsa sezione.
+Il modulo è anch'esso costituito da una classe principale, \texttt{GGHHNFCryptosystem}, che, come nel 
+caso del modulo fratello GGH, serve da contenitore per l'accesso a tutte le funzioni.
+I parametri ereditati e mantenuti da GGH sono: \texttt{dimension}, \texttt{private\_basis},
+\texttt{public\_basis}, \texttt{error} e \texttt{debug}, che mantengono le stesse proprietà
+e sono soggetti agli stessi controlli. I nuovi parametri invece sono i seguenti:
+\begin{itemize}
+    \item \texttt{lattice\_point} (\texttt{fmpz\_mat}, default: \texttt{None}) : 
+    Vettore rappresentante un punto del reticolo, il quale, una volta moltiplicato con la
+    base pubblica, verrà sottratto ad \texttt{error} in fase di cifratura.
+    \item \texttt{rho\_check} (\texttt{Boolean}, default: \texttt{True}):
+    Se \texttt{True}, impone un controllo sulla lunghezza del vettore di errore durante 
+    la generazione, assicurando che sia inferiore a $0.9\rho$. Questa opzione viene 
+    ignorata se \texttt{error} $\neq$ \texttt{None}.
+    \item \texttt{error\_bound} (\texttt{Integer}, default: 3)
+    Parametro intero che determina i limiti superiori e inferiori dei numeri casuali 
+    generati per il parametro \texttt{error} quando \texttt{rho\_check} è impostato su 
+    \texttt{False}. 
+    \item \texttt{GGH\_private} (\texttt{Boolean}, default: \texttt{False}):
+    Se \texttt{True}, utilizza la tecnica di generazione della base privata di GGH invece di 
+    quella proposta da Micciancio. 
+\end{itemize}
+
+\subsection{Generazione delle chiavi}
+
+Diversamente da GGH, lo schema GGH-HNF richiede la generazione di solo due elementi 
+per le chiavi: la base privata e $\rho$. In \cite{HNF01}, Micciancio propone un metodo 
+alternativo per la generazione della base privata, pur riconoscendo che l'approccio 
+utilizzato in GGH e descritto nell'implementazione della Sezione \ref{sec:gghimplementationprivkey} 
+fosse già adeguatamente efficiente. Dato che ambedue le tecniche generano basi con 
+proprietà diverse, è stato scelto di adottarle entrambe dando scelta all'utente di decidere
+quale usare attraverso il parametro \texttt{GGH\_private}. Di default la scelta ricade
+sulla tecnica proposta da Micciancio. 
+
+\subsubsection{Chiave privata}
+
+Come per GGH, la chiave privata è rappresentata dalla tupla $(\mathbf{R}, \mathbf{R}^{-1})$.
+La funzione di generazione della base privata si articola in due fasi indipendenti, 
+determinate dal parametro \texttt{GGH\_private}. Se \texttt{GGH\_private}
+è settato a \texttt{True}, viene utilizzato l'algoritmo impiegato nell'implementazione di GGH.
+In caso contrario, il programma avvia un ciclo in cui genera matrici di numeri casuali 
+nell'intervallo $[-\texttt{dimension},\texttt{dimension}]$, le riduce tramite l'algoritmo 
+LLL e poi le inverte. Se l'inversione fallisce, il ciclo riparte fino a ottenere una 
+matrice LLL-ridotta invertibile. 
+Come per il primo metodo, anche il secondo sfrutta il modulo \texttt{Random} per la 
+generazione della matrice.
+
+\subsubsection{Chiave pubblica}
+
+Anche la chiave pubblica, come quella privata, presenta delle somiglianze con la sua 
+controparte nel caso di GGH, con la sola eccezione del parametro $\sigma$. 
+In GGH-HNF, infatti, $\sigma$ non è presente ed è sostituito da $\rho$. 
+Pertanto, la chiave pubblica è costituita dalla tupla $(\mathbf{B}, \rho)$. Come spiegato
+in \ref{sec:ggh-hnf}, la base pubblica è ottenibile con il semplice calcolo della forma
+normale di Hermite, operazione direttamente integrata in FLINT. Al contrario invece il 
+calcolo del $\rho$ è molto più oneroso, poiché richiede l'ortogonalizzazione tramite il 
+metodo di Gram-Schmidt, descritto in Algoritmo \ref{alg:one}. Tale implementazione è 
+presente solo nel modulo Sympy ma, data la particolare forma dei parametri richiesta in input, 
+si è preferito procedere con la riscrittura dell'algoritmo integrata nel modulo \texttt{Utils}.
+Dopo aver ortogonalizzato la base privata, non resta che trovare la norma minima euclidea 
+ed effettuare il calcolo come definito in Equazione \ref{eq:rho}. 
+Per determinare la norma, è stato utilizzato l'algoritmo illustrato in Figura 
+\ref{fig:conversione}, che sfrutta il modulo \texttt{Decimal}.
+
+\subsection{Cifratura e decifratura}
+
+I processi di cifratura e decifratura di GGH-HNF mantengono la stessa struttura generale 
+di quelli presenti nell'implementazione di GGH, con alcune differenze fondamentali. 
+La decifratura segue 
+fedelmente l'algoritmo già presente in GGH, mantenendo gli stessi vantaggi e svantaggi
+nella risoluzione del CVP. Al contrario, la cifratura subisce una modifica significativa, 
+poiché utilizza un approccio diverso per la generazione e gestione del messaggio e 
+dell'errore.
+
+\subsubsection{Cifratura}
+
+Come precedentemente introdotto, la cifratura differisce completamente adottando 
+l'Equazione \ref{eq:HNFencryption}. Data $\mathbf{B}$, due sono gli elementi mancanti: un punto $\mathbf{x}$ 
+del reticolo e l'errore $\mathbf{e}$. Il primo valore viene calcolato direttamente usando
+l'Equazione \ref{eq:HNFreduction}  che sfrutta interamente le matrici FLINT e l'operazione 
+arrotondamento per difetto nativa di Python. 
+La generazione dell'errore utilizza invece una funzione più complessa, che impiega un 
+metodo differente in base al valore di \texttt{rho\_check}, a seconda che sia impostato 
+su \texttt{True} o \texttt{False}. In entrambi i casi il vettore di errore viene creato 
+casualmente attraverso il modulo \texttt{Random}. 
+Se \texttt{rho\_check} è vero, l'errore $\mathbf{e}$ viene 
+generato attraverso un processo iterativo che inizia con la creazione di un vettore 
+casuale nell'intervallo $[-\texttt{dimension}, \texttt{dimension}]$ .
+ Viene calcolata poi la lunghezza del vettore che deve essere inferiore
+a $\rho$ meno il 10\%, se cosi non fosse il vettore 
+viene rigenerato con valori casuali più piccoli, finché non si ottiene un errore che 
+soddisfa il criterio desiderato. Se \texttt{rho\_check} è falso invece viene costruito un
+vettore random utilizzando come intervallo $[-\texttt{error\_bound}, \texttt{error\_bound}]$,
+senza effettuare alcun controllo sul $\rho$ evitando di calcolarlo direttamente. Questa
+modalità consente alla fase di cifratura una diminuizione del tempo richiesto considerevole
+come può essere osservato in Tabella X sezione X. Il principale svantaggio però è che, se
+\texttt{error\_bound} risulta troppo lungo rispetto a $\rho$, allora la decifratura non 
+avrà successo. 
+
+\subsubsection{Decifratura}
+
+La decifratura, come introdotto, segue gli stessi passaggi di GGH, con l'unica differenza 
+nel valore di ritorno. Dato che il messaggio da recuperare è codificato in $\mathbf{e}$ è
+necessario ritornare il testo cifrato a cui viene sottratto il risultato della tecnica
+di arrotondamento di Babai, come mostrato più dettagliatamente nell'Esempio \ref{exp:HNF}. 
+La scelta di questo algoritmo per la risoluzione del CVP porta a un'ulteriore conseguenza:
+il vettore di errore $\mathbf{e}$ non basta che sia semplicemente minore di $\rho$, 
+ma è necessario che sia metodicamente minore a causa della minore precisione dell'algoritmo. 
+Esperimenti hanno dimostrato che è sufficiente un $\mathbf{e} < 0.9\rho$. 
+
+\subsection{Caso d'uso}
+
+Come osservabile in Figura \ref{fig:gghhnfmoduleexample}, il caso d'uso della classe 
+\texttt{GGHHNFCryptosystem} risulta quasi identico a quello del
+modulo \texttt{GGH} in quanto, come già discusso, entrambi i sistemi seguono la stessa struttura.  
+L'unica differenza sostanziale sta nel fatto che l'attributo \texttt{message} non è più 
+presente e al suo posto viene utilizzato \texttt{error}. 
+
+\begin{figure}[h]
+    \begin{python}
+        from GGH_crypto import GGHHNFCryptosystem
+        dimension = 100
+
+        GGHHNF_object = GGHHNFCryptosystem(dimension = dimension)
+        GGHHNF_object.encrypt()
+
+        message = GGHHNF_object.error
+        decrypted_message = GGHHNF_object.decrypt()
+
+        print(f"message: {message}")
+    \end{python}
+    \caption{Esempio di funzionamento della classe \texttt{GGHHNFCryptosystem}.}
+    \label{fig:gghhnfmoduleexample}
+\end{figure}

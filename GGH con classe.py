@@ -18,6 +18,8 @@ ciphertext = GGH_object.ciphertext
 
 decrypted_message = GGH_object.decrypt()
 
+print(type(decrypted_message))
+
 print(f"error: {message}")
 # print(f"decrypted message: {decrypted_message.transpose()}")
 print(f"error: {decrypted_message}")

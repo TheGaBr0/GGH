@@ -243,7 +243,7 @@ class Utils:
         return result, f"{result:.{precision}f}"
     
     def write_matrix_to_file(matrix, filename):
-        filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
+        filename = os.path.join(os.getcwd(), filename)
 
         rows = matrix.nrows()
         cols = matrix.ncols()
@@ -265,7 +265,7 @@ class Utils:
         return filename
     
     def load_matrix_from_file(filename, matrix_type='fmpq'):
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), filename), 'r') as file:
+        with open(os.path.join(os.getcwd(), filename), 'r') as file:
             content = file.read().replace(']', '],').replace(' ]', ']').replace(' ', ', ')[:-4] + ']'
     
         if matrix_type == 'fmpz':
@@ -285,7 +285,7 @@ class Utils:
             raise ValueError("Invalid matrix_type. Use 'fmpz' or 'fmpq'.")
 
     def BKZ_reduction(matrix, block=20, pruned=False, precision=90, bkzautoabort=True, bkzmaxloops=None, nolll=False):
-        script_path = os.path.dirname(os.path.abspath(__file__))
+
         input_path = Utils.write_matrix_to_file(matrix, 'input.txt')
         output_path = Utils.write_matrix_to_file(matrix, 'out.txt')
 
@@ -324,7 +324,7 @@ class Utils:
                   f"{command}")
            
             time_now = time.time()
-            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, cwd=script_path)
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, cwd=os.getcwd())
             output, error = process.communicate()
             output = output.decode('utf-8')
             error = error.decode('utf-8')

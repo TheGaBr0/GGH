@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.5.26)  28 AUG 2024 09:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.5.26)  5 SEP 2024 17:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -7,33 +7,52 @@ entering extended mode
 (c:/Users/gbott/Desktop/syncRaspberry/Progetto Tesi/Tesi LaTeX/main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-04-11>
-(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/latex-lab\documentmetadata-support.ltx (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\pdfmanagement-testphase.sty
-Package: pdfmanagement-testphase 2024-04-09 v0.96h LaTeX PDF management testphase bundle
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/tagpdf\tagpdf-base.sty
-Package: tagpdf-base 2024-04-12 v0.99b part of tagpdf - provide base, no-op versions of the user commands 
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/latex-lab\documentmetad
+ata-support.ltx
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\pdfmanagement-testphase.sty
+Package: pdfmanagement-testphase 2024-04-09 v0.96h LaTeX PDF management testpha
+se bundle
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/tagpdf\tagpdf-base.sty
+Package: tagpdf-base 2024-04-12 v0.99b part of tagpdf - provide base, no-op ver
+sions of the user commands 
 \c@g__tag_MCID_abs_int=\count189
 \c@g__tag_struct_abs_int=\count190
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\pdfmanagement-testphase.ltx
-File: pdfmanagement-testphase.ltx 2024-04-09 v0.96h PDF management code (testphase)
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\pdfmanagement-testphase.ltx
+File: pdfmanagement-testphase.ltx 2024-04-09 v0.96h PDF management code (testph
+ase)
 \g__pdfmanagement_EmbeddedFiles_int=\count191
 \l__pdfmeta_xmp_indent_int=\count192
-))) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+)))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
 File: l3backend-pdftex.def 2024-04-11 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count193
 \l__pdf_internal_box=\box51
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\l3backend-testphase-pdftex.def
-File: l3backend-testphase-pdftex.def 2024-04-09 LaTeX PDF management testphase bundle backend support:PDFoutput(pdfTeX)
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\l3backend-testphase-pdftex.def
+File: l3backend-testphase-pdftex.def 2024-04-09 LaTeX PDF management testphase 
+bundle backend support:PDFoutput(pdfTeX)
 \l__pdf_backend_tmpa_box=\box52
 \l__pdf_backend_tmpb_box=\box53
 \g__pdf_backend_resourceid_int=\count194
 \g__pdf_backend_name_int=\count195
 \g__pdf_backend_page_int=\count196
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\pdfmanagement-firstaid.sty
-Package: pdfmanagement-firstaid 2024-04-09 v0.96h LaTeX PDF management testphase bundle / firstaid-patches
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\pdfmanagement-firstaid.sty
+Package: pdfmanagement-firstaid 2024-04-09 v0.96h LaTeX PDF management testphas
+e bundle / firstaid-patches
 
 Package pdfmanagement Info: loading pdfmanagement firstaid code for pgf
 
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
 Document Class: report 2023/05/17 v1.4n Standard LaTeX document class
 (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
 File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
@@ -50,27 +69,35 @@ File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen141
 \Gin@req@width=\dimen142
 ) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/dirtree\dirtree.sty
 Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/dirtree\dirtree.tex `dirtree' v0.32, 2012/12/11 (jcc)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/dirtree\dirtree.tex
+`dirtree' v0.32, 2012/12/11 (jcc)
 \DT@offset=\dimen143
 \DT@width=\dimen144
 \DT@sep=\dimen145
@@ -87,9 +114,10 @@ Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
 \DT@baselineskip=\dimen152
 )
 File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
 \c@blindtext=\count276
@@ -110,34 +138,95 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@randommax=\count291
 \c@blind@pangramcount=\count292
 \c@blind@pangrammax=\count293
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/subfiles\subfiles.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.sty
+Package: adjustbox 2022/10/17 v1.3a Adjusting TeX boxes (trim, clip, ...)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+\XKV@toks=\toks18
+\XKV@tempa@toks=\toks19
+)
+\XKV@depth=\count294
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.s
+ty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box54
+)
+\tc@llx=\dimen153
+\tc@lly=\dimen154
+\tc@urx=\dimen155
+\tc@ury=\dimen156
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-pdftex.def
+File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen157
+\adjbox@Height=\dimen158
+\adjbox@Depth=\dimen159
+\adjbox@Totalheight=\dimen160
+\adjbox@pwidth=\dimen161
+\adjbox@pheight=\dimen162
+\adjbox@pdepth=\dimen163
+\adjbox@ptotalheight=\dimen164
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count295
+) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box55
+\sift@deathcycles=\count296
+\@vwid@loff=\dimen165
+\@vwid@roff=\dimen166
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/subfiles\subfiles.sty
 Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/import\import.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/import\import.sty
 Package: import 2020/04/01  v 6.2
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count294
-\Gm@cntv=\count295
-\c@Gm@tempcnt=\count296
-\Gm@bindingoffset=\dimen153
-\Gm@wd@mp=\dimen154
-\Gm@odd@mp=\dimen155
-\Gm@even@mp=\dimen156
-\Gm@layoutwidth=\dimen157
-\Gm@layoutheight=\dimen158
-\Gm@layouthoffset=\dimen159
-\Gm@layoutvoffset=\dimen160
-\Gm@dimlist=\toks18
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+\Gm@cnth=\count297
+\Gm@cntv=\count298
+\c@Gm@tempcnt=\count299
+\Gm@bindingoffset=\dimen167
+\Gm@wd@mp=\dimen168
+\Gm@odd@mp=\dimen169
+\Gm@even@mp=\dimen170
+\Gm@layoutwidth=\dimen171
+\Gm@layoutheight=\dimen172
+\Gm@layouthoffset=\dimen173
+\Gm@layoutvoffset=\dimen174
+\Gm@dimlist=\toks20
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks19
+\@emptytoks=\toks21
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
@@ -150,125 +239,153 @@ Package: amsmath 2023/05/13 v2.17o AMS math features
 For additional information on amsmath, use the `?' option.
 (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks20
-\ex@=\dimen161
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+\@emptytoks=\toks22
+\ex@=\dimen175
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen162
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+\pmbraise@=\dimen176
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count297
+\inf@bad=\count300
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count298
-\leftroot@=\count299
+\uproot@=\count301
+\leftroot@=\count302
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count300
-\DOTSCASE@=\count301
+\classnum@=\count303
+\DOTSCASE@=\count304
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box54
-\strutbox@=\box55
+\Mathstrutbox@=\box56
+\strutbox@=\box57
 LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen163
+\big@size=\dimen177
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count302
+\macc@depth=\count305
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count303
+\c@MaxMatrixCols=\count306
 \dotsspace@=\muskip16
-\c@parentequation=\count304
-\dspbrk@lvl=\count305
-\tag@help=\toks21
-\row@=\count306
-\column@=\count307
-\maxfields@=\count308
-\andhelp@=\toks22
-\eqnshift@=\dimen164
-\alignsep@=\dimen165
-\tagshift@=\dimen166
-\tagwidth@=\dimen167
-\totwidth@=\dimen168
-\lineht@=\dimen169
-\@envbody=\toks23
+\c@parentequation=\count307
+\dspbrk@lvl=\count308
+\tag@help=\toks23
+\row@=\count309
+\column@=\count310
+\maxfields@=\count311
+\andhelp@=\toks24
+\eqnshift@=\dimen178
+\alignsep@=\dimen179
+\tagshift@=\dimen180
+\tagwidth@=\dimen181
+\totwidth@=\dimen182
+\lineht@=\dimen183
+\@envbody=\toks25
 \multlinegap=\skip51
 \multlinetaggap=\skip52
-\mathdisplay@stack=\toks24
+\mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks25
-\thm@bodyfont=\toks26
-\thm@headfont=\toks27
-\thm@notefont=\toks28
-\thm@headpunct=\toks29
+\thm@style=\toks27
+\thm@bodyfont=\toks28
+\thm@headfont=\toks29
+\thm@notefont=\toks30
+\thm@headpunct=\toks31
 \thm@preskip=\skip53
 \thm@postskip=\skip54
 \thm@headsep=\skip55
-\dth@everypar=\toks30
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\dth@everypar=\toks32
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2024-01-20 v7.01h Hypertext links for LaTeX
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
+keys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.s
+ty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
+.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
+ty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettit
+lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count309
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count310
+\c@section@level=\count312
 )
-\@linkdim=\dimen170
-\Hy@linkcounter=\count311
-\Hy@pagecounter=\count312
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count313
+)
+\@linkdim=\dimen184
+\Hy@linkcounter=\count314
+\Hy@pagecounter=\count315
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count313
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+\Hy@SavedSpaceFactor=\count316
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -280,17 +397,21 @@ Package hyperref Info: Plain pages OFF on input line 4194.
 Package hyperref Info: Backreferencing OFF on input line 4199.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4446.
-\c@Hy@tempcnt=\count314
+\c@Hy@tempcnt=\count317
 LaTeX Info: Redefining \url on input line 4784.
-\XeTeXLinkMargin=\dimen171
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+\XeTeXLinkMargin=\dimen185
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc
+.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
 ))
-\Fld@menulength=\count315
-\Field@Width=\dimen172
-\Fld@charsize=\dimen173
+\Fld@menulength=\count318
+\Field@Width=\dimen186
+\Fld@charsize=\dimen187
 Package hyperref Info: Hyper figures OFF on input line 6063.
 Package hyperref Info: Link nesting OFF on input line 6068.
 Package hyperref Info: Hyper index ON on input line 6071.
@@ -298,166 +419,220 @@ Package hyperref Info: backreferencing OFF on input line 6078.
 Package hyperref Info: Link coloring OFF on input line 6083.
 Package hyperref Info: Link coloring with OCG OFF on input line 6088.
 Package hyperref Info: PDF/A mode OFF on input line 6093.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count316
-\c@Item=\count317
-\c@Hfootnote=\count318
+\Hy@abspage=\count319
+\c@Item=\count320
+\c@Hfootnote=\count321
 )
 Package hyperref Info: Driver (custom): hgeneric-testphase.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\hgeneric-testphase.def
-File: hgeneric-testphase.def 2024-04-09 v0.96h generic Hyperref driver for the LaTeX PDF management testphase bundle
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\hyperref-colorschemes.def)
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\hgeneric-testphase.def
+File: hgeneric-testphase.def 2024-04-09 v0.96h generic Hyperref driver for the 
+LaTeX PDF management testphase bundle
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\hyperref-colorschemes.def)
 LaTeX Info: Redefining \href on input line 275.
 LaTeX Info: Redefining \url on input line 361.
-\l__hyp_tmpa_box=\box56
-\l__hyp_tmpa_int=\count319
-\l__hyp_dest_box=\box57
-\g__hyp_linknestlevel_int=\count320
-\HyAnn@Count=\count321
-\Fld@listcount=\count322
+\l__hyp_tmpa_box=\box58
+\l__hyp_tmpa_int=\count322
+\l__hyp_dest_box=\box59
+\g__hyp_linknestlevel_int=\count323
+\HyAnn@Count=\count324
+\Fld@listcount=\count325
 \Hy@SectionHShift=\skip56
 LaTeX Info: Redefining \Hy__hypSectionAnchor on input line 3537.
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\epsfig.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\epsfig.sty
 Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
-\epsfxsize=\dimen174
-\epsfysize=\dimen175
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+\epsfxsize=\dimen188
+\epsfysize=\dimen189
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
 Package: babel 2024/04/20 v24.4 The Babel package
-\babel@savecnt=\count323
-\U@D=\dimen176
+\babel@savecnt=\count326
+\U@D=\dimen190
 \l@unhyphenated=\language79
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count324
+\bbl@dirlevel=\count327
 
 *************************************
 * Local config file bblopts.cfg used
 *
 (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/babel-italian\italian.ldf
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/babel-italian\italian.l
+df
 Language: italian 2024/01/03 v.1.5.00 Italian support for the babel system
-\it@lettering=\count325
-\it@doublequoteactive=\count326
-\it@ISOcompliance=\count327
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/it\babel-italian.tex
+\it@lettering=\count328
+\it@doublequoteactive=\count329
+\it@ISOcompliance=\count330
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/it\babel
+-italian.tex
 Package babel Info: Importing font and identification data for italian
 (babel)             from babel-it.ini. Reported on input line 11.
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
-) (tesi.sty) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
+)
+(tesi.sty)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
 Package: mathtools 2024/03/11 v1.30 mathematical typesetting tools
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count328
-\calc@Bcount=\count329
-\calc@Adimen=\dimen177
-\calc@Bdimen=\dimen178
+\calc@Acount=\count331
+\calc@Bcount=\count332
+\calc@Adimen=\dimen191
+\calc@Bdimen=\dimen192
 \calc@Askip=\skip57
 \calc@Bskip=\skip58
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count330
+\calc@Ccount=\count333
 \calc@Cskip=\skip59
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count331
-\l_MT_multwidth_dim=\dimen179
+\g_MT_multlinerow_int=\count334
+\l_MT_multwidth_dim=\dimen193
 \origjot=\skip60
-\l_MT_shortvdotswithinadjustabove_dim=\dimen180
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen181
-\l_MT_above_intertext_sep=\dimen182
-\l_MT_below_intertext_sep=\dimen183
-\l_MT_above_shortintertext_sep=\dimen184
-\l_MT_below_shortintertext_sep=\dimen185
-\xmathstrut@box=\box58
-\xmathstrut@dim=\dimen186
+\l_MT_shortvdotswithinadjustabove_dim=\dimen194
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen195
+\l_MT_above_intertext_sep=\dimen196
+\l_MT_below_intertext_sep=\dimen197
+\l_MT_above_shortintertext_sep=\dimen198
+\l_MT_below_shortintertext_sep=\dimen199
+\xmathstrut@box=\box60
+\xmathstrut@dim=\dimen256
 ) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen187
-\captionmargin=\dimen188
-\caption@leftmargin=\dimen189
-\caption@rightmargin=\dimen190
-\caption@width=\dimen191
-\caption@indent=\dimen192
-\caption@parindent=\dimen193
-\caption@hangindent=\dimen194
+\caption@tempdima=\dimen257
+\captionmargin=\dimen258
+\caption@leftmargin=\dimen259
+\caption@rightmargin=\dimen260
+\caption@width=\dimen261
+\caption@indent=\dimen262
+\caption@parindent=\dimen263
+\caption@hangindent=\dimen264
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count332
-\c@continuedfloat=\count333
+\c@caption@flags=\count335
+\c@continuedfloat=\count336
 Package caption Info: hyperref package is loaded.
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count334
+\c@subfigure=\count337
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count335
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex
-\pgfutil@everybye=\toks31
-\pgfutil@tempdima=\dimen195
-\pgfutil@tempdimb=\dimen196
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
-\pgfutil@abb=\box59
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
+\c@subtable=\count338
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.
+sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.st
+y
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil
+-common.tex
+\pgfutil@everybye=\toks33
+\pgfutil@tempdima=\dimen265
+\pgfutil@tempdimb=\dimen266
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil
+-latex.def
+\pgfutil@abb=\box61
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.
+code.tex
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
 Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
 ))
 Package: pgf 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.
+sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.
+sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+s.code.tex
 Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks32
-\pgfkeys@temptoks=\toks33
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.tex
-\pgfkeys@tmptoks=\toks34
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
+.code.tex
+\pgfkeys@pathtoks=\toks34
+\pgfkeys@temptoks=\toks35
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
+libraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks36
 ))
-\pgf@x=\dimen197
-\pgf@y=\dimen198
-\pgf@xa=\dimen199
-\pgf@ya=\dimen256
-\pgf@xb=\dimen257
-\pgf@yb=\dimen258
-\pgf@xc=\dimen259
-\pgf@yc=\dimen260
-\pgf@xd=\dimen261
-\pgf@yd=\dimen262
+\pgf@x=\dimen267
+\pgf@y=\dimen268
+\pgf@xa=\dimen269
+\pgf@ya=\dimen270
+\pgf@xb=\dimen271
+\pgf@yb=\dimen272
+\pgf@xc=\dimen273
+\pgf@yc=\dimen274
+\pgf@xd=\dimen275
+\pgf@yd=\dimen276
 \w@pgf@writea=\write3
 \r@pgf@reada=\read3
-\c@pgf@counta=\count336
-\c@pgf@countb=\count337
-\c@pgf@countc=\count338
-\c@pgf@countd=\count339
-\t@pgf@toka=\toks35
-\t@pgf@tokb=\toks36
-\t@pgf@tokc=\toks37
-\pgf@sys@id@count=\count340
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
+\c@pgf@counta=\count339
+\c@pgf@countb=\count340
+\c@pgf@countc=\count341
+\c@pgf@countd=\count342
+\t@pgf@toka=\toks37
+\t@pgf@tokb=\toks38
+\t@pgf@tokc=\toks39
+\pgf@sys@id@count=\count343
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.c
+fg
 File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
 )
 Driver file for pgf: pgfsys-pdftex.def
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+s-pdftex.def
 File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+s-common-pdf.def
 File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
-))) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex
+)))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+ssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfsyssoftpath@smallbuffer@items=\count341
-\pgfsyssoftpath@bigbuffer@items=\count342
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
+\pgfsyssoftpath@smallbuffer@items=\count344
+\pgfsyssoftpath@bigbuffer@items=\count345
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+sprotocol.code.tex
 File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
 Package xcolor Info: Model `RGB' extended on input line 1366.
@@ -467,155 +642,253 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase\xcolor-patches-tmp-ltx.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pdfmanagement-testphase
+\xcolor-patches-tmp-ltx.sty
 Package: xcolor-patches-tmp-ltx 2024-04-09 v0.96h patch xcolor for l3color
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+e.code.tex
 Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
-\pgfmath@dimen=\dimen263
-\pgfmath@count=\count343
-\pgfmath@box=\box60
-\pgfmath@toks=\toks38
-\pgfmath@stack@operand=\toks39
-\pgfmath@stack@operation=\toks40
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count344
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code
+.tex
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.
+code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparse
+r.code.tex
+\pgfmath@dimen=\dimen277
+\pgfmath@count=\count346
+\pgfmath@box=\box62
+\pgfmath@toks=\toks40
+\pgfmath@stack@operand=\toks41
+\pgfmath@stack@operation=\toks42
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.basic.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.trigonometric.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.random.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.comparison.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.base.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.round.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.misc.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.integerarithmetics.code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.
+code.tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat
+.code.tex
+\c@pgfmathroundto@lastzeros=\count347
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.
+tex)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epoints.code.tex
 File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@picminx=\dimen264
-\pgf@picmaxx=\dimen265
-\pgf@picminy=\dimen266
-\pgf@picmaxy=\dimen267
-\pgf@pathminx=\dimen268
-\pgf@pathmaxx=\dimen269
-\pgf@pathminy=\dimen270
-\pgf@pathmaxy=\dimen271
-\pgf@xx=\dimen272
-\pgf@xy=\dimen273
-\pgf@yx=\dimen274
-\pgf@yy=\dimen275
-\pgf@zx=\dimen276
-\pgf@zy=\dimen277
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
+\pgf@picminx=\dimen278
+\pgf@picmaxx=\dimen279
+\pgf@picminy=\dimen280
+\pgf@picmaxy=\dimen281
+\pgf@pathminx=\dimen282
+\pgf@pathmaxx=\dimen283
+\pgf@pathminy=\dimen284
+\pgf@pathmaxy=\dimen285
+\pgf@xx=\dimen286
+\pgf@xy=\dimen287
+\pgf@yx=\dimen288
+\pgf@yy=\dimen289
+\pgf@zx=\dimen290
+\pgf@zy=\dimen291
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@path@lastx=\dimen278
-\pgf@path@lasty=\dimen279
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
+\pgf@path@lastx=\dimen292
+\pgf@path@lasty=\dimen293
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epathusage.code.tex
 File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@shorten@end@additional=\dimen280
-\pgf@shorten@start@additional=\dimen281
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
+\pgf@shorten@end@additional=\dimen294
+\pgf@shorten@start@additional=\dimen295
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+escopes.code.tex
 File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfpic=\box61
-\pgf@hbox=\box62
-\pgf@layerbox@main=\box63
-\pgf@picture@serial@count=\count345
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
+\pgfpic=\box63
+\pgf@hbox=\box64
+\pgf@layerbox@main=\box65
+\pgf@picture@serial@count=\count348
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+egraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgflinewidth=\dimen282
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
+\pgflinewidth=\dimen296
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+etransformations.code.tex
 File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@pt@x=\dimen283
-\pgf@pt@y=\dimen284
-\pgf@pt@temp=\dimen285
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+\pgf@pt@x=\dimen297
+\pgf@pt@y=\dimen298
+\pgf@pt@temp=\dimen299
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+equick.code.tex
 File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eobjects.code.tex
 File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epathprocessing.code.tex
 File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+earrows.code.tex
 File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowsep=\dimen286
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
+\pgfarrowsep=\dimen300
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eshade.code.tex
 File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@max=\dimen287
-\pgf@sys@shading@range@num=\count346
-\pgf@shadingcount=\count347
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
+\pgf@max=\dimen301
+\pgf@sys@shading@range@num=\count349
+\pgf@shadingcount=\count350
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eimage.code.tex
 File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eexternal.code.tex
 File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfexternal@startupbox=\box64
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
+\pgfexternal@startupbox=\box66
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+elayers.code.tex
 File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+etransparency.code.tex
 File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epatterns.code.tex
 File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+erdf.code.tex
 File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
+)))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+shapes.code.tex
 File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodeparttextbox=\box65
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
+\pgfnodeparttextbox=\box67
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+plot.code.tex
 File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
+mp-version-0-65.sty
 Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
-\pgf@nodesepstart=\dimen288
-\pgf@nodesepend=\dimen289
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
+\pgf@nodesepstart=\dimen302
+\pgf@nodesepend=\dimen303
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
+mp-version-1-18.sty
 Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.st
+y
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.s
+ty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
+.code.tex))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code
+.tex))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.
+code.tex
 Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
-\pgffor@iter=\dimen290
-\pgffor@skip=\dimen291
-\pgffor@stack=\toks41
-\pgffor@toks=\toks42
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+\pgffor@iter=\dimen304
+\pgffor@skip=\dimen305
+\pgffor@stack=\toks43
+\pgffor@toks=\toks44
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z\tikz.code.tex
 Package: tikz 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
+aryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count348
-\pgfplotmarksize=\dimen292
+\pgf@plot@mark@count=\count351
+\pgfplotmarksize=\dimen306
 )
-\tikz@lastx=\dimen293
-\tikz@lasty=\dimen294
-\tikz@lastxsaved=\dimen295
-\tikz@lastysaved=\dimen296
-\tikz@lastmovetox=\dimen297
-\tikz@lastmovetoy=\dimen298
-\tikzleveldistance=\dimen299
-\tikzsiblingdistance=\dimen300
-\tikz@figbox=\box66
-\tikz@figbox@bg=\box67
-\tikz@tempbox=\box68
-\tikz@tempbox@bg=\box69
-\tikztreelevel=\count349
-\tikznumberofchildren=\count350
-\tikznumberofcurrentchild=\count351
-\tikz@fig@count=\count352
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+\tikz@lastx=\dimen307
+\tikz@lasty=\dimen308
+\tikz@lastxsaved=\dimen309
+\tikz@lastysaved=\dimen310
+\tikz@lastmovetox=\dimen311
+\tikz@lastmovetoy=\dimen312
+\tikzleveldistance=\dimen313
+\tikzsiblingdistance=\dimen314
+\tikz@figbox=\box68
+\tikz@figbox@bg=\box69
+\tikz@tempbox=\box70
+\tikz@tempbox@bg=\box71
+\tikztreelevel=\count352
+\tikznumberofchildren=\count353
+\tikznumberofcurrentchild=\count354
+\tikz@fig@count=\count355
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+matrix.code.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count353
-\pgfmatrixcurrentcolumn=\count354
-\pgf@matrix@numberofcolumns=\count355
+\pgfmatrixcurrentrow=\count356
+\pgfmatrixcurrentcolumn=\count357
+\pgf@matrix@numberofcolumns=\count358
 )
-\tikz@expandcount=\count356
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+\tikz@expandcount=\count359
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z/libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarybackgrounds.code.tex
+)))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z/libraries\tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@layerbox@background=\box70
-\pgf@layerboxsaved@background=\box71
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+\pgf@layerbox@background=\box72
+\pgf@layerboxsaved@background=\box73
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count357
-\float@exts=\toks43
-\float@box=\box72
-\@float@everytoks=\toks44
-\@floatcapt=\box73
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e.sty
+\c@float@type=\count360
+\float@exts=\toks45
+\float@box=\box74
+\@float@everytoks=\toks46
+\@floatcapt=\box75
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e
+.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count358
+\c@AlgoLine=\count361
  (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
 \algocf@hangindent=\skip61
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
-Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count359
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
 \skiptotal=\skip62
@@ -626,76 +899,89 @@ Package: relsize 2013/03/29 ver 4.1
 \skiplength=\skip67
 \algomargin=\skip68
 \skipalgocfslide=\skip69
-\algowidth=\dimen301
-\inoutsize=\dimen302
-\inoutindent=\dimen303
-\interspacetitleruled=\dimen304
-\interspacealgoruled=\dimen305
-\interspacetitleboxruled=\dimen306
+\algowidth=\dimen315
+\inoutsize=\dimen316
+\inoutindent=\dimen317
+\interspacetitleruled=\dimen318
+\interspacealgoruled=\dimen319
+\interspacetitleboxruled=\dimen320
 \algocf@ruledwidth=\skip70
-\algocf@inoutbox=\box74
-\algocf@inputbox=\box75
+\algocf@inoutbox=\box76
+\algocf@inputbox=\box77
 \AlCapSkip=\skip71
 \AlCapHSkip=\skip72
 \algoskipindent=\skip73
-\algocf@nlbox=\box76
-\algocf@hangingbox=\box77
-\algocf@untilbox=\box78
+\algocf@nlbox=\box78
+\algocf@hangingbox=\box79
+\algocf@untilbox=\box80
 \algocf@skipuntil=\skip74
-\algocf@capbox=\box79
+\algocf@capbox=\box81
 \algocf@lcaptionbox=\skip75
 \algoheightruledefault=\skip76
 \algoheightrule=\skip77
 \algotitleheightruledefault=\skip78
 \algotitleheightrule=\skip79
-\c@algocfline=\count360
-\c@algocfproc=\count361
-\c@algocf=\count362
-\algocf@algoframe=\box80
-\algocf@algobox=\box81
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pythonhighlight\pythonhighlight.sty
-Package: pythonhighlight 2024/03/18 python code highlighting; provided by Olivier Verdier <olivier.verdier@gmail.com>
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count363
-\lst@gtempboxa=\box82
-\lst@token=\toks45
-\lst@length=\count364
-\lst@currlwidth=\dimen307
-\lst@column=\count365
-\lst@pos=\count366
-\lst@lostspace=\dimen308
-\lst@width=\dimen309
-\lst@newlines=\count367
-\lst@lineno=\count368
-\lst@maxwidth=\dimen310
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
+\c@algocfline=\count362
+\c@algocfproc=\count363
+\c@algocf=\count364
+\algocf@algoframe=\box82
+\algocf@algobox=\box83
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/pythonhighlight\pythonh
+ighlight.sty
+Package: pythonhighlight 2024/03/18 python code highlighting; provided by Olivi
+er Verdier <olivier.verdier@gmail.com>
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count365
+\lst@gtempboxa=\box84
+\lst@token=\toks47
+\lst@length=\count366
+\lst@currlwidth=\dimen321
+\lst@column=\count367
+\lst@pos=\count368
+\lst@lostspace=\dimen322
+\lst@width=\dimen323
+\lst@newlines=\count369
+\lst@lineno=\count370
+\lst@maxwidth=\dimen324
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
 File: lstpatch.sty 2024/03/11 1.10a (Carsten Heinz)
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2024/03/11 1.10a (Carsten Heinz)
-\c@lstnumber=\count369
-\lst@skipnumbers=\count370
-\lst@framebox=\box83
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+\c@lstnumber=\count371
+\lst@skipnumbers=\count372
+\lst@framebox=\box85
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2024/03/11 1.10a listings configuration
 ))
 Package: listings 2024/03/11 1.10a (Carsten Heinz)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xparse.sty (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpars
+e.sty
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
 Package: expl3 2024-04-11 L3 programming layer (loader) 
 )
 Package: xparse 2024-03-14 L3 Experimental document command parser
 ))
-\c@exmp=\count371
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+\c@exmp=\count373
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks46
-\inpenc@posthook=\toks47
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\utf8.def
+\inpenc@prehook=\toks48
+\inpenc@posthook=\toks49
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\utf8.def
 File: utf8.def 2022/06/07 v1.3c UTF-8 support
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\omsenc.dfu
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\omsenc.dfu
 File: omsenc.dfu 2022/06/07 v1.3c UTF-8 support
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -706,7 +992,8 @@ File: omsenc.dfu 2022/06/07 v1.3c UTF-8 support
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\ot1enc.dfu
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\ot1enc.dfu
 File: ot1enc.dfu 2022/06/07 v1.3c UTF-8 support
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
@@ -754,7 +1041,8 @@ File: ot1enc.dfu 2022/06/07 v1.3c UTF-8 support
 )
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\t1enc.dfu
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\t1enc.dfu
 File: t1enc.dfu 2022/06/07 v1.3c UTF-8 support
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
@@ -1033,7 +1321,8 @@ File: t1enc.dfu 2022/06/07 v1.3c UTF-8 support
 )
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1enc.dfu
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1enc.dfu
 File: ts1enc.dfu 2022/06/07 v1.3c UTF-8 support
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
@@ -1129,55 +1418,67 @@ Now handling font encoding PU ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
    defining Unicode char U+FEFF (decimal 65279)
-)) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
+))
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
-File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
-\BKM@id=\count372
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
+File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
+)
+\BKM@id=\count374
 )) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count373
-\scratchdimen=\dimen311
-\scratchbox=\box84
-\nofMPsegments=\count374
-\nofMParguments=\count375
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count376
-\MPscratchDim=\dimen312
-\MPnumerator=\count377
-\makeMPintoPDFobject=\count378
-\everyMPtoPDFconversion=\toks49
-) (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+\scratchcounter=\count375
+\scratchdimen=\dimen325
+\scratchbox=\box86
+\nofMPsegments=\count376
+\nofMParguments=\count377
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count378
+\MPscratchDim=\dimen326
+\MPnumerator=\count379
+\makeMPintoPDFobject=\count380
+\everyMPtoPDFconversion=\toks51
+)
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
 Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
 )
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 504.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 *geometry* driver: auto-detecting
@@ -1214,33 +1515,39 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 52.
-LaTeX Info: Redefining \it@ocap on input line 52.
-LaTeX Info: Redefining \it@ccap on input line 52.
+Package hyperref Info: Link coloring OFF on input line 53.
+LaTeX Info: Redefining \it@ocap on input line 53.
+LaTeX Info: Redefining \it@ccap on input line 53.
 
 File italian.ldf warning: 
 italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting
-italian.ldf    on input line 52.
+italian.ldf    on input line 53.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count379
+\c@lstlisting=\count381
 <<sRGB.icc>>
-LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+LaTeX Font Info:    Trying to load font information for U+msa on input line 64.
+
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
- (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
 
-{C:/Users/gbott/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc [2
+
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+[1
+
+{C:/Users/gbott/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc
+[2
 
 ])
 \tf@toc=\write4
@@ -1256,42 +1563,49 @@ Capitolo 2.
 
 ] [3] [4]) [5] (chapters/Cap2/Problemi.tex
 Overfull \hbox (26.02626pt too wide) in paragraph at lines 14--24
-\OT1/cmr/m/n/12 se di un re-ti-co-lo $\OT1/cmr/bx/n/12 B \OMS/cmsy/m/n/12 2 \U/msb/m/n/12 Z[]$\OT1/cmr/m/n/12 , tro-va-re $\OML/cmm/m/it/12 n$ \OT1/cmr/m/n/12 vet-to-ri li-near-men-te in-di-pen-den-ti $ []$
+\OT1/cmr/m/n/12 se di un re-ti-co-lo $\OT1/cmr/bx/n/12 B \OMS/cmsy/m/n/12 2 \U/
+msb/m/n/12 Z[]$\OT1/cmr/m/n/12 , tro-va-re $\OML/cmm/m/it/12 n$ \OT1/cmr/m/n/12
+ vet-to-ri li-near-men-te in-di-pen-den-ti $ []$
  []
 
 ) [6
 
 ] (chapters/Cap2/Riduzione.tex
-Underfull \hbox (badness 10000) in paragraph at lines 6--16
+Underfull \hbox (badness 10000) in paragraph at lines 4--14
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--46
+Underfull \hbox (badness 10000) in paragraph at lines 33--44
 
  []
 
 [7
 
 ] [8] [9]
-Overfull \hbox (9.43791pt too wide) in paragraph at lines 181--225
-\OT1/cmr/m/n/12 L'ultima va-rian-te di-scus-sa ^^Re ba-sa-ta sul-l'al-go-rit-mo di ri-du-zio-ne Kor-kin{Zolotarev (KZ)[[],
+Overfull \hbox (9.43791pt too wide) in paragraph at lines 179--223
+\OT1/cmr/m/n/12 L'ultima va-rian-te di-scus-sa ^^Re ba-sa-ta sul-l'al-go-rit-mo
+ di ri-du-zio-ne Kor-kin{Zolotarev (KZ)[[],
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--225
+Underfull \hbox (badness 10000) in paragraph at lines 179--223
 
  []
 
-[10]) (chapters/Cap2/CVP.tex [11] [12] [13] [14] [15])) (chapters/Cap3/GGH.tex [16]
+[10]) (chapters/Cap2/CVP.tex [11] [12] [13] [14] [15])) (chapters/Cap3/GGH.tex
+[16]
 Capitolo 3.
 (chapters/Cap3/Introduzione.tex [17
 
-] (chapters/Cap3/Generate.tex [18] [19]) (chapters/Cap3/Esempio.tex [20])) (chapters/Cap3/Crittoanalisi.tex [21] [22] [23] [24] [25] [26] [27] [28])) (chapters/Cap4/GGH-HNF.tex [29]
+] (chapters/Cap3/Generate.tex [18] [19])
+(chapters/Cap3/Esempio.tex [20])) (chapters/Cap3/Crittoanalisi.tex [21]
+[22] [23] [24] [25] [26] [27] [28])) (chapters/Cap4/GGH-HNF.tex [29]
 Capitolo 4.
 (chapters/Cap4/Introduzione.tex [30
 
-] [31] (chapters/Cap4/Esempio.tex [32])) (chapters/Cap4/Crittoanalisi.tex [33]
+] [31] (chapters/Cap4/Esempio.tex [32]))
+(chapters/Cap4/Crittoanalisi.tex [33]
 Underfull \hbox (badness 10000) in paragraph at lines 32--45
 
  []
@@ -1308,19 +1622,84 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--12
 
  []
 
-[39]) (chapters/Cap5/Python_tipizzazione.tex [40] (C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[39]) (chapters/Cap5/Python_tipizzazione.tex [40]
+(C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2024/03/11 1.10a listings language file
 )
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 61.
-)) (chapters/Cap5/Modulo_GGH.tex [41] [42] [43]) (chapters/Cap5/Modulo_GGH_HNF.tex)) [44] [45
+)) (chapters/Cap5/Modulo_GGH.tex [41] [42] [43] [44] [45])
+(chapters/Cap5/Modulo_GGH_HNF.tex [46] [47]
 
-]
-Underfull \hbox (badness 1231) in paragraph at lines 124--126
-[]\OT1/cmr/m/n/12 Nguyen Phong e Da-mien Ste-hl^^Se, \Floating-point LLL re-vi-si-ted\, LNCS,
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (chapters/Cap5/Modulo_Utils.tex [48]
+Overfull \hbox (37.05957pt too wide) in paragraph at lines 15--34
+\OT1/cmr/m/n/12 nor-me. Per quan-to ri-guar-da la con-ver-sio-ne, l'u-ni-ca fun
+-zio-ne di-spo-ni-bi-le ^^Re \OT1/cmtt/m/n/12 sympy[]to[]fmpz[]mat\OT1/cmr/m/n/
+12 ,
  []
 
-[46] (main.aux)
+[49] [50]
+Overfull \hbox (17.94255pt too wide) in paragraph at lines 110--113
+\OT1/cmtt/m/n/12 Matplotlib\OT1/cmr/m/n/12 , in-te-gra-ta nel mo-du-lo at-tra-v
+er-so una fun-zio-ne chia-ma-ta \OT1/cmtt/m/n/12 visualize[]lattice\OT1/cmr/m/n
+/12 .
+ []
+
+[51]
+<images/matplotlib.png, id=594, 718.93594pt x 394.47375pt>
+File: images/matplotlib.png Graphic file (type png)
+<use images/matplotlib.png>
+Package pdftex.def Info: images/matplotlib.png  used on input line 148.
+(pdftex.def)             Requested size: 433.62pt x 237.93204pt.
+ [52 <./images/matplotlib.png>] [53]
+Overfull \hbox (9.02364pt too wide) in paragraph at lines 235--239
+\OT1/cmr/m/n/12 inol-trer^^Ra \OT1/cmtt/m/n/12 basis\OT1/cmr/m/n/12 , \OT1/cmtt
+/m/n/12 ciphertext \OT1/cmr/m/n/12 e il CVP cal-co-la-to, al-la fun-zio-ne \OT1
+/cmtt/m/n/12 visualize[]lattice
+ []
+
+[54] [55]
+Overfull \hbox (16.28955pt too wide) in paragraph at lines 315--316
+[][] 
+ []
+
+
+Overfull \hbox (9.98956pt too wide) in paragraph at lines 315--316
+[]  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 333--340
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[56])
+Overfull \hbox (2.39421pt too wide) in paragraph at lines 387--31
+[]\OT1/cmr/m/n/12 Dopo che il co-man-do ^^Re sta-to ge-ne-ra-to, vie-ne ese-gui
+-to uti-liz-zan-do il mo-du-lo \OT1/cmtt/m/n/12 subprocess
+ []
+
+) (chapters/Cap6/Risultati_sperimentali.tex [57]
+Capitolo 6.
+) [58
+
+] [59
+
+]
+Underfull \hbox (badness 1231) in paragraph at lines 128--130
+[]\OT1/cmr/m/n/12 Nguyen Phong e Da-mien Ste-hl^^Se, \Floating-point LLL re-vi-
+si-ted\, LNCS,
+ []
+
+[60] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-04-11>
@@ -1331,17 +1710,45 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 30434 strings out of 474370
- 583836 string characters out of 5740535
- 1993754 words of memory out of 5000000
- 52102 multiletter control sequences out of 15000+600000
+ 31795 strings out of 474370
+ 607220 string characters out of 5740535
+ 2066754 words of memory out of 5000000
+ 53302 multiletter control sequences out of 15000+600000
  573892 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,17n,105p,713b,2085s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\gbott\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (49 pages, 540037 bytes).
+ 86i,17n,137p,713b,2134s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\gbott\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1200.pk><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmbx8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/gbott/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gbott/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gbott/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/User
+s/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+<C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+mi7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmmi8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/gbott/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gbott/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/gbott/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gbott/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users
+/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+sy6.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmsy7.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmsy8.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmti12.pfb><C:/Users/gbott/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/gbott/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/gbott/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (63 pages, 655762 bytes).
 PDF statistics:
- 741 PDF objects out of 1000 (max. 8388607)
- 162 named destinations out of 1000 (max. 500000)
- 297 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1003 PDF objects out of 1200 (max. 8388607)
+ 279 named destinations out of 1000 (max. 500000)
+ 390 words of extra memory for PDF output out of 10000 (max. 10000000)
 
