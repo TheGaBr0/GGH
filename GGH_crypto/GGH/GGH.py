@@ -132,13 +132,12 @@ class GGHCryptosystem:
         self.private_key = (R_inv, self.private_basis)
 
     def generate_keys(self):
-        if self.debug:
-            print("[GGH] Generating private basis...")
         tries = 0
-        time_start = time.time()
         l = 4
         k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
-        
+        if self.debug:
+            print("[GGH] Generating private basis...")
+            time_start = time.time()
         while True:
             try:
                 R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
@@ -154,32 +153,37 @@ class GGHCryptosystem:
                 break
 
         if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start} with {tries} tries")
+            priv_time = time.time() - time_start
+            print(f"[GGH] Time taken: {priv_time} with {tries} tries")
 
         self.private_basis = R
 
         if not self.sigma:
+            if self.debug:
+                print("[GGH] Generating sigma...")
+                time_start = time.time()
             self.sigma = self.generate_sigma(R_inv)
-
-        if self.debug:
-            print(f"Generated sigma is {self.sigma}")
-
-        if self.debug:
-            print(f"Generating unimodular matrix...")
-        time_start = time.time()
+            if self.debug:
+                sigma_time = time.time() - time_start
+                print(f"Generated sigma is {self.sigma}, time taken: {sigma_time}")
 
         if not self.unimodular:
+            if self.debug:
+                print(f"Generating unimodular matrix...")
+                time_start = time.time()
             self.unimodular = self.random_unimodular(self.dimension, 2)
+            if self.debug:
+                unim_time = time.time() - time_start
+                print(f"[GGH] Time taken: {unim_time}")
 
-        if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start}")
 
         if self.debug:
             print(f"[GGH] Generating public basis...")
-        time_start = time.time()
+            time_start = time.time()
         self.public_basis = self.unimodular * self.private_basis
         if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start}")
+            pub_time = time.time() - time_start
+            print(f"[GGH] Time taken: {pub_time}")
 
         self.public_key = (self.public_basis, self.sigma)
         self.private_key = (R_inv, R)
@@ -187,7 +191,7 @@ class GGHCryptosystem:
     def encrypt(self):
         if self.debug:
             print(f"[GGH] Encrypting...")
-        time_start = time.time()
+            time_start = time.time()
         if self.error is None:
             self.generate_error()
 
@@ -198,18 +202,20 @@ class GGHCryptosystem:
 
         self.ciphertext = self.message * B + self.error
         if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start}")
+            enc_time = time.time() - time_start
+            print(f"[GGH] Time taken: {enc_time}")
 
     def decrypt(self):
         if self.debug:
             print(f"[GGH] Decrypting...")
-        time_start = time.time()
+            time_start = time.time()
         
         CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
         
         result = CVP * self.public_basis.inv()
 
         if self.debug:
-            print(f"[GGH] Time taken: {time.time() - time_start}")
+            dec_time = time.time() - time_start
+            print(f"[GGH] Time taken: {dec_time}")
 
         return result
