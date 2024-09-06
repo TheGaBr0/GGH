@@ -90,12 +90,7 @@ class GGHHNFCryptosystem:
         return norms[norms.index(min_norm)]
 
     def calculate_rho(self, basis):
-        if self.debug:
-            print("[GGH-HNF] Gram Schmidt orthogonalization started...")
-        time_start = time.time()
         basis_orthogonalized = Utils.gram_schmidt(basis)
-        if self.debug:
-            print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
         min_norm = self.min_norm_row(basis_orthogonalized)
         rho = Decimal(0.5) * min_norm
 
