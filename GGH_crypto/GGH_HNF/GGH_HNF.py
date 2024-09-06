@@ -172,7 +172,8 @@ class GGHHNFCryptosystem:
                     break
         
         if self.debug:
-            print(f"[GGH-HNF] Time taken: {time.time() - time_start} with {tries} tries")
+            priv_time = time.time() - time_start
+            print(f"[GGH-HNF] Time taken: {priv_time} with {tries} tries")
         self.private_basis = R
 
         if self.rho_check:
@@ -181,14 +182,16 @@ class GGHHNFCryptosystem:
                 print("[GGH-HNF] Calculating rho...")
             self.R_rho = self.calculate_rho(self.private_basis)
             if self.debug:
-                print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
+                rho_time = time.time() - time_start
+                print(f"[GGH-HNF] Time taken: {rho_time}")
 
         if self.debug:
             print("[GGH-HNF] Generating public basis...")
             time_start = time.time()
         self.public_basis = H = R.hnf()
         if self.debug:
-            print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
+            pub_time = time.time() - time_start
+            print(f"[GGH-HNF] Time taken: {pub_time}")
 
         self.public_key = (H, self.R_rho)
 
@@ -206,7 +209,8 @@ class GGHHNFCryptosystem:
 
         self.ciphertext = r - x * H
         if self.debug:
-            print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
+            enc_time = time.time() - time_start
+            print(f"[GGH-HNF] Time taken: {enc_time}")
 
     def decrypt(self):
         if self.debug:
@@ -216,7 +220,8 @@ class GGHHNFCryptosystem:
         CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
 
         if self.debug:
-            print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
+            dec_time = time.time() - time_start
+            print(f"[GGH-HNF] Time taken: {dec_time}")
 
 
         return fmpq_mat(self.ciphertext) - CVP
