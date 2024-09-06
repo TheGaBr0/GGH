@@ -143,7 +143,7 @@ class GGHHNFCryptosystem:
         if self.GGH_private:
             if self.debug:
                 print("[GGH-HNF] Generating private basis using GGH's matrix transformations technique...")
-            time_start = time.time()
+                time_start = time.time()
             l = n
             k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
             
@@ -163,7 +163,7 @@ class GGHHNFCryptosystem:
         else:
             if self.debug:
                 print("[GGH-HNF] Generating private basis using Micciancio's random matrices tecnique...")
-            time_start = time.time()
+                time_start = time.time()
             while True:
                 try:
                     R = fmpz_mat([[random.randint(-n, n - 1) for _ in range(n)] for _ in range(n)])
@@ -182,12 +182,15 @@ class GGHHNFCryptosystem:
 
         if self.rho_check:
             if self.debug:
+                time_start = time.time()
                 print("[GGH-HNF] Calculating rho...")
             self.R_rho = self.calculate_rho(self.private_basis)
+            if self.debug:
+                print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
 
         if self.debug:
             print("[GGH-HNF] Generating public basis...")
-        time_start = time.time()
+            time_start = time.time()
         self.public_basis = H = R.hnf()
         if self.debug:
             print(f"[GGH-HNF] Time taken: {time.time() - time_start}")
@@ -199,7 +202,7 @@ class GGHHNFCryptosystem:
     def encrypt(self):
         if self.debug:
             print(f"[GGH-HNF] Encrypting...")
-        time_start = time.time()
+            time_start = time.time()
         if self.lattice_point is None:
             x = self.reduce_mod_B()
         
@@ -213,7 +216,7 @@ class GGHHNFCryptosystem:
     def decrypt(self):
         if self.debug:
             print(f"[GGH-HNF] Decrypting...")
-        time_start = time.time()
+            time_start = time.time()
         
         CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
 
