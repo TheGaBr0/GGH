@@ -13,23 +13,38 @@ funzioni, organizzate per categoria.
 \subsection{Conversione e norme}
 
 La prima categoria di funzioni trattate riguarda quelle relative alla conversione e 
-alle norme. Per quanto riguarda la conversione, l'unica funzione disponibile è 
-\texttt{sympy\_to\_fmpz\_mat}, illustrata nella figura \ref{fig:utilsconversion}.
-Come suggerisce il nome, questa funzione esegue la trasformazione di 
-oggetti \texttt{Sympy} in \texttt{fmpz\_mat}. La conversione inversa non è 
-necessaria, poiché \texttt{Sympy} è in grado di interpretare istanze FLINT 
-convertite in liste tramite il metodo \texttt{tolist} integrato in quest'ultimo.
+alle norme. Per quanto riguarda la conversione, sono presenti solo due funzioni specifiche:  
+\texttt{npsp\_to\_fmpz\_mat} e \texttt{npsp\_to\_fmpq\_mat}, illustrate rispettivamente in 
+Figura \ref{fig:npsp_to_fmpz_mat} e Figura \ref{fig:npsp_to_fmpq_mat}.
+Come suggerisce il nome, queste funzioni eseguono la trasformazione di 
+oggetti \texttt{Numpy} o \texttt{Sympy} in \texttt{fmpz\_mat} e \texttt{fmpq\_mat}. 
+La conversione inversa non è necessaria, poiché \texttt{Numpy} e \texttt{Sympy} sono
+in grado di interpretare 
+istanze FLINT convertite in liste tramite il metodo \texttt{tolist} integrato in quest'ultimo.
 Ulteriori conversioni non necessitano di funzioni proprie in quanto sono strettamente 
 specifiche al contesto in cui si trovano. 
 \begin{figure}[h]
     \begin{python}
-        def sympy_to_fmpz_mat(basis_sympy):
+        def sympy_to_fmpz_mat(basis):
             return fmpz_mat([[int(item) for item in sublist] 
-                    for sublist in basis_sympy.tolist()])
+                    for sublist in basis.tolist()])
     \end{python}
-    \caption{Funzione di conversione da oggetti \texttt{sympy} a \texttt{fmpz\_mat} 
-    contenuta nel modulo \texttt{Utils}.}
-    \label{fig:utilsconversion}
+    \caption{Funzione di conversione da oggetti \texttt{Numpy} o \texttt{Sympy} a 
+    \texttt{fmpz\_mat} contenuta nel modulo \texttt{Utils}.}
+    \label{fig:npsp_to_fmpz_mat}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{python}
+        def npsp_to_fmpq_mat(basis):
+            fractions = [[Fraction(item) for item in row] 
+                                    for row in basis.tolist()]
+            return fmpq_mat([[fmpq(f.numerator, f.denominator) 
+                                for f in row] for row in fractions])
+    \end{python}
+    \caption{Funzione di conversione da oggetti \texttt{Numpy} o \texttt{Sympy} a 
+    \texttt{fmpq\_mat} contenuta nel modulo \texttt{Utils}.}
+    \label{fig:npsp_to_fmpq_mat}
 \end{figure}
 
 Le norme contenute in \texttt{Utils} includono la L1 ed L2. La norma 
@@ -312,7 +327,7 @@ La funzione \texttt{get\_hadamard\_ratio} accetta solo due parametri, ovvero:
             
             for i in range(matrix.nrows()):
                 row = fmpz_mat([[matrix[i, j] 
-                                    for j in range(matrix.ncols())]])
+                                for j in range(matrix.ncols())]])
                 norm = Utils.vector_l2_norm(row)
                 norms.append(Decimal(str(norm)))
             
@@ -337,19 +352,35 @@ del rapporto di Hadamard il problema può verificarsi nella produttoria di norme
 che nel caso di matrici a grandi dimensioni, può causare un overflow. 
 La funzione ritorna infine due valori: il risultato sottoforma di oggetto \texttt{Decimal}
 e una sua versione formattata in stringa e limitata a \texttt{precision} cifre dopo la virgola. \\
+La seconda tipologia, relativa alla riduzione di una base reticolare, è invece composta
+dalle due funzioni \texttt{gram\_schmidt} e \texttt{BKZ\_reduction}. La prima, nient'altro 
+è, che un'implementazione in Python dell'Algoritmo \ref{alg:two}, attraverso l'uso del
+modulo \texttt{Numpy}. La costruzione inizialmente utilizzava esclusivamente oggetti FLINT 
+e costrutti Python, ma dopo vari esperimenti venne scartata a causa dei tempi di calcolo 
+eccessivi: per ortogonalizzare una matrice di 300 dimensioni era necessaria oltre 
+un'ora di elaborazione. La nuova implementazione, osservabile in Figura \ref{fig:utils_gram_schmidt}
+è invece in grado di ottenere i medesimi risultati riducendo però ad una manciata di 
+secondi il tempo di computazione richiesto a parità di input. 
+La base in input necessita una conversione da \texttt{fmpz\_mat} ad 
+array \texttt{Numpy} mentre, vicevers, l'output riceve il procedimento inverso con l'uso 
+di \texttt{npsp\_to\_fmpq\_mat}.
 
-\begin{figure}[h]
-    \centering
-    \begin{tabular}{l}
-        \texttt{wsl fplll input.txt -a bkz -b 20 -p 100} \\
-        \texttt{-f mpfr -m proved -bkzautoabort > out.txt}
-    \end{tabular}
-    \caption{Comando Windows FPLLL per una riduzione BKZ-20 con auto-abort.}
-    \label{fig:bkzcommand1}
+\begin{figure}[H]
+    \begin{python}
+        def gram_schmidt(basis):
+            B = basis[0:1,:].copy()
+            for i in range(1, basis.shape[0]):
+                proj = np.diag((basis[i,:].dot(B.T)
+                        /np.linalg.norm(B,axis=1)**2).flat).dot(B)
+
+                B = np.vstack((B, basis[i,:] - proj.sum(0)))
+            return B
+    \end{python}
+    \caption{Funzione del modulo \texttt{Utils} per l'ortogonalizzazione Gram-Schmidt.}
+    \label{fig:utils_gram_schmidt}
 \end{figure}
 
-La seconda tipologia, relativa alla riduzione di una base reticolare, è invece rappresentata
-dalla funzione \texttt{BKZ\_reduction}, che come da nome, esegue una riduzione BKZ alla 
+La seconda ed ultima funzione \texttt{BKZ\_reduction} invece esegue una riduzione BKZ alla 
 base passata come input. Gli altri parametri di questa funzione sono gli stessi 
 descritti precedentemente nella sezione che illustra la funzione \texttt{embedding\_technique}. 
 Tutti questi parametri vengono direttamente utilizzati nella costruzione del comando 
@@ -372,16 +403,15 @@ Nelle figure
 \ref{fig:bkzcommand1} e \ref{fig:bkzcommand2} è possibile osservare due esempi di comandi
 che sono stati impiegati per attaccare GGH attraverso il metodo di Nguyen in sezione X.  
 
+
 \begin{figure}[h]
     \centering
     \begin{tabular}{l}
-        \texttt{fplll input.txt -a bkz -b 60 -p 100 } \\
-        \texttt{-f mpfr -m proved -s default.json} \\
-        \texttt{-bkzmaxloops 30 -nolll > out.txt}
+        \texttt{wsl fplll input.txt -a bkz -b 20 -p 100} \\
+        \texttt{-f mpfr -m wrapper -bkzautoabort > out.txt}
     \end{tabular}
-    \caption{Comando Linux FPLLL per BKZ-60 prunato con auto-abort a 30 iterazioni, 
-    senza riduzione LLL preliminare.}
-    \label{fig:bkzcommand2}
+    \caption{Comando Windows FPLLL per una riduzione BKZ-20 con auto-abort.}
+    \label{fig:bkzcommand1}
 \end{figure}
 
 Dopo che il comando è stato generato, viene eseguito utilizzando il modulo \texttt{subprocess}
@@ -393,3 +423,14 @@ viene salvato in un file \texttt{out.txt} e poi caricato in un oggetto attravers
 \texttt{load\_matrix\_from\_file}. 
 Infine entrambi i file di input e output vengono cancellati e la matrice caricata viene
 ritornata. 
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{l}
+        \texttt{fplll input.txt -a bkz -b 60 -p 100 -bkzmaxloops 30} \\
+        \texttt{-s default.json -f mpfr -m wrapper -nolll > out.txt} \\
+    \end{tabular}
+    \caption{Comando Linux FPLLL per BKZ-60 prunato con auto-abort a 30 iterazioni, 
+    senza riduzione LLL preliminare.}
+    \label{fig:bkzcommand2}
+\end{figure}

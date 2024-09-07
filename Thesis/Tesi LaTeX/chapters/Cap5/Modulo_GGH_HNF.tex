@@ -12,14 +12,6 @@ e sono soggetti agli stessi controlli. I nuovi parametri invece sono i seguenti:
     \item \texttt{lattice\_point} (\texttt{fmpz\_mat}, default: \texttt{None}) : 
     Vettore rappresentante un punto del reticolo, il quale, una volta moltiplicato con la
     base pubblica, verrà sottratto ad \texttt{error} in fase di cifratura.
-    \item \texttt{rho\_check} (\texttt{Boolean}, default: \texttt{True}):
-    Se \texttt{True}, impone un controllo sulla lunghezza del vettore di errore durante 
-    la generazione, assicurando che sia inferiore a $0.9\rho$. Questa opzione viene 
-    ignorata se \texttt{error} $\neq$ \texttt{None}.
-    \item \texttt{error\_bound} (\texttt{Integer}, default: 3)
-    Parametro intero che determina i limiti superiori e inferiori dei numeri casuali 
-    generati per il parametro \texttt{error} quando \texttt{rho\_check} è impostato su 
-    \texttt{False}. 
     \item \texttt{GGH\_private} (\texttt{Boolean}, default: \texttt{False}):
     Se \texttt{True}, utilizza la tecnica di generazione della base privata di GGH invece di 
     quella proposta da Micciancio. 
@@ -38,8 +30,8 @@ sulla tecnica proposta da Micciancio.
 
 \subsubsection{Chiave privata}
 
-Come per GGH, la chiave privata è rappresentata dalla tupla $(\mathbf{R}, \mathbf{R}^{-1})$.
-La funzione di generazione della base privata si articola in due fasi indipendenti, 
+Come per GGH, la chiave privata è rappresentata dalla sola base privata $\mathbf{R}$.
+La funzione che si occupa della sua generazione si articola in due fasi indipendenti, 
 determinate dal parametro \texttt{GGH\_private}. Se \texttt{GGH\_private}
 è settato a \texttt{True}, viene utilizzato l'algoritmo impiegato nell'implementazione di GGH.
 In caso contrario, il programma avvia un ciclo in cui genera matrici di numeri casuali 
@@ -83,24 +75,16 @@ l'Equazione \ref{eq:HNFencryption}. Data $\mathbf{B}$, due sono gli elementi man
 del reticolo e l'errore $\mathbf{e}$. Il primo valore viene calcolato direttamente usando
 l'Equazione \ref{eq:HNFreduction}  che sfrutta interamente le matrici FLINT e l'operazione 
 arrotondamento per difetto nativa di Python. 
-La generazione dell'errore utilizza invece una funzione più complessa, che impiega un 
-metodo differente in base al valore di \texttt{rho\_check}, a seconda che sia impostato 
-su \texttt{True} o \texttt{False}. In entrambi i casi il vettore di errore viene creato 
-casualmente attraverso il modulo \texttt{Random}. 
-Se \texttt{rho\_check} è vero, l'errore $\mathbf{e}$ viene 
-generato attraverso un processo iterativo che inizia con la creazione di un vettore 
-casuale nell'intervallo $[-\texttt{dimension}, \texttt{dimension}]$ .
- Viene calcolata poi la lunghezza del vettore che deve essere inferiore
-a $\rho$ meno il 10\%, se cosi non fosse il vettore 
-viene rigenerato con valori casuali più piccoli, finché non si ottiene un errore che 
-soddisfa il criterio desiderato. Se \texttt{rho\_check} è falso invece viene costruito un
-vettore random utilizzando come intervallo $[-\texttt{error\_bound}, \texttt{error\_bound}]$,
-senza effettuare alcun controllo sul $\rho$ evitando di calcolarlo direttamente. Questa
-modalità consente alla fase di cifratura una diminuizione del tempo richiesto considerevole
-come può essere osservato in Tabella X sezione X. Il principale svantaggio però è che, se
-\texttt{error\_bound} risulta troppo lungo rispetto a $\rho$, allora la decifratura non 
-avrà successo. 
-
+La generazione dell'errore utilizza una funzione che crea un vettore di errore casuale
+attraverso il modulo \texttt{Random}. Il vettore di errore viene generato attraverso un processo 
+iterativo che inizia con la creazione di un vettore casuale nell'intervallo 
+[-\texttt{dimension}, \texttt{dimension}]. Viene calcolata poi la lunghezza del vettore che 
+deve essere inferiore a $\alpha\rho$ con $\alpha$ che rappresenta un coefficiente moltiplicativo 
+compreso tra 0 e 1. Se così non fosse, il vettore viene rigenerato con valori casuali 
+più piccoli, finché non si ottiene un errore che soddisfa il criterio desiderato. 
+Questo metodo assicura che l'errore generato sia sempre entro i limiti accettabili definiti
+dal $\rho$ e che quindi la decifratura con base privata abbia una probabilità di successo
+legata al parametro $\alpha$.
 \subsubsection{Decifratura}
 
 La decifratura, come introdotto, segue gli stessi passaggi di GGH, con l'unica differenza 

@@ -39,23 +39,23 @@
 \contentsline {section}{\numberline {5.2}Modulo GGH}{42}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Generazione delle chiavi}{43}{subsection.5.2.1}%
 \contentsline {subsubsection}{Chiave privata}{43}{section*.16}%
-\contentsline {subsubsection}{Chiave pubblica}{44}{section*.17}%
+\contentsline {subsubsection}{Chiave pubblica}{43}{section*.17}%
 \contentsline {subsection}{\numberline {5.2.2}Cifratura e decifratura}{44}{subsection.5.2.2}%
 \contentsline {subsubsection}{Cifratura}{44}{section*.18}%
 \contentsline {subsubsection}{Decifratura}{45}{section*.19}%
 \contentsline {subsection}{\numberline {5.2.3}Caso d'uso}{45}{subsection.5.2.3}%
 \contentsline {section}{\numberline {5.3}Modulo GGH-HNF}{46}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1}Generazione delle chiavi}{46}{subsection.5.3.1}%
-\contentsline {subsubsection}{Chiave privata}{47}{section*.21}%
+\contentsline {subsubsection}{Chiave privata}{46}{section*.21}%
 \contentsline {subsubsection}{Chiave pubblica}{47}{section*.22}%
 \contentsline {subsection}{\numberline {5.3.2}Cifratura e decifratura}{47}{subsection.5.3.2}%
-\contentsline {subsubsection}{Cifratura}{48}{section*.23}%
+\contentsline {subsubsection}{Cifratura}{47}{section*.23}%
 \contentsline {subsubsection}{Decifratura}{48}{section*.24}%
 \contentsline {subsection}{\numberline {5.3.3}Caso d'uso}{48}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}Modulo Utils}{49}{section.5.4}%
+\contentsline {section}{\numberline {5.4}Modulo Utils}{48}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}Conversione e norme}{49}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Scrittura e lettura su file}{50}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Visualizzazione grafica}{51}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Algoritmi di risoluzione del CVP}{53}{subsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.4.2}Scrittura e lettura su file}{49}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Visualizzazione grafica}{50}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Algoritmi di risoluzione del CVP}{52}{subsection.5.4.4}%
 \contentsline {subsection}{\numberline {5.4.5}Riduzione e qualità di una base}{55}{subsection.5.4.5}%
-\contentsline {chapter}{\numberline {6}Risultati sperimentali}{58}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Risultati sperimentali}{59}{chapter.6}%

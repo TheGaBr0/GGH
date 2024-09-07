@@ -1,1 +1,76 @@
 \chapter{Risultati sperimentali}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{*}{Dimensione} & 
+        \multicolumn{2}{c|}{Tempo chiave privata (s)} & 
+        \multicolumn{2}{c|}{Tempo chiave pubblica (s)} \\
+        \cline{2-5}
+        & GGH & GGH-HNF & GGH & GGH-HNF \\
+        \hline
+        100 & 0.140 & 0.246 & 0.363 & 0.026 \\
+        200 & 1.557 & 3.171 & 2.110 & 0.200 \\
+        300 & 6.964 & 13.514 & 6.486 & 0.673 \\
+        400 & 19.064 & 40.431 & 17.119 & 1.372 \\
+        500 & 43.148 & 94.615 & 34.368 & 3.396 \\
+        600 & 93.651 & 239.462 & 62.038 & 6.930 \\
+        700 & 158.663 & 404.155 & 98.639 & 12.798 \\
+        800 & 346.433 & 711.288 & 155.798 & 17.628 \\
+        \hline
+    \end{tabular}
+    \caption{Confronto dei tempi di generazione delle chiavi GGH e GGH-HNF.}
+    \raggedright
+    \small{$^*$GGH-HNF con \texttt{rho\_check=False} e \texttt{GGH\_private=False}.}
+    \label{tab:key_gen_comparison}
+\end{table}
+
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{*}{Dimensione} & 
+        \multicolumn{2}{c|}{Tempo di cifratura (s)} & 
+        \multicolumn{2}{c|}{Tempo di decifratura (s)} \\
+        \cline{2-5}
+        & GGH & GGH-HNF & GGH & GGH-HNF \\
+        \hline
+        100 & $\approx$0 & 0.001 & 0.331 & 0.225 \\
+        200 & $\approx$0 & 0.005 & 3.531 & 2.924 \\
+        300 & 0.003 & 0.010 & 14.744 & 12.835 \\
+        400 & 0.014 & 0.022 & 42.559 & 39.237 \\
+        500 & 0.025 & 0.035 & 102.352 & 92.531 \\
+        600 & 0.041 & 0.047 & 224.612 & 233.293 \\
+        700 & 0.048 & 0.070 & 376.845 & 405.199 \\
+        800 & 0.069 & 0.077 & 857.904 & 696.020 \\
+        \hline
+    \end{tabular}
+    \caption{Confronto dei tempi di cifratura e decifratura GGH e GGH-HNF.}
+    \label{tab:enc_dec_comparison}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{*}{Dimensione} & 
+        \multicolumn{2}{c|}{Dimensione chiave privata (MB)} & 
+        \multicolumn{2}{c|}{Dimensione chiave pubblica (MB)} \\
+        \cline{2-5}
+        & GGH & GGH-HNF & GGH & GGH-HNF \\
+        \hline
+        100 & 0.024 & 0.034 & 0.098 & 0.044 \\
+        200 & 0.096 & 0.153 & 0.654 & 0.191 \\
+        300 & 0.216 & 0.358 & 2.072 & 0.452 \\
+        400 & 0.383 & 0.650 & 4.963 & 0.832 \\
+        500 & 0.598 & 1.028 & 9.057 & 1.335 \\
+        600 & 0.861 & 1.493 & 15.698 & 1.962 \\
+        700 & 1.172 & 2.043 & 24.149 & 2.718 \\
+        800 & 1.530 & 2.680 & 36.280 & 3.602 \\
+        \hline
+    \end{tabular}
+    \caption{Confronto delle dimensioni delle chiavi GGH e GGH-HNF.}
+    \label{tab:key_size_comparison}
+\end{table}

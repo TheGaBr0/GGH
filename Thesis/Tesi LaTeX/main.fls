@@ -296,6 +296,8 @@ INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\base\ifthen.sty
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\base\ifthen.sty
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\relsize\relsize.sty
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\relsize\relsize.sty
+INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\pythonhighlight\pythonhighlight.sty
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\pythonhighlight\pythonhighlight.sty
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.sty
@@ -521,6 +523,7 @@ INPUT .\chapters\Cap6\Risultati_sperimentali.tex
 INPUT chapters\Cap6\Risultati_sperimentali.tex
 INPUT .\chapters\Cap6\Risultati_sperimentali.tex
 INPUT chapters\Cap6\Risultati_sperimentali.tex
+INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
 INPUT main.aux
 INPUT C:\Users\gbott\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
 INPUT C:\Users\gbott\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk

@@ -27,6 +27,8 @@ print(f"error: {decrypted_message}")
 
 n = B.nrows()
 
+exit()
+
 # Create the initial matrix with R and a column of zeros
 matrix_emb = fmpz_mat([[int(B[i,j]) if j < n else 0 for j in range(n+1)] for i in range(n)])
 

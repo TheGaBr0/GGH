@@ -80,9 +80,9 @@ class GGHCryptosystem:
 
         return Utils.npsp_to_fmpz_mat(T)
 
-    def generate_sigma(self, R_inv):
+    def generate_sigma(self, R):
         getcontext().prec = 50
-        rho = Utils.vector_l1_norm(R_inv)
+        rho = Utils.vector_l1_norm(R.inv())
 
         sigma_max = 1 / (2 * rho)
 
@@ -139,17 +139,14 @@ class GGHCryptosystem:
             print("[GGH] Generating private basis...")
             time_start = time.time()
         while True:
-            try:
-                R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
-                I = Utils.npsp_to_fmpz_mat(sp.eye(self.dimension))
-                KI = k * I
-                R += KI
-                R_inv = R.inv()
-                tries += 1
-            except Exception as e:
-                print(e)
-                continue
-            else:
+            R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
+            I = Utils.npsp_to_fmpz_mat(sp.eye(self.dimension))
+            KI = k * I
+            R += KI
+            
+            tries += 1
+
+            if R.det() != 0:
                 break
 
         if self.debug:
@@ -162,7 +159,7 @@ class GGHCryptosystem:
             if self.debug:
                 print("[GGH] Generating sigma...")
                 time_start = time.time()
-            self.sigma = self.generate_sigma(R_inv)
+            self.sigma = self.generate_sigma(R)
             if self.debug:
                 sigma_time = time.time() - time_start
                 print(f"Generated sigma is {self.sigma}, time taken: {sigma_time}")
@@ -186,7 +183,7 @@ class GGHCryptosystem:
             print(f"[GGH] Time taken: {pub_time}")
 
         self.public_key = (self.public_basis, self.sigma)
-        self.private_key = (R_inv, R)
+        self.private_key = R
 
     def encrypt(self):
         if self.debug:

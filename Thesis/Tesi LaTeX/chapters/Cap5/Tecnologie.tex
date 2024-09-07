@@ -71,7 +71,8 @@ sistemi operativi più comuni, che
 possono risultare insufficienti per calcoli che richiedono una precisione estremamente 
 elevata o che coinvolgono numeri al di fuori del range rappresentabile con 64 bit. 
 Questa limitazione può portare a errori di arrotondamento o overflow in operazioni 
-matematiche complesse o con numeri estremamente grandi.
+matematiche complesse o con numeri estremamente grandi, resta comunque possibile e utile
+l'uso di questo modulo, ma con molta attenzione al tipo di calcoli affidatogli.
 Per ottimizzare queste operazioni mantenendo al contempo il vantaggio della precisione 
 arbitraria di Python, si è scelto di integrare una libreria specializzata scritta in un 
 linguaggio ad alte prestazioni. La Fast Library for Number Theory \cite{FLINT} (FLINT) è stata 
@@ -85,7 +86,12 @@ semplificare il codice, è stato necessario utilizzare altre librerie esterne di
 I principali moduli e librerie utilizzati nel progetto, oltre a FLINT, sono:
 
 \begin{itemize}
-    \item \texttt{Sympy}: Modulo Python dedicato ai calcoli simbolici a precisione arbitraria.
+    \item \texttt{Numpy}: Modulo esterno che, come già introdotto, si specializza in calcoli
+    numerici e matematici con particolare attenzione all'efficienza. Il suo utilizzo può
+    diventare rischioso a causa della sua limitata precisione a "soli" 64 bit, per questo 
+    il suo utilizzo è confinato in contesti testati e dalla relativa importanza  numerica, 
+    dove la precisione limitata non compromette l'accuratezza dei risultati finali.
+    \item \texttt{Sympy}: Modulo esterno dedicato ai calcoli simbolici a precisione arbitraria.
     Utilizzato come supporto a FLINT grazie alle sue numerose funzioni già pronte e il 
     mantenimento della precisione nei calcoli. A causa delle sue basse performance, il suo
     utilizzo è strettamente limitato a funzioni di bassa complessità.
@@ -109,7 +115,8 @@ Nello specifico:
     che offre implementazioni in virgola mobile di vari algoritmi di riduzione per reticoli, tra cui
     anche LLL.
     \item Per l'algoritmo di Gram-Schmidt, non avendo trovato un'implementazione rapida 
-    e facilmente integrabile, si è proceduto a una riscrittura in Python.
+    e facilmente integrabile, si è proceduto a una riscrittura in Python attraverso l'uso 
+    di \texttt{Numpy}.
 \end{itemize}
 
 E' importante precisare che FPLLL è disponibile solo per il sistema operativo Linux, impedendo
