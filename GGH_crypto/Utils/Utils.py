@@ -9,36 +9,15 @@ import ast
 from fractions import Fraction
 import re
 import time
+import numpy as np
 
 class Utils:
-    def gram_schmidt(matrix_fmpz):
-        matrix = fmpq_mat(matrix_fmpz)
-        n, m = matrix.nrows(), matrix.ncols()
-        
-        result = fmpq_mat(n, m)
-        w_array = [[fmpq(0) for _ in range(m)] for _ in range(n)]
-
-        for i in range(n):
-            v_i = [matrix[i, j] for j in range(m)]
-            w_i = v_i[:]
-            
-            for j in range(i):
-                w_j = w_array[j]
-                
-                # Calculate dot products
-                dot_v_w = sum(v_i[k] * w_j[k] for k in range(m))
-                dot_w_w = sum(w_j[k] * w_j[k] for k in range(m))
-                
-                # Perform subtraction
-                factor = dot_v_w / dot_w_w
-                w_i = [w_i[k] - factor * w_j[k] for k in range(m)]
-            
-            w_array[i] = w_i
-            
-            for j in range(m):
-                result[i, j] = w_i[j]
-
-        return result
+    def gram_schmidt(basis):
+        ortho_basis = basis[0:1,:].copy()
+        for i in range(1, basis.shape[0]):
+            proj = np.diag((basis[i,:].dot(ortho_basis.T)/np.linalg.norm(ortho_basis,axis=1)**2).flat).dot(ortho_basis)
+            ortho_basis = np.vstack((ortho_basis, basis[i,:] - proj.sum(0)))
+        return ortho_basis
     
     def visualize_lattice(basis_1, basis_1_cvp, point, basis_2=None, basis_2_cvp=None, title="Lattice Plot", limit=5):
         basis_1_np = np.array(basis_1.tolist()).astype(int)
@@ -203,9 +182,12 @@ class Utils:
 
         return closest_vector
     
-        
-    def sympy_to_fmpz_mat(basis_sympy):
-        return fmpz_mat([[int(item) for item in sublist] for sublist in basis_sympy.tolist()])
+    def npsp_to_fmpq_mat(basis):
+        fractions = [[Fraction(item) for item in row] for row in basis.tolist()]
+        return fmpq_mat([[fmpq(f.numerator, f.denominator) for f in row] for row in fractions])
+
+    def npsp_to_fmpz_mat(basis):
+        return fmpz_mat([[int(item) for item in sublist] for sublist in basis.tolist()])
         
     def vector_l1_norm(row):
         if isinstance(row, fmpz_mat):
@@ -290,7 +272,7 @@ class Utils:
         output_path = Utils.write_matrix_to_file(matrix, 'out.txt')
 
         if os.name == 'nt':
-            command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -y -bkzdumpgso debug{block}.txt "
+            command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -m wrapper -f mpfr -y -bkzdumpgso debug{block}.txt"
             if pruned:
                 command += " -s default.json"
             if bkzautoabort:

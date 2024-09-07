@@ -78,7 +78,7 @@ class GGHCryptosystem:
                 # Reset x for the next iteration
                 x[0, i] = 0
 
-        return Utils.sympy_to_fmpz_mat(T)
+        return Utils.npsp_to_fmpz_mat(T)
 
     def generate_sigma(self, R_inv):
         getcontext().prec = 50
@@ -129,7 +129,7 @@ class GGHCryptosystem:
                 print("[GGH] Using the provided public basis as the public key")
         
         self.public_key = (self.public_basis, self.sigma)
-        self.private_key = (R_inv, self.private_basis)
+        self.private_key = self.private_basis
 
     def generate_keys(self):
         tries = 0
@@ -141,7 +141,7 @@ class GGHCryptosystem:
         while True:
             try:
                 R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
-                I = Utils.sympy_to_fmpz_mat(sp.eye(self.dimension))
+                I = Utils.npsp_to_fmpz_mat(sp.eye(self.dimension))
                 KI = k * I
                 R += KI
                 R_inv = R.inv()

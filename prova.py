@@ -1,5 +1,5 @@
 from flint import *
-from GGH_crypto import Utils
+from GGH_crypto import Utils, GGHCryptosystem
 
 mat = Utils.load_matrix_from_file("totry.txt")
 
