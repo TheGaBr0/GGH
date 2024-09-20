@@ -10,6 +10,7 @@ from fractions import Fraction
 import re
 import time
 import numpy as np
+import random
 
 class Utils:
     def gram_schmidt(basis):
@@ -267,12 +268,14 @@ class Utils:
             raise ValueError("Invalid matrix_type. Use 'fmpz' or 'fmpq'.")
 
     def BKZ_reduction(matrix, block=20, pruned=False, precision=90, bkzautoabort=True, bkzmaxloops=None, nolll=False):
+        
+        short_id = f"{int(time.time())%10000:04d}{random.randint(1000,9999)}"
 
-        input_path = Utils.write_matrix_to_file(matrix, 'input.txt')
-        output_path = Utils.write_matrix_to_file(matrix, 'out.txt')
+        input_path = Utils.write_matrix_to_file(matrix, f'input_{short_id}.txt')
+        output_path = Utils.write_matrix_to_file(matrix, f'output_{short_id}.txt')
 
         if os.name == 'nt':
-            command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -m wrapper -f mpfr -y -bkzdumpgso debug{block}.txt"
+            command = f"wsl fplll input_{short_id}.txt -a bkz -b {block} -p {precision} -m wrapper -f mpfr -bkzdumpgso debug{block}_{short_id}.txt"
             if pruned:
                 command += " -s default.json"
             if bkzautoabort:
@@ -281,9 +284,9 @@ class Utils:
                 command += f" -bkzmaxloops {bkzmaxloops}"
             if nolll:
                 command += " -nolll"
-            command += " > out.txt"
+            command += f" > output_{short_id}.txt"
         else:
-            command = f"fplll input.txt -a bkz -b {block} -p {precision} -f mpfr -y -bkzdumpgso debug{block}.txt"
+            command = f"fplll input.txt_{short_id} -a bkz -b {block} -p {precision} -m wrapper -f mpfr -bkzdumpgso debug{block}_{short_id}.txt"
             if pruned:
                 command += " -s default.json"
             if bkzautoabort:
@@ -292,7 +295,7 @@ class Utils:
                 command += f" -bkzmaxloops {bkzmaxloops}"
             if nolll:
                 command += " -nolll"
-            command += " > out.txt"
+            command += f" > output_{short_id}.txt"
         try:
             # Run the command and capture its output
             print(f"Reduction started with the following parameters:\n"
@@ -314,16 +317,18 @@ class Utils:
             if error:
                 if str(error).strip() != "Failure: loops limit exceeded in BKZ":
                     print("Error during reduction:", error)
+            else:
+                error = None
 
             print(f"Reduction completed, time taken: {time.time() - time_now}")
 
             # Load the reduced matrix
-            reduced_matrix = Utils.load_matrix_from_file("out.txt", "fmpz")
+            reduced_matrix = Utils.load_matrix_from_file(f"output_{short_id}.txt", "fmpz")
 
             os.remove(output_path)
             os.remove(input_path)
 
-            return reduced_matrix
+            return reduced_matrix, error
 
         except Exception as e:
             return None, str(e)

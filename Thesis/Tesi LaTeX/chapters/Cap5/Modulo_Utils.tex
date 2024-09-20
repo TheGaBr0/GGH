@@ -25,12 +25,13 @@ Ulteriori conversioni non necessitano di funzioni proprie in quanto sono stretta
 specifiche al contesto in cui si trovano. 
 \begin{figure}[h]
     \begin{python}
-        def sympy_to_fmpz_mat(basis):
+        def npsp_to_fmpz_mat(basis):
             return fmpz_mat([[int(item) for item in sublist] 
                     for sublist in basis.tolist()])
     \end{python}
-    \caption{Funzione di conversione da oggetti \texttt{Numpy} o \texttt{Sympy} a 
-    \texttt{fmpz\_mat} contenuta nel modulo \texttt{Utils}.}
+    \caption[Conversione da \texttt{Numpy} o \texttt{Sympy} in \texttt{fmpz\_mat}.]
+    {Funzione del modulo \texttt{Utils} che converte oggetti \texttt{Numpy} o \texttt{Sympy}  
+    in \texttt{fmpz\_mat}.}
     \label{fig:npsp_to_fmpz_mat}
 \end{figure}
 
@@ -42,8 +43,9 @@ specifiche al contesto in cui si trovano.
             return fmpq_mat([[fmpq(f.numerator, f.denominator) 
                                 for f in row] for row in fractions])
     \end{python}
-    \caption{Funzione di conversione da oggetti \texttt{Numpy} o \texttt{Sympy} a 
-    \texttt{fmpq\_mat} contenuta nel modulo \texttt{Utils}.}
+    \caption[Conversione da \texttt{Numpy} o \texttt{Sympy} in \texttt{fmpq\_mat}.]
+    {Funzione del modulo \texttt{Utils} che converte oggetti \texttt{Numpy} o \texttt{Sympy}  
+    in \texttt{fmpq\_mat}.}
     \label{fig:npsp_to_fmpq_mat}
 \end{figure}
 
@@ -90,7 +92,7 @@ Due sono le funzioni appartenenti a questa categoria:
     estraendo numeratore e denominatore. Questi valori vengono utilizzati per creare 
     oggetti \texttt{Fraction}, che vengono inseriti in una lista e successivamente convertiti 
     in una matrice \texttt{fmpq\_mat}, la quale viene infine restituita dalla funzione.
-
+    
 \end{itemize}
 Anche se queste due funzioni non vengono impiegate direttamente dai crittosistemi, 
 possono rivelarsi molto utili per il salvataggio di basi e vettori, facilitando così il 
@@ -100,7 +102,6 @@ vantaggioso perché la gestione dei dati tramite file rappresenta uno dei metodi
 efficaci e affidabili, soprattutto nella comunicazione tra programmi in esecuzione su Windows e su
 WSL. Utilizzare lo standard input e output potrebbe non essere 
 sufficiente, considerata la grande quantità di dati e le elevate dimensioni coinvolte.
-
 \subsection{Visualizzazione grafica}
 
 \begin{figure}[h]
@@ -161,7 +162,8 @@ vengono infine regolate automaticamente in base ai punti visualizzati.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{matplotlib.png}
-    \caption{Esempio di visualizzazione della tecnica di arrotondamento di Babai con l'ausilio
+    \caption[Esempio di output della funzione \texttt{visualize\_lattice}.]
+    {Esempio di visualizzazione della tecnica di arrotondamento di Babai con l'ausilio
     della funzione \texttt{visualize\_lattice}.}
     \label{fig:babaivisualizationout}
 \end{figure}
@@ -220,8 +222,8 @@ algoritmo, implementato attraverso la funzione \texttt{babai\_rounding},
                 
             return closest_vector
     \end{python}
-    \caption{Implementazione della tecnica di arrotondamento di Babai contenuta nel modulo 
-    \texttt{Utils}.}
+    \caption[Tecnica di arrotondamento di Babai nel modulo \texttt{Utils}.]
+    {Implementazione della tecnica di arrotondamento di Babai nel modulo \texttt{Utils}.}
     \label{fig:utilsbabai}
 \end{figure}
 
@@ -340,8 +342,7 @@ La funzione \texttt{get\_hadamard\_ratio} accetta solo due parametri, ovvero:
             
             return result, f"{result:.{precision}f}"
     \end{python}
-    \caption{Funzione implementata nel modulo \texttt{Utils} e dedicata al calcolo del rapporto
-    di Hadamard.}
+    \caption{Funzione del modulo \texttt{Utils} per il calcolo del rapporto di Hadamard.}
     \label{fig:utilshadamard}
 \end{figure}
 
@@ -384,8 +385,8 @@ La seconda ed ultima funzione \texttt{BKZ\_reduction} invece esegue una riduzion
 base passata come input. Gli altri parametri di questa funzione sono gli stessi 
 descritti precedentemente nella sezione che illustra la funzione \texttt{embedding\_technique}. 
 Tutti questi parametri vengono direttamente utilizzati nella costruzione del comando 
-\texttt{fplll}. Tale comando è proposto direttamente dalla libreria e, per una sua 
-maggiore comprensione, è possibile consultare la documentazione proposta in \cite{FPLLL}.
+\texttt{fplll}. Tale comando è proposto direttamente dalla libreria e, per una migliore 
+comprensione dei relativi parametri, si rimanda alla sezione \ref{sec:risultati_sicurezza}.
 Come inizialmente introdotto in Sezione \ref{sec:motivations}, tutti i passaggi di dati 
 tra il modulo \texttt{Utils} e \texttt{FPLLL} avviene attraverso l'uso di files, quindi 
 con l'ausilio delle funzioni \texttt{write\_matrix\_to\_file} e \texttt{load\_matrix\_from\_file}.
@@ -401,7 +402,8 @@ Su sistemi Linux nativi, invece, il comando viene eseguito
 direttamente senza alcun prefisso, poiché l'ambiente Unix-like è già disponibile.
 Nelle figure 
 \ref{fig:bkzcommand1} e \ref{fig:bkzcommand2} è possibile osservare due esempi di comandi
-che sono stati impiegati per attaccare GGH attraverso il metodo di Nguyen in sezione X.  
+che sono stati impiegati per attaccare GGH attraverso il metodo di Nguyen in Sezione 
+\ref{sec:risultati_sicurezza}.  
 
 
 \begin{figure}[h]
@@ -410,7 +412,8 @@ che sono stati impiegati per attaccare GGH attraverso il metodo di Nguyen in sez
         \texttt{wsl fplll input.txt -a bkz -b 20 -p 100} \\
         \texttt{-f mpfr -m wrapper -bkzautoabort > out.txt}
     \end{tabular}
-    \caption{Comando Windows FPLLL per una riduzione BKZ-20 con auto-abort.}
+    \caption[Comando Linux FPLLL per BKZ-20.]
+    {Comando Windows FPLLL per una riduzione BKZ-20 con auto-abort.}
     \label{fig:bkzcommand1}
 \end{figure}
 
@@ -427,10 +430,11 @@ ritornata.
 \begin{figure}[h]
     \centering
     \begin{tabular}{l}
-        \texttt{fplll input.txt -a bkz -b 60 -p 100 -bkzmaxloops 30} \\
+        \texttt{fplll input.txt -a bkz -b 60 -p 100 -bkzmaxloops 5} \\
         \texttt{-s default.json -f mpfr -m wrapper -nolll > out.txt} \\
     \end{tabular}
-    \caption{Comando Linux FPLLL per BKZ-60 prunato con auto-abort a 30 iterazioni, 
+    \caption[Comando Linux FPLLL per BKZ-60.]
+    {Comando Linux FPLLL per BKZ-60 prunato con auto-abort a 5 iterazioni, 
     senza riduzione LLL preliminare.}
     \label{fig:bkzcommand2}
 \end{figure}

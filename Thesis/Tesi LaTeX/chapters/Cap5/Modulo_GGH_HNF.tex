@@ -12,6 +12,10 @@ e sono soggetti agli stessi controlli. I nuovi parametri invece sono i seguenti:
     \item \texttt{lattice\_point} (\texttt{fmpz\_mat}, default: \texttt{None}) : 
     Vettore rappresentante un punto del reticolo, il quale, una volta moltiplicato con la
     base pubblica, verrà sottratto ad \texttt{error} in fase di cifratura.
+    \item \texttt{alpha} (\texttt{Float}, default: 0.75):
+    Valore decimale usato come fattore moltiplicativo per $\rho$ in fase di 
+    generazione dell'errore causale. La sua lughezza sarà garantita essere
+    strettamente minore di  $\alpha\rho$.
     \item \texttt{GGH\_private} (\texttt{Boolean}, default: \texttt{False}):
     Se \texttt{True}, utilizza la tecnica di generazione della base privata di GGH invece di 
     quella proposta da Micciancio. 
@@ -49,13 +53,13 @@ In GGH-HNF, infatti, $\sigma$ non è presente ed è sostituito da $\rho$.
 Pertanto, la chiave pubblica è costituita dalla tupla $(\mathbf{B}, \rho)$. Come spiegato
 in \ref{sec:ggh-hnf}, la base pubblica è ottenibile con il semplice calcolo della forma
 normale di Hermite, operazione direttamente integrata in FLINT. Al contrario invece il 
-calcolo del $\rho$ è molto più oneroso, poiché richiede l'ortogonalizzazione tramite il 
-metodo di Gram-Schmidt, descritto in Algoritmo \ref{alg:one}. Tale implementazione è 
-presente solo nel modulo Sympy ma, data la particolare forma dei parametri richiesta in input, 
-si è preferito procedere con la riscrittura dell'algoritmo integrata nel modulo \texttt{Utils}.
+calcolo del $\rho$ è più oneroso, poiché richiede l'ortogonalizzazione tramite il 
+metodo di Gram-Schmidt, descritto in Algoritmo \ref{alg:one}. Questo algoritmo è stato 
+implementato nel modulo \texttt{Utils} con l'ausilio di \texttt{Numpy}, una sua discussione più 
+approfondita può essere trovata nella sottosezione dedicata in Sezione \ref{sec:moduloutils}. 
 Dopo aver ortogonalizzato la base privata, non resta che trovare la norma minima euclidea 
 ed effettuare il calcolo come definito in Equazione \ref{eq:rho}. 
-Per determinare la norma, è stato utilizzato l'algoritmo illustrato in Figura 
+Per determinare la norma, è stata utilizzata uitilizzata la funzione illustrata in Figura 
 \ref{fig:conversione}, che sfrutta il modulo \texttt{Decimal}.
 
 \subsection{Cifratura e decifratura}
@@ -79,12 +83,12 @@ La generazione dell'errore utilizza una funzione che crea un vettore di errore c
 attraverso il modulo \texttt{Random}. Il vettore di errore viene generato attraverso un processo 
 iterativo che inizia con la creazione di un vettore casuale nell'intervallo 
 [-\texttt{dimension}, \texttt{dimension}]. Viene calcolata poi la lunghezza del vettore che 
-deve essere inferiore a $\alpha\rho$ con $\alpha$ che rappresenta un coefficiente moltiplicativo 
-compreso tra 0 e 1. Se così non fosse, il vettore viene rigenerato con valori casuali 
-più piccoli, finché non si ottiene un errore che soddisfa il criterio desiderato. 
+deve essere strettamente inferiore a $\texttt{alpha}\times\rho$. Se così non fosse, il vettore 
+viene rigenerato con valori casuali diminuendo il parametro \texttt{dimension} dal range 
+iniziale finché non si ottiene un errore che soddisfa il criterio desiderato. 
 Questo metodo assicura che l'errore generato sia sempre entro i limiti accettabili definiti
-dal $\rho$ e che quindi la decifratura con base privata abbia una probabilità di successo
-legata al parametro $\alpha$.
+dal $\rho$, dando la possibilità all'utente di poter controllare la probabilità di decifratura
+con base privata attraverso il parametro \texttt{alpha}.
 \subsubsection{Decifratura}
 
 La decifratura, come introdotto, segue gli stessi passaggi di GGH, con l'unica differenza 
@@ -94,8 +98,12 @@ di arrotondamento di Babai, come mostrato più dettagliatamente nell'Esempio \re
 La scelta di questo algoritmo per la risoluzione del CVP porta a un'ulteriore conseguenza:
 il vettore di errore $\mathbf{e}$ non basta che sia semplicemente minore di $\rho$, 
 ma è necessario che sia metodicamente minore a causa della minore precisione dell'algoritmo. 
-Esperimenti hanno dimostrato che è sufficiente un $\mathbf{e} < 0.9\rho$. 
-
+Risultati sperimentali, osservabili in Tabella \ref{tab:combined_successes_hnf} Sezione 
+\ref{sec:risultati_cifratura_decifratura}, hanno dimostrato che è sufficiente un 
+$\mathbf{e} < 0.8\rho$ per assicurare un successo con probabilità stimata del 97.92\%. 
+Inoltre, nel caso in cui il parametro \texttt{GGH\_private} sia impostato su \texttt{True}, 
+gli stessi risultati indicano che un valore di $\mathbf{e} < \rho$ garantisce una probabilità di 
+decifratura pari al 100\%.
 \subsection{Caso d'uso}
 
 Come osservabile in Figura \ref{fig:gghhnfmoduleexample}, il caso d'uso della classe 

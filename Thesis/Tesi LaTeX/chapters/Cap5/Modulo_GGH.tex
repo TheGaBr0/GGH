@@ -19,7 +19,7 @@ di essi. I parametri consentiti sono i seguenti:
     \item \texttt{unimodular} (\texttt{fmpz\_mat}, default: \texttt{None}):
     Matrice unimodulare usata per la generazione della base pubblica. 
     \item \texttt{message} (\texttt{fmpz\_mat}, default: \texttt{None}): 
-    Vettrore rappresentante il messaggio che verrà cifrato dal crittosistema.
+    Vettore rappresentante il messaggio che verrà cifrato dal crittosistema.
     \item \texttt{error} (\texttt{fmpz\_mat}, default: \texttt{None}): 
     Vettore rappresentante l'errore che verrà aggiunto in fase di cifratura.
     \item \texttt{sigma} (\texttt{Integer}, default: \texttt{None}): 
@@ -77,7 +77,7 @@ se lasciare $\sigma$ in forma di \texttt{float} o arrotondarlo per difetto all'i
 L'arrotondamento è necessario che sia per difetto al fine di non invalidare la precisione 
 del crittosistema: la metrica basata su L1 definisce un limite a $\sigma$ sotto al quale
 il successo della decifratura con base privata è sicuro. Ottenuto quindi $\sigma$ si calcola infine
-la base pubblica, ottenuta dalla moltplicazione di una matrice unimodulare $\mathbf{U}$ con
+la base pubblica, ottenuta dalla moltiplicazione di una matrice unimodulare $\mathbf{U}$ con
 la base privata $\mathbf{R}$. Per la creazione di $\mathbf{U}$ è stato scelto di usare
 la tecnica descritta al punto \ref{en:gghunim1} della Sezione \ref{sec:gghkeys}, in quanto
 i valori della matrice generati sono meno grandi di quelli ottenuti col metodo del punto
@@ -127,8 +127,9 @@ vicino e la tecnica di arrotondamento di Babai. Un'analisi dei vantaggi e
 degli svantaggi di entrambi gli algoritmi è stata trattata nella Sezione \ref{sec:babai}. 
 La scelta implementativa è ricaduta sulla tecnica di arrotondamento, principalmente per la sua 
 efficienza computazionale, rinunciando però alla precisione massima ottenibile. Questa perdita
-di precisione non influisce però sulle probabilità di decifratura, come mostrato in tabella
-X sezione X. 
+di precisione però, in seguito a risultati sperimentali osservabili 
+in tabella \ref{tab:combined_successes} e X Sezione \ref{sec:risultati_cifratura_decifratura},
+non influisce in maniera drastica sulle probabilità di successo nella decifratura.  
 L'implementazione della decifratura segue fedelmente i passaggi illustrati nell'esempio 
 \ref{exp:GGH}, mentre l'algoritmo di Babai applicato è stato dettagliatamente descritto 
 nell'esempio \ref{exp:babai}. Tutti i calcoli sono gestiti completamente da FLINT eccetto

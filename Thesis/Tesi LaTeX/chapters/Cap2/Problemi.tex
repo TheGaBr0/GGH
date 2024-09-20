@@ -5,18 +5,19 @@ casi di spazi multidimensionali, la complessità computazionale derivante da det
 problemi su di essi, sia un limite invalicabile. I problemi reticolari 
 più conosciuti e usati in ambito crittografico sono i seguenti:
 \begin{itemize}
-    \item Problema del Vettore più Corto (SVP): Data una base di un reticolo $\mathbf{B}$, 
+    \item Problema del Vettore più Corto (SVP): Data una base $\mathbf{B}$ di un reticolo, 
     trovare il vettore non nullo di lunghezza minima in $\mathcal{L}(\mathbf{B})$.
-    \item Problema del Vettore più Vicino (CVP): Data una base di un reticolo $\mathbf{B}$ e un 
+    \item Problema del Vettore più Vicino (CVP): Data una base $\mathbf{B}$ di un reticolo e un 
     vettore target $\mathbf{t}$ (non necessariamente nel reticolo), trovare il vettore 
     $\mathbf{w} \in \mathcal{L}(\mathbf{B})$ più vicino a $\mathbf{t}$ minimizzando 
     $\|\mathbf{t}-\mathbf{w}\|_2$.
-    \item Problema dei Vettori Lineramente Indipendenti più Corti (SIVP): Data una base di un reticolo 
-    $\mathbf{B} \in \mathbb{Z}^{n\times n}$, trovare $n$ vettori linearmente indipendenti 
+    \item Problema dei Vettori Lineramente Indipendenti più Corti (SIVP): 
+    Data una base $\mathbf{B} \in \mathbb{Z}^{n\times n}$ di un reticolo , 
+    trovare $n$ vettori linearmente indipendenti 
     $\ {\mathbf{S} = [\mathbf{s}_1, \dots, \mathbf{s}_n]}$ 
     \mbox{(dove  $\mathbf{s}_i \in \mathcal{L}(\mathbf{B})$)}
     per tutte le $i$) minimizzando la quantità 
-    ${||\mathbf{S}|| = \text{max}_i||\mathbf{s}_i||}$. 
+    ${||\mathbf{S}|| = \text{max}_i||\mathbf{s}_i||_2}$. 
     SIVP è una variante di SVP, ma a differenza di quest'ultimo, SIVP mira a identificare 
     un insieme di vettori indipendenti che siano i più corti possibile, in altre parole 
     la ricerca di una base ortogonale o ortonormale che generi il reticolo e che minimizzi

@@ -219,10 +219,10 @@ $\mathbf{e} \in \{\pm\frac{1}{2}\}^n$ conseguendo quindi che la parte sinistra d
 non sia più un vettore di soli elementi interi. Per risolvere tale problema Nguyen propose
 due soluzioni:
 \begin{enumerate}
-    \item Moltiplicare per 2 l'equazione \ref{eq:Nguyen2} ottenendo così $\mathbf{e} \in \{\pm 1\}^n$.
+    \item  \label{en:nguyen1} Moltiplicare per 2 l'equazione \ref{eq:Nguyen2} ottenendo così $\mathbf{e} \in \{\pm 1\}^n$.
     Ciò però consegue che anche la base pubblica $\mathbf{B}$ sarà moltiplicata per 2 causando un
     aumento di complessità dei calcoli con reticoli di grandi dimensioni. 
-    \item Aggiungere un vettore costante  $\mathbf{s} = (\sigma,\dots,\sigma)$ e 
+    \item \label{en:nguyen2} Aggiungere un vettore costante  $\mathbf{s} = (\sigma,\dots,\sigma)$ e 
     successivamente scalare l'intero sistema per un fattore $2\sigma$.
     Questa manipolazione matematica semplifica i calcoli, poiché il vettore di errore risultante 
     contiene solo valori 0 o 1. Tuttavia, è importante notare che questa trasformazione comporta un 

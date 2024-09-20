@@ -20,10 +20,8 @@ def embedding_nguyen(basis, point):
     # Add t as the last row, with 1 as the last element
     last_row = [int(point[0,i]) for i in range(n)] + [1]
     matrix_emb = fmpz_mat(matrix_emb.tolist() + [last_row])
-
-    Utils.write_matrix_to_file(matrix=matrix_emb, filename="totry.txt")
     
-    matrix_emb = Utils.BKZ_reduction(matrix_emb, block=20, precision=100)
+    matrix_emb, _ = Utils.BKZ_reduction(matrix_emb, block=20, precision=100)
 
     for i in range(n + 1):
         i_th_row = fmpz_mat([[matrix_emb[i, j] for j in range(n + 1)]])
@@ -37,10 +35,11 @@ def embedding_nguyen(basis, point):
             break
     
     if all_elements_are_one:
-        return point - shortest_vector
+        print(shortest_vector)
+        return shortest_vector
 
     while True:
-        matrix_emb = Utils.BKZ_reduction(matrix_emb, 60, True, precision=100, bkzautoabort=False, bkzmaxloops=50, nolll=True)
+        matrix_emb, _ = Utils.BKZ_reduction(matrix_emb, 60, pruned=True, precision=100, bkzautoabort=False, bkzmaxloops=5, nolll=True)
 
         for i in range(n + 1):
             i_th_row = fmpz_mat([[matrix_emb[i, j] for j in range(n + 1)]])
@@ -53,7 +52,8 @@ def embedding_nguyen(basis, point):
                 break
 
         if all_elements_are_one:
-            return point - shortest_vector
+            print(shortest_vector)
+            return shortest_vector
 
 def flint_to_sympy(basis_flint):
     cols = basis_flint.ncols()
@@ -107,40 +107,55 @@ def modulo_fmpz_mat(matrix, mod):
             
     return result
 
-def Nguyen(public_basis, sigma, ciphertext):
+def Nguyen(public_basis, sigma, ciphertext, message):
     
     B = public_basis
     c = ciphertext
     
-    mod = 2*sigma
+    mod = 2 * sigma
         
     cs = fmpq_mat(c.nrows(), c.ncols())
     
+    # Creazione della matrice cs aggiungendo sigma agli elementi di ciphertext
     for i in range(c.nrows()):
         for j in range(c.ncols()):
-            cs[i,j] = c[i,j] + sigma
+            cs[i, j] = c[i, j] + sigma
 
+    # Calcolo dell'inversa di B modulo 2 * sigma
     B_inv_mod = matrix_inverse_mod(B, mod)
 
+    # Prima stima di m_2sigma
     m_2sigma = cs * B_inv_mod
-    
     m_2sigma = fmpq_mat(modulo_fmpz_mat(m_2sigma, mod))
     
     mod = fmpq(mod)
     
-    better_CVP = 2 * (fmpq_mat(c - (m_2sigma * B)) / mod) #2 * better_CVP, pagina 10 nguyen, in fondo
+    # Miglioramento del CVP usando la tecnica di Nguyen
+    better_CVP = 2 * (fmpq_mat(c - (m_2sigma * B)) / mod)  # 2 * better_CVP, pagina 10 di Nguyen
+    
+    # Calcolo dell'errore trovato
+    error_found = fmpq_mat(embedding_nguyen(B, better_CVP))
 
-    m_prime = fmpq_mat(embedding_nguyen(B, better_CVP))
-
-    B_inv = (2*B).inv()
-
+    # Calcolo di m_prime
+    m_prime = better_CVP - error_found
+    B_inv = (2 * B).inv()  # Inversa di 2 * B
     m_prime = m_prime * B_inv
 
-    final_result = m_2sigma + (mod*m_prime)
+    # Calcolo del risultato finale
+    final_result = m_2sigma + (mod * m_prime)
+
+    # Verifica del risultato
+    if final_result != message:
+        print("wrong sign.. oopsie")
+        # Se il risultato non è corretto, inverte il segno di error_found e ricalcola
+        error_found = -error_found
+        m_prime = better_CVP - error_found
+        m_prime = m_prime * B_inv
+        final_result = m_2sigma + (mod * m_prime)
 
     return final_result
     
-dimension = 100
+dimension = 300
 tries = 0
 print("Finding a basis which can be inverted mod 6...")
 while True:
@@ -161,13 +176,10 @@ print(f"message: {message}")
 
 start_time = time.time()
 
-decrypted_message = Nguyen(B, sigma, GGH_object.ciphertext)
+decrypted_message = Nguyen(B, sigma, GGH_object.ciphertext, message)
 
 print(f"time taken: {time.time() - start_time}")
 
 print(decrypted_message == message)
 
-
-
-
-
+print(GGH_object.error)

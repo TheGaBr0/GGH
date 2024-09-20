@@ -9,16 +9,16 @@ import numpy as np
 from ..Utils.Utils import Utils
 
 class GGHHNFCryptosystem:
-    def __init__(self, dimension, private_basis=None, public_basis=None, lattice_point=None, error=None, GGH_private=False, debug=False):
+    def __init__(self, dimension, private_basis=None, public_basis=None, lattice_point=None, error=None, alpha=0.75, GGH_private=False, debug=False):
         self.dimension = dimension
         
         self.lattice_point = lattice_point
         self.ciphertext = None
         self.error = error
+        self.alpha = alpha
 
         self.private_basis = private_basis
         self.public_basis = public_basis
-        self.unimodular = None
         
         self.R_rho = None
         self.GGH_private = GGH_private
@@ -100,7 +100,7 @@ class GGHHNFCryptosystem:
     
     def generate_random_error(self):
         n = self.dimension
-        max_norm = Decimal(0.75) * self.R_rho
+        max_norm = Decimal(self.alpha) * self.R_rho
 
         while True:
             error = fmpz_mat([[random.randint(-n, n) for _ in range(self.dimension)]])

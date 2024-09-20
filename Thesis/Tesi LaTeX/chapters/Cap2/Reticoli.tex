@@ -65,7 +65,7 @@ coefficienti integrali: la base di un reticolo ha sempre coefficienti integrali,
 il che significa che tutti i vettori nella base sono combinazioni lineari intere 
 l'uno dell'altro.
 I reticoli possono essere formati in diversi modi, il più comune è il reticolo quadrato 
-(Figura~\ref{fig:lattice1a}) nel quale la base è allineata con gli assi cartesiani. 
+(Figura~\ref{fig:lattice1a}) nel quale la base è ortogonale con gli assi cartesiani. 
 Le altre varianti sono ottenibili applicando delle trasformazioni lineari alla base del 
 reticolo quadrato (Figura~\ref{fig:lattice1b}).
 
@@ -117,72 +117,19 @@ Computando $\mathbf{R}^+$, ovvero la matrice pseudo-inversa di $\mathbf{R}$, si 
 \[
     \mathbf{U} = \mathbf{B} \ \mathbf{R}^+.
 \]
-$\mathbf{R}^+$ è particolarmente facile da ottenere in questo caso in quanto i vettori
-riga di $\mathbf{R}$ sono linearmente indipendenti per definizione. Di conseguenza la
-matrice pseudo-inversa assume la seguente forma:
+$\mathbf{R}^+$ è particolarmente facile da ottenere in questo caso in quanto $\mathbf{R}$ è 
+una matrice quadrata e i suoi vettori
+riga di sono linearmente indipendenti per definizione.
+Di conseguenza la matrice pseudo-inversa nient'altro è che la normale inversa:
 \[
-    \mathbf{R}^+ = (\mathbf{R}^* (\mathbf{R} \ \mathbf{R}^*)^{-1})
+    \mathbf{R}^+ = \mathbf{R}^{-1}.
 \]
-con $\mathbf{R}^*$ che è la matrice trasposta coniugata di $\mathbf{R}$. Dato che $\mathbf{R}$
-è una matrice composta da soli interi, la matrice trasposta coniugata è uguale alla matrice
-trasposta normale. Si ottiene quindi che:
+Si ottiene quindi che:
 \[
-    \mathbf{U} = \mathbf{B}(\mathbf{R}^T (\mathbf{R} \ \mathbf{R}^T)^{-1})
+    \mathbf{U} = \mathbf{B}\mathbf{R}^{-1}.
 \]
-\begin{exmp} (Verificare che due basi generino lo stesso reticolo)
-    \label{exp:basis}
-    \\
-    Siano $\mathbf{R}$ e $\mathbf{B}$ due basi generanti entrambi il reticolo $\mathcal{L}$
-    con
-    \begin{equation*}
-        \mathbf{R} =
-        \begin{bmatrix}
-            1 & 2\\
-            3 & 0
-        \end{bmatrix}
-        \ \text{ e } \ 
-        \mathbf{B} =
-        \begin{bmatrix*}[l]
-            \phantom{-}5 & \phantom{-}4\\
-            -6 & -6
-        \end{bmatrix*}
-    \end{equation*}
-    allora deve esistere una matrice unimodulare $\mathbf{U}$ tale che 
-    $\mathbf{U}\mathbf{R} = \mathbf{B}$. Per trovare $\mathbf{U}$ è possibile
-    calcolare:
-    \begin{equation*}
-        \mathbf{U} = \mathbf{B}(\mathbf{R}^T (\mathbf{R} \ \mathbf{R}^T)^{-1}) =
-        \begin{bmatrix*}[l]
-            \phantom{-}2 & \phantom{-}1\\
-            -3 & -1
-        \end{bmatrix*}.
-    \end{equation*}
-    Ora è sufficiente controllare che
-    \begin{equation*}
-        \mathbf{U}\mathbf{R} = \mathbf{B}
-        \ \text{ ovvero } \
-        \begin{bmatrix*}[l]
-            \phantom{-}2 & \phantom{-}1\\
-            -3 & -1
-        \end{bmatrix*}
-        \times
-        \begin{bmatrix}
-            1 & 2\\
-            3 & 0
-        \end{bmatrix}
-        =
-        \begin{bmatrix*}[l]
-            \phantom{-}5 & \phantom{-}4\\
-            -6 & -6
-        \end{bmatrix*}
-    \end{equation*}
-inoltre dato che $\det(\mathbf{U}) = 1$, si può affermare che $\mathbf{R}$ e $\mathbf{B}$
-sono entrambe basi di $\mathcal{L}$.
-\end{exmp}
-\subsection{Dominio Fondamentale}
-\label{sec:dominio}
 
-\begin{figure}[t]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=1, framed]
         \clip (-4,-3) rectangle (4,3); 
@@ -238,11 +185,65 @@ sono entrambe basi di $\mathcal{L}$.
 \label{fig:lattice2}
 \end{figure}
 
+\begin{exmp} (Verificare che due basi generino lo stesso reticolo)
+    \label{exp:basis}
+    \\
+    Siano $\mathbf{R}$ e $\mathbf{B}$ due basi generanti entrambi il reticolo $\mathcal{L}$
+    con
+    \begin{equation*}
+        \mathbf{R} =
+        \begin{bmatrix}
+            1 & 2\\
+            3 & 0
+        \end{bmatrix}
+        \ \text{ e } \ 
+        \mathbf{B} =
+        \begin{bmatrix*}[l]
+            \phantom{-}5 & \phantom{-}4\\
+            -6 & -6
+        \end{bmatrix*}
+    \end{equation*}
+    allora deve esistere una matrice unimodulare $\mathbf{U}$ tale che 
+    $\mathbf{U}\mathbf{R} = \mathbf{B}$. Per trovare $\mathbf{U}$ è possibile
+    calcolare:
+    \begin{equation*}
+        \mathbf{U} = \mathbf{B}\mathbf{R}^{-1} =
+        \begin{bmatrix*}[l]
+            \phantom{-}2 & \phantom{-}1\\
+            -3 & -1
+        \end{bmatrix*}.
+    \end{equation*}
+    Ora è sufficiente controllare che
+    \begin{equation*}
+        \mathbf{U}\mathbf{R} = \mathbf{B}
+        \ \text{ ovvero } \
+        \begin{bmatrix*}[l]
+            \phantom{-}2 & \phantom{-}1\\
+            -3 & -1
+        \end{bmatrix*}
+        \times
+        \begin{bmatrix}
+            1 & 2\\
+            3 & 0
+        \end{bmatrix}
+        =
+        \begin{bmatrix*}[l]
+            \phantom{-}5 & \phantom{-}4\\
+            -6 & -6
+        \end{bmatrix*}
+    \end{equation*}
+inoltre dato che $\det(\mathbf{U}) = 1$, si può affermare che $\mathbf{R}$ e $\mathbf{B}$
+sono entrambe basi di $\mathcal{L}$.
+\end{exmp}
+\subsection{Dominio Fondamentale}
+\label{sec:dominio}
+
+
+
 Il dominio fondamentale è un concetto molto importante nei reticoli, grazie al quale è possibile
-capire la struttura matematica che li compone. Data una base abritraria $\mathbf{B}$ e un reticolo 
+capire la struttura matematica che li compone. Data una base arbitraria $\mathbf{B}$ e un reticolo 
 $\mathcal{L}$ è possibile immaginare il dominio fondamentale come un parallelepipedo 
-che ha come vertici: i vettori base $\mathbf{b}$ generanti il reticolo, il punto di origine e 
-come quarto punto la somma dei vettori base all'origine. \\
+che ha come vertice l'origine e come lati i vettori base $\mathbf{b}$ generanti il reticolo. \\
 Di tale parallelepipedo è possibile calcolarne il volume $\mathcal{F}(\mathbf{B})$, il 
 quale è strettamente legato al determinante del reticolo. 
 E' possibile osservare in Figura~\ref{fig:lattice2} un reticolo con due sue basi: nonostante 

@@ -125,6 +125,22 @@ quindi di poter funzionare su più piattaforme, punto importante del progetto. I
 Questa tecnologia consente di eseguire un ambiente Linux virtualizzato  
 all'interno di Windows, integrandosi con il sistema operativo e permettendo di richiamare 
 funzionalità Linux direttamente.
+E' infine opportuno notare che il sistema di archiviazione su file adottato, ovvero su 
+semplici file di testo, non 
+rappresenta la soluzione ottimale in termini di efficienza dello spazio. 
+Come evidenziato nella Tabella \ref{tab:key_size_comparison} della Sezione 
+\ref{sec:risultati_chiavi}, questo approccio genera file di dimensioni considerevoli 
+per gli standard crittografici. Le chiavi e il testo cifrato potrebbero essere deserializzate
+attraverso l'uso del modulo \texttt{Pickle} e poi compresse usando algoritmi come bz2 o lzma, 
+ottenendo una riduzione significativa delle dimensioni dei file. 
+Nonostante ciò, la scelta di utilizzare il formato \texttt{txt} anziché alternative come \texttt{Pickle} 
+è stata dettata da considerazioni di sicurezza e portabilità. Il formato \texttt{txt} garantisce 
+una maggiore leggibilità e modificabilità dei dati, riducendo i rischi associati alla 
+deserializzazione di oggetti potenzialmente dannosi, un problema noto con \texttt{Pickle}. 
+Inoltre, il formato testuale assicura una migliore compatibilità tra diversità
+sistemi operativi, facilitando la condivisione e il trasferimento sicuro 
+dei dati da e verso WSL, senza la necessità di gestire la decompressione o affrontare
+potenziali problemi di compatibilità legati alle versioni degli algoritmi di compressione. 
 
 %
 %          STRUTTURA DEL PACCHETTO
