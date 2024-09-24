@@ -8,7 +8,7 @@ $\mathbf{A}$ è composta da vettori corti e quasi ortogonali fra loro mentre $\m
 composta da vettori lunghi e quasi paralleli fra loro.\\
 La qualità di una base risiede in queste differenze dei vettori costituenti le basi, chiamiamo
 quindi base "buona" $\mathbf{A}$ e base "cattiva" $\mathbf{B}$.
-E' necessario però definire una metrica per valutare quanto una base sia buona o meno; a tal
+È necessario però definire una metrica per valutare quanto una base sia buona o meno; a tal
 proposito Hadamard\cite{HDMRD08} introdusse una formula quantitativa per misurare la qualità
 di una base reticolare, il cosiddetto rapporto di Hadamard. \\
 
@@ -23,8 +23,9 @@ $\mathbf{B}$ è definito dal valore:
     \Biggr)^{\frac{1}{n}}
 \]
 \\
-Il rapporto di Hadamard si configura nell'intervallo $(0, 1]$, dove più vicino all'1 si è 
-e più la base è buona, viceversa più vicino allo 0 si è e più la base è cattiva. Questa formula
+Il rapporto di Hadamard si configura nell'intervallo $(0, 1]$, dove i valori che si avvicinano 
+a 1 rappresentano la bontà della base, mentre i valori tendenti a zero sono indice di una
+base "cattiva". Questa formula
 verrà utilizzata come unica misura per verificare la qualità degli esempi di basi che verranno
 presentate più avanti in questa tesi.
 
@@ -158,7 +159,7 @@ I valori $\delta$ e $\eta$ sono standardizzati rispettivamente a $\frac{3}{4}$ e
     \[
         \mathcal{H}(\mathbf{B}^*) = 0.99442 \text{ e }\det(\mathbf{B}^*) = 1079906335101.
     \]
-    E' stato ottenuto un incremento notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
+    È stato ottenuto un incremento notevole del rapporto di Hadamard grazie alla riduzione LLL senza 
     interferire con le proprietà della base $\mathbf{B}$. Infatti $|\det(\mathbf{B})| = |\det(\mathbf{B}^*)|$ e,
     usando la formula descritta nella Sezione \ref{sec:reticoli}, 
     è possibile trovare una matrice di interi
@@ -187,8 +188,8 @@ La prima versione discussa è quella in virgola mobile (FPLLL)\cite{FPLLL05}, la
 utilizza aritmetica in virgola mobile a 
 precisione arbitraria per accelerare i calcoli razionali dell'algoritmo originale. 
 Questa versione ha come vantaggio un aumento delle performance: in comparazione con LLL
-il tempo di computazione nel caso peggiore è $O(n^3 (\log\mathcal{E})^2)$. E' importante notare che
-l'utilizzo di aritmetica a virgola mobile per velocizzare i calcoli è una tenica comune e utilizzabile
+il tempo di computazione nel caso peggiore è $O(n^3 (\log\mathcal{E})^2)$. È importante notare che
+l'utilizzo di aritmetica a virgola mobile per velocizzare i calcoli è una tecnica comune e utilizzabile
 per tutti gli algoritmi di riduzione dei reticoli spiegati in questa sezione.
 \\ 
 La seconda versione è stata presentata da Schnorr-Euchner~\cite{DEEPLLL94} ed il suo nome
@@ -205,13 +206,12 @@ significativamente migliore di quella di LLL standard.
 L'ultima variante discussa è basata sull'algoritmo di riduzione 
 Korkin–Zolotarev (KZ)\cite[sezione 18.5]{Galbraith18}. Le caratteristiche di una base KZ-ridotta
 sono generalmente migliori rispetto a quelle di LLL, ma richiedono una complessità maggiore
-e un tempo di computazione non polinomiale; per le proprietà complete si veda il riferimento. 
+e un tempo di computazione non polinomiale; per le proprietà complete si veda il riferimento sopracitato. 
 Più nel dettaglio, il problema principale, è che non esiste un algoritmo in grado di computare
-una base KZ in tempo polinomiale. L'algoritmo più veloce conosciuto richiede un tempo
-di computazione esponenziale rispetto alla dimensione. 
-Per compensare a tale problema KZ apporta un 
-grande vantaggio in rispetto all'accuratezza della riduzione, infatti, il primo vettore
-di una base KZ-ridotta è sempre una soluzione al SVP. Dato che la complessità di KZ
+una base KZ in tempo polinomiale, infatti, l'algoritmo più veloce conosciuto, richiede un tempo
+di computazione esponenziale rispetto alla dimensione. KZ offre un notevole vantaggio per la 
+riduzione del carico computazionale, in quanto il primo vettore di una base KZ-ridotta è 
+sempre una soluzione al SVP. Dato che la complessità di KZ
 cresce con $n$, è logico pensare che a basse dimensioni sia comunque sufficientemente
 veloce. Un'idea è quindi quella di computare
 una riduzione di proiezioni a dimensioni più basse del reticolo originale.

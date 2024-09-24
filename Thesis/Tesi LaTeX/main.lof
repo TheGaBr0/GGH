@@ -9,20 +9,20 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5}{\ignorespaces Struttura logica del pacchetto Python.}}{41}{figure.caption.18}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Conversione da \texttt {fmpq\_mat} a \texttt {Decimal}.}}{43}{figure.caption.19}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Esempio di funzionamento della classe \texttt {GGHCryptosystem}.}}{47}{figure.caption.24}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Esempio di funzionamento della classe \texttt {GGHHNFCryptosystem}.}}{50}{figure.caption.29}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Conversione da \texttt {Numpy} o \texttt {Sympy} in \texttt {fmpz\_mat}.}}{51}{figure.caption.30}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Conversione da \texttt {Numpy} o \texttt {Sympy} in \texttt {fmpq\_mat}.}}{51}{figure.caption.31}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Esempio di caso d'uso della funzione \texttt {visualize\_lattice}.}}{52}{figure.caption.32}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Esempio di output della funzione \texttt {visualize\_lattice}.}}{54}{figure.caption.33}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Tecnica di arrotondamento di Babai nel modulo \texttt {Utils}.}}{55}{figure.caption.34}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Funzione del modulo \texttt {Utils} per il calcolo del rapporto di Hadamard.}}{58}{figure.caption.35}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Funzione del modulo \texttt {Utils} per l'ortogonalizzazione Gram-Schmidt.}}{59}{figure.caption.36}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Comando Linux FPLLL per BKZ-20.}}{59}{figure.caption.37}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Comando Linux FPLLL per BKZ-60.}}{60}{figure.caption.38}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Struttura logica del pacchetto Python.}}{40}{figure.caption.18}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Conversione da \texttt {fmpq\_mat} a \texttt {Decimal}.}}{42}{figure.caption.19}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Esempio di funzionamento della classe \texttt {GGHCryptosystem}.}}{46}{figure.caption.24}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Esempio di funzionamento della classe \texttt {GGHHNFCryptosystem}.}}{49}{figure.caption.29}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Conversione da \texttt {Numpy} o \texttt {Sympy} in \texttt {fmpz\_mat}.}}{50}{figure.caption.30}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Conversione da \texttt {Numpy} o \texttt {Sympy} in \texttt {fmpq\_mat}.}}{50}{figure.caption.31}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Esempio di caso d'uso della funzione \texttt {visualize\_lattice}.}}{51}{figure.caption.32}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Esempio di output della funzione \texttt {visualize\_lattice}.}}{53}{figure.caption.33}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Tecnica di arrotondamento di Babai nel modulo \texttt {Utils}.}}{54}{figure.caption.34}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Funzione del modulo \texttt {Utils} per il calcolo del rapporto di Hadamard.}}{57}{figure.caption.35}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Funzione del modulo \texttt {Utils} per l'ortogonalizzazione Gram-Schmidt.}}{58}{figure.caption.36}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Comando Linux FPLLL per BKZ-20.}}{58}{figure.caption.37}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Comando Linux FPLLL per BKZ-60.}}{59}{figure.caption.38}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {18}{\ignorespaces Confronto del valore medio di $\rho $ con \texttt {GGH\_private} $=$ \texttt {True} o \texttt {False}.}}{65}{figure.caption.43}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Comparazione fra le strutture dei testi cifrati di GGH e GGH-HNF.}}{67}{figure.caption.46}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Confronto del valore medio di $\rho $ con \texttt {GGH\_private} $=$ \texttt {True} o \texttt {False}.}}{64}{figure.caption.43}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Comparazione fra le strutture dei testi cifrati di GGH e GGH-HNF.}}{66}{figure.caption.46}%
 \addvspace {10\p@ }

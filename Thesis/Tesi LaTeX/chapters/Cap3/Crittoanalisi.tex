@@ -173,7 +173,7 @@ modulo $2\sigma$, la differenza $(\mathbf{m} - \mathbf{m}_{2\sigma})$ risulta pe
 divisibile per $2\sigma$. Questa proprietà consente di rappresentare tale differenza 
 come il prodotto tra $2\sigma$ e un nuovo intero $\mathbf{m}'$, esprimendola nella 
 forma $\mathbf{m} - \mathbf{m}_{2\sigma} = 2\sigma\mathbf{m}'$, dove $\mathbf{m}'$ 
-costituisce il quoziente intero derivante da questa divisione. E' possibile quindi riscrivere
+costituisce il quoziente intero derivante da questa divisione. È possibile quindi riscrivere
 \ref{eq:Nguyen1} come:
 \[
     \mathbf{c} - \mathbf{m}_{2\sigma}\mathbf{B} = (2\sigma\mathbf{m}')\mathbf{B} + \mathbf{e}
@@ -214,8 +214,8 @@ algoritmo di risoluzione per il CVP con una versione potata di BKZ a blocchi di 
 stabilità, entrambe le varianti di BKZ furono implementate utilizzando l'aritmetica a 
 virgola mobile. Un problema precedentemente introdotto nella Sezione \ref{sec:embedding} 
 è l'uso di valori non interi nella costruzione della matrice secondo la tecnica di incorporamento. 
-Infatti, secondo quanto ottenuto nell'equazione \ref{eq:Nguyen2}, 
-$\mathbf{e} \in \{\pm\frac{1}{2}\}^n$ conseguendo quindi che la parte sinistra dell'equazione
+Infatti, in accordo con quanto ottenuto nell'equazione \ref{eq:Nguyen2}, 
+$\mathbf{e} \in \{\pm\frac{1}{2}\}^n$ ne consegue quindi che la parte sinistra dell'equazione
 non sia più un vettore di soli elementi interi. Per risolvere tale problema Nguyen propose
 due soluzioni:
 \begin{enumerate}
@@ -352,7 +352,7 @@ attacchi basati su tecnica di incorporamento.
 \subsection{Attacco basato su informazioni parziali}
 Per quanto la vulnerabilità scoperta da Nguyen renda molto più facile l'attacco a GGH, essa
 non si rivelò sufficiente per dimensioni superiori a 400. A tal proposito nel 2010, Moon Sung Lee 
-e Sang Geun Hahn\cite{Nguyen400}, proposero un attacco in grado di rompere la barriera 
+e Sang Geun Hahn\cite{Nguyen400}, proposero un attacco in grado di superare la barriera 
 dimensionale a cui i precedenti attacchi si fermarono. Mentre sia questo attacco che quello 
 di Nguyen mirano a semplificare il CVP, essi differiscono nel metodo: 
 Nguyen riduce la lunghezza del vettore di errore $\mathbf{e}$, mentre questo nuovo approccio 
@@ -393,8 +393,8 @@ grazie alle informazioni parziali rilevate da Nguyen, si dedusse l'esistenza di 
 per $\mathbf{m}^1 = (\mathbf{m}_1)$, ovvero $(-127), (-121), \dots, (125)$. 
 Questa deduzione permise di restringere significativamente lo spazio di ricerca per 
 l'attacco, rendendo il metodo più efficace e praticabile.
-In conclusione quindi, gli autori di \cite{Nguyen400}, riuscirono a rompere la challenge
-in dimensione 400 avendo a dispozione un solo valore del messaggio originale.
+In conclusione quindi, gli autori di \cite{Nguyen400}, riuscirono a superare la sfida (challenge) 
+imposta dalla dimensione 400 avendo a dispozione un solo valore del messaggio originale.
 
 \subsubsection{Contromisure}
 Dato l'utilizzo della vulnerabilità scoperta da Nguyen al fine di indovinare valori del

@@ -170,7 +170,7 @@ vengono infine regolate automaticamente in base ai punti visualizzati.
 
 Tale funzione è direttamente integrata negli algoritmi per la risoluzione del CVP
 implementati in \texttt{Utils} e spiegati nella prossima selezione. 
-E' possibile osservare un esempio d'uso in Figura \ref{fig:babaivisualizationcode} nel
+È possibile osservare un esempio d'uso in Figura \ref{fig:babaivisualizationcode} nel
 quale sono stati usati i dati dell'Esempio \ref{exp:babai}. Il risultato è osservabile 
 in Figura \ref{fig:babaivisualizationout}: in viola è rappresentata la base privata $\mathbf{R}$, 
 insieme al risultato della tecnica di arrotondamento di Babai 
@@ -237,10 +237,10 @@ fine da ottenere il messaggio originale.
 Si può anche osservare che la visualizzazione grafica, gestita dal parametro visualize 
 e realizzata tramite la funzione \texttt{visualize\_lattice}, viene eseguita solo dopo 
 aver verificato che la base sia bidimensionale.
-E' opportuno specificare che il controllo sul parametro \texttt{point} risulterebbe inutile
+È opportuno specificare che il controllo sul parametro \texttt{point} risulterebbe inutile
 in quanto, se fosse di dimensione diversa dalla base, l'algoritmo ritornerebbe un errore 
 a causa dell'impossibilità di moltiplicare matrici e basi di dimensioni diverse. 
-La tenica di incorporamento invece, implementata attraverso la funzione \\
+La tecnica di incorporamento invece, implementata attraverso la funzione \\
 \texttt{embedding\_technique}, è sia teoricamente che implementativamente più complessa. 
 Si compone dei seguenti parametri in input:
 \begin{itemize}
@@ -349,7 +349,7 @@ La funzione \texttt{get\_hadamard\_ratio} accetta solo due parametri, ovvero:
 Un aspetto rilevante dell'implementazione è l'ampio impiego di operazioni logaritmiche.
 Operando nello spazio logaritmico, si prevengono problemi di stabilità numerica che 
 potrebbero verificarsi manipolando direttamente numeri di scale molto diverse. Nel caso
-del rapporto di Hadamard il problema può verificarsi nella produttoria di norme vettoriali,
+del rapporto di Hadamard il problema può verificarsi nella moltiplicazione di norme vettoriali,
 che nel caso di matrici a grandi dimensioni, può causare un overflow. 
 La funzione ritorna infine due valori: il risultato sottoforma di oggetto \texttt{Decimal}
 e una sua versione formattata in stringa e limitata a \texttt{precision} cifre dopo la virgola. \\
@@ -357,13 +357,13 @@ La seconda tipologia, relativa alla riduzione di una base reticolare, è invece 
 dalle due funzioni \texttt{gram\_schmidt} e \texttt{BKZ\_reduction}. La prima, nient'altro 
 è, che un'implementazione in Python dell'Algoritmo \ref{alg:two}, attraverso l'uso del
 modulo \texttt{Numpy}. La costruzione inizialmente utilizzava esclusivamente oggetti FLINT 
-e costrutti Python, ma dopo vari esperimenti venne scartata a causa dei tempi di calcolo 
+e costrutti Python, ma dopo vari esperimenti è stata scartata a causa dei tempi di calcolo 
 eccessivi: per ortogonalizzare una matrice di 300 dimensioni era necessaria oltre 
 un'ora di elaborazione. La nuova implementazione, osservabile in Figura \ref{fig:utils_gram_schmidt}
 è invece in grado di ottenere i medesimi risultati riducendo però ad una manciata di 
 secondi il tempo di computazione richiesto a parità di input. 
 La base in input necessita una conversione da \texttt{fmpz\_mat} ad 
-array \texttt{Numpy} mentre, vicevers, l'output riceve il procedimento inverso con l'uso 
+array \texttt{Numpy} mentre, viceversa, l'output riceve il procedimento inverso con l'uso 
 di \texttt{npsp\_to\_fmpq\_mat}.
 
 \begin{figure}[H]
@@ -388,7 +388,7 @@ Tutti questi parametri vengono direttamente utilizzati nella costruzione del com
 \texttt{fplll}. Tale comando è proposto direttamente dalla libreria e, per una migliore 
 comprensione dei relativi parametri, si rimanda alla sezione \ref{sec:risultati_sicurezza}.
 Come inizialmente introdotto in Sezione \ref{sec:motivations}, tutti i passaggi di dati 
-tra il modulo \texttt{Utils} e \texttt{FPLLL} avviene attraverso l'uso di files, quindi 
+tra il modulo \texttt{Utils} e \texttt{FPLLL} avvengono attraverso l'uso di files, quindi 
 con l'ausilio delle funzioni \texttt{write\_matrix\_to\_file} e \texttt{load\_matrix\_from\_file}.
 Successivamente al salvataggio su file \texttt{input.txt} della base in input, inizia
 il processo di costruzione del comando. 
@@ -434,7 +434,7 @@ ritornata.
         \texttt{-s default.json -f mpfr -m wrapper -nolll > out.txt} \\
     \end{tabular}
     \caption[Comando Linux FPLLL per BKZ-60.]
-    {Comando Linux FPLLL per BKZ-60 prunato con auto-abort a 5 iterazioni, 
+    {Comando Linux FPLLL per BKZ-60 potato con auto-abort a 5 iterazioni, 
     senza riduzione LLL preliminare.}
     \label{fig:bkzcommand2}
 \end{figure}

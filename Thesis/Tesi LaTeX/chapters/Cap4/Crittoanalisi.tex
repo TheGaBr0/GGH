@@ -1,10 +1,10 @@
 \section{Limiti pratici di GGH-HNF}
 \label{sec:HNFLimits}
-GGH-HNF riesce a risolvere i problemi di GGH con successo, riuscendo a diventarne una variante migliorata
+GGH-HNF riesce a risolvere i problemi di GGH con successo, diventando una variante migliorata
 a tutti gli effetti. Nelle conclusioni di \cite{HNF01}, Micciancio suggerisce che una dimensione di 
 500 potrebbe offrire un livello di sicurezza adeguato, mantenendo al contempo una dimensione delle 
 chiavi accettabile grazie all'impiego della forma normale di Hermite. Sfortunatamente però le 
-supposizioni di Micciancio si rivelarono troppo ottimistiche. \\
+supposizioni di Micciancio si sono rivelate troppo ottimistiche. \\
 Nel Gennaio del 2004 Christoph Ludwig stilò un report tecnico \cite{HNF04} nel quale crittoanlizzò
 GGH-HNF e ne testò i suoi limiti pratici. 
 
@@ -24,29 +24,29 @@ cifratura molto veloce. Ciò venne confermato dai test di Ludwig i quali impiega
 secondi in dimensione 800. Le cose cambiano drasticamente con la decifratura: a causa dell'ortogonalizzazione
 Gram-Schmidt e della precisione richiesta, lo spazio occupato e il tempo richiesto per i calcoli
 cresce a livelli non accettabili. Gli esperimenti richiedettero 40 minuti per ortogonalizzare
-e rispettivamente 13 e 73 minuti per decifrare in dimensione 475 e 800. E' però importante precisare
+e rispettivamente 13 e 73 minuti per decifrare in dimensione 475 e 800. È però importante precisare
 che Ludwig utilizzò il metodo del piano più vicino di Babai che restituisce una soluzione più precisa, 
 ma contemporanemente richiede più tempo per trovarla a causa della sua complessità computazionale maggiore. 
 
 \subsubsection{Attacchi a GGH-HNF}
-Gli attacchi a GGH-HNF coinvolsero reticoli di dimensioni fino a 280, impiegando vettori di errore 
-la cui lunghezza variava dal 10\% al 100\% del $\rho$. Gli algoritmi di riduzione impiegati spaziarono da
-LLL a diverse varianti di BKZ. L'algoritmo LLL dimostrò efficacia in dimensione 280 con vettori di errore corti,
-ma si rivelò inefficace per dimensioni pari o superiori a 180 con vettori più lunghi. 
-L'incremento della dimensione del reticolo rese necessario l'impiego di BKZ con blocchi fino a 60 per
-mantenere l'efficacia degli attacchi. Utilizzando una tecnica di estrapolazione basata sui risultati sperimentali
-ottenuti, 
-Ludwig è riuscito a prevedere l'efficacia degli attacchi su dimensioni più elevate, 
-che non erano state direttamente testate. Questo ha fornito una visione sulla sicurezza futura del 
-sistema. Considerando scenari di complessità esponenziale e subesponenziale, Ludwig ha suggerito 
-che per garantire la sicurezza del GGH-HNF sarebbero necessarie dimensioni del reticolo di almeno 800, 
-un valore significativamente superiore rispetto alle stime iniziali di Micciancio, 
-che si attenevano su una dimensione di 500.\\
-
-E' ovvio che i valori riportati da Ludwig portino alla comune considerazione che le basse performance
-di GGH-HNF su alte dimensioni lo rendano praticamente non utilizzabile, soprattutto dopo che 
-le estrapolazioni fatte hanno indicato la necessità di dimensioni superiori a 800. E' 
-però importante precisare che, dato l'avanzamento della tecnologia, tali dati siano ormai obsoleti.
-Come mostrano i dati sperimentali presentati in Sezione \ref{sec:risultati_sicurezza}, grazie ai nuovi
-algoritmi è possibile generare e decifrare chiavi con molte meno risorse spaziali e
-temporali di quelle richieste negli anni della pubblicazione dell'algoritmo, ormai venti anni fa. 
+Gli attacchi a GGH-HNF furono condotti su reticoli di dimensioni fino a 280, con vettori 
+di errore di lunghezza variabile tra il 10\% e il 100\% del $\rho$. Gli attacchi furono
+configurati con la tecnica di incorporamento, usando LLL, BKZ-20 e BKZ-60 potato. LLL 
+si dimostrò efficace in 
+dimensione 280 con vettori di errore corti, ma inefficiente per dimensioni da 180 in su 
+con vettori più lunghi. L'aumento di lunghezza dei vettori in dimensioni più alte richiese 
+necessario l'impiego 
+di algoritmi più avanzati. Inizialmente, si tentò con BKZ-20, ma quando questo si rivelò 
+insufficiente, si passò al più potente BKZ-60 potato.
+Ludwig, estrapolando dai dati sperimentali, stimò l'efficacia degli attacchi su dimensioni 
+maggiori che non erano state oggetto di verifica, offrendo una prospettiva sulla 
+sicurezza futura del sistema. Considerando scenari di complessità esponenziale e 
+subesponenziale, suggerì che per garantire la sicurezza del GGH-HNF sarebbero necessarie 
+dimensioni del reticolo di almeno 800, ben oltre le stime iniziali di Micciancio di 500.
+Questi risultati portarono alla conclusione che le scarse prestazioni di GGH-HNF su alte 
+dimensioni lo rendessero impraticabile, specialmente considerando la necessità di 
+dimensioni superiori a 800. Tuttavia, è cruciale notare che tali dati sono ormai 
+superati dal progresso tecnologico. Come dimostrano i risultati sperimentali in Sezione 
+\ref{sec:risultati_sicurezza}, gli algoritmi moderni consentono di generare e decifrare 
+chiavi con risorse notevolmente inferiori rispetto a quelle richieste all'epoca della 
+pubblicazione dell'algoritmo, circa vent'anni fa.

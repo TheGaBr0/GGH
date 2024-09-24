@@ -448,6 +448,10 @@ INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\gbott\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\gbott\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsl12.tfm
+INPUT .\acknowledgements.tex
+INPUT acknowledgements.tex
+INPUT .\acknowledgements.tex
+INPUT acknowledgements.tex
 INPUT .\main.toc
 INPUT .\main.toc
 INPUT main.toc

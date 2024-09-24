@@ -35,7 +35,7 @@ Dopo l'assegnazione dei valori alle variabili interne, la classe eseguirà contr
 per verificare che, se un vettore o una base sono stati forniti come input, la loro 
 dimensione sia (\texttt{dimension}, \texttt{dimension})
 nel caso delle matrici e (1, \texttt{dimension}) nel caso dei vettori. Se tale condizione
-dovesse risultare falsa per qualsiasi dei paramtri, come risposta la classe ritornerà
+dovesse risultare falsa per qualsiasi dei parametri, come risposta la classe ritornerà
 un'eccezione di tipo \texttt{ValueError}, con annesso un messaggio riguardante il parametro
 che ha causato l'errore.
 
@@ -46,7 +46,7 @@ la base privata $\mathbf{R}$, $\sigma$ e una matrice unimodulare $\mathbf{U}$.
 In \cite{GGH97} vennero proposte più opzioni di generazione
 per ciascuno di questi elementi. Nella presente implementazione, sono state selezionate 
 alcune opzioni specifiche tra quelle proposte, che verranno discusse singolarmente nel contesto
-delle prestazioni. Le due chiavi sono rappresentate da due tuple contenute ciascuna
+delle prestazioni offerte. Le due chiavi sono rappresentate da due tuple contenute ciascuna
 nel rispettivo attributo \texttt{private\_key} o \texttt{public\_key}.
 
 \subsubsection{Chiave privata}
@@ -128,7 +128,7 @@ degli svantaggi di entrambi gli algoritmi è stata trattata nella Sezione \ref{s
 La scelta implementativa è ricaduta sulla tecnica di arrotondamento, principalmente per la sua 
 efficienza computazionale, rinunciando però alla precisione massima ottenibile. Questa perdita
 di precisione però, in seguito a risultati sperimentali osservabili 
-in tabella \ref{tab:combined_successes} e X Sezione \ref{sec:risultati_cifratura_decifratura},
+in Tabella \ref{tab:combined_successes_hnf} Sezione \ref{sec:risultati_cifratura_decifratura},
 non influisce in maniera drastica sulle probabilità di successo nella decifratura.  
 L'implementazione della decifratura segue fedelmente i passaggi illustrati nell'esempio 
 \ref{exp:GGH}, mentre l'algoritmo di Babai applicato è stato dettagliatamente descritto 

@@ -9,6 +9,40 @@ import time
 from ..Utils.Utils import Utils
 
 class GGHCryptosystem:
+    """
+    Implementation of the GGH (Goldreich-Goldwasser-Halevi) cryptographic system.
+
+    This class provides methods for generating keys, encrypting, and decrypting messages
+    using the GGH lattice-based cryptographic system.
+
+    Attributes:
+        dimension (int): The dimension of the lattice.
+        integer_sigma (bool): If True, uses an integer value for sigma.
+        sigma (int or float): The sigma parameter for error generation.
+        message (fmpq_mat): The message to be encrypted.
+        ciphertext (fmpq_mat): The encrypted text.
+        error (fmpz_mat or fmpq_mat): The error vector.
+        private_basis (fmpz_mat): The private basis of the lattice.
+        public_basis (fmpz_mat): The public basis of the lattice.
+        unimodular (fmpz_mat): The unimodular matrix for public key generation.
+        debug (bool): If True, prints debug information.
+        private_key (fmpz_mat): The private key.
+        public_key (tuple): The public key (public basis, sigma).
+
+    Args:
+        dimension (int): The dimension of the lattice.
+        private_basis (fmpz_mat, optional): A predefined private basis.
+        public_basis (fmpz_mat, optional): A predefined public basis.
+        unimodular (fmpz_mat, optional): A predefined unimodular matrix.
+        message (fmpq_mat, optional): A predefined message.
+        error (fmpz_mat or fmpq_mat, optional): A predefined error vector.
+        sigma (int or float, optional): A predefined value for sigma.
+        integer_sigma (bool, optional): Whether to use an integer value for sigma. Default is True.
+        debug (bool, optional): Whether to enable debug prints. Default is False.
+
+    Raises:
+        ValueError: If the dimensions of the provided bases or vectors do not match.
+    """
     def __init__(self, dimension, private_basis=None, public_basis=None, unimodular=None, message=None, 
                  error=None, sigma = None, integer_sigma=True, debug=False):
         self.dimension = dimension
@@ -56,6 +90,16 @@ class GGHCryptosystem:
             self.generate_keys()
 
     def random_unimodular(self, dim, mix):
+        """
+        Generates a random unimodular matrix.
+
+        Args:
+            dim (int): The dimension of the matrix.
+            mix (int): The number of mixing operations to perform.
+
+        Returns:
+            fmpz_mat: A random unimodular matrix.
+        """
         T = sp.eye(dim)
         x = sp.zeros(1, dim)
         choices = [-1, 0, 1]
@@ -81,6 +125,15 @@ class GGHCryptosystem:
         return Utils.npsp_to_fmpz_mat(T)
 
     def generate_sigma(self, R):
+        """
+        Generates the sigma value based on the L1 norm of the inverse of R.
+
+        Args:
+            R (fmpz_mat): The R matrix to calculate the inverse from.
+
+        Returns:
+            int or float: The calculated sigma value.
+        """
         getcontext().prec = 50
         rho = Utils.vector_l1_norm(R.inv())
 
@@ -93,6 +146,9 @@ class GGHCryptosystem:
 
 
     def generate_error(self):
+        """
+        Generates a random error vector based on sigma.
+        """
         sigma = self.public_key[1]
 
         random_elements = [random.choice([-sigma, sigma]) for _ in range(self.dimension)]
@@ -104,11 +160,16 @@ class GGHCryptosystem:
             self.error = fmpq_mat([random_elements])
 
     def generate_random_message(self):
+        """
+        Generates a random message.
+        """
         random_elements = [random.randint(-128, 127) for _ in range(self.dimension)]
         self.message = fmpq_mat([random_elements])
 
     def generate_keys_from_R_or_B(self):
-
+        """
+        Generates keys from a provided private or public basis.
+        """
         if self.debug:
             print("[GGH] Private basis given as input, inverting it..")
 
@@ -132,6 +193,9 @@ class GGHCryptosystem:
         self.private_key = self.private_basis
 
     def generate_keys(self):
+        """
+        Generates the private and public keys of the cryptographic system.
+        """
         tries = 0
         l = 4
         k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
@@ -186,6 +250,9 @@ class GGHCryptosystem:
         self.private_key = R
 
     def encrypt(self):
+        """
+        Encrypts the message using the public key and an error vector.
+        """
         if self.debug:
             print(f"[GGH] Encrypting...")
             time_start = time.time()
@@ -203,6 +270,12 @@ class GGHCryptosystem:
             print(f"[GGH] Time taken: {enc_time}")
 
     def decrypt(self):
+        """
+        Decrypts the ciphertext using the private key.
+
+        Returns:
+            fmpq_mat: The decrypted message.
+        """
         if self.debug:
             print(f"[GGH] Decrypting...")
             time_start = time.time()

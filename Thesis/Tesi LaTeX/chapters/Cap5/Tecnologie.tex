@@ -18,13 +18,13 @@ negli studi svolti dagli autori citati nei precedenti capitoli:
 \end{itemize}
 
 La scelta di C risulta quindi essere molto popolare e giustificata dalla sua efficienza. 
-E' però necessario precisare che, dati gli anni di pubblicazione degli studi originali, molti
+È però necessario precisare che, dati gli anni di pubblicazione degli studi originali, molti
 dei linguaggi di programmazione attualmente in circolazione non potevano essere presi 
 in considerazione, poichè semplicemente non esistenti o non sufficientemente maturi. 
 Alcuni dei più recenti linguaggi
 popolari al giorno d'oggi riescono non solo a pareggiare o superare la velocità di C, ma
-risolvono anche altri suoi problemi intrinsechi, come il non essere multipiattaforma
-e non avere sistemi di sicurezza per quanto riguarda la memoria. \\
+risolvono anche altri suoi problemi intrinseci, come il non supportare più piattaforme e 
+non disporre di sistemi di sicurezza a protezione dei dati in memoria. \\
 Alcuni esempi includono Rust, nato nel 2015, e Python, introdotto nel 1991, molto prima 
 che venisse pubblicato GGH e le sue varianti. Nello specifico, quest'ultimo, ha attraversato 
 un'evoluzione significativa nel corso degli anni, diventando oggi il linguaggio 
@@ -40,7 +40,7 @@ In particolare Python gode delle seguenti proprietà:
     sistemi operativi (Windows, macOS, Linux) senza richiedere modifiche sostanziali.
     \item Gestione automatica della memoria: Python gestisce automaticamente la memoria 
     attraverso un garbage collector, riducendo il rischio di memory leaks e semplificando 
-    lo sviluppo rispetto a linguaggi come C, dove la gestione manuale della memoria è richiesta.
+    lo sviluppo rispetto a linguaggi come C, dove viceversa è richiesta la gestione manuale della memoria.
     \item Sicurezza: Python offre protezioni intrinseche contro problemi di sicurezza 
     comuni, come buffer overflow, che sono invece frequenti in linguaggi a basso livello come C.
     \item Estendibilità: Python può essere facilmente esteso con moduli 
@@ -72,7 +72,7 @@ possono risultare insufficienti per calcoli che richiedono una precisione estrem
 elevata o che coinvolgono numeri al di fuori del range rappresentabile con 64 bit. 
 Questa limitazione può portare a errori di arrotondamento o overflow in operazioni 
 matematiche complesse o con numeri estremamente grandi, resta comunque possibile e utile
-l'uso di questo modulo, ma con molta attenzione al tipo di calcoli affidatogli.
+l'uso di questo modulo, ponendo però molta attenzione al tipo di calcoli affidatogli.
 Per ottimizzare queste operazioni mantenendo al contempo il vantaggio della precisione 
 arbitraria di Python, si è scelto di integrare una libreria specializzata scritta in un 
 linguaggio ad alte prestazioni. La Fast Library for Number Theory \cite{FLINT} (FLINT) è stata 
@@ -89,7 +89,7 @@ I principali moduli e librerie utilizzati nel progetto, oltre a FLINT, sono:
     \item \texttt{Numpy}: Modulo esterno che, come già introdotto, si specializza in calcoli
     numerici e matematici con particolare attenzione all'efficienza. Il suo utilizzo può
     diventare rischioso a causa della sua limitata precisione a "soli" 64 bit, per questo 
-    il suo utilizzo è confinato in contesti testati e dalla relativa importanza  numerica, 
+    il suo utilizzo uso va confinato a contesti verificati 
     dove la precisione limitata non compromette l'accuratezza dei risultati finali.
     \item \texttt{Sympy}: Modulo esterno dedicato ai calcoli simbolici a precisione arbitraria.
     Utilizzato come supporto a FLINT grazie alle sue numerose funzioni già pronte e il 
@@ -119,13 +119,13 @@ Nello specifico:
     di \texttt{Numpy}.
 \end{itemize}
 
-E' importante precisare che FPLLL è disponibile solo per il sistema operativo Linux, impedendo
+È importante precisare che FPLLL è disponibile solo per il sistema operativo Linux, impedendo
 quindi di poter funzionare su più piattaforme, punto importante del progetto. Il problema 
 è stato superato su Windows grazie all'introduzione del Windows Subsystem for Linux (WSL). 
 Questa tecnologia consente di eseguire un ambiente Linux virtualizzato  
 all'interno di Windows, integrandosi con il sistema operativo e permettendo di richiamare 
 funzionalità Linux direttamente.
-E' infine opportuno notare che il sistema di archiviazione su file adottato, ovvero su 
+È infine opportuno notare che il sistema di archiviazione su file adottato, ovvero su 
 semplici file di testo, non 
 rappresenta la soluzione ottimale in termini di efficienza dello spazio. 
 Come evidenziato nella Tabella \ref{tab:key_size_comparison} della Sezione 

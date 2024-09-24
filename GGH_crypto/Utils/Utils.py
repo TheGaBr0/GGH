@@ -13,7 +13,43 @@ import numpy as np
 import random
 
 class Utils:
+    """
+    A utility class providing various helper methods for lattice-based cryptography operations.
+
+    This class includes methods for linear algebra operations, lattice visualizations,
+    mathematical computations, and file I/O operations specific to lattice-based cryptography.
+
+    Class Methods:
+        gram_schmidt(basis): Performs Gram-Schmidt orthogonalization on a given basis.
+        visualize_lattice(basis_1, basis_1_cvp, point, basis_2=None, basis_2_cvp=None, title="Lattice Plot", limit=5):
+            Visualizes a 2D lattice with given bases and points.
+        embedding(basis, ciphertext, visualize=False, GGH=False, BKZ=False, block=20, pruned=False, precision=100, bkzautoabort=True, bkzmaxloops=None, nolll=False):
+            Performs lattice embedding for closest vector problem (CVP) solving.
+        npsp_to_fmpq_mat(basis): Converts a numpy array or sympy matrix to an fmpq_mat.
+        npsp_to_fmpz_mat(basis): Converts a numpy array or sympy matrix to an fmpz_mat.
+        vector_l1_norm(row): Calculates the L1 norm of a vector.
+        vector_l2_norm(row): Calculates the L2 norm of a vector.
+        get_hadamard_ratio(basis=None, precision=10): Calculates the Hadamard ratio of a basis.
+        write_matrix_to_file(matrix, filename): Writes a matrix to a file.
+        load_matrix_from_file(filename, matrix_type='fmpq'): Loads a matrix from a file.
+        BKZ_reduction(matrix, block=20, pruned=False, precision=90, bkzautoabort=True, bkzmaxloops=None, nolll=False):
+            Performs BKZ (Block Korkine-Zolotarev) lattice reduction.
+        babai_rounding(basis, point, visualize=False): Performs Babai's rounding algorithm for CVP.
+
+    Note:
+        This class assumes the availability of certain libraries like flint, matplotlib, and numpy.
+        It also interacts with system commands, particularly for BKZ reduction using fplll.
+    """
     def gram_schmidt(basis):
+        """
+        Performs Gram-Schmidt orthogonalization on a given basis.
+
+        Args:
+            basis (numpy.ndarray): The input basis.
+
+        Returns:
+            numpy.ndarray: The orthogonalized basis.
+        """
         ortho_basis = basis[0:1,:].copy()
         for i in range(1, basis.shape[0]):
             proj = np.diag((basis[i,:].dot(ortho_basis.T)/np.linalg.norm(ortho_basis,axis=1)**2).flat).dot(ortho_basis)
@@ -21,6 +57,18 @@ class Utils:
         return ortho_basis
     
     def visualize_lattice(basis_1, basis_1_cvp, point, basis_2=None, basis_2_cvp=None, title="Lattice Plot", limit=5):
+        """
+        Visualizes a 2D lattice with given bases and points.
+
+        Args:
+            basis_1 (fmpz_mat): The first basis.
+            basis_1_cvp (fmpz_mat): The closest vector point for basis_1.
+            point (fmpz_mat): The target point.
+            basis_2 (fmpz_mat, optional): The second basis.
+            basis_2_cvp (fmpz_mat, optional): The closest vector point for basis_2.
+            title (str, optional): The title of the plot.
+            limit (int, optional): The limit for the lattice points to plot.
+        """
         basis_1_np = np.array(basis_1.tolist()).astype(int)
 
         plt.rcParams.update({'font.size': 14})
@@ -122,7 +170,25 @@ class Utils:
 
     def embedding(basis, ciphertext, visualize=False, GGH=False, BKZ=False, block=20, 
                   pruned=False, precision=100, bkzautoabort=True, bkzmaxloops=None, nolll=False):
-        
+        """
+        Performs lattice embedding for closest vector problem (CVP) solving.
+
+        Args:
+            basis (fmpz_mat): The lattice basis.
+            ciphertext (fmpz_mat): The ciphertext vector.
+            visualize (bool, optional): Whether to visualize the result.
+            GGH (bool, optional): Whether to use GGH-specific constraints.
+            BKZ (bool, optional): Whether to use BKZ reduction.
+            block (int, optional): The block size for BKZ reduction.
+            pruned (bool, optional): Whether to use pruning in BKZ.
+            precision (int, optional): The precision for BKZ calculations.
+            bkzautoabort (bool, optional): Whether to use auto-abort in BKZ.
+            bkzmaxloops (int, optional): The maximum number of loops for BKZ.
+            nolll (bool, optional): Whether to skip LLL in BKZ.
+
+        Returns:
+            fmpz_mat: The closest vector to the ciphertext in the lattice.
+        """
         if basis.ncols() != ciphertext.ncols():
                 raise ValueError(f"[Utils] Point is a {1}x{ciphertext.ncols()} matrix, but basis is a {basis.nrows()}x{basis.ncols()} one")
         
@@ -184,19 +250,55 @@ class Utils:
         return closest_vector
     
     def npsp_to_fmpq_mat(basis):
+        """
+        Converts a numpy array or sympy matrix to an fmpq_mat.
+
+        Args:
+            basis (numpy.ndarray or sympy.Matrix): The input matrix.
+
+        Returns:
+            fmpq_mat: The converted matrix.
+        """
         fractions = [[Fraction(item) for item in row] for row in basis.tolist()]
         return fmpq_mat([[fmpq(f.numerator, f.denominator) for f in row] for row in fractions])
 
     def npsp_to_fmpz_mat(basis):
+        """
+        Converts a numpy array or sympy matrix to an fmpz_mat.
+
+        Args:
+            basis (numpy.ndarray or sympy.Matrix): The input matrix.
+
+        Returns:
+            fmpz_mat: The converted matrix.
+        """
         return fmpz_mat([[int(item) for item in sublist] for sublist in basis.tolist()])
         
     def vector_l1_norm(row):
+        """
+        Calculates the L1 norm of a vector.
+
+        Args:
+            row (fmpz_mat or fmpq_mat): The input vector.
+
+        Returns:
+            Decimal: The L1 norm of the vector.
+        """
         if isinstance(row, fmpz_mat):
             row = fmpq_mat(row)
         getcontext().prec = 50
         return max(sum(abs(Decimal(int(x.numer())) / Decimal(int(x.denom()))) for x in row) for row in row.tolist())
         
     def vector_l2_norm(row):
+        """
+        Calculates the L2 norm of a vector.
+
+        Args:
+            row (fmpz_mat or fmpq_mat): The input vector.
+
+        Returns:
+            Decimal: The L2 norm of the vector.
+        """
         if isinstance(row, fmpz_mat):
             row = fmpq_mat(row)
         getcontext().prec = 50
@@ -204,6 +306,16 @@ class Utils:
 
     
     def get_hadamard_ratio(basis=None, precision=10):
+        """
+        Calculates the Hadamard ratio of a basis.
+
+        Args:
+            basis (fmpz_mat or fmpq_mat, optional): The input basis.
+            precision (int, optional): The precision for calculations.
+
+        Returns:
+            tuple: (Decimal ratio, str formatted ratio)
+        """
         norms = []
         dimension = basis.nrows()
         
@@ -226,6 +338,16 @@ class Utils:
         return result, f"{result:.{precision}f}"
     
     def write_matrix_to_file(matrix, filename):
+        """
+        Writes a matrix to a file.
+
+        Args:
+            matrix (fmpz_mat or fmpq_mat): The matrix to write.
+            filename (str): The name of the file to write to.
+
+        Returns:
+            str: The full path of the written file.
+        """
         filename = os.path.join(os.getcwd(), filename)
 
         rows = matrix.nrows()
@@ -248,6 +370,19 @@ class Utils:
         return filename
     
     def load_matrix_from_file(filename, matrix_type='fmpq'):
+        """
+        Loads a matrix from a file.
+
+        Args:
+            filename (str): The name of the file to read from.
+            matrix_type (str, optional): The type of matrix to load ('fmpz' or 'fmpq').
+
+        Returns:
+            fmpz_mat or fmpq_mat: The loaded matrix.
+
+        Raises:
+            ValueError: If an invalid matrix_type is provided.
+        """
         with open(os.path.join(os.getcwd(), filename), 'r') as file:
             content = file.read().replace(']', '],').replace(' ]', ']').replace(' ', ', ')[:-4] + ']'
     
@@ -268,14 +403,26 @@ class Utils:
             raise ValueError("Invalid matrix_type. Use 'fmpz' or 'fmpq'.")
 
     def BKZ_reduction(matrix, block=20, pruned=False, precision=90, bkzautoabort=True, bkzmaxloops=None, nolll=False):
-        
-        short_id = f"{int(time.time())%10000:04d}{random.randint(1000,9999)}"
+        """
+        Performs BKZ (Block Korkine-Zolotarev) lattice reduction.
 
-        input_path = Utils.write_matrix_to_file(matrix, f'input_{short_id}.txt')
-        output_path = Utils.write_matrix_to_file(matrix, f'output_{short_id}.txt')
+        Args:
+            matrix (fmpz_mat): The input matrix to reduce.
+            block (int, optional): The block size for BKZ.
+            pruned (bool, optional): Whether to use pruning.
+            precision (int, optional): The precision for calculations.
+            bkzautoabort (bool, optional): Whether to use auto-abort.
+            bkzmaxloops (int, optional): The maximum number of loops.
+            nolll (bool, optional): Whether to skip LLL.
+
+        Returns:
+            tuple: (fmpz_mat reduced matrix, str error message or None)
+        """
+        input_path = Utils.write_matrix_to_file(matrix, f'input.txt')
+        output_path = Utils.write_matrix_to_file(matrix, f'output.txt')
 
         if os.name == 'nt':
-            command = f"wsl fplll input_{short_id}.txt -a bkz -b {block} -p {precision} -m wrapper -f mpfr -bkzdumpgso debug{block}_{short_id}.txt"
+            command = f"wsl fplll input.txt -a bkz -b {block} -p {precision} -m wrapper -f mpfr"
             if pruned:
                 command += " -s default.json"
             if bkzautoabort:
@@ -284,9 +431,9 @@ class Utils:
                 command += f" -bkzmaxloops {bkzmaxloops}"
             if nolll:
                 command += " -nolll"
-            command += f" > output_{short_id}.txt"
+            command += f" > output.txt"
         else:
-            command = f"fplll input.txt_{short_id} -a bkz -b {block} -p {precision} -m wrapper -f mpfr -bkzdumpgso debug{block}_{short_id}.txt"
+            command = f"fplll input.txt -a bkz -b {block} -p {precision} -m wrapper -f mpfr"
             if pruned:
                 command += " -s default.json"
             if bkzautoabort:
@@ -295,7 +442,7 @@ class Utils:
                 command += f" -bkzmaxloops {bkzmaxloops}"
             if nolll:
                 command += " -nolll"
-            command += f" > output_{short_id}.txt"
+            command += f" > output.txt"
         try:
             # Run the command and capture its output
             print(f"Reduction started with the following parameters:\n"
@@ -323,7 +470,7 @@ class Utils:
             print(f"Reduction completed, time taken: {time.time() - time_now}")
 
             # Load the reduced matrix
-            reduced_matrix = Utils.load_matrix_from_file(f"output_{short_id}.txt", "fmpz")
+            reduced_matrix = Utils.load_matrix_from_file(f"output.txt", "fmpz")
 
             os.remove(output_path)
             os.remove(input_path)
@@ -334,7 +481,20 @@ class Utils:
             return None, str(e)
         
     def babai_rounding(basis, point, visualize=False):
+        """
+        Performs Babai's rounding algorithm for CVP.
 
+        Args:
+            basis (fmpz_mat): The lattice basis.
+            point (fmpz_mat): The target point.
+            visualize (bool, optional): Whether to visualize the result.
+
+        Returns:
+            fmpz_mat: The closest vector to the point in the lattice.
+
+        Raises:
+            ValueError: If visualization is requested for a non-2D lattice.
+        """
         x = point * basis.inv()
 
         for i in range(x.nrows()):

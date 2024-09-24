@@ -9,10 +9,11 @@ Nel 1986 Babai\cite{Babai86}  propose due algoritmi per la risoluzione di apprCV
 entrambi verranno trattati, sebbene il primo sarà discusso in modo più conciso 
 poiché, come verrà spiegato nei prossimi capitoli, non è stato utilizzato nelle 
 implementazioni proposte. \\
-Il metodo del piano più vicino è il primo algoritmo presentato da Babai, esso si basa sull'impiegare 
-l'ortogonalizzazione di Gram-Schmidt per semplificare il problema. L'algoritmo inizia quindi
-ortogonalizzando la base del reticolo fornita in 
-input attraverso Gram-Schmidt. Successivamente, procede in maniera iterativa a partire 
+Il metodo del piano più vicino è il primo algoritmo presentato da Babai; esso si basa sull'impiegare 
+l'ortogonalizzazione di Gram-Schmidt per semplificare il problema.
+L'algoritmo infatti, in una fase iniziale, provvede ad ortogonalizzare la base del reticolo 
+fornita in input.
+Successivamente, procede in maniera iterativa a partire 
 dalla dimensione più alta: il vettore input viene proiettato sul vettore base ortogonale 
 corrispondente e questa proiezione viene approssimata al multiplo intero più vicino del 
 vettore della base originale. Tale approssimazione viene sottratta dal vettore input, 
@@ -35,7 +36,7 @@ $n$ e una sua base $\mathbf{B}$, per ogni vettore $\mathbf{t} \in \mathbb{R}^n$,
 con $\mathbf{t} \notin \mathcal{L}$, un'unica decomposizione $\mathbf{t} = \mathbf{f} + \mathbf{v}$
 può essere sempre trovata in modo tale che $\mathbf{v} \in \mathcal{L}$ e $\mathbf{f}$ si collochi
 nel dominio fondamentale $\mathcal{F}$ di $\mathbf{B}$. Questa proprietà fornisce l'idea
-dietro alla risoluzione dell'apprCVP usata da questo algoritmo: identificare il dominio fondamentale (traslato) rispettivamente
+che sta dietro alla risoluzione dell'apprCVP usata da questo algoritmo: identificare il dominio fondamentale (traslato) rispettivamente
 a $\mathbf{v} \in \mathcal{L}$, nel quale il vettore target $\mathbf{t}$ si trova. 
 Sia $\mathcal{L}$ un reticolo con 
 dimensione $n$ generato da una base (buona) $\mathbf{B}$ e sia $\mathbf{t}$ un vettore tale che

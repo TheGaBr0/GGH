@@ -9,6 +9,39 @@ import numpy as np
 from ..Utils.Utils import Utils
 
 class GGHHNFCryptosystem:
+    """
+    Implementation of the GGH (Goldreich-Goldwasser-Halevi) cryptographic system with Hermite Normal Form (HNF) modifications.
+
+    This class provides methods for generating keys, encrypting, and decrypting messages
+    using the GGH lattice-based cryptographic system with HNF optimizations.
+
+    Attributes:
+        dimension (int): The dimension of the lattice.
+        lattice_point (fmpz_mat): The lattice point to be encrypted.
+        ciphertext (fmpq_mat): The encrypted text.
+        error (fmpz_mat): The error vector.
+        alpha (float): The alpha parameter for error generation.
+        private_basis (fmpz_mat): The private basis of the lattice.
+        public_basis (fmpz_mat): The public basis of the lattice.
+        R_rho (Decimal): The rho parameter of the private basis.
+        GGH_private (bool): If True, uses GGH's matrix transformation technique for private basis generation.
+        debug (bool): If True, prints debug information.
+        private_key (tuple): The private key (R_inv, R).
+        public_key (tuple): The public key (H, R_rho).
+
+    Args:
+        dimension (int): The dimension of the lattice.
+        private_basis (fmpz_mat, optional): A predefined private basis.
+        public_basis (fmpz_mat, optional): A predefined public basis.
+        lattice_point (fmpz_mat, optional): A predefined lattice point.
+        error (fmpz_mat, optional): A predefined error vector.
+        alpha (float, optional): The alpha parameter for error generation. Default is 0.75.
+        GGH_private (bool, optional): Whether to use GGH's matrix transformation technique. Default is False.
+        debug (bool, optional): Whether to enable debug prints. Default is False.
+
+    Raises:
+        ValueError: If the dimensions of the provided bases or vectors do not match.
+    """
     def __init__(self, dimension, private_basis=None, public_basis=None, lattice_point=None, error=None, alpha=0.75, GGH_private=False, debug=False):
         self.dimension = dimension
         
@@ -55,7 +88,9 @@ class GGHHNFCryptosystem:
                 print(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(self.error)}")
 
     def generate_keys_from_R_or_B(self):
-
+        """
+        Generates keys from a provided private or public basis.
+        """
         if self.debug:
             print("[GGH-HNF] Private basis given as input, inverting it..")
     
@@ -81,6 +116,15 @@ class GGHHNFCryptosystem:
         self.private_key = (R_inv, R)
 
     def min_norm_row(self, matrix):
+        """
+        Finds the minimum norm row in the given matrix.
+
+        Args:
+            matrix (fmpz_mat or fmpq_mat): The input matrix.
+
+        Returns:
+            float: The minimum norm among all rows.
+        """
         norms = []
         for j in range(matrix.nrows()):
             row = [matrix[j, i] for i in range(matrix.ncols())]
@@ -89,6 +133,15 @@ class GGHHNFCryptosystem:
         return norms[norms.index(min_norm)]
 
     def calculate_rho(self, basis):
+        """
+        Calculates the rho parameter for the given basis.
+
+        Args:
+            basis (fmpz_mat): The input basis.
+
+        Returns:
+            Decimal: The calculated rho value.
+        """
         basis_orthogonalized = Utils.gram_schmidt(np.array(basis.tolist()).astype(int))
         basis_orthogonalized = Utils.npsp_to_fmpq_mat(basis_orthogonalized)
         min_norm = self.min_norm_row(basis_orthogonalized)
@@ -99,6 +152,9 @@ class GGHHNFCryptosystem:
         return rho
     
     def generate_random_error(self):
+        """
+        Generates a random error vector based on the alpha and R_rho parameters.
+        """
         n = self.dimension
         max_norm = Decimal(self.alpha) * self.R_rho
 
@@ -117,6 +173,9 @@ class GGHHNFCryptosystem:
             print(f"[GGH-HNF] Length of error vector is: {error_norm}")
     
     def reduce_mod_B(self):
+        """
+        Generates the private and public keys of the cryptographic system.
+        """
         r = fmpq_mat(self.error)
         H = self.public_basis
         x = fmpz_mat(r.nrows(), r.ncols())
@@ -130,6 +189,9 @@ class GGHHNFCryptosystem:
         return x
 
     def generate_keys(self):
+        """
+        Encrypts the lattice point using the public key and an error vector.
+        """
         n = self.dimension
         tries = 0
         if self.GGH_private:
@@ -203,6 +265,12 @@ class GGHHNFCryptosystem:
             print(f"[GGH-HNF] Time taken: {enc_time}")
 
     def decrypt(self):
+        """
+        Decrypts the ciphertext using the private key.
+
+        Returns:
+            fmpq_mat: The decrypted lattice point.
+        """
         if self.debug:
             print(f"[GGH-HNF] Decrypting...")
             time_start = time.time()

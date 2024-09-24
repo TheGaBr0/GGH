@@ -32,35 +32,35 @@
 \contentsline {subsubsection}{Generazione delle chiavi}{34}{section*.15}%
 \contentsline {subsubsection}{Cifratura e decifratura}{35}{section*.16}%
 \contentsline {subsubsection}{Attacchi a GGH-HNF}{35}{section*.17}%
-\contentsline {chapter}{\numberline {5}Implementazione}{37}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Tecnologie adottate e motivazioni}{37}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Struttura del progetto}{41}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Integrazione e gestione di FLINT}{42}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Modulo GGH}{43}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Generazione delle chiavi}{44}{subsection.5.2.1}%
-\contentsline {subsubsection}{Chiave privata}{45}{section*.20}%
-\contentsline {subsubsection}{Chiave pubblica}{45}{section*.21}%
-\contentsline {subsection}{\numberline {5.2.2}Cifratura e decifratura}{45}{subsection.5.2.2}%
-\contentsline {subsubsection}{Cifratura}{46}{section*.22}%
-\contentsline {subsubsection}{Decifratura}{46}{section*.23}%
-\contentsline {subsection}{\numberline {5.2.3}Caso d'uso}{46}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Modulo GGH-HNF}{47}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Generazione delle chiavi}{48}{subsection.5.3.1}%
-\contentsline {subsubsection}{Chiave privata}{48}{section*.25}%
-\contentsline {subsubsection}{Chiave pubblica}{48}{section*.26}%
-\contentsline {subsection}{\numberline {5.3.2}Cifratura e decifratura}{49}{subsection.5.3.2}%
-\contentsline {subsubsection}{Cifratura}{49}{section*.27}%
-\contentsline {subsubsection}{Decifratura}{49}{section*.28}%
-\contentsline {subsection}{\numberline {5.3.3}Caso d'uso}{50}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}Modulo Utils}{50}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Conversione e norme}{50}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Scrittura e lettura su file}{51}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Visualizzazione grafica}{52}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Algoritmi di risoluzione del CVP}{54}{subsection.5.4.4}%
-\contentsline {subsection}{\numberline {5.4.5}Riduzione e qualità di una base}{57}{subsection.5.4.5}%
-\contentsline {chapter}{\numberline {6}Risultati sperimentali}{61}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Generazione delle chiavi}{61}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Cifratura e decifratura}{65}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Sicurezza}{68}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Confronti con studi precedenti}{72}{section.6.4}%
+\contentsline {chapter}{\numberline {5}Implementazione}{36}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Tecnologie adottate e motivazioni}{36}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Struttura del progetto}{40}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Integrazione e gestione di FLINT}{41}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Modulo GGH}{42}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Generazione delle chiavi}{43}{subsection.5.2.1}%
+\contentsline {subsubsection}{Chiave privata}{44}{section*.20}%
+\contentsline {subsubsection}{Chiave pubblica}{44}{section*.21}%
+\contentsline {subsection}{\numberline {5.2.2}Cifratura e decifratura}{44}{subsection.5.2.2}%
+\contentsline {subsubsection}{Cifratura}{45}{section*.22}%
+\contentsline {subsubsection}{Decifratura}{45}{section*.23}%
+\contentsline {subsection}{\numberline {5.2.3}Caso d'uso}{45}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Modulo GGH-HNF}{46}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Generazione delle chiavi}{47}{subsection.5.3.1}%
+\contentsline {subsubsection}{Chiave privata}{47}{section*.25}%
+\contentsline {subsubsection}{Chiave pubblica}{47}{section*.26}%
+\contentsline {subsection}{\numberline {5.3.2}Cifratura e decifratura}{48}{subsection.5.3.2}%
+\contentsline {subsubsection}{Cifratura}{48}{section*.27}%
+\contentsline {subsubsection}{Decifratura}{48}{section*.28}%
+\contentsline {subsection}{\numberline {5.3.3}Caso d'uso}{49}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Modulo Utils}{49}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Conversione e norme}{49}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Scrittura e lettura su file}{50}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Visualizzazione grafica}{51}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Algoritmi di risoluzione del CVP}{53}{subsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.4.5}Riduzione e qualità di una base}{56}{subsection.5.4.5}%
+\contentsline {chapter}{\numberline {6}Risultati sperimentali}{60}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Generazione delle chiavi}{60}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Cifratura e decifratura}{64}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Sicurezza}{67}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Confronti con studi precedenti}{71}{section.6.4}%
 \contentsline {chapter}{\numberline {7}Conclusioni}{75}{chapter.7}%
