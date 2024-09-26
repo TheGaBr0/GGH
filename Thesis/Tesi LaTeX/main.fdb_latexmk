@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1727208630.64061 "c:/Users/gbott/Desktop/syncRaspberry/Progetto Tesi/Tesi LaTeX/main.tex" "main.pdf" "main" 1727208634.08988 0
+["pdflatex"] 1727252193.45122 "c:/Users/gbott/Desktop/syncRaspberry/Progetto Tesi/Tesi LaTeX/main.tex" "main.pdf" "main" 1727252196.80691 0
   "C:/Users/gbott/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1725698213 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/gbott/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1716722799 14064 4ad39736800831010d55b34e6505d243 ""
   "C:/Users/gbott/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1716722874 24240354 cc1614d3c84e920674e523b419cd0a5e ""
@@ -291,7 +291,7 @@
   "acknowledgements.tex" 1727078928 3232 637b3d9a2039d8124f3c3dd877671e27 ""
   "c:/Users/gbott/Desktop/syncRaspberry/Progetto" 1724484207 0 d41d8cd98f00b204e9800998ecf8427e ""
   "c:/Users/gbott/Desktop/syncRaspberry/Progetto Tesi/Tesi LaTeX/main.tex" 1727109824 6155 97cb3dfea02e4daec7164fe08c7ad8fe ""
-  "chapters/Cap1/Introduzione.tex" 1727208628 3316 1510a40acafe78eb9cef6df47cc91cd8 ""
+  "chapters/Cap1/Introduzione.tex" 1727252192 4454 d1c70bb9ba65a53bb52c170306f0debe ""
   "chapters/Cap2/CVP.tex" 1727121734 15011 588a524cb51a1395bb65054537bf18b1 ""
   "chapters/Cap2/Problemi.tex" 1727121061 3153 fef9d683d35b3c04a7e2911256b6bcb2 ""
   "chapters/Cap2/Reticoli.tex" 1727120858 14473 d877dcadbe33c85f5fe1e992a6f60b71 ""
@@ -316,11 +316,11 @@
   "chapters/Cap6/Risultati_sperimentali.tex" 1727193803 45612 0b920efff9fe167c5ae92ad5e7883d68 ""
   "chapters/Cap7/Conclusioni.tex" 1727123649 4689 0da3d0f83a0c20a1efc36d87b6b97110 ""
   "images/matplotlib.png" 1725031448 45753 7e684b06b75676026f4b4204988a1357 ""
-  "main.aux" 1727208633 41530 bf4d173cb2733bf855c09d435dd49dc5 "pdflatex"
-  "main.lof" 1727208633 2887 60cd26769619bcaf3ab50ca288b25cdb "pdflatex"
-  "main.lot" 1727208633 2003 90ec316f481b17e932d4aca100f753f1 "pdflatex"
+  "main.aux" 1727252196 41530 bf4d173cb2733bf855c09d435dd49dc5 "pdflatex"
+  "main.lof" 1727252196 2887 60cd26769619bcaf3ab50ca288b25cdb "pdflatex"
+  "main.lot" 1727252196 2003 90ec316f481b17e932d4aca100f753f1 "pdflatex"
   "main.tex" 1727109824 6155 97cb3dfea02e4daec7164fe08c7ad8fe ""
-  "main.toc" 1727208633 5387 73470f77e25a4e8f4530fbe7f694b2bd "pdflatex"
+  "main.toc" 1727252196 5387 73470f77e25a4e8f4530fbe7f694b2bd "pdflatex"
   "tesi.sty" 1726300590 9693 59f24ee3bdd5ce4b645ca9bdae99196c ""
   (generated)
   "main.aux"
