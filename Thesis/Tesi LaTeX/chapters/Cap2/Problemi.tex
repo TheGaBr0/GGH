@@ -34,12 +34,14 @@ e Problema del Vettore più Corto Approssimato  (apprSVP).
 Questi sotto-problemi sono riferibili alla necessità di trovare un vettore non nullo la 
 cui lunghezza sia maggiore di un fattore dato $\Psi(n)$, rispetto ad un vettore non nullo 
 corretto che risulti essere più corto o più vicino, a seconda del problema.
-\\
-In particolare GGH si basa sulla risoluzione del CVP basandosi su una delle proprietà
-fondamentali dei reticoli: la possibilità di usare più basi per lo stesso reticolo.
-Utilizzando due basi $\mathbf{A}$ e $\mathbf{B}$, definite rispettivamente come 
-"buona" e "cattiva", ma che generano lo stesso reticolo, diventa più agevole 
-risolvere determinati problemi sui reticoli utilizzando la base $\mathbf{A}$ piuttosto 
-che la base $\mathbf{B}$. 
-Per questi motivi il CVP sarà il fulcro dei problemi discussi in questa tesi assieme al SVP,
-il quale verrà trattato prevalentemente per quanto riguarda la crittoanalisi di GGH. 
+Nel contesto di questa tesi, l'attenzione sarà focalizzata principalmente su questi 
+sotto-problemi. Nello specifico apprCVP assume un ruolo di primaria importanza, essendo cruciale sia per 
+il funzionamento del crittosistema GGH, oggetto centrale di questo studio, sia per la sua 
+crittoanalisi. D'altra parte, apprSVP trova la sua applicazione esclusivamente nell'ambito
+della crittoanalisi e sarà quindi trattato con minor dettaglio. 
+Per affrontare quest'ultimo, si ricorre tipicamente a algoritmi di riduzione dei 
+reticoli, un tema che sarà esaminato in dettaglio nella prossima sezione.
+È importante precisare che, quando si parla di risolvere CVP o SVP, si intende sempre anche la 
+risoluzione dei loro sottoproblemi. Nel resto di questa tesi quindi, la risoluzione 
+del CVP e dell'SVP, sarà una generalizzazione che implicherà sempre anche la risoluzione delle loro versioni 
+approssimate.

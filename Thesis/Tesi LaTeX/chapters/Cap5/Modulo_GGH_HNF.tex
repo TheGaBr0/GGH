@@ -96,8 +96,8 @@ nel valore di ritorno. Dato che il messaggio da recuperare è codificato in $\ma
 necessario ritornare il testo cifrato a cui viene sottratto il risultato della tecnica
 di arrotondamento di Babai, come mostrato più dettagliatamente nell'Esempio \ref{exp:HNF}. 
 La scelta di questo algoritmo per la risoluzione del CVP porta a un'ulteriore conseguenza:
-il vettore di errore $\mathbf{e}$ non basta che sia semplicemente minore di $\rho$, 
-ma è necessario che sia metodicamente minore a causa della minore precisione dell'algoritmo. 
+la lunghezza del vettore di errore $\mathbf{e}$ non basta che sia semplicemente minore di $\rho$, 
+ma è necessario che sia significativamente più piccola a causa della inferiore precisione dell'algoritmo. 
 Risultati sperimentali, osservabili in Tabella \ref{tab:combined_successes_hnf} Sezione 
 \ref{sec:risultati_cifratura_decifratura}, hanno dimostrato che è sufficiente un 
 $\mathbf{e} < 0.8\rho$ per assicurare un successo con probabilità stimata del 97.92\%. 

@@ -3,22 +3,31 @@
 
 Nell'era digitale odierna, la sicurezza delle informazioni è diventata una priorità 
 cruciale. La crittografia, in particolare quella basata sui reticoli, svolge un ruolo 
-fondamentale in questo contesto. I reticoli offrono una solidità matematica e resistenza 
+fondamentale in questo contesto. I reticoli offrono una solida resistenza matematica 
 anche ai computer quantistici, una minaccia emergente per molti sistemi crittografici 
 tradizionali.
-Il sistema GGH, proposto nel 1997, rappresenta una pietra miliare nella crittografia 
-basata sui reticoli, sfruttando la complessità del problema dei vettori più vicini sui reticoli. Tuttavia, il sistema originale GGH ha mostrato vulnerabilità, stimolando la ricerca di miglioramenti come la variante GGH-HNF.
-Questa tesi si propone di rivisitare approfonditamente GGH e GGH-HNF, valutandone la 
-potenziale applicabilità pratica nel contesto tecnologico attuale. \\
+Il crittosistema a chiave pubblica GGH, proposto nel 1997, rappresenta una pietra miliare 
+in questo tipo di 
+crittografia, fondandosi sulla complessità posta da uno in particolare dei problemi più famosi
+sui reticoli, ovvero il Problema del Vettore più corto (CVP).
+Tuttavia, lo schema originale ha mostrato vulnerabilità, stimolando la ricerca di miglioramenti 
+come la variante ottimizzata GGH-HNF.
+Questa tesi si propone dunque di rivisitare approfonditamente GGH e GGH-HNF, valutandone la 
+potenziale applicabilità pratica nel contesto tecnologico attuale. L'obiettivo di questa tesi è dunque 
+quello di rivedere i crittosistemi menzionati in precedenza utilizzando strumenti moderni, mediante 
+un'implementazione dettagliata supportata da: un'attenta analisi delle loro proprietà 
+matematiche, la descrizione degli algoritmi necessari al loro funzionamento e una crittoanalisi 
+approfondita.\\
 Il Capitolo 2 si concentra sulle proprietà e i problemi relativi ai reticoli. 
 Viene innanzitutto presentata una panoramica dettagliata sui reticoli, tra cui la 
 definizione formale, le nozioni base come la proprietà dei coefficienti integrali, e il 
 concetto del dominio fondamentale. Vengono inoltre introdotti i principali problemi 
 reticolari di interesse crittografico, ovvero il Problema del Vettore più Corto (SVP) e 
-il Problema del Vettore più Vicino (CVP). Il capitolo prosegue illustrando algoritmi 
-chiave per la riduzione di basi reticolari, introducendo prima l'ortogonalizzazione
-Gram-Schmidt necessaria per la riduzione e successivamente l'algoritmo di Lenstra-Lenstra-Lovász 
-(LLL) e sue varianti migliorate. Questi algoritmi permettono di trasformare 
+il CVP. Il capitolo prosegue illustrando algoritmi 
+chiave per la riduzione di basi reticolari. Viene prima presentato l'algoritmo d'ortogonalizzazione
+Gram-Schmidt, un passo preliminare essenziale per il successivo processo di riduzione. In seguito, 
+viene introdotto l'algoritmo di Lenstra-Lenstra-Lovász (LLL) e alcune sue versioni perfezionate. 
+Questi algoritmi permettono di trasformare 
 basi "cattive" in basi "buone", migliorando il rapporto di Hadamard che misura la qualità 
 della base.
 Infine, il capitolo si concentra su algoritmi per la risoluzione approssimata del CVP, 
@@ -27,29 +36,36 @@ ridotte per ottenere soluzioni efficaci. \\
 Il Capitolo 3 descrive e crittoanalizza il crittosistema a chiave pubblica Goldreich 
 Goldwasser Halevi (GGH), oggetto di questa tesi. Viene spiegato in dettaglio il funzionamento 
 di GGH, con particolare focus sulla generazione delle chiavi pubblica e privata. 
-Il capitolo analizza poi le principali vulnerabilità del sistema GGH originale, come 
-gli attacchi di calcolo della chiave privata, risoluzione diretta del CVP, l'attacco di 
-Nguyen che sfrutta la struttura del vettore di errore, e gli attacchi basati su 
-informazioni parziali del messaggio. Per ciascun attacco sono forniti esempi pratici e 
-discusse le possibili contromisure proposte. \\
-Il Capitolo 4 presenta la variante migliorata del sistema GGH, nota come GGH-HNF, 
-proposta da Daniele Micciancio nel 2001. Questa versione mira a risolvere le 
+Il capitolo analizza poi le principali vulnerabilità del sistema GGH originale, 
+classificandoli per efficacia e proponendone eventuali
+contromisure. Il capitolo inoltre contiene al suo interno esempi pratici e dettagliati del funzionamento 
+di GGH e di alcuni dei suoi attacchi principali. \\
+Il Capitolo 4 affronta la variante migliorata dello schema originale, nota come GGH-HNF 
+Questa versione mira a risolvere le 
 vulnerabilità della versione originale di GGH aumentandone sia le performance che la 
 sicurezza. Il capitolo descrive in dettaglio la struttura e il funzionamento di GGH-HNF, 
-spiegando come Micciancio abbia scelto di utilizzare la forma normale di Hermite (HNF) 
-per generare la chiave pubblica invece della costruzione casuale originale. 
-In questo capitolo vengono anche riportati anche i dati riguardanti i limiti pratici di 
-GGH-HNF, rilevati da un rapporto tecnico di Christoph Ludwig nel 2004. \\
-Il Capitolo 5 esplora l'implementazione dei crittosistemi GGH e GGH-HNF, strutturata 
-come un pacchetto Python. Questa sezione offre una dettagliata giustificazione delle 
-scelte progettuali e presenta un'analisi approfondita dei tre moduli principali che 
-compongono il pacchetto: GGH e GGH-HNF, che implementano rispettivamente i due sistemi 
-in esame, e Utils, un modulo di supporto che fornisce funzioni e metodi di 
-utilità generale utilizzati da entrambi i crittosistemi. \\
-Il Capitolo 6 espone i risultati sperimentali dei test condotti sui sistemi crittografici 
-precedentemente discussi. Presenta dati dettagliati sui tempi di esecuzione per ciascuna 
-fase operativa e sulle dimensioni delle chiavi e dei testi cifrati. L'analisi si conclude 
-con un confronto tra questi risultati e quelli ottenuti da studi precedenti sugli stessi 
-crittosistemi, nonché con schemi crittografici tradizionali come RSA ed ElGamal. \\
-Il Capitolo 7, infine, discute i risultati ottenuti e risponde alle domande poste dalla 
-tesi, con particolare attenzione ai vantaggi e, soprattutto, gli svantaggi rilevati. 
+spiegando come la scelta d'utilizzo della forma normale di Hermite (HNF) possa aver apportato 
+migliorie significative. 
+Il capitolo procede poi riportando i limiti pratici di GGH-HNF e discutendone la sua sicurezza, 
+presentando inoltre un esempio pratico del funzionamento dello schema. \\
+Il Capitolo 5 descrive come l'implementazione, configurata come pacchetto Python, sia stata pensata e 
+costruita. Vengono innanzitutto argomentate le ragioni che hanno guidato specifiche scelte progettuali, 
+accompagnate da una descrizione dettagliata delle soluzioni implementate e delle ottimizzazioni apportate 
+per migliorare le prestazioni del sistema. Il capitolo procede poi con la descrizione della
+struttura del pacchetto, basata su tre moduli: i primi due dedicati ai crittosistemi singoli e il 
+terzo contenente metodi in comune e funzioni utili nell'ambito della crittografia basata sui reticoli. 
+Ogni modulo viene affrontato singolarmente nel dettaglio, spiegando: parametri in input, funzioni e 
+decisioni implementative. \\
+Il Capitolo 6 offre una panoramica completa dei risultati sperimentali ottenuti attraverso una serie 
+di test mirati sull'intero progetto. L'analisi si concentra su tre aspetti chiave: i tempi di esecuzione,
+l'occupazione di memoria per chiavi e testi cifrati, e il livello di sicurezza raggiunto. Inoltre, 
+il capitolo introduce una variante ibrida che combina elementi dei due crittosistemi originali, 
+mirando a ottenere prestazioni potenzialmente superiori pur mantenendo le caratteristiche fondamentali 
+di entrambi i sistemi di base. Il capitolo si conclude con un'analisi comparativa che mette a confronto 
+i risultati 
+ottenuti con due importanti riferimenti: gli studi precedenti condotti sugli stessi crittosistemi 
+e le analisi di sistemi crittografici classici come RSA ed ElGamal. Questa comparazione fornisce un 
+contesto più ampio per valutare l'efficacia e l'innovazione dei risultati presentati sia nel rispetto
+di dati passati che nel rispetto di sistemi attualmente in uso e dalla dimostrata validità.\\ 
+Il Capitolo 7, infine, discute le conclusioni ottenute dai risultati sperimentali, fornendo un punto 
+di vista oggettivo per quanto riguarda l'usabilità di questi crittosistemi con le tecnologie attuali. 
