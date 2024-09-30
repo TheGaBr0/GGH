@@ -2,7 +2,7 @@ import sympy as sp
 import random
 import math
 from flint import fmpz_mat, fmpq_mat, fmpq, fmpz
-from decimal import Decimal, getcontext
+from decimal import Decimal
 import time
 import numpy as np
 import logging

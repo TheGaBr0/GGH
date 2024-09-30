@@ -2,7 +2,6 @@ import random
 import sympy as sp
 import math
 from flint import fmpz_mat, fmpz, fmpq, fmpq_mat
-from decimal import Decimal, getcontext
 from fractions import Fraction
 import time
 import logging
@@ -139,7 +138,6 @@ class GGHCryptosystem:
         Returns:
             int or float: The calculated sigma value.
         """
-        getcontext().prec = 50
         rho = Utils.vector_l1_norm(R.inv())
 
         sigma_max = 1 / (2 * rho)
