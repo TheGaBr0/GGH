@@ -1,130 +1,36 @@
-from flint import *
-import numpy as np
-import matplotlib.pyplot as plt
-import sympy as sp
-from decimal import Decimal
-import math
-import random
+from flint import fmpq_mat
+from GGH_crypto import GGHCryptosystem, Utils
 
-def rounding(basis, w):
+# Initialize the GGH cryptosystem with a 2-dimensional lattice
+GGH_object = GGHCryptosystem(dimension=2)
 
-    a = w * basis.inv()
-    print(a)
-    cols = a.ncols()
-    rows = a.nrows()
+# Extract the private (good) and public (potentially bad) bases
+R = GGH_object.private_basis 
+B = GGH_object.public_basis   
 
-    for i in range(rows):
-        for j in range(cols):
-            a[i,j] = round(a[i,j])
-    
-    result = a * basis 
-    
-    
-    return result
+# Define a target point, possibly not in the lattice
+T = fmpq_mat([[12, 21]])
 
-def numpy_to_fmpz_mat(numpy_matrix):
-        return fmpz_mat([[int(item) for item in sublist] for sublist in numpy_matrix])
+# Print information about both bases
+print(f"Good basis R = {R.tolist()} with det = {R.det()} and Hadamard ratio = {Utils.get_hadamard_ratio(R)[1]}")
+print(f"Bad basis B = {B.tolist()} with det = {B.det()} and Hadamard ratio = {Utils.get_hadamard_ratio(B)[1]}")
 
-def generate_lattice_points(R_np, B_np, w, w_2, t_np, limit=5):
-    # Create a meshgrid of integer coordinates
-    x = np.arange(-limit, limit + 1)
-    y = np.arange(-limit, limit + 1)
-    coords = np.array(np.meshgrid(x, y)).T.reshape(-1, 2)
+# Solve the Closest Vector Problem (CVP) using Babai's rounding algorithm with the private basis
+# This should give a reasonably accurate result
+w = Utils.babai_rounding(R, T, visualize=True)
 
-    # Multiply the meshgrid by the basis matrix to get lattice points
-    lattice_points = np.dot(coords, R_np)
-    
-    plt.plot(lattice_points[:, 0], lattice_points[:, 1], 'bo', color='black')
-    plt.grid(True)
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title('Lattice Plot')
-    label_w = "w"
-    label_w_2 = "w_2"
-    label_t = "t"
-    
-    plt.scatter(t_np[0][0],t_np[0][1])
-    
-    plt.scatter(int(w_2[0, 0]),int(w_2[0, 1]), color='red', s=70)
-    
-    plt.scatter(int(w[0, 0]),int(w[0, 1]), color='blueviolet', s=70)
-    
-    plt.annotate(label_t, # this is the text
-                 (t_np[0][0],t_np[0][1]), # these are the coordinates to position the label
-                 textcoords="offset points", # how to position the text
-                 xytext=(0,-12), # distance from text to points (x,y)
-                 ha='center') # horizontal alignment can be left, right or center
-    plt.annotate(label_w, 
-                 (int(w[0, 0]),int(w[0, 1])), 
-                 textcoords="offset points",
-                 xytext=(0,10), 
-                 ha='center') 
-    plt.annotate(label_w_2, 
-                 (int(w_2[0, 0]),int(w_2[0, 1])), 
-                 textcoords="offset points", 
-                 xytext=(0,-12), 
-                 ha='center') 
-    
-    
-    plt.arrow(0, 0, R_np[0][0], R_np[0][1], lw=2, head_width=0.1, head_length=0.1, fc='blueviolet', ec='blueviolet')
-    plt.arrow(0, 0, R_np[1][0], R_np[1][1], lw=2, head_width=0.1, head_length=0.1, fc='blueviolet', ec='blueviolet')
-    plt.arrow(0, 0, B_np[0][0], B_np[0][1], lw=2, head_width=0.1, head_length=0.1, fc='red', ec='red')
-    plt.arrow(0, 0, B_np[1][0], B_np[1][1], lw=2, head_width=0.1, head_length=0.1, fc='red', ec='red')  
-    
-    plt.show()
-    
-def fmpq_to_decimal(fmpq_number):
-    fraction_str = fmpq_number.str()
-    try:
-        if '/' in fraction_str:
-            numerator_str, denominator_str = fraction_str.split('/')
-            numerator = Decimal(numerator_str)
-            denominator = Decimal(denominator_str)
-            result = numerator / denominator
-        else:
-            result = Decimal(fraction_str)
-        return result
-    except Exception as e:
-        print(f"Error converting {fraction_str} to decimal: {e}")
-        return None
-    
-def row_norm(row):
-    return Decimal(sum(Decimal(fmpq_to_decimal(x))**2 for x in row)).sqrt()
-    
-def get_hadamard_ratio(basis):
-    norms = []
-        
-    for i in range(basis.nrows()):
-        row = [basis[i, j] for j in range(basis.ncols())]
-        norms.append(Decimal(sum(Decimal(int(x))**2 for x in row)).sqrt())
-    
-    denominator = math.prod(norms)
-    numerator = abs(Decimal(basis.det().str()))
-    result = (numerator / denominator) ** Decimal(1 / 2)
-    return f"{result:.16f}"
-  
-R = fmpz_mat([[1,2],[3,0]])
+# Solve CVP using Babai's rounding algorithm with the public basis
+# This is more likely to give an incorrect result compared to using the private basis
+w_2 = Utils.babai_rounding(B, T, visualize=True)
 
-B = fmpz_mat([[5, 4], [-6, -6]])
-T = fmpq_mat([[5, 3]])
+# Print the results and the distances between the target point and the found lattice points
+print(f"CVP found by R is {w.tolist()}, t-w = {Utils.vector_l2_norm(T-w)}")
+print(f"CVP found by B is {w_2.tolist()}, t-w_2 = {Utils.vector_l2_norm(T-w_2)}")
 
-print(f"Good basis R = {R.tolist()} with det = {R.det()} and Hadamard ratio = {get_hadamard_ratio(R)}")
-print(f"Bad basis B = {B.tolist()} with det = {B.det()} and Hadamard ratio = {get_hadamard_ratio(B)}")
-
-R_np = np.array(R.tolist()).astype(int)
-B_np = np.array(B.tolist()).astype(int)
-t_np = np.array(T.tolist()).astype(int)
-
-w = rounding(R, T)
-w_np = np.array(w.tolist()).astype(int)
-w_2 = rounding(B, T)
-w_2_np = np.array(w_2.tolist()).astype(int)
-
-print(f"CVP found by R is {w.tolist()}, t-w = {row_norm(numpy_to_fmpz_mat([T-w]))}")
-print(f"CVP found by B is {w_2.tolist()}, t-w_2 = {row_norm(numpy_to_fmpz_mat([T-w_2]))}")
-
-generate_lattice_points(R_np, B_np, w_np, w_2_np, t_np)
-
-
-
-
+# Note: Babai's rounding algorithm is an approximate method for solving CVP.
+# It generally performs well with a good basis like R, but may produce
+# significant errors with a "bad" basis like B.
+# The quality of the result using B heavily depends on how "bad" B is compared to R.
+# In particular:
+# 1. B is likely to produce more errors than R in most cases.
+# 2. The worse the Hadamard ratio of B, the more likely it is to produce incorrect results.

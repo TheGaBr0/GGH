@@ -5,6 +5,10 @@ from flint import fmpz_mat, fmpq_mat, fmpq, fmpz
 from decimal import Decimal, getcontext
 import time
 import numpy as np
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 from ..Utils.Utils import Utils
 
@@ -85,31 +89,31 @@ class GGHHNFCryptosystem:
             self.generate_random_error()
         else:
             if self.debug:
-                print(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(self.error)}")
+                logger.info(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(self.error)}")
 
     def generate_keys_from_R_or_B(self):
         """
         Generates keys from a provided private or public basis.
         """
         if self.debug:
-            print("[GGH-HNF] Private basis given as input, inverting it..")
+            logger.info("[GGH-HNF] Private basis given as input, inverting it..")
     
         R = self.private_basis
         R_inv = R.inv()
 
         if self.debug:
-            print("[GGH-HNF] Calculating rho...")
+            logger.info("[GGH-HNF] Calculating rho...")
             self.R_rho = self.calculate_rho(self.private_basis)
             
 
         if self.public_basis is None:
             if self.debug:
-                print("[GGH-HNF] Generating public basis using HNF of the good basis...")
+                logger.info("[GGH-HNF] Generating public basis using HNF of the good basis...")
             H = R.hnf()
             self.public_basis = H
         else:
             if self.debug:
-                print("[GGH-HNF] Using the provided public basis as the public key")
+                logger.info("[GGH-HNF] Using the provided public basis as the public key")
             H = self.public_basis
         
         self.public_key = (H, self.R_rho)
@@ -148,7 +152,7 @@ class GGHHNFCryptosystem:
         rho = Decimal(0.5) * min_norm
 
         if self.debug:
-            print(f'[GGH-HNF] Rho is: {rho:f}')
+            logger.info(f'[GGH-HNF] Rho is: {rho:f}')
         return rho
     
     def generate_random_error(self):
@@ -170,7 +174,7 @@ class GGHHNFCryptosystem:
         self.error = error
 
         if self.debug:
-            print(f"[GGH-HNF] Length of error vector is: {error_norm}")
+            logger.info(f"[GGH-HNF] Length of error vector is: {error_norm}")
     
     def reduce_mod_B(self):
         """
@@ -196,7 +200,7 @@ class GGHHNFCryptosystem:
         tries = 0
         if self.GGH_private:
             if self.debug:
-                print("[GGH-HNF] Generating private basis using GGH's matrix transformations technique...")
+                logger.info("[GGH-HNF] Generating private basis using GGH's matrix transformations technique...")
                 time_start = time.time()
             l = n
             k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
@@ -213,7 +217,7 @@ class GGHHNFCryptosystem:
                     break
         else:
             if self.debug:
-                print("[GGH-HNF] Generating private basis using Micciancio's random matrices tecnique...")
+                logger.info("[GGH-HNF] Generating private basis using Micciancio's random matrices tecnique...")
                 time_start = time.time()
             while True:
                 R = fmpz_mat([[random.randint(-n, n - 1) for _ in range(n)] for _ in range(n)])
@@ -227,31 +231,31 @@ class GGHHNFCryptosystem:
         
         if self.debug:
             priv_time = time.time() - time_start
-            print(f"[GGH-HNF] Time taken: {priv_time} with {tries} tries")
+            logger.info(f"[GGH-HNF] Time taken: {priv_time} with {tries} tries")
         self.private_basis = R
 
         if self.debug:
             time_start = time.time()
-            print("[GGH-HNF] Calculating rho...")
+            logger.info("[GGH-HNF] Calculating rho...")
         self.R_rho = self.calculate_rho(self.private_basis)
         if self.debug:
             rho_time = time.time() - time_start
-            print(f"[GGH-HNF] Time taken: {rho_time}")
+            logger.info(f"[GGH-HNF] Time taken: {rho_time}")
 
         if self.debug:
-            print("[GGH-HNF] Generating public basis...")
+            logger.info("[GGH-HNF] Generating public basis...")
             time_start = time.time()
         self.public_basis = H = R.hnf()
         if self.debug:
             pub_time = time.time() - time_start
-            print(f"[GGH-HNF] Time taken: {pub_time}")
+            logger.info(f"[GGH-HNF] Time taken: {pub_time}")
 
         self.public_key = (H, self.R_rho)
         self.private_key = R
 
     def encrypt(self):
         if self.debug:
-            print(f"[GGH-HNF] Encrypting...")
+            logger.info(f"[GGH-HNF] Encrypting...")
             time_start = time.time()
         if self.lattice_point is None:
             x = self.reduce_mod_B()
@@ -262,7 +266,7 @@ class GGHHNFCryptosystem:
         self.ciphertext = r - x * H
         if self.debug:
             enc_time = time.time() - time_start
-            print(f"[GGH-HNF] Time taken: {enc_time}")
+            logger.info(f"[GGH-HNF] Time taken: {enc_time}")
 
     def decrypt(self):
         """
@@ -272,14 +276,14 @@ class GGHHNFCryptosystem:
             fmpq_mat: The decrypted lattice point.
         """
         if self.debug:
-            print(f"[GGH-HNF] Decrypting...")
+            logger.info(f"[GGH-HNF] Decrypting...")
             time_start = time.time()
         
         CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
 
         if self.debug:
             dec_time = time.time() - time_start
-            print(f"[GGH-HNF] Time taken: {dec_time}")
+            logger.info(f"[GGH-HNF] Time taken: {dec_time}")
 
 
         return fmpq_mat(self.ciphertext) - CVP

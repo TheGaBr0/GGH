@@ -5,6 +5,11 @@ from flint import fmpz_mat, fmpz, fmpq, fmpq_mat
 from decimal import Decimal, getcontext
 from fractions import Fraction
 import time
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 
 from ..Utils.Utils import Utils
 
@@ -171,7 +176,7 @@ class GGHCryptosystem:
         Generates keys from a provided private or public basis.
         """
         if self.debug:
-            print("[GGH] Private basis given as input, inverting it..")
+            logger.info("[GGH] Private basis given as input, inverting it..")
 
         R_inv = self.private_basis.inv()
 
@@ -180,14 +185,14 @@ class GGHCryptosystem:
 
         if self.public_basis is None:
             if self.debug:
-                print("[GGH] Generating public key...")
+                logger.info("[GGH] Generating public key...")
 
             if not self.unimodular:
                 self.unimodular = self.random_unimodular(self.dimension, 2)
             self.public_basis = self.unimodular * self.private_basis
         else:
             if self.debug:
-                print("[GGH] Using the provided public basis as the public key")
+                logger.info("[GGH] Using the provided public basis as the public key")
         
         self.public_key = (self.public_basis, self.sigma)
         self.private_key = self.private_basis
@@ -200,7 +205,7 @@ class GGHCryptosystem:
         l = 4
         k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
         if self.debug:
-            print("[GGH] Generating private basis...")
+            logger.info("[GGH] Generating private basis...")
             time_start = time.time()
         while True:
             R = fmpz_mat([[random.randint(-l, l-1) for _ in range(self.dimension)] for _ in range(self.dimension)])
@@ -215,36 +220,36 @@ class GGHCryptosystem:
 
         if self.debug:
             priv_time = time.time() - time_start
-            print(f"[GGH] Time taken: {priv_time} with {tries} tries")
+            logger.info(f"[GGH] Time taken: {priv_time} with {tries} tries")
 
         self.private_basis = R
 
         if not self.sigma:
             if self.debug:
-                print("[GGH] Generating sigma...")
+                logger.info("[GGH] Generating sigma...")
                 time_start = time.time()
             self.sigma = self.generate_sigma(R)
             if self.debug:
                 sigma_time = time.time() - time_start
-                print(f"Generated sigma is {self.sigma}, time taken: {sigma_time}")
+                logger.info(f"Generated sigma is {self.sigma}, time taken: {sigma_time}")
 
         if not self.unimodular:
             if self.debug:
-                print(f"Generating unimodular matrix...")
+                logger.info(f"Generating unimodular matrix...")
                 time_start = time.time()
             self.unimodular = self.random_unimodular(self.dimension, 2)
             if self.debug:
                 unim_time = time.time() - time_start
-                print(f"[GGH] Time taken: {unim_time}")
+                logger.info(f"[GGH] Time taken: {unim_time}")
 
 
         if self.debug:
-            print(f"[GGH] Generating public basis...")
+            logger.info(f"[GGH] Generating public basis...")
             time_start = time.time()
         self.public_basis = self.unimodular * self.private_basis
         if self.debug:
             pub_time = time.time() - time_start
-            print(f"[GGH] Time taken: {pub_time}")
+            logger.info(f"[GGH] Time taken: {pub_time}")
 
         self.public_key = (self.public_basis, self.sigma)
         self.private_key = R
@@ -254,7 +259,7 @@ class GGHCryptosystem:
         Encrypts the message using the public key and an error vector.
         """
         if self.debug:
-            print(f"[GGH] Encrypting...")
+            logger.info(f"[GGH] Encrypting...")
             time_start = time.time()
         if self.error is None:
             self.generate_error()
@@ -267,7 +272,7 @@ class GGHCryptosystem:
         self.ciphertext = self.message * B + self.error
         if self.debug:
             enc_time = time.time() - time_start
-            print(f"[GGH] Time taken: {enc_time}")
+            logger.info(f"[GGH] Time taken: {enc_time}")
 
     def decrypt(self):
         """
@@ -277,7 +282,7 @@ class GGHCryptosystem:
             fmpq_mat: The decrypted message.
         """
         if self.debug:
-            print(f"[GGH] Decrypting...")
+            logger.info(f"[GGH] Decrypting...")
             time_start = time.time()
         
         CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
@@ -286,6 +291,6 @@ class GGHCryptosystem:
 
         if self.debug:
             dec_time = time.time() - time_start
-            print(f"[GGH] Time taken: {dec_time}")
+            logger.info(f"[GGH] Time taken: {dec_time}")
 
         return result

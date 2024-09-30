@@ -2,7 +2,6 @@ from flint import fmpz_mat, fmpq_mat, fmpq, fmpz
 import matplotlib.pyplot as plt
 import numpy as np
 from decimal import Decimal, getcontext
-import math
 import os
 import subprocess
 import ast
@@ -10,7 +9,10 @@ from fractions import Fraction
 import re
 import time
 import numpy as np
-import random
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class Utils:
     """
@@ -89,7 +91,7 @@ class Utils:
         
         fig, ax = plt.subplots(figsize=(10, 10))
         
-        ax.plot(lattice_points[:, 0], lattice_points[:, 1], 'bo', color='black')
+        ax.plot(lattice_points[:, 0], lattice_points[:, 1], 'o', color='black')
         ax.grid(True, linestyle='--', alpha=0.7)
         ax.set_xlabel('X-axis')
         ax.set_ylabel('Y-axis')
@@ -445,14 +447,14 @@ class Utils:
             command += f" > output.txt"
         try:
             # Run the command and capture its output
-            print(f"Reduction started with the following parameters:\n"
+            logger.info(f"Reduction started with the following parameters:\n"
             f"  block: {block}\n"
             f"  pruned: {pruned}\n"
             f"  precision: {precision}\n"
             f"  bkzautoabort: {bkzautoabort}\n"
             f"  bkzmaxloops: {bkzmaxloops}\n"
             f"  nolll: {nolll}")
-            print("Final command:\n"
+            logger.info("Final command:\n"
                   f"{command}")
            
             time_now = time.time()
@@ -463,11 +465,11 @@ class Utils:
 
             if error:
                 if str(error).strip() != "Failure: loops limit exceeded in BKZ":
-                    print("Error during reduction:", error)
+                    logger.error("Error during reduction:", error)
             else:
                 error = None
 
-            print(f"Reduction completed, time taken: {time.time() - time_now}")
+            logger.info(f"Reduction completed, time taken: {time.time() - time_now}")
 
             # Load the reduced matrix
             reduced_matrix = Utils.load_matrix_from_file(f"output.txt", "fmpz")
