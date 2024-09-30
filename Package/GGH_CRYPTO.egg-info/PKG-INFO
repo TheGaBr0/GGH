@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: GGH-CRYPTO
+Version: 1
+Summary: GGH_CRYPTO is a Python package for lattice-based cryptography, focusing on GGH and GGH-HNF implementations.
+Home-page: https://github.com/TheGaBr0/GGH
+Download-URL: https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.0.tar.gz
+Author: Gabriele Bottani
+Author-email: gbotani19@gmail.com
+License: MIT
+Keywords: GGH,GGH-HNF,GGH_CRYPTO,Lattice,LLL,BKZ,Lattice-based-cryptography
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+License-File: LICENSE.txt
