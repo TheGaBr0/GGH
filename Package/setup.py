@@ -1,14 +1,14 @@
-from distutils.core import setup
+from distutils.core import setup, find_packages
 setup(
   name = 'GGH_crypto',
-  packages = ['GGH_crypto'],
-  version = '1.0.2',
+  packages = find_packages(),
+  version = '1.0.3',
   license='MIT',
   description = 'GGH_crypto is a Python package for lattice-based cryptography, focusing on GGH and GGH-HNF implementations.',
   author = 'Gabriele Bottani',
   author_email = 'gbotani19@gmail.com',
   url = 'https://github.com/TheGaBr0/GGH',
-  download_url = 'https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.2.tar.gz',
+  download_url = 'https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.3.tar.gz',
   keywords = ['GGH', 'GGH-HNF', 'GGH_CRYPTO', 'Lattice', 'LLL', 'BKZ', 'Lattice-based-cryptography'],
   install_requires=[
       'matplotlib',
