@@ -8,7 +8,7 @@ setup(
   author = 'Gabriele Bottani',
   author_email = 'gbotani19@gmail.com',
   url = 'https://github.com/TheGaBr0/GGH',
-  download_url = 'https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.0.tar.gz',
+  download_url = 'https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.tar.gz',
   keywords = ['GGH', 'GGH-HNF', 'GGH_CRYPTO', 'Lattice', 'LLL', 'BKZ', 'Lattice-based-cryptography'],
   install_requires=[
       'matplotlib==3.9.2',
