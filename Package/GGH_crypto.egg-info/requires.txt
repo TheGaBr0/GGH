@@ -1,4 +1,4 @@
-matplotlib==3.9.2
-numpy==2.1.1
-python_flint==0.6.0
-sympy==1.12.1
+matplotlib
+numpy
+python_flint
+sympy
