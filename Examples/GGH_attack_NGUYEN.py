@@ -1,7 +1,7 @@
 from flint import fmpz_mat, fmpq_mat, fmpq
 import time
 import sympy as sp
-from GGH_CRYPTO import GGHCryptosystem
+from GGH_crypto import GGHCryptosystem
 
 def embedding_nguyen(basis, point):
     """
