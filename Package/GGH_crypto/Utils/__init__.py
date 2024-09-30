@@ -1,1 +1,3 @@
-from GGH_crypto.Utils import *
+from .Utils import Utils
+
+__all__ = ['Utils']

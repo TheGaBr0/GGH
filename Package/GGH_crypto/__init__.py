@@ -1,3 +1,5 @@
-from GGH_crypto.GGH.GGH import GGHCryptosystem
-from GGH_crypto.GGH_HNF.GGH_HNF import GGHHNFCryptosystem
-from GGH_crypto.Utils.Utils import Utils
+from .GGH.GGH import GGHCryptosystem
+from .GGH_HNF.GGH_HNF import GGHHNFCryptosystem
+from .Utils.Utils import Utils
+
+__all__ = ['GGHCryptosystem', 'GGHHNFCryptosystem', 'Utils']
