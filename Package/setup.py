@@ -1,10 +1,10 @@
 from distutils.core import setup
 setup(
-  name = 'GGH_CRYPTO',
-  packages = ['GGH_CRYPTO'],
+  name = 'GGH_crypto',
+  packages = ['GGH_crypto'],
   version = '1',
   license='MIT',
-  description = 'GGH_CRYPTO is a Python package for lattice-based cryptography, focusing on GGH and GGH-HNF implementations.',
+  description = 'GGH_crypto is a Python package for lattice-based cryptography, focusing on GGH and GGH-HNF implementations.',
   author = 'Gabriele Bottani',
   author_email = 'gbotani19@gmail.com',
   url = 'https://github.com/TheGaBr0/GGH',
