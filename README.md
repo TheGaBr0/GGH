@@ -11,7 +11,7 @@ The package uses and implements essential functions for lattice-based cryptograp
     - Gram-Schmidt orthogonalization
     - FLINT implementation of LLL
 
-The package is composed by 3 specific subpackaged:
+The package is composed by 3 specific subpackages:
 - `GGH.py` which implements the original cryptosystem presented in 1997.
 - `GGH_HNF.py` which implements the optimised version of GGH proposed by Micciancio in 2002.
 - `Utils.py` which includes functions and methods in common between the 2 cryptosystems. It also contains general algorithms -or wrappers for them- related to the lattice-based cryptography, such as: BKZ, Gram-Schmidt, and CVP solvers.  
@@ -23,6 +23,7 @@ pip install GGH-crypto
 ```
 However, to use the BKZ reduction, it's necessary to install the external FPLLL library. FPLLL is only compatible with Linux. You can refer to [this link](https://github.com/fplll/fplll#compilation) for installation steps on various operative systems.
 
-# Usage
+# General Usage
 
 # References
+Every reference can be found at the end of thesis.pdf file.
