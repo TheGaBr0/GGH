@@ -11,11 +11,7 @@ The package uses and implements essential functions for lattice-based cryptograp
     - Gram-Schmidt orthogonalization
     - FLINT implementation of LLL
 
-
-# Package Structure
-
 # Installation
-
 The Package can be simply installed with PIP: 
 ```
 pip install GGH-crypto
