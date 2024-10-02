@@ -11,6 +11,11 @@ The package uses and implements essential functions for lattice-based cryptograp
     - Gram-Schmidt orthogonalization
     - FLINT implementation of LLL
 
+The package is composed by 3 specific subpackaged:
+- GGH.py which implements the original cryptosystem presented in 1997.
+- GGH_HNF.py which implements the optimised version of GGH proposed by Micciancio in 2002.
+- Utils.py which includes functions and methods in common between the 2 cryptosystems. It also contains general algorithms -or wrappers for them- related to the lattice-based cryptography, such as: BKZ, Gram-Schmidt, and CVP solvers.  
+
 # Installation
 The Package can be simply installed with PIP: 
 ```
