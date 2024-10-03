@@ -24,6 +24,15 @@ pip install GGH-crypto
 However, to use the BKZ reduction, it's necessary to install the external FPLLL library. FPLLL is only compatible with Linux. You can refer to [this link](https://github.com/fplll/fplll#compilation) for installation steps on various operative systems.
 
 # General Usage
+To demonstrate the usage and capabilities of this package, several example scripts are provided in the Examples folder:
+1. `GGH_classes_example.py`: This script showcases the basic usage of the GGH and GGH-HNF classes, demonstrating key generation, encryption, and decryption processes.
+2. `GGH_HNF_attack.py`: This example implements an attack on the GGH-HNF variant described in Christoph Ludwig's technical report presented in 2004.
+3. `GGH_attack_Nguyen.py`: This script demonstrates the Nguyen attack on the original GGH cryptosystem, published in 1999. This example uses the simplest case where the public matrix is invertible mod 2σ.
+4. `embedding_technique.py`: This example showcases the embedding technique for solving the Closest Vector Problem (CVP). It also includes a visualization of the problem using matplotlib.
+5. `rounding_off_technique.py`: This script implements Babai's rounding-off algorithm, another approach to solving the CVP. Like the embedding technique example, it also provides a visualization of the problem using matplotlib.
+
+Each function and its parameters are thoroughly described with comments in the package. Furthermore vectors within this package must adhere to the FLINT Python bindings notation for proper definition and representation.
+
 
 # References
 Every reference can be found at the end of thesis.pdf file.
