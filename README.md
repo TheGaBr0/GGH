@@ -34,5 +34,10 @@ To demonstrate the usage and capabilities of this package, several example scrip
 Each function and its parameters are thoroughly described with comments in the package. Furthermore vectors within this package must adhere to the [FLINT Python bindings](https://fredrikj.net/python-flint/) notation for proper definition and representation.
 The hybrid version proposed in the thesis, which outperforms both GGH and GGH-HNF in various fields, can be tested by setting the GGH_private flag to True. Doing so will generate a random private basis using the method applied in GGH, while following the process implemented in GGH-HNF for subsequent steps.
 
-# References
-Every reference can be found at the end of thesis.pdf file.
+# References and final notes
+
+Testing demonstrated significant performance improvements. The hybrid version showed superior results in both performance and security, requiring twice the time to break compared to the original GGH. However, with a dimension of 800 needed for security, these systems still present practical limitations compared to RSA, mainly in decryption times and key sizes. Nevertheless, the proposed hybrid version could open new perspectives for future analyses.
+
+This thesis is sadly written in Italian only. For non-Italian speakers interested in reading the details, please use a translation tool to access the content. 
+
+References can be found at the end of **thesis.pdf** file.
