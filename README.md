@@ -32,7 +32,7 @@ To demonstrate the usage and capabilities of this package, several example scrip
 5. `rounding_off_technique.py`: This script implements Babai's rounding-off algorithm, another approach to solving the CVP. Like the embedding technique example, it also provides a visualization of the problem using matplotlib.
 
 Each function and its parameters are thoroughly described with comments in the package. Furthermore vectors within this package must adhere to the [FLINT Python bindings](https://fredrikj.net/python-flint/) notation for proper definition and representation.
-The hybrid version proposed in the thesis, which outperforms both GGH and GGH-HNF in various fields, can be tested by setting the GGH_private flag to True. Doing so will generate a random private basis using the method applied in GGH, while following the process implemented in GGH-HNF for subsequent steps.
+The hybrid version proposed in the thesis, which outperforms both GGH and GGH-HNF in various fields, can be tested by setting the `GGH_private` flag to `True`. Doing so will generate a random private basis using the method applied in GGH, while following the process implemented in GGH-HNF for subsequent steps.
 
 # References and final notes
 
