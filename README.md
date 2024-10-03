@@ -31,7 +31,7 @@ To demonstrate the usage and capabilities of this package, several example scrip
 4. `embedding_technique.py`: This example showcases the embedding technique for solving the Closest Vector Problem (CVP). It also includes a visualization of the problem using matplotlib.
 5. `rounding_off_technique.py`: This script implements Babai's rounding-off algorithm, another approach to solving the CVP. Like the embedding technique example, it also provides a visualization of the problem using matplotlib.
 
-Each function and its parameters are thoroughly described with comments in the package. Furthermore vectors within this package must adhere to the FLINT [Python bindings](https://fredrikj.net/python-flint/) notation for proper definition and representation.
+Each function and its parameters are thoroughly described with comments in the package. Furthermore vectors within this package must adhere to the [FLINT Python bindings](https://fredrikj.net/python-flint/) notation for proper definition and representation.
 
 
 # References
