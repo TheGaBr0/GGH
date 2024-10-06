@@ -16,6 +16,8 @@ The package is composed by 3 specific subpackages:
 - `GGH_HNF.py` which implements the optimised version of GGH proposed by Micciancio in 2002.
 - `Utils.py` which includes functions and methods in common between the 2 cryptosystems. It also contains general algorithms -or wrappers for them- related to the lattice-based cryptography, such as: BKZ, Gram-Schmidt, and CVP solvers.  
 
+Source code of the package can be found in the [release branch](https://github.com/TheGaBr0/GGH/tree/release).
+
 # Installation
 The Package can be simply installed with PIP: 
 ```
