@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: GGH-crypto
-Version: 1.0.3
+Version: 1.0.4
 Summary: GGH_crypto is a Python package for lattice-based cryptography, focusing on GGH and GGH-HNF implementations.
 Home-page: https://github.com/TheGaBr0/GGH
-Download-URL: https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.3.tar.gz
+Download-URL: https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.4.tar.gz
 Author: Gabriele Bottani
 Author-email: gbotani19@gmail.com
 License: MIT
@@ -15,4 +15,24 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3.10
 Classifier: Programming Language :: Python :: 3.11
 Classifier: Programming Language :: Python :: 3.12
+Description-Content-Type: text/markdown
 License-File: LICENSE.txt
+
+# GGH-crypto
+GGH-crypto is a Python package implementing the Goldreich-Goldwasser-Halevi (GGH) public key cryptosystem and its optimization, GGH-HNF by Micciancio. This package is designed for educational and research purposes, offering insights into lattice-based cryptography.
+This project was developed as part of a 3-year degree program at the UniversitÃ  degli Studi di Milano (University of Milan). It explores the resilience of lattice-based cryptography against quantum threats and introduces an hybrid variant.
+
+# Features
+
+- Implementation of the original GGH cryptosystem (1997)
+- Implementation of the GGH-HNF optimization (2002)
+- Utility functions for lattice-based cryptography
+- Algorithms for solving the Closest Vector Problem (CVP)
+- Lattice reduction algorithms
+
+# Usage and details
+For detailed installation, usage, examples and documentation, please visit the [GitHub repository](https://github.com/TheGaBr0/GGH).
+
+
+# Note
+Both the original GGH cryptosystem and its GGH-HNF optimization have known security vulnerabilities. This implementation is not intended for production use.    
