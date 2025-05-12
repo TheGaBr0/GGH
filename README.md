@@ -1,3 +1,4 @@
+[![PyPI Downloads](https://static.pepy.tech/badge/ggh-crypto)](https://pepy.tech/projects/ggh-crypto)
 # Project Overview
 This project was developed as part of a 3-year degree program at the Università degli Studi di Milano (University of Milan). It aims to provide a comprehensive implementation and analysis of the GGH lattice-based cryptosystem and its GGH-HNF variant using modern tools. The work explores the resilience of lattice-based cryptography against quantum threats, offering in-depth mathematical analysis, cryptanalysis, and experimental results on performance and security. A novel hybrid variant is introduced, combining elements of both systems. By comparing findings with classical cryptosystems and previous studies, the project assesses the practical viability of these lattice-based schemes in current technological contexts.
 # GGH_crypto Python Package
