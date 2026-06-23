@@ -148,19 +148,41 @@ class GGHCryptosystem:
             return sigma_max
 
 
-    def generate_error(self):
+    def generate_error(self, nguyen_fix=False):
         """
         Generates a random error vector based on sigma.
+
+        Args:
+            nguyen_fix (bool): If True, uses the Mandangan et al. (2020) countermeasure against
+                               the Nguyen attack. Entries are drawn from {σ-2, σ-1, σ, σ+1}
+                               with counts preserving ||e|| = σ√n. Requires integer σ > 2 and
+                               dimension divisible by k = 4σ-2.
         """
         sigma = self.public_key[1]
 
-        random_elements = [random.choice([-sigma, sigma]) for _ in range(self.dimension)]
-        
-        if isinstance(sigma, int):
+        if nguyen_fix:
+            if not isinstance(sigma, int) or sigma <= 2:
+                raise ValueError("[GGH] nguyen_fix requires integer sigma > 2")
+            k = 4 * sigma - 2
+            n = self.dimension
+            if n % k != 0:
+                raise ValueError(f"[GGH] nguyen_fix requires dimension divisible by k=4σ-2={k}, got {n}")
+            t = n // k
+            random_elements = (
+                [sigma - 2] * t +
+                [sigma - 1] * ((k - 2) * t // 2) +
+                [sigma]     * t +
+                [sigma + 1] * ((k - 2) * t // 2)
+            )
+            random.shuffle(random_elements)
             self.error = fmpz_mat([random_elements])
         else:
-            random_elements = [fmpq(Fraction(item).numerator, Fraction(item).denominator) for item in random_elements]
-            self.error = fmpq_mat([random_elements])
+            random_elements = [random.choice([-sigma, sigma]) for _ in range(self.dimension)]
+            if isinstance(sigma, int):
+                self.error = fmpz_mat([random_elements])
+            else:
+                random_elements = [fmpq(Fraction(item).numerator, Fraction(item).denominator) for item in random_elements]
+                self.error = fmpq_mat([random_elements])
 
     def generate_random_message(self):
         """
