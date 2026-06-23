@@ -81,7 +81,7 @@ class GGHHNFCryptosystem:
                 raise ValueError(f"[GGH-HNF] Error vector must have length {dimension}, but got length {error.ncols()}")
 
         if self.private_basis is not None:
-            self.generate_keys_from_R_or_B()
+            self.generate_keys_from_R()
         else:
             self.generate_keys()
             
@@ -91,7 +91,7 @@ class GGHHNFCryptosystem:
             if self.debug:
                 logger.info(f"[GGH-HNF] Length of error vector is: {Utils.vector_l2_norm(self.error)}")
 
-    def generate_keys_from_R_or_B(self):
+    def generate_keys_from_R(self):
         """
         Generates keys from a provided private or public basis.
         """

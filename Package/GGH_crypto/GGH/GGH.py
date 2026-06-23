@@ -89,7 +89,7 @@ class GGHCryptosystem:
 
 
         if private_basis is not None:
-            self.generate_keys_from_R_or_B()
+            self.generate_keys_from_basis()
         else:
             self.generate_keys()
 
@@ -169,7 +169,7 @@ class GGHCryptosystem:
         random_elements = [random.randint(-128, 127) for _ in range(self.dimension)]
         self.message = fmpq_mat([random_elements])
 
-    def generate_keys_from_R_or_B(self):
+    def generate_keys_from_R(self):
         """
         Generates keys from a provided private or public basis.
         """
