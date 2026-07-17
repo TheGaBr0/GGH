@@ -47,11 +47,12 @@ class GGHCryptosystem:
     Raises:
         ValueError: If the dimensions of the provided bases or vectors do not match.
     """
-    def __init__(self, dimension, private_basis=None, public_basis=None, unimodular=None, message=None, 
-                 error=None, sigma = None, integer_sigma=True, debug=False):
+    def __init__(self, dimension, private_basis=None, public_basis=None, unimodular=None, message=None,
+                 error=None, sigma = None, integer_sigma=True, nguyen_fix=False, debug=False):
         self.dimension = dimension
         self.integer_sigma = integer_sigma
         self.sigma = sigma
+        self.nguyen_fix = nguyen_fix
         
         self.message = message
         self.ciphertext = None
@@ -221,6 +222,7 @@ class GGHCryptosystem:
         """
         Generates the private and public keys of the cryptographic system.
         """
+        MAX_TRIES = 100
         tries = 0
         l = 4
         k = fmpz(l * math.ceil(math.sqrt(self.dimension) + 1))
@@ -232,11 +234,24 @@ class GGHCryptosystem:
             I = Utils.npsp_to_fmpz_mat(sp.eye(self.dimension))
             KI = k * I
             R += KI
-            
+
             tries += 1
 
-            if R.det() != 0:
-                break
+            if tries > MAX_TRIES:
+                raise ValueError(
+                    f"[GGH] Could not generate a private basis with sigma > 2 after {MAX_TRIES} tries. "
+                    f"Consider increasing the dimension."
+                )
+
+            if R.det() == 0:
+                continue
+
+            if self.nguyen_fix and self.generate_sigma(R) <= 2:
+                if self.debug:
+                    logger.info(f"[GGH] Basis rejected (sigma <= 2), retrying... (try {tries})")
+                continue
+
+            break
 
         if self.debug:
             priv_time = time.time() - time_start
@@ -282,7 +297,7 @@ class GGHCryptosystem:
             logger.info(f"[GGH] Encrypting...")
             time_start = time.time()
         if self.error is None:
-            self.generate_error()
+            self.generate_error(nguyen_fix=self.nguyen_fix)
 
         if self.message is None:
             self.generate_random_message()

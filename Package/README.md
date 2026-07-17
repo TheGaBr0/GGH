@@ -15,4 +15,13 @@ For detailed installation, usage, examples and documentation, please visit the [
 
 
 # Note
-Both the original GGH cryptosystem and its GGH-HNF optimization have known security vulnerabilities. This implementation is not intended for production use.    
+Both the original GGH cryptosystem and its GGH-HNF optimization have known security vulnerabilities. This implementation is not intended for production use.
+
+# Changelog
+
+## 1.0.5
+- Added `nguyen_fix` parameter to `GGHCryptosystem` (default `False`). When enabled, implements the Mandangan et al. (2020) countermeasure against Nguyen's attack: error entries are drawn from {σ-2, σ-1, σ, σ+1} instead of {-σ, +σ}, preserving ||e|| = σ√n while breaking the elimination stage of the attack.
+- Key generation with `nguyen_fix=True` automatically retries until a basis yielding σ > 2 is found (required by the countermeasure). Raises `ValueError` after 100 failed attempts with a suggestion to increase the dimension.
+
+## 1.0.4
+- Initial stable release.    

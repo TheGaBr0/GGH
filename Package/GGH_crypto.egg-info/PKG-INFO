@@ -1,11 +1,11 @@
-Metadata-Version: 2.1
-Name: GGH-crypto
-Version: 1.0.4
+Metadata-Version: 2.4
+Name: GGH_crypto
+Version: 1.0.5
 Summary: GGH_crypto is a Python package for lattice-based cryptography, focusing on GGH and GGH-HNF implementations.
 Home-page: https://github.com/TheGaBr0/GGH
-Download-URL: https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.4.tar.gz
+Download-URL: https://github.com/TheGaBr0/GGH/archive/refs/tags/v1.0.5.tar.gz
 Author: Gabriele Bottani
-Author-email: gbotani19@gmail.com
+Author-email: gbottani19@gmail.com
 License: MIT
 Keywords: GGH,GGH-HNF,GGH_CRYPTO,Lattice,LLL,BKZ,Lattice-based-cryptography
 Classifier: Development Status :: 5 - Production/Stable
@@ -17,10 +17,26 @@ Classifier: Programming Language :: Python :: 3.11
 Classifier: Programming Language :: Python :: 3.12
 Description-Content-Type: text/markdown
 License-File: LICENSE.txt
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: python_flint
+Requires-Dist: sympy
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: download-url
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
 
 # GGH-crypto
 GGH-crypto is a Python package implementing the Goldreich-Goldwasser-Halevi (GGH) public key cryptosystem and its optimization, GGH-HNF by Micciancio. This package is designed for educational and research purposes, offering insights into lattice-based cryptography.
-This project was developed as part of a 3-year degree program at the UniversitÃ  degli Studi di Milano (University of Milan). It explores the resilience of lattice-based cryptography against quantum threats and introduces an hybrid variant.
+This project was developed as part of a 3-year degree program at the Università degli Studi di Milano (University of Milan). It explores the resilience of lattice-based cryptography against quantum threats and introduces an hybrid variant.
 
 # Features
 
@@ -35,4 +51,13 @@ For detailed installation, usage, examples and documentation, please visit the [
 
 
 # Note
-Both the original GGH cryptosystem and its GGH-HNF optimization have known security vulnerabilities. This implementation is not intended for production use.    
+Both the original GGH cryptosystem and its GGH-HNF optimization have known security vulnerabilities. This implementation is not intended for production use.
+
+# Changelog
+
+## 1.0.5
+- Added `nguyen_fix` parameter to `GGHCryptosystem` (default `False`). When enabled, implements the Mandangan et al. (2020) countermeasure against Nguyen's attack: error entries are drawn from {σ-2, σ-1, σ, σ+1} instead of {-σ, +σ}, preserving ||e|| = σ√n while breaking the elimination stage of the attack.
+- Key generation with `nguyen_fix=True` automatically retries until a basis yielding σ > 2 is found (required by the countermeasure). Raises `ValueError` after 100 failed attempts with a suggestion to increase the dimension.
+
+## 1.0.4
+- Initial stable release.    
