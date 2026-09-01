@@ -497,7 +497,7 @@ class Utils:
         Raises:
             ValueError: If visualization is requested for a non-2D lattice.
         """
-        x = point * basis.inv()
+        x = fmpq_mat(basis).transpose().solve(fmpq_mat(point).transpose()).transpose()
 
         for i in range(x.nrows()):
             for j in range(x.ncols()):

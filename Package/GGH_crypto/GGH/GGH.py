@@ -90,7 +90,7 @@ class GGHCryptosystem:
 
 
         if private_basis is not None:
-            self.generate_keys_from_basis()
+            self.generate_keys_from_R()
         else:
             self.generate_keys()
 
@@ -197,12 +197,10 @@ class GGHCryptosystem:
         Generates keys from a provided private or public basis.
         """
         if self.debug:
-            logger.info("[GGH] Private basis given as input, inverting it..")
-
-        R_inv = self.private_basis.inv()
+            logger.info("[GGH] Private basis given as input..")
 
         if not self.sigma:
-            self.sigma = self.generate_sigma(R_inv)
+            self.sigma = self.generate_sigma(self.private_basis)
 
         if self.public_basis is None:
             if self.debug:
@@ -322,7 +320,7 @@ class GGHCryptosystem:
         
         CVP = Utils.babai_rounding(self.private_basis, self.ciphertext)
         
-        result = CVP * self.public_basis.inv()
+        result = fmpq_mat(self.public_basis).transpose().solve(fmpq_mat(CVP).transpose()).transpose()
 
         if self.debug:
             dec_time = time.time() - time_start

@@ -30,7 +30,7 @@ class GGHHNFCryptosystem:
         R_rho (Decimal): The rho parameter of the private basis.
         GGH_private (bool): If True, uses GGH's matrix transformation technique for private basis generation.
         debug (bool): If True, prints debug information.
-        private_key (tuple): The private key (R_inv, R).
+        private_key (fmpz_mat): The private key (the private basis R).
         public_key (tuple): The public key (H, R_rho).
 
     Args:
@@ -96,15 +96,13 @@ class GGHHNFCryptosystem:
         Generates keys from a provided private or public basis.
         """
         if self.debug:
-            logger.info("[GGH-HNF] Private basis given as input, inverting it..")
-    
+            logger.info("[GGH-HNF] Private basis given as input..")
+
         R = self.private_basis
-        R_inv = R.inv()
 
         if self.debug:
             logger.info("[GGH-HNF] Calculating rho...")
-            self.R_rho = self.calculate_rho(self.private_basis)
-            
+        self.R_rho = self.calculate_rho(self.private_basis)
 
         if self.public_basis is None:
             if self.debug:
@@ -117,7 +115,7 @@ class GGHHNFCryptosystem:
             H = self.public_basis
         
         self.public_key = (H, self.R_rho)
-        self.private_key = (R_inv, R)
+        self.private_key = R
 
     def min_norm_row(self, matrix):
         """
